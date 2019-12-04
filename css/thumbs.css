@@ -1,0 +1,101 @@
+.body-content {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.title {
+    margin: 10px 2px 0 2px;
+    border-bottom: 1px solid #09080d;
+    overflow: hidden;
+    display: none;
+}
+
+.thumbs-content {
+    padding-top: 6px;
+    overflow: hidden;
+    padding-bottom: 5px;
+}
+
+.thumb-col {
+    width: 334px;
+    float: left;
+}
+
+/*thumbs*/
+
+.thumb {
+    text-align: left;
+    border-radius: 3px;
+    padding: 5px;
+    overflow: hidden;
+    margin: 4px 2px 0 2px;
+}
+
+.thumb-pic {
+    background-color: #16151B;
+    color: #7A797F;
+    padding: 1px;
+    overflow: hidden;
+}
+
+.thumb-pic img {
+    width: 100%;
+    height: auto;
+    max-height: 180px;
+}
+
+/*thumb title*/
+
+.thumb .description {
+    display: block;
+    font-size: 12px;
+    margin: 0px 5px 0 5px;
+    line-height: 15px;
+    height: 15px;
+    color: white;
+}
+
+.description {
+    margin-right: 0 !important;
+}
+
+ .piece-info-button {
+    float: right;
+}
+
+/*------------------------------------------------------------------------*/
+
+@media (min-width: 1022px) {
+    .body-content {
+        width: 1002px;
+    }
+
+    .thumb img {
+        width: 320px;
+        height: 180px;
+    }
+}
+
+@media (max-width: 1022px) {
+    .thumb-col {
+        width: 33%;
+    }
+}
+
+@media (max-width: 760px) {
+    .thumb-col {
+        width: 49%;
+    }
+}
+
+@media (max-width: 450px) {
+    .thumb-col {
+        width: 99%;
+    }
+    .thumbs-content {
+        margin: 0 9%;
+    }
+}
+
