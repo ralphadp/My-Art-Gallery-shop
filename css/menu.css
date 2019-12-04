@@ -1,0 +1,102 @@
+header {
+    height: 100px;
+    background: #c0392b;
+    color: bisque;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    box-shadow: 0 2px 4px #5a5763;
+}
+
+a {
+    text-decoration: none;
+    color: blanchedalmond;
+}
+
+.app-logo {
+    /*margin-right: auto;*/
+    text-align: center;
+    transition: 0s;
+    -webkit-box-flex: 0;
+    flex: 0;
+    padding: 0 40px;
+    align-self: stretch;
+    position: relative;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.app-logo > a {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.icon-nav-palette {
+    width: 80px;
+    height: 80px;
+    pointer-events: none;
+    fill: #c0392b;
+    stroke-width: 2;
+    stroke: #c0392b;
+}
+
+.logo-name {
+    width: 140px;
+    margin-left: 10px;
+}
+
+.icon-search, .icon-logo-text {
+    fill: #fff;
+    height: 18px;
+    width: 18px;
+    top: 2px;
+    position: relative;
+}
+
+.icon-logo {
+    fill: #fff;
+    margin: 0 .5rem 0 0;
+    height: 50px;
+    width: 50px;
+}
+
+.icon-logo-text {
+    height: 24px;
+    width: 120px;
+}
+
+.menu {
+    margin-left: auto;
+}
+
+.item {
+    padding: 20px;
+    display: inline-block;
+    transition: .3s;
+}
+
+.item:hover {
+    background: rgba(255,255,255, 0.15);
+}
+
+#input-search-art {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0 0 0 0;
+    width: 0;
+    border-radius: 10px;
+    transition: 0.4s;
+}
+
+.search:hover > #input-search-art {
+    width: 200px;
+    background-color: white;
+    padding-left: 10px;
+}
