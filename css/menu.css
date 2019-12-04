@@ -82,7 +82,10 @@ a {
 }
 
 .item:hover {
-    background: rgba(255,255,255, 0.15);
+    background-color: #34333A;
+    background: linear-gradient(to bottom,#3B3941,#2A292F);
+    /* border-top: 1px solid #4F4D55; */
+    box-shadow: 0 1px 3px #16151B;
 }
 
 #input-search-art {
@@ -99,4 +102,107 @@ a {
     width: 200px;
     background-color: white;
     padding-left: 10px;
+}
+
+@media (max-width: 976px) {
+    .search:hover > #input-search-art {
+        width: 200px;
+    }
+    .app-logo {
+        padding: 0 0 0 30px;
+    }
+}
+
+@media (max-width: 976px) {
+    .search:hover > #input-search-art {
+        width: 180px;
+    }
+    .app-logo {
+        padding: 0 0 0 20px;
+    }
+}
+
+@media (max-width: 870px) {
+    .search:hover > #input-search-art {
+        width: 300px;
+    }
+    .search {
+        width: 388px;
+    }
+    header {
+        height: 200px;
+    }
+    .menu {
+        margin-left: 160px;
+    }
+}
+
+@media (max-width: 810px) {
+    .menu {
+        margin-top: 10px;
+        margin-left: 5%;
+    }
+}
+
+@media (max-width: 674px) {
+    header {
+        display: block;
+    }
+    .menu {
+        margin-left: 1%;
+    }
+    .logo-name {
+        width: 210px;
+    }
+    .item {
+        padding: 20px 50px;
+    }
+    .search {
+        width: 628px;
+    }
+}
+
+@media (max-width: 648px) {
+    .item {
+        padding: 20px 40px;
+    }
+    .search {
+        width: 548px;
+    }
+}
+
+@media (max-width: 568px) {
+    .item {
+        padding: 20px 30px;
+    }
+    .search {
+        width: 468px;
+    }
+}
+
+@media (max-width: 488px) {
+    .item {
+        padding: 20px 20px;
+    }
+    .search {
+        width: 388px;
+    }
+}
+
+@media (max-width: 375px) {
+    .item {
+        padding: 20px 15px;
+    }
+    .search {
+        width: 248px;
+    }
+}
+
+@media (max-width: 320px) {
+    .item {
+        padding: 20px 10px;
+    }
+    .search {
+        width: 198px;
+    }
 }
