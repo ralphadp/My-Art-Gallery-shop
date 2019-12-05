@@ -61,8 +61,13 @@
     margin-right: 0 !important;
 }
 
- .piece-info-button {
+.piece-info-button {
     float: right;
+    background: linear-gradient(to bottom,#e74c3c,#c0392b);
+    color: #0c0b01;
+    border-color: #e74c3c;
+    color:#0c0b01;
+    outline: none;
 }
 
 /*------------------------------------------------------------------------*/
