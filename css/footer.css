@@ -1,0 +1,39 @@
+.footer-wrap {
+    box-shadow: 0 -1px 3px #3d3d3d;
+    margin-top: 40px;
+    font-family: 'Sarala', sans-serif;
+}
+
+.footer-menu  {
+    padding: 15px 0 0;
+    width: 100%;
+    text-align: center;
+}
+
+.footer-menu a {
+    color: #c0392b !important;
+}
+.footer {
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px 0 30px 0;
+    color: #7D7C81;
+    font-size: 12px;
+    text-align: center;
+}
+
+.footer p {
+    margin: 10px 2px 0 2px;
+}
+
+.footer p a{
+    color: #c0392b !important;
+}
+
+/*------------------------------------------------------------------------*/
+
+@media (min-width: 1022px) {
+    .footer {
+        width: 1000px;
+    }
+}
