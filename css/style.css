@@ -19,7 +19,7 @@ svg:not(:root) {
     overflow: hidden;
 }
 
-.frame-pic {
+.frame-gallery {
     background-color: #34333A;
     background: linear-gradient(to bottom,#3B3941,#2A292F);
     border-top: 1px solid #4F4D55;

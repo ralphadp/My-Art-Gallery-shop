@@ -1,0 +1,35 @@
+.pages {
+    padding-top: 12px;
+}
+
+.pages ul {
+    padding-left: 0;
+}
+
+.pages li {
+    margin: 4px 2px 0 2px;
+    display: inline-block;
+}
+
+.pages li a, .pages li span {
+    color: white;
+    height: 26px;
+    line-height: 26px;
+    font-size: 12px;
+    display: block;
+    min-width: 10px;
+    padding: 0 10px;
+    border-radius: 3px;
+    transition: .3s;
+}
+
+.pages li span {
+    color: #98979E;
+}
+
+.pages li a:hover, .pages li.active a {
+    background-color: #c0392b;
+    background: linear-gradient(to bottom,#e74c3c,#c0392b); 
+    color: #0c0b01; 
+    border-color: #e74c3c; 
+}
