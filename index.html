@@ -9,6 +9,8 @@
     <link type="text/css" rel="stylesheet" href="css/menu.css"/>
     <link type="text/css" rel="stylesheet" href="css/social-menu.css"/>
     <link type="text/css" rel="stylesheet" href="css/piece.css" />
+    <link type="text/css" rel="stylesheet" href="css/list.css" />
+    <link type="text/css" rel="stylesheet" href="css/picking.css" />
     <link type="text/css" rel="stylesheet" href="css/thumbs.css"/>
     <link type="text/css" rel="stylesheet" href="css/pager.css"/>
     <link type="text/css" rel="stylesheet" href="css/categories.css"/>
@@ -30,8 +32,8 @@
         </div>
         <nav class="menu">
             <div 
-                class="item" id="open-picked"><a href="#">Picking</a></div><div 
-                class="item" id="open-list"><a href="#">List</a></div><div 
+                class="item" id="open-picked"><a>Picking</a></div><div 
+                class="item" id="open-list"><a>List</a></div><div 
                 class="item"><a href="learning.html">Learning</a></div><div 
                 class="item"><a href="write-us.html">Write Us</a></div><div 
                 class="item search">
@@ -76,6 +78,50 @@
     <div class="fog-frame" id="piece-maximized">
         <section class="piece-photo" id="photo">
             <img id="photo-image" src="http://picsum.photos/400/200">
+        </section>
+    </div>
+
+    <div class="fog-frame" id="list">
+        <section id="list-frame">
+            <h3>All available pieces</h3>
+            <a id="list-box-close" >
+                <svg class="icon-close" width="20px" height="20px">
+                    <use xlink:href="#icon-box-close"></use>
+                </svg>
+            </a>
+            <div class="list-item-row odd">The Sibling Exploring</div>
+            <div class="list-item-row pair">Lorem ipsum dolor sit amet.</div>
+            <div class="list-item-row odd">Lorem ipsum dolor sit.</div>
+            <div class="list-item-row pair">Lorem, ipsum dolor.</div>
+            <div class="list-item-row odd">Stradd - cifi</div>
+            <div class="list-item-row pair">Lorem, ipsum</div>
+            <div class="list-item-row odd">notorious</div>
+            <div class="list-item-row pair">table</div>
+            <div class="list-item-row odd">Add with some apples</div>
+            <div class="list-item-row pair">cactus</div>
+            <div class="list-item-row odd">altiplano</div>
+            <div class="list-item-row pair">robore-X</div>
+        </section>
+    </div>
+
+    <div class="fog-frame" id="cart-picking">
+        <section id="pick-frame">
+            <h3>In-cart pieces</h3>
+            <a id="pick-box-close">
+                <svg class="icon-close" width="20px" height="20px">
+                    <use xlink:href="#icon-box-close"></use>
+                </svg>
+            </a>
+            <div class="pick-item-row"><input type="checkbox" id="2341" checked>The Sibling Exploring</div>
+            <div class="pick-item-row"><input type="checkbox" id="341" checked>Lorem ipsum dolor sit amet.</div>
+            <div class="pick-item-row"><input type="checkbox" id="5300" checked>Lorem, ipsum dolor.</div>
+            <div class="pick-item-row"><input type="checkbox" id="341" checked>Stradd - cifi</div>
+            <div class="pick-item-row"><input type="checkbox" id="2322" checked>Lorem, ipsum</div>
+            <div class="pick-item-row"><input type="checkbox" id="211" checked>Add with some apples</div>
+            <div class="pick-item-row"><input type="checkbox" id="351" checked>Cactus</div>
+            <div class="pick-item-row"><input type="checkbox" id="71" checked>Robore-X</div>
+
+            <button id="update-picked">Update</button>
         </section>
     </div>
 
@@ -386,11 +432,11 @@
 
     <footer class="footer-wrap">
         <div class="footer-menu">
-            <span><a href="#">Home</a></span> |
-            <span><a href="#">Picking</a></span> |
-            <span><a href="#">List</a></span> |
-            <span><a href="#">Learning</a></span> |
-            <span><a href="#">Write Us</a></span>
+            <span><a  href="index.html">Home</a></span> |
+            <span><a id="open-picked-footer">Picking</a></span> |
+            <span><a id="open-list-footer">List</a></span> |
+            <span><a href="learning.html">Learning</a></span> |
+            <span><a href="write-us.html">Write Us</a></span>
         </div>
         <div class="footer">
             <p>Don't forget to stay tooned (press Ctrl + D) news on working for <span>ART shopping</span>, comming soon!<br><br>2019 © <span>Arts and Passion</span>. All Rights Reserved. WARNING : ART shooping website doesn't set the prices pieces, insted the artist. Please suscribe to our podcast to be updated ! <a href="#" onclick="JavaScript:window.location='mailto:admin@artshooping.com'">Contact us</a><br>All the pictures showing on the website are similar or equal to the offers by the artist. None is a copy unless you ask for it to the artist. Please be aware if someone is saling copy art pieces out of our lists  

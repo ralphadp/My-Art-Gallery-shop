@@ -1,0 +1,43 @@
+#list-frame {
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 600px;
+    border-radius: 5px;
+    position: absolute;
+    background: whitesmoke;
+    padding: 20px;
+    transform: translate(-50%, -50%);
+    font-family: 'Sarala', sans-serif;
+    color: #999;
+    box-shadow: 0 0 20px #111; 
+    -moz-box-shadow: 0 0 20px #111;
+    -webkit-box-shadow: 0 0 20px #111;
+}
+
+#list-frame h3 {
+    padding: 0 0 5px;
+    color: #111;
+}
+
+.list-item-row {
+    color: white;
+    padding: 10px;
+    opacity: 0.9;
+}
+
+.odd {
+    background: linear-gradient(to bottom,#e74c3c,#c0392b);
+}
+
+.pair {
+    background: linear-gradient(to bottom,#3B3941,#2A292F);
+}
+
+#list-box-close {
+    position: absolute;
+    top: -20px;
+    right: -28px;
+    cursor: pointer;
+    z-index: 100;
+}

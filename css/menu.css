@@ -104,6 +104,10 @@ a {
     padding-left: 10px;
 }
 
+#open-picked, #open-list {
+    cursor: pointer;
+}
+
 @media (max-width: 976px) {
     .search:hover > #input-search-art {
         width: 200px;

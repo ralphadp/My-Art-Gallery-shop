@@ -30,6 +30,10 @@
     color: #c0392b !important;
 }
 
+#open-picked-footer, #open-list-footer {
+    cursor: pointer;
+}
+
 /*------------------------------------------------------------------------*/
 
 @media (min-width: 1022px) {
