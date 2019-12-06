@@ -1,0 +1,32 @@
+.body-content {
+    margin: 5px 10px;
+}
+
+.title {
+    padding: 5px 100px;
+}
+
+.art-classification {
+    padding: 10px 100px;
+}
+
+.art-classification p {
+    margin-bottom: 100px;
+}
+
+@media (max-width: 660px) {
+    .body-content {
+        font-size: 14px;
+    }
+    .title {
+        padding: 5px 70px;
+    }
+    
+    .art-classification {
+        padding: 10px 70px;
+    }
+    
+    .art-classification p {
+        margin-bottom: 70px;
+    }
+}

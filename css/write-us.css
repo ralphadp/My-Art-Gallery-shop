@@ -1,0 +1,22 @@
+#email-frame {
+    padding: 10px 200px;
+}
+
+#email-frame .title {
+    padding: 10px 0!important; 
+}
+
+.row {
+    margin-bottom: 30px;
+}
+
+.row input {
+    margin-left: 20px;
+    width: 300px;
+}
+
+textarea {
+    width: 360px;
+    height: 200px;
+    resize: none;
+}
