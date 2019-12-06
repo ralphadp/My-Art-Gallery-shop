@@ -1,0 +1,117 @@
+.fog-frame {
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 100;
+    background: rgba(112, 119, 119, 0.7);
+    transition: all 1.5s;
+}
+
+.piece-info-frame {
+    top: 50%;
+    left: 50%;
+    width: 350px;
+    height: 350px;
+    border-radius: 5px;
+    position: absolute;
+    background: whitesmoke;
+    padding: 30px;
+    transform: translate(-50%, -50%);
+    font-family: 'Sarala', sans-serif;
+    color: #999;
+    box-shadow: 0 0 20px #111; 
+    -moz-box-shadow: 0 0 20px #111;
+    -webkit-box-shadow: 0 0 20px #111;
+}
+
+.label, .content {
+    display: inline-block;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #bbbbbb;
+}
+
+.piece-info-frame .row .label {
+    width: 70px;
+    text-align: right;
+    margin-left: 10px;
+}
+
+.piece-info-frame .row .content {
+    width: 200px;
+    text-align: left;
+    margin-right: 10px;
+}
+
+#box-close {
+    position: absolute;
+    top: -20px;
+    right: -28px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.icon-close {
+    fill: #c0392b;
+    background: whitesmoke;
+    margin: 0 .5rem 0 0;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+}
+
+.piece-photo {
+    border: 10px solid white;
+    width: 700px;
+    height: 450px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px #111; 
+    -moz-box-shadow: 0 0 20px #111;
+    -webkit-box-shadow: 0 0 20px #111;
+ }
+
+ .piece-photo img {
+    width: 100%;
+    height: 100%;
+ }
+
+ @media (max-width: 375px) {
+    .piece-info-frame {
+        width: 320px;
+        height: 320px;
+        font-size: 11px;
+    }
+
+    .piece-info-frame .row .label {
+        width: 60px;
+        margin-left: 8px;
+    }
+    
+    .piece-info-frame .row .content {
+        width: 180px;
+        margin-right: 8px;
+    }
+}
+
+@media (max-width: 320px) {
+    .piece-info-frame {
+        width: 280px;
+        height: 280px;
+        font-size: 10px;
+    }
+    .piece-info-frame .row .label {
+        width: 50px;
+        margin-left: 5px;
+    }
+    
+    .piece-info-frame .row .content {
+        width: 160px;
+        margin-right: 5px;
+    }
+}
