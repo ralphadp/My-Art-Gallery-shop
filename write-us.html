@@ -132,15 +132,18 @@
                 <h1>Write Us</h1>
             </div>
 
-            <div class="emai-us-body">
+            <div class="email-us-body">
                 <div class="row">
-                    <label>Description:</label><br/><textarea rows="10" cols="40"></textarea>
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="10" cols="40" maxlength=200 placeholder="Please leave a comment"></textarea>
                 </div>
                 <div class="row">
-                    <label>email:</label><input type="text"/>
+                    <label for="email">Email:</label>
+                    <input id="email" name="email" type="email" placeholder="Please enter your email"></textarea>
                 </div>
                 <div class="row">
-                    <label>Name:</label><input type="email"/>
+                    <label for="name">Name:</label>
+                    <input id="name" name="name" type="name" placeholder="Enter your name"/>
                 </div>
 
                 <button id="send-us-email">Send</button>
