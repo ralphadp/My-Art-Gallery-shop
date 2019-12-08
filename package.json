@@ -1,0 +1,14 @@
+{
+  "name": "art-gallery-shopping",
+  "version": "1.0.0",
+  "description": "Art gallery app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ralph",
+  "license": "ISC",
+  "dependencies": {
+    "express-generator": "^4.16.1"
+  }
+}

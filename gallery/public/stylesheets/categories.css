@@ -65,3 +65,21 @@
         margin: 0 8px 0 2px;
     }
 }
+
+@media (max-width: 450px) {
+    .list-col {
+        margin: 0 100px;
+    }
+    .list-col li a {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 375px) {
+    .list-col {
+        margin: 0 85px;
+    }
+    .list-col li a {
+        font-size: 12px;
+    }
+}
