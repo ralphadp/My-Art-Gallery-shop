@@ -19,7 +19,16 @@
 
     const infoButton = document.getElementsByClassName("piece-info-button");
     for (let index = 0; index < infoButton.length; index++) {
-        infoButton.item(index).addEventListener('click', () => pieceFrame.show());
+        infoButton.item(index).addEventListener('click', () => {
+            
+            document.getElementById("pieceName").innerHTML = allpieces[index].name;
+            document.getElementById("pieceArtist").innerHTML = allpieces[index].artist;
+            document.getElementById("pieceType").innerHTML = allpieces[index].type;
+            document.getElementById("pieceDate").innerHTML = allpieces[index].date;
+            document.getElementById("pieceSize").innerHTML = allpieces[index].size;
+            document.getElementById("piecePrice").innerHTML = allpieces[index].price;
+            pieceFrame.show()
+        });
     }
 
     /*PHOTO PIECE */
