@@ -128,7 +128,7 @@ router.get('/', function(req, res, next) {
     {
       id:34624, 
       thumb:"http://picsum.photos/400/200?random=13", 
-      name:"sea 9",
+      name:"9",
       artist:"Maria P. R.",
       type:"watercolor",
       date:"05/11/2017",
@@ -206,7 +206,7 @@ router.get('/', function(req, res, next) {
       price:"170 USD"
     },
     {
-      id:11544, 
+      id:544, 
       thumb:"http://picsum.photos/400/200?random=21", 
       name:"random",
       artist:"Maria P. R.",
@@ -214,239 +214,290 @@ router.get('/', function(req, res, next) {
       date:"05/11/2017",
       size:"2x3",
       price:"170 USD"
+    },
+    {
+      id:9914, 
+      thumb:"http://picsum.photos/400/200?random=22", 
+      name:"cactus",
+      artist:"Carlos Mayta",
+      type:"Oil",
+      date:"05/11/2017",
+      size:"2x2",
+      price:"200 USD"
+    },
+    {
+      id:71544, 
+      thumb:"http://picsum.photos/400/200?random=23", 
+      name:"robore-x",
+      artist:"Jose Rollano",
+      type:"watercolor",
+      date:"05/11/2017",
+      size:"1x1",
+      price:"380 USD"
+    },
+    {
+      id:80044, 
+      thumb:"http://picsum.photos/400/200?random=24", 
+      name:"flash interno",
+      artist:"Jose Rollano",
+      type:"wood sculture",
+      date:"05/11/2019",
+      size:"3x3",
+      price:"500 USD"
     }
+  ];
+
+  const categories = [
+    {
+      path:"/category/realism/",
+      name:"Realism"
+    },
+    {
+      path:"/category/hyperrealism/",
+      name:"Hyperrealism"
+    },
+    {
+      path:"/category/surrealism/",
+      name:"Surrealism"
+    },
+    {
+      path:"/category/impressionism/",
+      name:"Impressionism"
+    },
+    {
+      path:"/category/expressionism/",
+      name:"Expressionism"
+    },
+    {
+      path:"/category/abstract-art/",
+      name:"Abstract art"
+    },
+    {
+      path:"/category/pop-art/",
+      name:"Pop Art"
+    },
+    {
+      path:"/category/cubism/",
+      name:"Cubism"
+    },
+    {
+      path:"/category/portrait/",
+      name:"Portrait"
+    },
+    {
+      path:"/category/gender-painting/",
+      name:"Gender painting"
+    },
+    {
+      path:"/category/landscape/",
+      name:"Landscape"
+    },
+    {
+      path:"/category/still-life/",
+      name:"Still life"
+    },
+    {
+      path:"/category/naked/",
+      name:"Naked"
+    },
+    {
+      path:"/category/historical-painting/",
+      name:"Historical Painting"
+    },
+    {
+      path:"/category/oil/",
+      name:"Oil"
+    },
+    {
+      path:"/category/wax/",
+      name:"Wax"
+    },
+    {
+      path:"/category/watercolor/",
+      name:"Watercolor"
+    },
+    {
+      path:"/category/tempera/",
+      name:"Tempera"
+    },
+    {
+      path:"/category/acrylic/",
+      name:"Acrylic"
+    },
+    {
+      path:"/category/pie/",
+      name:"Pie"
+    },
+    {
+      path:"/category/quenching/",
+      name:"Quenching"
+    },
+    {
+      path:"/category/ink/",
+      name:"Ink"
+    },
+    {
+      path:"/category/cool/",
+      name:"Cool"
+    },
+    {
+      path:"/category/grisalea/",
+      name:"Grisalea"
+    },
+    {
+      path:"/category/pointillism/",
+      name:"Pointillism"
+    },
+    {
+      path:"/category/dripping/",
+      name:"Dripping"
+    },
+    {
+      path:"/category/grafitti/",
+      name:"Grafitti"
+    },
+    {
+      path:"/category/mixed-media/",
+      name:"Mixed media"
+    },
+    {
+      path:"/category/on-wooden-board/",
+      name:"On wooden board"
+    },
+    {
+      path:"/category/on-canvas/",
+      name:"On canvas"
+    },
+    {
+      path:"/category/in-copper/",
+      name:"In copper"
+    },
+    {
+      path:"/category/in-glass/",
+      name:"In glass"
+    },
+    {
+      path:"/category/on-paper/",
+      name:"On paper"
+    },
+    {
+      path:"/category/sculpture/",
+      name:"Sculpture"
+    },
+    {
+      path:"/category/abstract-sculpture/",
+      name:"Abstract sculpture"
+    },
+    {
+      path:"/category/relief/",
+      name:"Relief"
+    },
+    {
+      path:"/category/color-relief/",
+      name:"Color relief"
+    },
+    {
+      path:"/category/glass-relief/",
+      name:"Glass relief"
+    },
+    {
+      path:"/category/contemporary/",
+      name:"Contemporary"
+    },
+    {
+      path:"/category/round-bulk-statue/",
+      name:"Round Bulk Statue"
+    },
+    {
+      path:"/category/low-relief/",
+      name:"Low relief"
+    },
+    {
+      path:"/category/bust/",
+      name:"Bust"
+    },
+    {
+      path:"/category/torso/",
+      name:"Torso"
+    },
+    {
+      path:"/category/kinetic-sculpture/",
+      name:"Kinetic sculpture"
+    },
+    {
+      path:"/category/chryselephantine/",
+      name:"Chryselephantine"
+    },
+    {
+      path:"/category/architectural-sculpture/",
+      name:"Architectural sculpture"
+    },
+    {
+      path:"/category/clay-sculpture/",
+      name:"Clay sculpture"
+    },
+    {
+      path:"/category/stone-sculpture/",
+      name:"Stone sculpture"
+    },
+    {
+      path:"/category/stucco-sculpture/",
+      name:"Stucco sculpture"
+    },
+    {
+      path:"/category/metal-sculpture/",
+      name:"Metal sculpture"
+    },
+    {
+      path:"/category/wood-sculpture/",
+      name:"Wood sculpture"
+    },
+    {
+      path:"/category/ivory-Sculpture/",
+      name:"Ivory Sculpture"
+    },
+    {
+      path:"/category/concrete-sculpture/",
+      name:"Concrete sculpture"
+    },
+    {
+      path:"/category/emptying/",
+      name:"Emptying"
+    },
+    {
+      path:"/category/removing/",
+      name:"Removing"
+    },
+    {
+      path:"/category/adding/",
+      name:"Adding"
+    }
+  ];
+
+  const picked = [
+    {
+      id: 914,
+      name: "cactus",
+      price: 200
+    },
+     {
+      id: 71544, 
+      name: "robore-x",
+      price: 370
+     },
+     {
+      id: 12324, 
+      name:"The Sibling Exploring",
+      price: 150
+     }
   ];
 
   const payload = { 
     title: 'Art Shoping', 
     stringPieces: JSON.stringify(pieces),
     piecePhoto: pieces,
-    categories:[
-      {
-        path:"/category/realism/",
-        name:"Realism"
-      },
-      {
-        path:"/category/hyperrealism/",
-        name:"Hyperrealism"
-      },
-      {
-        path:"/category/surrealism/",
-        name:"Surrealism"
-      },
-      {
-        path:"/category/impressionism/",
-        name:"Impressionism"
-      },
-      {
-        path:"/category/expressionism/",
-        name:"Expressionism"
-      },
-      {
-        path:"/category/abstract-art/",
-        name:"Abstract art"
-      },
-      {
-        path:"/category/pop-art/",
-        name:"Pop Art"
-      },
-      {
-        path:"/category/cubism/",
-        name:"Cubism"
-      },
-      {
-        path:"/category/portrait/",
-        name:"Portrait"
-      },
-      {
-        path:"/category/gender-painting/",
-        name:"Gender painting"
-      },
-      {
-        path:"/category/landscape/",
-        name:"Landscape"
-      },
-      {
-        path:"/category/still-life/",
-        name:"Still life"
-      },
-      {
-        path:"/category/naked/",
-        name:"Naked"
-      },
-      {
-        path:"/category/historical-painting/",
-        name:"Historical Painting"
-      },
-      {
-        path:"/category/oil/",
-        name:"Oil"
-      },
-      {
-        path:"/category/wax/",
-        name:"Wax"
-      },
-      {
-        path:"/category/watercolor/",
-        name:"Watercolor"
-      },
-      {
-        path:"/category/tempera/",
-        name:"Tempera"
-      },
-      {
-        path:"/category/acrylic/",
-        name:"Acrylic"
-      },
-      {
-        path:"/category/pie/",
-        name:"Pie"
-      },
-      {
-        path:"/category/quenching/",
-        name:"Quenching"
-      },
-      {
-        path:"/category/ink/",
-        name:"Ink"
-      },
-      {
-        path:"/category/cool/",
-        name:"Cool"
-      },
-      {
-        path:"/category/grisalea/",
-        name:"Grisalea"
-      },
-      {
-        path:"/category/pointillism/",
-        name:"Pointillism"
-      },
-      {
-        path:"/category/dripping/",
-        name:"Dripping"
-      },
-      {
-        path:"/category/grafitti/",
-        name:"Grafitti"
-      },
-      {
-        path:"/category/mixed-media/",
-        name:"Mixed media"
-      },
-      {
-        path:"/category/on-wooden-board/",
-        name:"On wooden board"
-      },
-      {
-        path:"/category/on-canvas/",
-        name:"On canvas"
-      },
-      {
-        path:"/category/in-copper/",
-        name:"In copper"
-      },
-      {
-        path:"/category/in-glass/",
-        name:"In glass"
-      },
-      {
-        path:"/category/on-paper/",
-        name:"On paper"
-      },
-      {
-        path:"/category/sculpture/",
-        name:"Sculpture"
-      },
-      {
-        path:"/category/abstract-sculpture/",
-        name:"Abstract sculpture"
-      },
-      {
-        path:"/category/relief/",
-        name:"Relief"
-      },
-      {
-        path:"/category/color-relief/",
-        name:"Color relief"
-      },
-      {
-        path:"/category/glass-relief/",
-        name:"Glass relief"
-      },
-      {
-        path:"/category/contemporary/",
-        name:"Contemporary"
-      },
-      {
-        path:"/category/round-bulk-statue/",
-        name:"Round Bulk Statue"
-      },
-      {
-        path:"/category/low-relief/",
-        name:"Low relief"
-      },
-      {
-        path:"/category/bust/",
-        name:"Bust"
-      },
-      {
-        path:"/category/torso/",
-        name:"Torso"
-      },
-      {
-        path:"/category/kinetic-sculpture/",
-        name:"Kinetic sculpture"
-      },
-      {
-        path:"/category/chryselephantine/",
-        name:"Chryselephantine"
-      },
-      {
-        path:"/category/architectural-sculpture/",
-        name:"Architectural sculpture"
-      },
-      {
-        path:"/category/clay-sculpture/",
-        name:"Clay sculpture"
-      },
-      {
-        path:"/category/stone-sculpture/",
-        name:"Stone sculpture"
-      },
-      {
-        path:"/category/stucco-sculpture/",
-        name:"Stucco sculpture"
-      },
-      {
-        path:"/category/metal-sculpture/",
-        name:"Metal sculpture"
-      },
-      {
-        path:"/category/wood-sculpture/",
-        name:"Wood sculpture"
-      },
-      {
-        path:"/category/ivory-Sculpture/",
-        name:"Ivory Sculpture"
-      },
-      {
-        path:"/category/concrete-sculpture/",
-        name:"Concrete sculpture"
-      },
-      {
-        path:"/category/emptying/",
-        name:"Emptying"
-      },
-      {
-        path:"/category/removing/",
-        name:"Removing"
-      },
-      {
-        path:"/category/adding/",
-        name:"Adding"
-      }
-    ]
+    categories: categories,
+    cart: picked
   };
 
   res.render('write', payload);
