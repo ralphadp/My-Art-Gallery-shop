@@ -19,9 +19,9 @@
 
     const infoButton = document.getElementsByClassName("piece-info-button");
     for (let index = 0; index < infoButton.length; index++) {
-        infoButton.item(index).addEventListener('click', () => {
+        infoButton.item(index).addEventListener('click', (event) => {
             //TODO: have a map of the pieces according the ID
-            const ID = event.currentTarget.getAttribute("reference") - 1;
+            const ID = event.currentTarget.getAttribute("reference");
             
             document.getElementById("pieceName").innerHTML = allpieces[ID].name;
             document.getElementById("pieceArtist").innerHTML = allpieces[ID].artist;

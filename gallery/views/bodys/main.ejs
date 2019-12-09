@@ -4,20 +4,23 @@
 
 <div class="thumbs-content">
     <script type="text/javascript">
-        var allpieces = JSON.parse('<%- stringPieces %>');
+        var allpieces = JSON.parse(`<%- stringPieces %>`);
     </script>
-    <% for(let index = page_min; index < page_max; index++) { %>
-    <div class="thumb-col">
-        <div class="thumb frame-gallery" id="<%= piecePhoto[index].id %>">
-            <div class="thumb-pic">
-                <img src="<%= piecePhoto[index].thumb %>" alt="<%= piecePhoto[index].name %>"/>
-            </div>
-            <div class="description"><%= ((piecePhoto[index].name.length > 50) ? (piecePhoto[index].name.substring(0,50) + ' ...') : piecePhoto[index].name) %>
-                <button reference="<%= piecePhoto[index].id %>" class="piece-info-button">...</button>
+    <% for (let key in piecePhoto) { 
+        if (piecePhoto.hasOwnProperty(key)) { 
+            const item = piecePhoto[key];
+    %>
+        <div class="thumb-col">
+            <div class="thumb frame-gallery" id="<%= item.id %>">
+                <div class="thumb-pic">
+                    <img src="<%= item.thumb %>" alt="<%= item.name %>"/>
+                </div>
+                <div class="description"><%= ((item.name.length > 46) ? (item.name.substring(0, 46) + ' ...') : item.name) %>
+                    <button reference="<%= item.id %>" class="piece-info-button">...</button>
+                </div>
             </div>
         </div>
-    </div>
-    <% } %>
+    <% }} %>
 </div>
 
 <div class="pages">

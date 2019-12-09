@@ -33,12 +33,19 @@
     <section class="frame">
         <div id="available-list-of-pieces">
             <h3>All available pieces</h3>
-            <% for(let index = 0; index < piecePhoto.length; index++) { %>
-                <div class="list-item-row <%= (index % 2===0) ? 'pair' : 'odd' %>" id="<%= piecePhoto[index].id %>"><%= piecePhoto[index].name %></div>
-            <% } %>
+            <%  let alternate = true; 
+                for (let key in piecePhoto) { 
+                    if (piecePhoto.hasOwnProperty(key)) { 
+                        const item = piecePhoto[key];
+            %>
+                    <div class="list-item-row <%= alternate ? 'pair' : 'odd' %>" id="<%= item.id %>"><%= item.name %></div>
+            <%  alternate = !alternate;
+                }} 
+            %>
+            
         </div>
     </section>
-</div>
+    </div>
 
 <div class="fog-frame-x" id="cart-picking">
     <section class="frame">

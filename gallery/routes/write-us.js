@@ -1,17 +1,18 @@
 var express = require('express');
-const thumbsPage = require('./helpers/thumbs-info');
+const thumbsPage = require('../helpers/thumbs-info');
 var router = express.Router();
 
 /* GET write us Page. */
 router.get('/', function(req, res, next) {
-  const payload = thumbsPage(1);
 
-  if (!payload) {
-    res.status(err.status || 500);
-    res.render('error');
-  }
+  thumbsPage(1, (payload) => {
+    if (!payload) {
+        res.status(404);
+        res.render('404');
+    }
 
-  res.render('write', payload);
+    res.render('write', payload);
+  });
 });
 
 module.exports = router;
