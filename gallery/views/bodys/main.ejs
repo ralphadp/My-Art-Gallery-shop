@@ -6,14 +6,14 @@
     <script type="text/javascript">
         var allpieces = JSON.parse('<%- stringPieces %>');
     </script>
-    <% for(let index = 0; index < piecePhoto.length; index++) { %>
+    <% for(let index = page_min; index < page_max; index++) { %>
     <div class="thumb-col">
         <div class="thumb frame-gallery" id="<%= piecePhoto[index].id %>">
             <div class="thumb-pic">
                 <img src="<%= piecePhoto[index].thumb %>" alt="<%= piecePhoto[index].name %>"/>
             </div>
-            <div class="description"><%= piecePhoto[index].name %>
-                <button reference="<%= index %>" class="piece-info-button">...</button>
+            <div class="description"><%= ((piecePhoto[index].name.length > 50) ? (piecePhoto[index].name.substring(0,50) + ' ...') : piecePhoto[index].name) %>
+                <button reference="<%= piecePhoto[index].id %>" class="piece-info-button">...</button>
             </div>
         </div>
     </div>
@@ -22,12 +22,12 @@
 
 <div class="pages">
     <ul>
-        <li><a class="frame-gallery" target="_self" href="/page/1">1</a></li>
-        <li><a class="frame-gallery" target="_self" href="/page/2">2</a></li>
-        <li><a class="frame-gallery" target="_self" href="/page/3">3</a></li>
-        <li><span class="frame-gallery">...</span></li>
-        <li><a class="frame-gallery" target="_self" href="/page/10">10</a></li>
-        <li><a class="frame-gallery" target="_self" href="/page/11">11</a></li>
-        <li><a class="frame-gallery" target="_self" href="/page/12">12</a></li>
+        <% for (let index = 0; index < buttons.length; index++) { %>
+            <% if (buttons[index] > 0) { %>
+            <li><a class="frame-gallery" target="_self" href="/page/<%= buttons[index] %>"><%= buttons[index] %></a></li>
+            <% } else { %>
+            <li><span class="frame-gallery"><%= buttons[index] %></span></li>
+            <% } %>    
+        <% } %>
     </ul>
 </div>

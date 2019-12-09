@@ -2,10 +2,10 @@ var express = require('express');
 const thumbsPage = require('./helpers/thumbs-info');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-
-  const payload = thumbsPage(1);
+/* GET page{index} Page. */
+router.get('/:indexPage', function(req, res, next) {
+  
+  const payload = thumbsPage(req.params.indexPage);
 
   if (!payload) {
     res.status(404);

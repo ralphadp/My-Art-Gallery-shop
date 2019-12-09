@@ -20,13 +20,15 @@
     const infoButton = document.getElementsByClassName("piece-info-button");
     for (let index = 0; index < infoButton.length; index++) {
         infoButton.item(index).addEventListener('click', () => {
+            //TODO: have a map of the pieces according the ID
+            const ID = event.currentTarget.getAttribute("reference") - 1;
             
-            document.getElementById("pieceName").innerHTML = allpieces[index].name;
-            document.getElementById("pieceArtist").innerHTML = allpieces[index].artist;
-            document.getElementById("pieceType").innerHTML = allpieces[index].type;
-            document.getElementById("pieceDate").innerHTML = allpieces[index].date;
-            document.getElementById("pieceSize").innerHTML = allpieces[index].size;
-            document.getElementById("piecePrice").innerHTML = allpieces[index].price;
+            document.getElementById("pieceName").innerHTML = allpieces[ID].name;
+            document.getElementById("pieceArtist").innerHTML = allpieces[ID].artist;
+            document.getElementById("pieceType").innerHTML = allpieces[ID].type;
+            document.getElementById("pieceDate").innerHTML = allpieces[ID].date;
+            document.getElementById("pieceSize").innerHTML = allpieces[ID].size;
+            document.getElementById("piecePrice").innerHTML = allpieces[ID].price;
             pieceFrame.show()
         });
     }

@@ -16,3 +16,7 @@
 .pair {
     background: linear-gradient(to bottom,#3B3941,#2A292F);
 }
+
+#available-list-of-pieces {
+    overflow: scroll;
+}
