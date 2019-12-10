@@ -35,13 +35,16 @@
 <div class="fog-frame-x" id="list">
     <section class="frame">
         <div id="available-list-of-pieces">
-            <h3>All available pieces</h3>
+            <h3>ALL AVAILABLE PIECES</h3>
             <%  let alternate = true; 
                 for (let key in piecePhoto) { 
                     if (piecePhoto.hasOwnProperty(key)) { 
                         const item = piecePhoto[key];
             %>
-                    <div class="list-item-row <%= alternate ? 'pair' : 'odd' %>" id="<%= item.id %>"><%= item.name %></div>
+                    <div class="list-item-row <%= alternate ? 'pair' : 'odd' %>" id="<%= item.id %>">
+                        <div id="a-piece-name"><%= item.name %></div>
+                        <div id="a-artist"><%= item.artist %></div>
+                    </div>
             <%  alternate = !alternate;
                 }} 
             %>

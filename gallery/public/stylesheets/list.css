@@ -1,11 +1,12 @@
 #available-list-of-pieces h3 {
     padding: 0 0 5px;
     color: #111;
+    word-spacing: 6px;
 }
 
 .list-item-row {
     color: white;
-    padding: 10px;
+    padding: 8px 10px;
     opacity: 0.9;
 }
 
@@ -18,5 +19,17 @@
 }
 
 #available-list-of-pieces {
+    width: 900px;
+    height: 600px;
+    padding: 20px;
     overflow: scroll;
+}
+
+#a-piece-name {
+    width: 80%;
+    display: inline-block;
+}
+
+#a-artist {
+    display: inline;  
 }
