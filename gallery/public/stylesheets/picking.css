@@ -10,6 +10,13 @@
 }
 
 #update-picked {
-    margin: 40px 5px;
+    margin: 40px 0;
     width: 100%;
+}
+
+#picked-pieces {
+    width: 500px;
+    height: 500px;
+    padding: 20px;
+    overflow: scroll;
 }

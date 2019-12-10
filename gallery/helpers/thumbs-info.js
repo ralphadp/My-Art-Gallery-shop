@@ -134,7 +134,7 @@ let thumsInfo = (index, resolve) => {
             })
             .then(resultObject => {
                 const oCart = new cartRepo();
-                oCart.getAll()
+                oCart.getById(global.currentUser)
                 .then(picked => {
                     resultObject.cart = picked;
 
