@@ -7,11 +7,12 @@
         var allpieces = JSON.parse(`<%- stringPieces %>`);
     </script>
     <% for (let key in piecePhoto) { 
-        if (piecePhoto.hasOwnProperty(key)) { 
+        if (piecePhoto.hasOwnProperty(key)) {
             const item = piecePhoto[key];
     %>
         <div class="thumb-col">
             <div class="thumb frame-gallery" id="<%= item.id %>">
+                <input class="thumb-checkbox" id="<%= item.id %>" type="checkbox" <%= item.picked ? 'checked' : '' %> <%= (item.picked === 'PRIVATE') ? 'readonly disabled' : '' %>/>
                 <div class="thumb-pic">
                     <img src="<%= item.thumb %>" alt="<%= item.name %>"/>
                 </div>

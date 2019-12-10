@@ -2,90 +2,128 @@ var sqlConn = require('../database/db');
 
 class Pieces {
 
-    constructor() {
-
+    /**
+     * Pieces for some User
+     * @param {*} userId 
+     */
+    constructor(userId) {
+        this.userId = userId;
     }
     
-    getById(id) {
-        let result = {};
-        let sql = `SELECT * FROM pieces WHERE id = '${id}'`;
-        let query = sqlConn.query(sql, (error, results) => {
-            if (error) {
-                throw error;
-            }
-            result = JSON.parse(JSON.stringify(results));
-        });
+    /**
+     * Get th einfo for cetain piece
+     * @param {*} pieceId 
+     */
+    getById(pieceId) {
+        let sql = 'SELECT * FROM pieces WHERE id = ?';
 
-        return result;
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [pieceId], (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
+                }
+            });
+        });
     }
 
+    /**
+     * Get the Total pieces in the gallery
+     */
     getSize() {
         let sql = "SELECT count(*) AS size FROM pieces";
         
         return new Promise((resolve, reject) => {
-            sqlConn.query(sql, (err, result) => {
-                if (!err) {
+            sqlConn.query(sql, (error, result) => {
+                if (!error) {
                     resolve(result[0].size);
                 } else {
-                    reject(err);
+                    reject(error);
                 }
             });
         });
     }
 
-    getAll(maxItems, page) {
-        let sql = "SELECT * FROM pieces LIMIT ? OFFSET ?";
+    /**
+     * Get all the pieces for a Page, also with the info if they are available or not(picked).
+     * 
+     * @param {*} maxItems 
+     * @param {*} pageOffset 
+     */
+    getAll(maxItems, pageOffset) {
+        let sql = `SELECT pieces.*, (CASE WHEN cart.userId = '${this.userId}' THEN cart.id WHEN cart.userId <> '${this.userId}' THEN 'PRIVATE' ELSE NULL END) AS picked FROM pieces LEFT JOIN cart ON pieces.id = cart.pieceId order by date desc LIMIT ? OFFSET ?`;
 
         return new Promise((resolve, reject) => {
-            sqlConn.query(sql, [maxItems, page], (err, result) => {
-                if (!err) {
+            sqlConn.query(sql, [maxItems, pageOffset], (error, result) => {
+                if (!error) {
                     const cleanJson = JSON.parse(JSON.stringify(result));
                     resolve(cleanJson);
                 } else {
-                    reject(err);
+                    reject(error);
                 }
             });
         });
     }
 
+    /**
+     * Update the infofor a piece of the gallery
+     * @param {*} piece 
+     */
     update(piece) {
-        let sql = `UPDATE piece SET name='${piece.name}', artist='${piece.artist}' WHERE price=${piece.price}`;
-        let query = sqlConn.query(sql, (error, results) => {
-            if (error) {
-                throw error;
-            }
+        let data = {name: piece.name, artist: piece.artist, price: piece.price};
+        let sql = 'UPDATE piece SET ?';
 
-            result = JSON.parse(JSON.stringify(results));
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, data, (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
+                }
+            });
         });
-
-        return result;
     }
 
-    delete(id) {
-        let result = {};
-        let sql = `DELETE FROM piece WHERE id='${id}'`;
-        let query = sqlConn.query(sql, (error, results) => {
-            if (error) {
-                throw error;
-            }
-            result = JSON.parse(JSON.stringify(results));
-        });
+    /**
+     * Remove a piece from the gallery
+     * @param {*} pieceId 
+     */
+    delete(pieceId) {
+        let sql = 'DELETE FROM piece WHERE id = ?';
 
-        return result;
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [pieceId], (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
+                }
+            });
+        });
     }
 
+    /**
+     * Save a new brand piece in our gallery
+     * @param {*} piece 
+     */
     save(piece) {
-        let result = {};
-        let data = {name: piece.name, artist: piece.artist};
+        let data = {name: piece.name, artist: piece.artist, price: piece.price};
         let sql = "INSERT INTO pieces SET ?";
-        let query = sqlConn.query(sql, data,(error, results) => {
-            if (error) {
-                throw error;
-            }
-            result = JSON.parse(JSON.stringify(results));
-        });
 
-        return result;
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, data, (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
+                }
+            });
+        });
     }
 }
 

@@ -70,6 +70,15 @@
     outline: none;
 }
 
+.thumb-checkbox {
+    position: absolute;
+    transform: scale(1.5);
+}
+
+.thumb-checkbox:focus {
+    outline: 0;
+}
+
 /*------------------------------------------------------------------------*/
 
 @media (min-width: 1022px) {

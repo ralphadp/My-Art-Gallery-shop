@@ -96,7 +96,7 @@ let thumsInfo = (index, resolve) => {
     }
 
     //read from DB
-    const oPieces = new piecesRepo();
+    const oPieces = new piecesRepo(global.currentUser);
     oPieces.getSize()
     .then(totalPieces => {
 
