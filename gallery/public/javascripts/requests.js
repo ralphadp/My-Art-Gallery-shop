@@ -6,7 +6,7 @@ let request = config => {
         xhr.open(config.method || "GET", config.url);
 
         if (config.headers) {
-            //for JWT
+            //for x-www-form-urlencoded, json, JWT
             Object.keys(config.headers).forEach(key => {
                 xhr.setRequestHeader(key, config.headers[key]);
             });

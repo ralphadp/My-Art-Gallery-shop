@@ -13,6 +13,7 @@ var writeUsRouter = require('./routes/write-us');
 var pageRouter = require('./routes/page');
 var cartRouter = require('./routes/cart');
 var categoryRouter = require('./routes/category');
+var emailerRouter = require('./routes/emailer');
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use('/write-us', writeUsRouter);
 app.use('/page', pageRouter);
 app.use('/cart', cartRouter);
 app.use('/category', categoryRouter);
+app.use('/send-message', emailerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
