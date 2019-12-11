@@ -6,8 +6,15 @@ class Pieces {
      * Pieces for some User
      * @param {*} userId 
      */
-    constructor(userId) {
+    constructor(userId, category) {
         this.userId = userId;
+
+        //no query in case 'ALL'
+        this.queryCategory = '';
+        //set query for category
+        if (category.toLowerCase() !== 'all') {
+            this.queryCategory = ` WHERE type = '${category}'`;
+        }
     }
     
     /**
@@ -33,7 +40,7 @@ class Pieces {
      * Get the Total pieces in the gallery
      */
     getSize() {
-        let sql = "SELECT count(*) AS size FROM pieces";
+        let sql = `SELECT count(*) AS size FROM pieces${this.queryCategory}`;
         
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, (error, result) => {
@@ -53,7 +60,7 @@ class Pieces {
      * @param {*} pageOffset 
      */
     getAll(maxItems, pageOffset) {
-        let sql = `SELECT pieces.*, (CASE WHEN cart.userId = '${this.userId}' THEN cart.id WHEN cart.userId <> '${this.userId}' THEN 'PRIVATE' ELSE NULL END) AS picked FROM pieces LEFT JOIN cart ON pieces.id = cart.pieceId order by date desc LIMIT ? OFFSET ?`;
+        let sql = `SELECT pieces.*, (CASE WHEN cart.userId = '${this.userId}' THEN cart.id WHEN cart.userId <> '${this.userId}' THEN 'PRIVATE' ELSE NULL END) AS picked FROM pieces LEFT JOIN cart ON pieces.id = cart.pieceId ${this.queryCategory} order by date desc LIMIT ? OFFSET ?`;
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [maxItems, pageOffset], (error, result) => {

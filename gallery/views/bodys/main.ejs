@@ -1,5 +1,5 @@
-<div class="title">
-    <h1></h1>
+<div class="title" style="display: <%= (typeof titlePage === 'string') ? 'block' : 'none' %>">
+    <h1><%= (typeof titlePage !== 'undefined') ? titlePage : '' %></h1>
 </div>
 
 <div class="thumbs-content">
@@ -28,7 +28,7 @@
     <ul>
         <% for (let index = 0; index < buttons.length; index++) { %>
             <% if (buttons[index] > 0) { %>
-            <li><a class="frame-gallery" target="_self" href="/page/<%= buttons[index] %>"><%= buttons[index] %></a></li>
+            <li><a class="frame-gallery" target="_self" href="<%= (categoryCode === 'all') ? '' : ('/category/' + categoryCode) %>/page/<%= buttons[index] %>"><%= buttons[index] %></a></li>
             <% } else { %>
             <li><span class="frame-gallery"><%= buttons[index] %></span></li>
             <% } %>    

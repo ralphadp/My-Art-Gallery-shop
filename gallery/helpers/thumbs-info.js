@@ -20,6 +20,18 @@ let calculateThumbPerPage = (pieces, index) => {
     };
 }
 
+let numPages = (totalSize) => {
+
+    let wholePart = Math.trunc(totalSize / MAX_THUMB_PER_PAGE);
+    const decimalPart = Math.trunc(totalSize % MAX_THUMB_PER_PAGE);
+
+    if (decimalPart > 0) {
+        wholePart++;
+    }
+
+    return wholePart;
+}
+
 /**
  * Converts an array to an object selecting the key as mapped field
  * @param {*} array 
@@ -43,7 +55,15 @@ const arrayToObject = (array, key) => {
 let calculatePagerButtons = (pieceslLength, index) => {
 
     let buttons = [];
-    let buttonsSize = Math.trunc(pieceslLength / MAX_THUMB_PER_PAGE);
+    let buttonsSize = numPages(pieceslLength);
+
+    if (buttonsSize <= 7) {
+        for (let index = 1; index <= buttonsSize; index++) {
+            buttons.push(index);
+        }
+
+        return buttons;
+    }
 
     //TODO: do it from DB or REDIS
     let groups = JSON.parse(fs.readFileSync('../tests/mockdata/buttons-group-mock.json'));
@@ -84,9 +104,10 @@ let calculatePagerButtons = (pieceslLength, index) => {
  * TODO: It has 4 concerns, need to be separated  
  * 
  * @param {*} index 
+ * @param {*} category 
  * @param {*} resolve 
  */
-let thumsInfo = (index, resolve) => {
+let thumbsInfo = (index, category, resolve) => {
 
     index = Number(index);
 
@@ -96,13 +117,17 @@ let thumsInfo = (index, resolve) => {
     }
 
     //read from DB
-    const oPieces = new piecesRepo(global.currentUser);
+    const oPieces = new piecesRepo(global.currentUser, category);
     oPieces.getSize()
     .then(totalPieces => {
 
-        if (index < 1 || index > Math.trunc(totalPieces / MAX_THUMB_PER_PAGE)) {
-            console.log(`Page index out of bounds [${index}]`);
-            resolve(null);
+        let NUM_PAGES = numPages(totalPieces);
+        
+        if (NUM_PAGES > 0) {
+            if (index < 1 || index > NUM_PAGES) {
+                console.log(`Page index out of bounds [${index}]`);
+                resolve(null);
+            }
         }
 
         oPieces.getAll(MAX_THUMB_PER_PAGE, (index - 1) * MAX_THUMB_PER_PAGE)
@@ -120,7 +145,8 @@ let thumsInfo = (index, resolve) => {
                 piecePhoto: pieces,
                 page_min: MIN,
                 page_max: MAX,
-                buttons: buttons     
+                buttons: buttons,
+                categoryCode: category 
             };   
         })
         .then(resultObject => {
@@ -159,4 +185,4 @@ let thumsInfo = (index, resolve) => {
 
 }
 
-module.exports = thumsInfo;
+module.exports = thumbsInfo;

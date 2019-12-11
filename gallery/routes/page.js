@@ -5,7 +5,7 @@ var router = express.Router();
 /* GET page{index} Page. */
 router.get('/:indexPage', function(req, res, next) {
 
-  thumbsPage(req.params.indexPage, (payload) => {
+  thumbsPage(req.params.indexPage, 'all', (payload) => {
     if (!payload) {
         res.status(404);
         res.render('404');

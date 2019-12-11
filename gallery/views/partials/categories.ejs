@@ -5,13 +5,13 @@
             <% for(let index = 0; index < categories.length; index+=7) { %>
             <div class="list-col">
                 <ul>
-                    <li><a href="<%= categories[index].path %>"><%= categories[index].name %></a></li>
-                    <li><a href="<%= categories[index + 1].path %>"><%= categories[index + 1].name %></a></li>
-                    <li><a href="<%= categories[index + 2].path %>"><%= categories[index + 2].name %></a></li>
-                    <li><a href="<%= categories[index + 3].path %>"><%= categories[index + 3].name %></a></li>
-                    <li><a href="<%= categories[index + 4].path %>"><%= categories[index + 4].name %></a></li>
-                    <li><a href="<%= categories[index + 5].path %>"><%= categories[index + 5].name %></a></li>
-                    <li><a href="<%= categories[index + 6].path %>"><%= categories[index + 6].name %></a></li>
+                    <li><a href="/category/<%= categories[index].path %>"><%= categories[index].name %></a></li>
+                    <li><a href="/category/<%= categories[index + 1].path %>"><%= categories[index + 1].name %></a></li>
+                    <li><a href="/category/<%= categories[index + 2].path %>"><%= categories[index + 2].name %></a></li>
+                    <li><a href="/category/<%= categories[index + 3].path %>"><%= categories[index + 3].name %></a></li>
+                    <li><a href="/category/<%= categories[index + 4].path %>"><%= categories[index + 4].name %></a></li>
+                    <li><a href="/category/<%= categories[index + 5].path %>"><%= categories[index + 5].name %></a></li>
+                    <li><a href="/category/<%= categories[index + 6].path %>"><%= categories[index + 6].name %></a></li>
                 </ul>
             </div>
             <% } %>
