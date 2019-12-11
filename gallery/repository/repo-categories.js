@@ -7,20 +7,23 @@ class Categories {
     }
     
     getById(id) {
-        let result = {};
-        let sql = `SELECT * FROM categories WHERE id = '${id}'`;
-        let query = sqlConn.query(sql, (error, results) => {
-            if (error) {
-                throw error;
-            }
-            result = JSON.parse(JSON.stringify(results));
-        });
+        
+        let sql = 'SELECT * FROM categories WHERE id = ?';
 
-        return result;
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [id], (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
     }
 
     getAll() {
         let sql = "SELECT * FROM categories";
+
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, (err, result) => {
                 if (!err) {
@@ -33,17 +36,22 @@ class Categories {
     }
 
     save(category) {
-        let result = {};
-        let data = {path: category.path,  name: category.name};
-        let sql = "INSERT INTO categories SET ?";
-        let query = sqlConn.query(sql, data,(error, results) => {
-            if (error) {
-                throw error;
-            }
-            result = JSON.parse(JSON.stringify(results));
-        });
+        let data = {
+            path: category.path, 
+            name: category.name
+        };
 
-        return result;
+        let sql = "INSERT INTO categories SET ?";
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, data, (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
     }
 }
 

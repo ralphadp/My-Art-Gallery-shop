@@ -19,7 +19,7 @@ router.get('/add-to/:pieceId', function(req, res, next) {
                 response = {
                     success: true,
                     message: `The piece [${req.params.pieceId}] was NOT accepted in your cart. Please contact your Admin.`
-                };    
+                };
             }
             res.send(response);
         })
@@ -51,10 +51,17 @@ router.get('/remove-from/:pieceId', function(req, res, next) {
         const oCart = new cartRepo();
         oCart.delete(req.params.pieceId)
         .then(result => {
-            response = {
-                success: true,
-                message: `The piece [${req.params.pieceId}] was removed from cart successfully`
-            };
+            if (result.affectedRows === 1) {
+                response = {
+                    success: true,
+                    message: `The piece [${req.params.pieceId}] was removed from cart successfully`
+                };
+            } else {
+                response = {
+                    success: true,
+                    message: `The piece [${req.params.pieceId}] could NOT be removed from your cart. Please contact your Admin.`
+                };
+            }
             res.send(response);
         })
         .catch(error => {

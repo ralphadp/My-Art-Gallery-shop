@@ -12,7 +12,7 @@ class Cart {
      * @param {*} userId 
      */
     getById(userId) {
-        let sql = 'SELECT cart.id, cart.userId, pieces.id as pieceId, pieces.name FROM cart INNER JOIN pieces ON cart.pieceId = pieces.id WHERE userId = ?';
+        let sql = 'SELECT cart.id, cart.userId, pieces.itemId as pieceId, pieces.name FROM cart INNER JOIN pieces ON cart.pieceId = pieces.itemId WHERE userId = ?';
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [userId], (err, result) => {
@@ -29,7 +29,7 @@ class Cart {
      * Get all the possible trades from all the users 
      */
     getAll() {
-        let sql = "SELECT cart.id, cart.userId, pieces.id as pieceId, pieces.name FROM cart INNER JOIN pieces ON cart.pieceId = pieces.id";
+        let sql = "SELECT cart.id, cart.userId, pieces.itemId as pieceId, pieces.name FROM cart INNER JOIN pieces ON cart.pieceId = pieces.itemId";
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, (err, result) => {
@@ -68,7 +68,11 @@ class Cart {
      * @param {*} pickedPieceId 
      */
     save(userId, pickedPieceId) {
-        let data = {userId: userId, pieceId: pickedPieceId};
+        let data = {
+            userId: userId, 
+            pieceId: pickedPieceId
+        };
+
         let sql = 'INSERT INTO cart SET ?';
 
         return new Promise((resolve, reject) => {

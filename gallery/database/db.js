@@ -6,7 +6,7 @@ const config = {
     port: process.env.MYSQL_PORT || '3306',
     user: 'root',
     password: 'root',
-    database: process.env.MYSQL_DATABASE || 'gallery'
+    database: process.env.MYSQL_DATABASE || 'gallery_db'
   };
 
 //Create connection

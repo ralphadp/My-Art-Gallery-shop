@@ -1,3 +1,3 @@
-create schema gallery;
+create schema gallery_db;
 
-use gallery;
+use gallery_db;

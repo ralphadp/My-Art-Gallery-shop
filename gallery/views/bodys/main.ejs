@@ -11,13 +11,13 @@
             const item = piecePhoto[key];
     %>
         <div class="thumb-col">
-            <div class="thumb frame-gallery" id="<%= item.id %>">
-                <input class="thumb-checkbox" id="<%= item.id %>" type="checkbox" <%= item.picked ? 'checked' : '' %> <%= (item.picked === 'PRIVATE') ? 'readonly disabled' : '' %>/>
+            <div class="thumb frame-gallery" id="<%= item.itemId %>">
+                <input class="thumb-checkbox" id="<%= item.itemId %>" type="checkbox" <%= item.picked ? 'checked' : '' %> <%= (item.picked === 'PRIVATE') ? 'readonly disabled' : '' %>/>
                 <div class="thumb-pic">
                     <img src="<%= item.thumb %>" alt="<%= item.name %>"/>
                 </div>
                 <div class="description"><%= ((item.name.length > 46) ? (item.name.substring(0, 46) + ' ...') : item.name) %>
-                    <button reference="<%= item.id %>" class="piece-info-button">...</button>
+                    <button reference="<%= item.itemId %>" class="piece-info-button">...</button>
                 </div>
             </div>
         </div>

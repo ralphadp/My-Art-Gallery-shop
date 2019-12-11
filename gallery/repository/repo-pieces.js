@@ -60,7 +60,7 @@ class Pieces {
      * @param {*} pageOffset 
      */
     getAll(maxItems, pageOffset) {
-        let sql = `SELECT pieces.*, (CASE WHEN cart.userId = '${this.userId}' THEN cart.id WHEN cart.userId <> '${this.userId}' THEN 'PRIVATE' ELSE NULL END) AS picked FROM pieces LEFT JOIN cart ON pieces.id = cart.pieceId ${this.queryCategory} order by date desc LIMIT ? OFFSET ?`;
+        let sql = `SELECT pieces.*, (CASE WHEN cart.userId = '${this.userId}' THEN cart.id WHEN cart.userId <> '${this.userId}' THEN 'PRIVATE' ELSE NULL END) AS picked FROM pieces LEFT JOIN cart ON pieces.itemId = cart.pieceId ${this.queryCategory} order by release_date desc LIMIT ? OFFSET ?`;
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [maxItems, pageOffset], (error, result) => {
@@ -79,7 +79,17 @@ class Pieces {
      * @param {*} piece 
      */
     update(piece) {
-        let data = {name: piece.name, artist: piece.artist, price: piece.price};
+        let data = {
+            itemId: 'UUID()', 
+            thumb: piece.url, 
+            name: piece.name, 
+            artist: piece.artist, 
+            type: piece.type,
+            release_date: piece.release,
+            size: piece.size,
+            price: piece.price,
+            currency: piece.currency
+        };
         let sql = 'UPDATE piece SET ?';
 
         return new Promise((resolve, reject) => {
@@ -118,7 +128,17 @@ class Pieces {
      * @param {*} piece 
      */
     save(piece) {
-        let data = {name: piece.name, artist: piece.artist, price: piece.price};
+        let data = {
+            itemId: 'UUID()', 
+            thumb: piece.url,
+            name: piece.name, 
+            artist: piece.artist, 
+            type: piece.type,
+            release_date: piece.release,
+            size: piece.size,
+            price: piece.price,
+            currency: piece.currency
+        };
         let sql = "INSERT INTO pieces SET ?";
 
         return new Promise((resolve, reject) => {

@@ -132,9 +132,11 @@ let thumbsInfo = (index, category, resolve) => {
 
         oPieces.getAll(MAX_THUMB_PER_PAGE, (index - 1) * MAX_THUMB_PER_PAGE)
         .then(pieces => {
-            return arrayToObject(pieces, 'id');
+
+            return arrayToObject(pieces, 'itemId');
         })
         .then(pieces => {
+
             let {MIN, MAX} = calculateThumbPerPage(pieces, index);
             let buttons = calculatePagerButtons(totalPieces, index);
 

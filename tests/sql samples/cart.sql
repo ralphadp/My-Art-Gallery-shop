@@ -1,9 +1,10 @@
-use gallery;
-create table cart (
-	id  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+USE gallery_db;
+
+CREATE TABLE cart (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	userId VARCHAR(50),
 	pieceId VARCHAR(40),
-	INDEX (id)
+	INDEX cart_index(id)
 );
 
 insert into cart (id, userId, pieceId) values (1, '03-028-2484', '26b22d6c-d112-410a-8192-7cd6d7f3e90b');
