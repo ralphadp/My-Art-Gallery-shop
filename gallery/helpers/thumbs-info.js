@@ -20,6 +20,10 @@ let calculateThumbPerPage = (pieces, index) => {
     };
 }
 
+/**
+ * Get the number of pages to use
+ * @param {*} totalSize 
+ */
 let numPages = (totalSize) => {
 
     let wholePart = Math.trunc(totalSize / MAX_THUMB_PER_PAGE);

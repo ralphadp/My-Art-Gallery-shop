@@ -1,19 +1,21 @@
 :root {
     --red1: #c0392b;
     --red2: #e74c3c;
-    --red3: #c0392b;
-    --red4: #e74c3c; 
     --sea: #5fcf80;
-    --gray-dark1: #34333A;
-    --gray-dark2: #3B3941;
-    --gray-dark3: #2A292F;
-    --gray-dark4: #4F4D55;
-    --gray-dark5: #0c0b01;
-    --gray-dark6: #98979E;
-    --gray-dark7: #7A797F;
-    --dark1: #16151B;
+    --dark1: #09080d;
     --dark2: #111;
-    --dark3: #09080d;
+    --dark3: #16151B;
+    --gray-dark1: #0c0b01;
+    --gray-dark2: #2A292F;
+    --gray-dark3: #34333A;
+    --gray-dark4: #3d3d3d;
+    --gray-dark5: #3B3941;
+    --gray-dark6: #4F4D55;
+    --gray-dark7: #7A797F;
+    --gray-dark8: #98979E;
+    --gray-dark9: #bbbbbb;
+    --gray-dark10:#cccccc;
+
     --font-family-content: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
     --font-family-interface: -system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
 }

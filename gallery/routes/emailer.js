@@ -2,7 +2,7 @@ var express = require('express');
 var mailer = require('../email/mailer');
 var router = express.Router();
 
-/* POST send a message. */
+/* POST send an email message. */
 router.post('/', function(req, res, next) {
 
     let response;
