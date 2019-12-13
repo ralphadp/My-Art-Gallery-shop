@@ -1,8 +1,19 @@
 (() => 
 {
     document.getElementById('input-search-art').addEventListener('keypress', (event) => {
-        if (event.keyCode === 13) {
-            const words = document.getElementById('input-search-art').value.replace(/ /g, "+");
+        const patternSearchText = document.getElementById('input-search-art').value;
+        if (patternSearchText.length > 0) {
+            if (event.keyCode === 13) {
+                const words = patternSearchText.value.replace(/ /g, "+");
+                window.location.replace(window.location.origin + '/search/' + words);
+            }
+        }
+    });
+
+    document.getElementById('input-search-art-anchor').addEventListener('click', () => {
+        const patternSearchText = document.getElementById('input-search-art').value;
+        if (patternSearchText.length > 0) {
+            const words = patternSearchText.replace(/ /g, "+");
             window.location.replace(window.location.origin + '/search/' + words);
         }
     });

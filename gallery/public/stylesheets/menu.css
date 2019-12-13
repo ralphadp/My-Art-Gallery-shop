@@ -104,7 +104,7 @@ a {
     padding-left: 10px;
 }
 
-#open-picked, #open-list {
+#open-picked, #open-list, #input-search-art-anchor {
     cursor: pointer;
 }
 
