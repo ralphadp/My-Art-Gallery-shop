@@ -16,6 +16,16 @@ class Pieces {
             this.queryCategory = ` WHERE type = '${category}'`;
         }
     }
+
+    fetchSearchQuery(pattern) {
+        let wherePattern = '';
+
+        if (pattern) {
+            wherePattern = ` WHERE (name REGEXP "${pattern}") or (artist REGEXP "${pattern}") or (type REGEXP "${pattern}")`;
+        }
+
+        return wherePattern;
+    }
     
     /**
      * Get th einfo for cetain piece
@@ -54,6 +64,26 @@ class Pieces {
     }
 
     /**
+     * Get the Total pieces of searching
+     *
+     * @param {*} pattern 
+     */
+    getSizeOfSearching(pattern) {
+
+        let sql =  `SELECT count(*) AS size FROM pieces ${this.fetchSearchQuery(pattern)}`;
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (error, result) => {
+                if (!error) {
+                    resolve(result[0].size);
+                } else {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    /**
      * Get all the pieces for a Page, also with the info if they are available or not(picked).
      * 
      * @param {*} maxItems 
@@ -61,6 +91,29 @@ class Pieces {
      */
     getAll(maxItems, pageOffset) {
         let sql = `SELECT pieces.*, (CASE WHEN cart.userId = '${this.userId}' THEN cart.id WHEN cart.userId <> '${this.userId}' THEN 'PRIVATE' ELSE NULL END) AS picked FROM pieces LEFT JOIN cart ON pieces.itemId = cart.pieceId ${this.queryCategory} order by release_date desc LIMIT ? OFFSET ?`;
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [maxItems, pageOffset], (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    /**
+     * Get all the pieces for a Page, also with the info if they are available or not(picked).
+     * 
+     * @param {*} pattern
+     * @param {*} maxItems 
+     * @param {*} pageOffset 
+     */
+    getAllSearching(pattern, maxItems, pageOffset) {
+ 
+        let sql = `SELECT pieces.*, (CASE WHEN cart.userId = '${this.userId}' THEN cart.id WHEN cart.userId <> '${this.userId}' THEN 'PRIVATE' ELSE NULL END) AS picked FROM pieces LEFT JOIN cart ON pieces.itemId = cart.pieceId ${this.fetchSearchQuery(pattern)} order by release_date desc LIMIT ? OFFSET ?`;
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [maxItems, pageOffset], (error, result) => {

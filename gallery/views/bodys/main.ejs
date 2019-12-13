@@ -28,7 +28,7 @@
     <ul>
         <% for (let index = 0; index < buttons.length; index++) { %>
             <% if (buttons[index] > 0) { %>
-            <li><a class="frame-gallery" target="_self" href="<%= (categoryCode === 'all') ? '' : ('/category/' + categoryCode) %>/page/<%= buttons[index] %>"><%= buttons[index] %></a></li>
+            <li><a class="frame-gallery" target="_self" href="<%= (categoryCode === 'all') ? ((typeof searchPattern !== 'undefined') ? ('/search/' + searchPattern) : '') : ('/category/' + categoryCode) %>/page/<%= buttons[index] %>"><%= buttons[index] %></a></li>
             <% } else { %>
             <li><span class="frame-gallery"><%= buttons[index] %></span></li>
             <% } %>    

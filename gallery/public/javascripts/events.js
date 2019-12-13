@@ -2,7 +2,8 @@
 {
     document.getElementById('input-search-art').addEventListener('keypress', (event) => {
         if (event.keyCode === 13) {
-            alert('SEARCHING ...');
+            const words = document.getElementById('input-search-art').value.replace(/ /g, "+");
+            window.location.replace(window.location.origin + '/search/' + words);
         }
     });
 

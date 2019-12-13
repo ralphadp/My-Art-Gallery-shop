@@ -14,6 +14,7 @@ var pageRouter = require('./routes/page');
 var cartRouter = require('./routes/cart');
 var categoryRouter = require('./routes/category');
 var emailerRouter = require('./routes/emailer');
+var searchRouter = require('./routes/search');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/page', pageRouter);
 app.use('/cart', cartRouter);
 app.use('/category', categoryRouter);
 app.use('/send-message', emailerRouter);
+app.use('/search', searchRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -191,4 +191,100 @@ let thumbsInfo = (index, category, resolve) => {
 
 }
 
-module.exports = thumbsInfo;
+/**
+ * Getting all info for the 'pieces thumbs' according searching
+ * 
+ * @param {*} index 
+ * @param {*} words 
+ * @param {*} resolve 
+ */
+let searchingThumbsInfo = (index, words, resolve) => {
+
+    index = Number(index);
+
+    if (typeof words === 'undefined' || !words || words.length === 0) {
+        words = false;
+    } else {
+        words = words.join('|');
+    }
+
+    if (isNaN(index)) {
+        console.log(`Invalid page index, not [${index}]`);
+        resolve(null);
+    }
+
+    //read from DB
+    const oPieces = new piecesRepo(global.currentUser, 'all');
+    oPieces.getSizeOfSearching(words)
+    .then(totalPieces => {
+
+        let NUM_PAGES = numPages(totalPieces);
+
+        if (NUM_PAGES > 0) {
+            if (index < 1 || index > NUM_PAGES) {
+                console.log(`Page index out of bounds [${index}]`);
+                resolve(null);
+            }
+        }
+
+        oPieces.getAllSearching(words, MAX_THUMB_PER_PAGE, (index - 1) * MAX_THUMB_PER_PAGE)
+        .then(pieces => {
+
+            return arrayToObject(pieces, 'itemId');
+        })
+        .then(pieces => {
+
+            let {MIN, MAX} = calculateThumbPerPage(pieces, index);
+            let buttons = calculatePagerButtons(totalPieces, index);
+
+            //return all the info needed by the front-end
+            return {
+                title: 'Art Shoping',
+                stringPieces: JSON.stringify(pieces),
+                piecePhoto: pieces,
+                page_min: MIN,
+                page_max: MAX,
+                buttons: buttons,
+                categoryCode: 'all'
+            };
+        })
+        .then(resultObject => {
+            const oCategory = new categoryRepo();
+            oCategory.getAll()
+            .then(categories => {
+                resultObject.categories = categories;
+
+                //return all the info needed by the front-end
+                return resultObject;
+            })
+            .then(resultObject => {
+                const oCart = new cartRepo();
+                oCart.getById(global.currentUser)
+                .then(picked => {
+                    resultObject.cart = picked;
+
+                    //pass all the info needed by the front-end
+                    resolve(resultObject);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    })
+    .catch(error => {
+        console.log(error);
+    });
+
+}
+
+module.exports = {
+    thumbsInfo,
+    searchingThumbsInfo
+};
