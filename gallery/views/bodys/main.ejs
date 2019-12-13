@@ -1,4 +1,4 @@
-<div class="title" style="display: <%= (typeof titlePage === 'string') ? 'block' : 'none' %>">
+<div class="title" <%= (typeof titlePage === 'string') ? 'style="display:block"' : 'style="display:none"' %>">
     <h1><%= (typeof titlePage !== 'undefined') ? titlePage : '' %></h1>
 </div>
 
