@@ -1,21 +1,21 @@
 (() => 
 {
-    document.getElementById('input-search-art').addEventListener('keypress', (event) => {
-        const patternSearchText = document.getElementById('input-search-art').value;
+    const search = (patternSearchText) => {
         if (patternSearchText.length > 0) {
-            if (event.keyCode === 13) {
-                const words = patternSearchText.value.replace(/ /g, "+");
-                window.location.replace(window.location.origin + '/search/' + words);
-            }
+            patternSearchText = patternSearchText.trim();
+            const words = patternSearchText.replace(/\s+/g, "+");
+            window.location.replace(window.location.origin + '/search/' + words);
+        }
+    }
+
+    document.getElementById('input-search-art').addEventListener('keypress', (event) => {
+        if (event.keyCode === 13) {
+            search(document.getElementById('input-search-art').value);
         }
     });
 
     document.getElementById('input-search-art-anchor').addEventListener('click', () => {
-        const patternSearchText = document.getElementById('input-search-art').value;
-        if (patternSearchText.length > 0) {
-            const words = patternSearchText.replace(/ /g, "+");
-            window.location.replace(window.location.origin + '/search/' + words);
-        }
+        search(document.getElementById('input-search-art').value);
     });
 
     /***********************************************************************/
