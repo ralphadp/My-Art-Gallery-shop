@@ -20,7 +20,7 @@ insert into categories (path, name) values ('gender-painting', 'Gender painting'
 insert into categories (path, name) values ('landscape', 'Landscape');
 insert into categories (path, name) values ('still-life', 'Still life');
 insert into categories (path, name) values ('naked', 'Naked');
-insert into categories (path, name) values ('historical-pPainting', 'Historical Painting');
+insert into categories (path, name) values ('historical-painting', 'Historical Painting');
 insert into categories (path, name) values ('oil', 'Oil');
 insert into categories (path, name) values ('wax', 'Wax');
 insert into categories (path, name) values ('watercolor', 'Watercolor');
