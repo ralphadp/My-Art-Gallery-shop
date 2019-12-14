@@ -1,14 +1,17 @@
 var express = require('express');
-const {thumbsInfo} = require('../helpers/thumbs-info');
+const manager = require('../middleware/manager');
 var router = express.Router();
 
 /* GET page{index} Page. */
 router.get('/:indexPage', function(req, res, next) {
 
-  thumbsInfo(req.params.indexPage, 'all', (payload) => {
-    if (!payload) {
-        res.status(404);
-        res.render('404');
+  manager(req.params.indexPage, 'all', null, (error, payload) => {
+
+    if (error) {
+        res.locals.message = 'Error';
+        res.locals.error = payload;
+        res.status(500);
+        res.render('error', {message:'not found', error: "error", status: 404});
     }
 
     res.render('index', payload);
