@@ -98,10 +98,19 @@ let calculatePagerButtons = (buttonsSize, index) => {
     return buttons;
 }
 
+/**
+ * Removes the - character of the category code with space
+ * @param {*} path 
+ */
+const fromCategoryPathToCategoryName = (path) => {
+    return path.replace(/-/g, " ");
+};
+
 module.exports = {
     MAX_THUMB_PER_PAGE,
     calculateThumbPerPage,
     numPages,
     arrayToObject,
-    calculatePagerButtons
+    calculatePagerButtons,
+    fromCategoryPathToCategoryName
 };

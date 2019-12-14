@@ -17,6 +17,10 @@ class Pieces {
         }
     }
 
+    /**
+     * Fetch the SQL search query 
+     * @param {*} pattern 
+     */
     fetchSearchQuery(pattern) {
         let wherePattern = '';
 
@@ -94,6 +98,42 @@ class Pieces {
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [maxItems, pageOffset], (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    /**
+     * Get all the available pieces
+     */
+    getAvailables() {
+        let sql = `SELECT pieces.* FROM pieces where pieces.itemId NOT IN (SELECT pieceId FROM cart) ORDER BY release_date;`;
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    /**
+     * Get all the pieces already taken by other users including the current user
+     */
+    getNotAvailables() {
+        let sql = 'SELECT pieces.* FROM pieces RIGHT JOIN cart ON pieces.itemId = cart.pieceId ORDER BY release_date';
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (error, result) => {
                 if (!error) {
                     const cleanJson = JSON.parse(JSON.stringify(result));
                     resolve(cleanJson);

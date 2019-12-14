@@ -1,5 +1,5 @@
 const {MAX_THUMB_PER_PAGE, arrayToObject} = require("./util/utilities");
-const piecesRepo = require('../../repository/repo-pieces');
+const piecesRepo = require('../../../repository/repo-pieces');
 
 const getPiecesPageItems = (context, next) => {
 

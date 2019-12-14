@@ -1,14 +1,12 @@
-const piecesRepo = require('../../repository/repo-pieces');
-
 const {numPages} = require("./util/utilities");
+const piecesRepo = require('../../../repository/repo-pieces');
 
-const getSearchingSize = (context, next) => {
-
+const getPiecesSize = (context, next) => {
     const oPieces = new piecesRepo(global.currentUser, context.categoryCode);
-    oPieces.getSizeOfSearching(context.words)
+    oPieces.getSize()
     .then(totalPieces => {
 
-        context.NUM_PAGES = numPages(totalPieces);
+        context.NUM_PAGES =  numPages(totalPieces);
     
         if (context.NUM_PAGES > 0) {
             if (context.index < 1 || context.index > context.NUM_PAGES) {
@@ -26,4 +24,4 @@ const getSearchingSize = (context, next) => {
  
 };
 
-module.exports = getSearchingSize;
+module.exports = getPiecesSize;

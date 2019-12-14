@@ -1,4 +1,4 @@
-const categoryRepo = require('../../repository/repo-categories');
+const categoryRepo = require('../../../repository/repo-categories');
 
 const getCategories = (context, next) => {
     const oCategory = new categoryRepo();

@@ -1,4 +1,4 @@
-const cartRepo = require('../../repository/repo-cart');
+const cartRepo = require('../../../repository/repo-cart');
 
 const getCart = (context, next) => {
 
