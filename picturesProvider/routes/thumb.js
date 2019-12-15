@@ -72,5 +72,14 @@ router.get('/form/test', function(req, res, next) {
   res.sendFile('index.html', { root: './private' });
 });
 
+/*DELETE remove images from bith directories */
+router.delete('/image/:id', function(req, res, next) {
+
+  handler.deleteImages(req.params.id, (result) => {
+      res.send(result); 
+  });
+
+});
+
 
 module.exports = router;

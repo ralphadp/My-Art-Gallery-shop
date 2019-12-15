@@ -17,7 +17,7 @@ const mine = {
  * @param {*} filepath 
  * @param {*} id 
  */
-const setFilepath = (filepath, id) => {
+const verifyFilepath = (filepath, id) => {
     let file = '';
 
     for (key in mine) {
@@ -63,7 +63,7 @@ const imageReader = (filepath) => {
 
     return (ID) => {
 
-        const result = setFilepath(filepath, ID);
+        const result = verifyFilepath(filepath, ID);
 
         return {
             type: mine[result.type],
@@ -118,8 +118,48 @@ const imageResize = (destinationFilePath, sourceFilePath) => {
     };
 }
 
+/**
+ * Delete images from both dire4ctories.
+ * @param {*} imagesfilePath 
+ * @param {*} HDimagesFilePath 
+ */
+const deleteImages = (imagesfilePath, HDimagesFilePath) => {
+
+    return (ID, next) => {
+
+        const result = {
+            message: [],
+            filesCount: 0 
+        };
+
+        const filePath = verifyFilepath(HDimagesFilePath, ID);
+
+        fs.unlink(filePath, (error) => {
+
+            if (error) {
+                result.message.push(error);
+                result.filesCount++;
+                console.log(error);
+            }
+
+            filePath = verifyFilepath(imagesfilePath, ID);
+
+            fs.unlink(filePath, (error) => {
+                if (error) {
+                    result.message.push(error);
+                    result.filesCount++;
+                    console.log(error);
+                }
+
+                next(result);
+            });
+        });
+    }
+};
+
 module.exports = {
     getImage: imageReader(IMAGES_PATH),
     getHDImage: imageReader(IMAGES_HD_PATH),
-    imageResize: imageResize(IMAGES_PATH, IMAGES_HD_PATH)
+    imageResize: imageResize(IMAGES_PATH, IMAGES_HD_PATH),
+    deleteImages: deleteImages(IMAGES_PATH, IMAGES_HD_PATH)
 };
