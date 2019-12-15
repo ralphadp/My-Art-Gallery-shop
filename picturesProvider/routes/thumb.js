@@ -6,7 +6,7 @@ var router = express.Router();
 /* GET api root not valid. */
 router.get('/', function(req, res, next) {
 
-  res.send('api root not valid');
+  res.send('api root not valid.');
 });
 
 /* GET thumb by ID service. */
@@ -33,12 +33,37 @@ router.get('/image-large/:id', function(req, res, next) {
 router.post("/form/upload", function(req, res) {
 
     upload(req, res, (error) => {
-        if (error) {
-            return res.end("Something went wrong! " + error);
-        }
-        return res.end("File uploaded sucessfully!.");
-    });
+        let message = '';
+        let anErrorHappened = false;
+        let files = [];
 
+        if (req.fileValidationError !== undefined) {
+            message = req.fileValidationError;
+            anErrorHappened = true;
+        } else if (error) {
+            message = error;
+            anErrorHappened = true;
+        } else {
+            if (req.files === undefined || !req.files) {
+                message = 'None image was provided to upload.';
+                anErrorHappened = true;
+            } else {
+              message = 'Files uploaded sucessfully';
+              files = req.files.map((item) => {
+                  //resize the current HD file
+                  handler.imageResize(item.filename, item.buffer);
+                  //save the filename in the array response
+                  return item.filename;
+              });
+            }
+          }
+
+          res.send({
+              message: message,
+              error: anErrorHappened,
+              files: files
+          });
+    });
 });
 
 /* GET upload test route. */
