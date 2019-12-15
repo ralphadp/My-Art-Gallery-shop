@@ -25,7 +25,8 @@ const verifyFilepath = (filepath, id) => {
         if (fs.existsSync(file)) {
             return {
                 file: file,
-                type: key
+                type: key,
+                found: true
             };
         }
     }
@@ -33,7 +34,8 @@ const verifyFilepath = (filepath, id) => {
     //not-found png image is returned
     return {
         file: `${IMAGES_PATH}not-found.png`,
-        type: 'png'
+        type: 'png',
+        found: false
     };
     //throw new Error('exttype or file not found.');
 }
@@ -132,9 +134,29 @@ const deleteImages = (imagesfilePath, HDimagesFilePath) => {
             filesCount: 0 
         };
 
-        const filePath = verifyFilepath(HDimagesFilePath, ID);
+        const fileInfo = verifyFilepath(HDimagesFilePath, ID);
 
-        fs.unlink(filePath, (error) => {
+        if (!fileInfo.found) {
+            fileInfo = verifyFilepath(imagesfilePath, ID);
+
+            if (fileInfo.found) {
+                fs.unlink(fileInfo.file, (error) => {
+                    if (error) {
+                        result.message.push(error);
+                        result.filesCount++;
+                        console.log(error);
+                    }
+
+                    next(result);
+                });
+            } else {
+                result.message.push("None image was found");
+
+                next(result);
+            }
+        }
+
+        fs.unlink(fileInfo.file, (error) => {
 
             if (error) {
                 result.message.push(error);
@@ -142,17 +164,22 @@ const deleteImages = (imagesfilePath, HDimagesFilePath) => {
                 console.log(error);
             }
 
-            filePath = verifyFilepath(imagesfilePath, ID);
+            fileInfo = verifyFilepath(imagesfilePath, ID);
 
-            fs.unlink(filePath, (error) => {
-                if (error) {
-                    result.message.push(error);
-                    result.filesCount++;
-                    console.log(error);
-                }
+            if (fileInfo.found) {
+                fs.unlink(fileInfo.file, (error) => {
+                    if (error) {
+                        result.message.push(error);
+                        result.filesCount++;
+                        console.log(error);
+                    }
+
+                    next(result);
+                });
+            } else {
 
                 next(result);
-            });
+            }
         });
     }
 };
