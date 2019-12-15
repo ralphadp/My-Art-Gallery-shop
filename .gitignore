@@ -1,3 +1,8 @@
 node_modules/
 user_requirements/
 gallery/node_modules/
+picturesProvider/node_modules/
+picturesProvider/private/images/
+!picturesProvider/private/images/not-found.png
+!picturesProvider/private/images/HD
+picturesProvider/private/images/HD/*
