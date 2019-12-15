@@ -19,5 +19,6 @@ Photo.prototype = Object.create(Foggy.prototype);
 //Override beforeShow
 Photo.prototype.beforeShow = function(event) {
     ///temporary line
-    document.getElementById("photo-image").src = event.srcElement.currentSrc;
+    document.getElementById("photo-image").src = "http://localhost:8888/api/image-large/" + event.srcElement.alt;
+    //event.srcElement.currentSrc;
 };
