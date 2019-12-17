@@ -36,18 +36,15 @@
     <section class="frame">
         <div id="available-list-of-pieces">
             <h3>ALL AVAILABLE PIECES</h3>
-            <%  let alternate = true; 
-                for (let key in piecePhoto) { 
+            <%  for (let key in piecePhoto) { 
                     if (piecePhoto.hasOwnProperty(key)) { 
                         const item = piecePhoto[key];
             %>
-                    <div class="list-item-row <%= alternate ? 'pair' : 'odd' %>" id="<%= item.id %>">
+                    <div class="list-item-row" id="<%= item.id %>">
                         <div id="a-piece-name"><%= item.name %></div>
                         <div id="a-artist"><%= item.artist %></div>
                     </div>
-            <%  alternate = !alternate;
-                }} 
-            %>
+            <%  }} %>
             
         </div>
     </section>

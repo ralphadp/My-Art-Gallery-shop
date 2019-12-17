@@ -8,14 +8,11 @@
     color: white;
     padding: 8px 10px;
     opacity: 0.9;
-}
-
-.odd {
-    background: linear-gradient(to bottom,#e74c3c,#c0392b);
-}
-
-.pair {
     background: linear-gradient(to bottom,#3B3941,#2A292F);
+}
+
+.list-item-row:nth-last-of-type(2n) {
+    background: linear-gradient(to bottom,#e74c3c,#c0392b);
 }
 
 #available-list-of-pieces {
