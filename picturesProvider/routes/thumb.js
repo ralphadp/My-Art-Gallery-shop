@@ -72,11 +72,20 @@ router.get('/form/test', function(req, res, next) {
   res.sendFile('index.html', { root: './private' });
 });
 
-/*DELETE remove images from bith directories */
+/*DELETE remove images from images directory */
 router.delete('/image/:id', function(req, res, next) {
 
   handler.deleteImages(req.params.id, (result) => {
-      res.send(result); 
+      res.send(result);
+  });
+
+});
+
+/*DELETE remove images large from images/HD directory */
+router.delete('/image-large/:id', function(req, res, next) {
+
+  handler.deleteHDImages(req.params.id, (result) => {
+      res.send(result);
   });
 
 });

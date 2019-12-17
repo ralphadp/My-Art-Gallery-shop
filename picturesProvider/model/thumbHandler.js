@@ -123,64 +123,34 @@ const imageResize = (destinationFilePath, sourceFilePath) => {
 /**
  * Delete images from both dire4ctories.
  * @param {*} imagesfilePath 
- * @param {*} HDimagesFilePath 
  */
-const deleteImages = (imagesfilePath, HDimagesFilePath) => {
+const deleteImages = (imagesfilePath) => {
 
     return (ID, next) => {
 
         const result = {
             message: [],
-            filesCount: 0 
+            deleteFiles: false
         };
 
-        const fileInfo = verifyFilepath(HDimagesFilePath, ID);
+        const fileInfo = verifyFilepath(imagesfilePath, ID);
 
         if (!fileInfo.found) {
-            fileInfo = verifyFilepath(imagesfilePath, ID);
-
-            if (fileInfo.found) {
-                fs.unlink(fileInfo.file, (error) => {
-                    if (error) {
-                        result.message.push(error);
-                        result.filesCount++;
-                        console.log(error);
-                    }
-
-                    next(result);
-                });
-            } else {
-                result.message.push("None image was found");
+            result.message.push("The image was found.");
+        } else {
+            fs.unlink(fileInfo.file, (error) => {
+                if (error) {
+                    result.message.push(error);
+                    console.log(error);
+                } else {
+                    result.deleteFiles = true;
+                }
 
                 next(result);
-            }
+            });
         }
 
-        fs.unlink(fileInfo.file, (error) => {
-
-            if (error) {
-                result.message.push(error);
-                result.filesCount++;
-                console.log(error);
-            }
-
-            fileInfo = verifyFilepath(imagesfilePath, ID);
-
-            if (fileInfo.found) {
-                fs.unlink(fileInfo.file, (error) => {
-                    if (error) {
-                        result.message.push(error);
-                        result.filesCount++;
-                        console.log(error);
-                    }
-
-                    next(result);
-                });
-            } else {
-
-                next(result);
-            }
-        });
+        next(result);
     }
 };
 
@@ -188,5 +158,6 @@ module.exports = {
     getImage: imageReader(IMAGES_PATH),
     getHDImage: imageReader(IMAGES_HD_PATH),
     imageResize: imageResize(IMAGES_PATH, IMAGES_HD_PATH),
-    deleteImages: deleteImages(IMAGES_PATH, IMAGES_HD_PATH)
+    deleteImages: deleteImages(IMAGES_PATH),
+    deleteHDImages: deleteImages(IMAGES_HD_PATH)
 };
