@@ -49,10 +49,29 @@ li.icon-item:hover > i {
  transform: scale(1.5);
 }
 
+.icon-item {
+  position: relative;
+}
+
+#unread-messages-count {
+  position: absolute;
+  top: 28px;
+  right: 20px;
+  border-radius: 30px;
+  background: red;
+  color: white;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  font-size: 10px;
+  line-height: 15px;
+}
+
 .content {
   display: flex;
   height: 85vh;
   box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
+  position: relative;
 }
 
 aside {
@@ -74,8 +93,8 @@ aside {
   display: block;
   color: #00B7FF;
   text-decoration: none;
-
 }
+
 .block a i {
   display: block;
   margin: 0 auto;
@@ -103,10 +122,80 @@ aside {
   margin-top: 5px;
 }
 
-.block:hover > a {
+.block:hover a {
   color: floralwhite;
   background: #00B7FF;
 }
+
+div#users:hover + #sidebar-users {
+  display: block;
+  top: 0;
+}
+
+#sidebar-users:hover {
+  display:block;
+  top: 0;
+}
+
+div#pieces:hover + #sidebar-pieces {
+  display: block;
+  top: 102px;
+}
+
+#sidebar-pieces:hover {
+  display:block;
+  top: 102px;
+}
+
+div#cart:hover + #sidebar-cart {
+  display: block;
+  top: 202px;
+}
+
+#sidebar-cart:hover {
+  display: block;
+  top: 202px;
+}
+
+div#category:hover + #sidebar-category {
+  display: block;
+  top: 302px;
+}
+
+#sidebar-category:hover {
+  display: block;
+  top: 302px;
+}
+
+.sidebar-menu {
+  display: none;
+  transition: .3s;
+  position: absolute;
+  top: 0px;
+  left: 112px;
+  width: 120px;
+  height: 140px;
+  background: white;
+  padding: 25px;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
+}
+
+.sidebar-menu ul {
+  list-style-type: none;
+}
+
+.sidebar-menu ul li a {
+  color: #00B7FF;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.sidebar-menu ul li a span {
+  margin-left: 10px;
+}
+
+
 
 section {
   width: 90%;
