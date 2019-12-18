@@ -14,44 +14,76 @@ header {
 }
 
 nav#movile {
-  color:#00B7FF;
   flex-basis: 38px;
   display: none;
 }
 
 .burguer-menu{
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 22px;
   cursor: pointer;
+  margin: 0 auto
 }
 
 .line {
   width: 100%;
-  height: 5px;
+  height: 3px;
   background: #00B7FF;
   margin: 4px 0;
 }
 
+#movile-vertical-menu {
+  display: none;
+  position: absolute;
+  top: 10vh;
+  left: 0;
+  width: 200px;
+  height: 250px;
+  z-index: 1000;
+  background: white;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
+}
+
+#movile-vertical-menu  ul {
+  list-style-type: none;
+}
+
+.vertical-item {
+  font-size: 18px;
+  font-weight: 500;
+  color:#00B7FF;
+  margin: 10px;
+  padding: 10px 20px;
+}
+
+.vertical-item:hover {
+  background: #00B7FF;
+  color: white;
+}
+
 nav {
   height: 100%;
+  color:#00B7FF;
 }
 
 nav#left {
-  color:#00B7FF;
   flex-basis: 65%;
 }
 
 nav#right {
-  color:#00B7FF;
   flex-basis: 290px;
 }
 
-nav#left ul, nav#right ul {
+nav#left ul, nav#right ul, nav#movile ul{
   height: 100%;
-  display: table
+  display: table;
 }
 
-nav#left ul li, nav#right ul li {
+nav#movile ul{
+  width: 110px;
+}
+
+nav#left ul li, nav#right ul li, nav#movile ul li {
   text-align: center;
   display: table-cell;
   vertical-align: middle;
@@ -81,6 +113,21 @@ li.icon-item:hover > i {
  color: royalblue;
 }
 
+nav#movile ul li:hover {
+  background: #00B7FF;
+}
+
+nav#movile ul li:hover > .burguer-menu .line{
+  background:white;
+}
+
+nav#movile:hover + #movile-vertical-menu{
+  display: block;
+}
+
+#movile-vertical-menu:hover {
+  display: block;
+}
 
 .icon-item:nth-child(2) {
   position: relative;
@@ -270,9 +317,6 @@ footer p#stack-top-message {
   nav#movile {
     display: block;
   }
-  nav#movile ul li {
-    padding: 20px 32px;
-  }
 }
 
 @media (max-width: 510px) {
@@ -290,15 +334,30 @@ footer p#stack-top-message {
   }
   footer p#stack-top-message {
     font-size: 10px;
-  } 
+  }
+  nav#movile ul {
+    width: 115px;
+  }
+  .burguer-menu{
+    width: 26px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0 auto
+  }
+  .line {
+    width: 100%;
+    height: 2.5px;
+    background: #00B7FF;
+    margin: 3px 0;
+  }
 }
 
 @media (max-width: 240px) {
   * {
     font-size: 11px;
   }
-  nav#movile ul li {
-    padding: 0 16px;
+  nav#movile ul {
+    width: 85px;
   }
   aside {
     width: 80px;
