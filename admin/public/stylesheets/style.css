@@ -54,6 +54,7 @@ nav#movile {
   color:#00B7FF;
   margin: 10px;
   padding: 10px 20px;
+  user-select: none;
 }
 
 .vertical-item:hover {
@@ -98,6 +99,7 @@ nav#left ul li, nav#right ul li, nav#movile ul li {
 
 nav#left ul li {
   width: 100px;
+  user-select: none;
 }
 
 nav#right ul li {
@@ -308,6 +310,14 @@ footer p#stack-top-message {
   position: absolute;
   top: 12px;
   left: 12px;
+}
+
+.item:nth-child(2):after, .vertical-item:nth-child(2):after {
+  content: attr(status);
+  font-weight: 900;
+  color: #ff0000;
+  user-select: none;
+  text-shadow: 0px 0px 5px rgba(255, 0, 0, 1);
 }
 
 @media (max-width: 768px) {
