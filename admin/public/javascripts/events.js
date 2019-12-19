@@ -25,6 +25,21 @@
         });
     };
 
+    /**
+     * Activate the search area
+     * @param {*} menuItem 
+     * @param {*} target 
+     */
+    const toogleSearch = (menuItem, target) => {
+        menuItem.addEventListener('click', () => {
+            if (target.style.display === 'flex') {
+                target.style.display = 'none';
+            } else {
+                target.style.display = 'flex';
+            }
+        });
+    };
+
     toogleMenu(
         document.getElementsByClassName('item').item(1),
         document.getElementsByClassName('vertical-item').item(1),
@@ -33,9 +48,18 @@
 
     toogleMenu(
         document.getElementsByClassName('vertical-item').item(1),
-        document.getElementsByClassName('vertical-item').item(1),
+        document.getElementsByClassName('item').item(1),
         document.getElementsByTagName('aside').item(0)  
     );
     
+    toogleSearch(
+        document.getElementsByClassName('item').item(3),
+        document.getElementsByClassName('search-bar').item(0),
+    );
+
+    toogleSearch(
+        document.getElementsByClassName('vertical-item').item(3),
+        document.getElementsByClassName('search-bar').item(0),
+    );
 
 })();
