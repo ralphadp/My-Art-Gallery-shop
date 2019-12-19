@@ -1,5 +1,7 @@
 (() => {
 
+    const logoutDialog = new Frame('logout-dialog');
+
     /**
      * Toogle aside menu 
      * @param {*} menuItem 
@@ -61,5 +63,9 @@
         document.getElementsByClassName('vertical-item').item(3),
         document.getElementsByClassName('search-bar').item(0),
     );
+
+    document.getElementById('logout').addEventListener('click', (event) => {
+        logoutDialog.show();
+    });
 
 })();
