@@ -296,6 +296,7 @@ section#contents-body {
   color: royalblue;
   background: transparent;
   display: inline-block;
+  overflow: auto;
 }
 
 section#contents-body h2 {
@@ -307,8 +308,16 @@ article {
   margin-bottom: 10px;
 }
 
-tr:nth-of-type(2n) {
+#table-basis th {
+  color: rgb(243, 243, 192);
+  background: royalblue;
+}
+
+#table-basis tr:nth-of-type(2n) {
   background: cornflowerblue;
+}
+
+#table-basis tr:nth-of-type(2n) td {
   color: white;
 }
 

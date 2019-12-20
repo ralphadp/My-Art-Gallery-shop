@@ -1,29 +1,8 @@
-section#contents-body-documents, 
-section#contents-body-configuration, 
-section#contents-body-profile, 
-section#contents-body-messages {
-    width: 90%;
-    padding: 2rem 2rem 0;
-    color: royalblue;
-    background: transparent;
-    display: inline-block;
-    overflow: scroll;
-}
-
-section#contents-body-documents h2, 
-section#contents-body-configuration h2, 
-section#contents-body-profile h2, 
-section#contents-body-messages h2 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-}
-
 #profile-form, #configuration-form, #messages-form  {
     border-radius: 20px;
     box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.08);
     border: 0;
 }
-
 
 #profile-form {
     width: 700px;

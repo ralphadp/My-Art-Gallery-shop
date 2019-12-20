@@ -6,7 +6,10 @@
     <% include ./partials/dialogs %>
     <div class="content">
         <% include ./partials/menu-vertical %>
-        <% include ./partials/content-basis %>
+        <section id="contents-body">
+            <% include ./partials/content-head %>
+            <% include ./partials/content-basis %>
+        </section>
     </div>
     <% include ./partials/footer %>
     <% include ./partials/svg %>

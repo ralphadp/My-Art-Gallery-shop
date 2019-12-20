@@ -1,45 +1,38 @@
-<section id="contents-body-profile">
-    <div class="search-bar">
-        <input type="text" placeholder="Type search here">
-        <i class="fas fa-search"></i>
+<article id="profile-form">
+    <div class="profile-row">
+        <label for="firstname">First Name</label><input id="firstname" type="text" size="40" maxlength="50"/>
     </div>
-    <h2><%= title %></h2>
-    <article id="profile-form">
-        <div class="profile-row">
-            <label for="firstname">First Name</label><input id="firstname" type="text" size="40" maxlength="50"/>
-        </div>
-        <div class="profile-row">
-            <label for="lastname">Last Name</label><input id="lastname" type="text" size="40"  maxlength="60"/>
-        </div>
-        <div class="profile-row">
-            <label for="birthyear">Birth Year</label><input id="birthyear" type="number"/>
-        </div>
-        <div class="profile-row">
-            <label for="username">Username</label><input id="username" type="text" size="30"  maxlength="30"/>
-        </div>
-        <div class="profile-row">
-            <label for="password">Password</label><input id="password" type="text" size="30"  maxlength="30"/>
-        </div>
-        <div class="profile-row">
-            <label for="dateregistration">Date registration</label><input id="dateregistration" type="date"/>
-        </div>
-        <div class="profile-row">
-            <label for="email">Email</label><input id="email" type="email"/>
-        </div>
-        <div class="profile-row">
-            <label for="gender">Gender</label><input name="gender" id="gender-male" type="radio" value="male" checked/><span>Male</span><input id="gender-female" name="gender" type="radio" value="female"/><span>Female</span>
-        </div>
-        <div class="profile-row">
-            <label for="movile">Movile</label><input id="movile" type="tel"/>
-        </div>
-        <div class="profile-row">
-            <label for="Country">Country</label><% include ./control/country %>
-        </div>
-        <div class="profile-row">
-            <label for="City">City</label><input id="City" type="text" size="30" maxlength="30"/>
-        </div>
-        <div class="profile-row">
-            <label for="postalcode">Postal Code</label><input id="postalcode" type="text" size="15" maxlength="15"/>
-        </div>
-    </article>
-</section>
+    <div class="profile-row">
+        <label for="lastname">Last Name</label><input id="lastname" type="text" size="40"  maxlength="60"/>
+    </div>
+    <div class="profile-row">
+        <label for="birthyear">Birth Year</label><input id="birthyear" type="number"/>
+    </div>
+    <div class="profile-row">
+        <label for="username">Username</label><input id="username" type="text" size="30"  maxlength="30"/>
+    </div>
+    <div class="profile-row">
+        <label for="password">Password</label><input id="password" type="text" size="30"  maxlength="30"/>
+    </div>
+    <div class="profile-row">
+        <label for="dateregistration">Date registration</label><input id="dateregistration" type="date"/>
+    </div>
+    <div class="profile-row">
+        <label for="email">Email</label><input id="email" type="email"/>
+    </div>
+    <div class="profile-row">
+        <label for="gender">Gender</label><input name="gender" id="gender-male" type="radio" value="male" checked/><span>Male</span><input id="gender-female" name="gender" type="radio" value="female"/><span>Female</span>
+    </div>
+    <div class="profile-row">
+        <label for="movile">Movile</label><input id="movile" type="tel"/>
+    </div>
+    <div class="profile-row">
+        <label for="Country">Country</label><% include ./control/country %>
+    </div>
+    <div class="profile-row">
+        <label for="City">City</label><input id="City" type="text" size="30" maxlength="30"/>
+    </div>
+    <div class="profile-row">
+        <label for="postalcode">Postal Code</label><input id="postalcode" type="text" size="15" maxlength="15"/>
+    </div>
+</article>

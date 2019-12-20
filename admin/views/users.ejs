@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-    <% include ./partials/tables/head-user %>
+    <% include ./partials/head %>
 <body>
     <% include ./partials/header %>
     <% include ./partials/dialogs %>
     <div class="content">
         <% include ./partials/menu-vertical %>
-        <% include ./partials/tables/user %>
+        <section id="contents-body">
+            <% include ./partials/content-head %>
+            <% include ./partials/tables/user %>
+        </section>
     </div>
     <% include ./partials/footer %>
     <% include ./partials/svg %>

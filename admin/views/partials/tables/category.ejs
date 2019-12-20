@@ -1,29 +1,22 @@
-<section id="contents-body-category">
-    <div class="search-bar">
-        <input type="text" placeholder="Type search here">
-        <i class="fas fa-search"></i>
-    </div>
-    <h2><%= title %></h2>
-    <article id="category-form">
-        <div class="table-category">
-            <div class="table-header"><%= tableTitle %></div>
-            
-            <table cellspacing="0">
+<article id="form-admin">
+    <div class="table-admin">
+        <div class="table-header head-categories"><%= tableTitle %></div>
+        
+        <table cellspacing="0">
+            <tr>
+                <th>Id</th>
+                <th>Path Code</th>
+                <th>Category Name</th>
+            </tr>
+
+            <% for (let index = 0; index < data.length; index++) { %>
                 <tr>
-                    <th>Id</th>
-                    <th>Path Code</th>
-                    <th>Category Name</th>
+                    <td><%= data[index].id %></td>
+                    <td><%= data[index].path %></td>
+                    <td><%= data[index].name %></td>
                 </tr>
+            <% } %>
 
-                <% for (let index = 0; index < data.length; index++) { %>
-                    <tr>
-                        <td><%= data[index].id %></td>
-                        <td><%= data[index].path %></td>
-                        <td><%= data[index].name %></td>
-                    </tr>
-                <% } %>
-
-            </table>
-        </div>
-    </article>
-</section>
+        </table>
+    </div>
+</article>
