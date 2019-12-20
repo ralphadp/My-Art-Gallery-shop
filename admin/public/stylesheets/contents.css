@@ -128,3 +128,31 @@
 .configuration-row  .option-wrapper {
     margin-top: 10px;
 }
+
+.head-users {
+    background-color: #00B7FF;
+}
+
+.head-categories {
+    background-color: #fad992!important;
+}
+
+.head-pieces {
+    background-color: #fc2f4a!important;
+}
+
+.head-trading {
+    background-color: #5f4366!important;
+}
+
+.category-card {
+    width: 400px;
+}
+
+.piece-card {
+    width: 600px;
+}
+
+.trading-card {
+    width: 500px;
+}

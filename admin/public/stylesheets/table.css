@@ -14,22 +14,6 @@
     text-transform: uppercase;
 }
 
-.head-users {
-    background-color: #00B7FF;
-}
-
-.head-categories {
-    background-color: #fad992!important;
-}
-
-.head-pieces {
-    background-color: #fc2f4a!important;
-}
-
-.head-trading {
-    background-color: #5f4366!important;
-}
-
 img {
     border-radius: 50%;
     height: 60px;

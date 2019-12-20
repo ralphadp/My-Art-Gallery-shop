@@ -9,7 +9,6 @@
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    width: 400px;
 }
 
 .editcard-body {
@@ -62,4 +61,17 @@
     line-height: 1.5;
     border-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background: royalblue;
+    color: white;
+}
+
+.done_button:focus {
+    text-decoration: none;
+    background: white;
+    color: royalblue;
+}
+
+.done_button:hover {
+    outline: 0;
+    box-shadow: 5px 7px 17px 0rem rgba(64, 104, 223, 0.5); 
 }
