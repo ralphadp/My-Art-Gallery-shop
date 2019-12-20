@@ -64,8 +64,36 @@
         document.getElementsByClassName('search-bar').item(0),
     );
 
-    document.getElementById('logout').addEventListener('click', (event) => {
+    document.getElementById('option-home').addEventListener('click', () => {
+        window.location.replace(window.location.origin + '/');
+    });
+
+    document.getElementById('vertical-option-home').addEventListener('click', () => {
+        window.location.replace(window.location.origin + '/');
+    });
+
+    document.getElementById('option-documents').addEventListener('click', () => {
+        window.location.replace(window.location.origin + '/documents');
+    });
+
+    document.getElementById('vertical-option-documents').addEventListener('click', () => {
+        window.location.replace(window.location.origin + '/documents');
+    });
+
+    document.getElementById('option-logout').addEventListener('click', () => {
         logoutDialog.show();
+    });
+
+    document.getElementById('option-profile').addEventListener('click', () => {
+        window.location.replace(window.location.origin + '/profile');
+    });
+
+    document.getElementById('option-messages').addEventListener('click', () => {
+        window.location.replace(window.location.origin + '/messages');
+    });
+
+    document.getElementById('option-configuration').addEventListener('click', () => {
+        window.location.replace(window.location.origin + '/configuration');
     });
 
 })();

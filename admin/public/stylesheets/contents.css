@@ -1,0 +1,146 @@
+section#contents-body-documents, 
+section#contents-body-configuration, 
+section#contents-body-profile, 
+section#contents-body-messages {
+    width: 90%;
+    padding: 2rem 2rem 0;
+    color: royalblue;
+    background: transparent;
+    display: inline-block;
+    overflow: scroll;
+}
+
+section#contents-body-documents h2, 
+section#contents-body-configuration h2, 
+section#contents-body-profile h2, 
+section#contents-body-messages h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+#profile-form, #configuration-form, #messages-form  {
+    border-radius: 20px;
+    box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.08);
+    border: 0;
+}
+
+
+#profile-form {
+    width: 700px;
+    margin-left: 20px;
+}
+
+.profile-row label {
+    width: 250px;
+    display: inline-block;
+    font-size: 16px;
+    text-align: end;
+    margin-right: 20px;
+}
+
+.profile-row input, .profile-row select {
+    padding: 5px;
+    margin-left: 20px;
+    outline: none;
+    border: 1px solid rgb(193, 192, 196);
+}
+
+.profile-row {
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.profile-row span {
+    margin-left: 5px;
+}
+
+.profile-row:nth-of-type(2n), .messages-row>:nth-of-type(2n) {
+    background: rgb(225, 241, 255);
+}
+
+#messages-form {
+    padding: 10px;
+}
+
+.messages-row {
+    width: 98%;
+    height: 130px;
+    margin: 10px;
+    border: 1px solid rgb(218, 218, 224);
+    border-radius: 4px;
+}
+
+.messages-row .wrapper {
+    padding: 10px;
+}
+
+.wrapper textarea {
+    border: 1px solid #cbcccc;
+    resize: none;
+}
+
+.profile-row input:focus, .wrapper textarea:focus {
+    outline: none;
+}
+
+.messages-row h3 {
+    padding-bottom: 10px;
+}
+
+.messages-row span {
+    display: block;
+}
+
+.documents-item {
+    box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.08);
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.documents-item {
+    border-radius: 5px;
+}
+
+#configuration-form {
+    padding: 10px;
+}
+
+.configuration-item {
+    box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.08);
+    width: 120px;
+    height: 70px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    text-align: left;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.configuration-item label {
+    height: 30px;
+    display: block;
+}
+
+.option-wrapper input,
+.option-wrapper select
+{
+    border: 1px solid rgb(211, 211, 211);
+}
+
+.option-wrapper span {
+    margin: 4px;
+}
+
+.documents-row, .configuration-row {
+    display: flex;
+}
+
+.configuration-row  .option-wrapper {
+    margin-top: 10px;
+}

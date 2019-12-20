@@ -1,0 +1,43 @@
+<section id="contents-body-users">
+    <div class="search-bar">
+        <input type="text" placeholder="Type search here">
+        <i class="fas fa-search"></i>
+    </div>
+    <h2><%= title %></h2>
+    <article id="users-form">
+        <div class="table-users">
+            <div class="table-header"><%= tableTitle %></div>
+            
+            <table cellspacing="0">
+                <tr>
+                    <th>Picture</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Registration</th>
+                    <th>Email</th>
+                    <th>Movile</th>
+                    <th>Birth</th>
+                    <th>Country</th>
+                    <th>City</th>
+                    <th>Postal Code</th>
+                </tr>
+
+                <% for (let index = 0; index < data.length; index++) { %>
+                    <tr>
+                        <td><img src="<%= data[index].Picture %>" alt="" /></td>
+                        <td><%= data[index].Name %></td>
+                        <td><%= data[index].Username %></td>
+                        <td><%= data[index].Registration %></td>
+                        <td><%= data[index].Email %></td>
+                        <td><%= data[index].Movile %></td>
+                        <td><%= data[index].Birth %></td>
+                        <td><%= data[index].Country %></td>
+                        <td><%= data[index].City %></td>
+                        <td><%= data[index].PostalCode %></td>
+                    </tr>
+                <% } %>
+
+            </table>
+        </div>
+    </article>
+</section>
