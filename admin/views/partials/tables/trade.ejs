@@ -1,0 +1,35 @@
+<section id="contents-body-trade">
+    <div class="search-bar">
+        <input type="text" placeholder="Type search here">
+        <i class="fas fa-search"></i>
+    </div>
+    <h2><%= title %></h2>
+    <article id="trade-form">
+        <div class="table-trade">
+            <div class="table-header"><%= tableTitle %></div>
+            
+            <table cellspacing="0">
+                <tr>
+                    <th>Id</th>
+                    <th>User Id</th>
+                    <th>User complete name</th>
+                    <th>Piece Id</th>
+                    <th>Piece Name</th>
+                    <th>Date</th>
+                </tr>
+
+                <% for (let index = 0; index < data.length; index++) { %>
+                    <tr>
+                        <td><%= data[index].id %></td>
+                        <td><%= data[index].userId %></td>
+                        <td><%= data[index].complete_username %></td>
+                        <td><%= data[index].pieceId %></td>
+                        <td><%= data[index].piece %></td>
+                        <td><%= data[index].pick_date %></td>
+                    </tr>
+                <% } %>
+
+            </table>
+        </div>
+    </article>
+</section>

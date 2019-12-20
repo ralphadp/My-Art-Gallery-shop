@@ -1,0 +1,43 @@
+<section id="contents-body-piece">
+    <div class="search-bar">
+        <input type="text" placeholder="Type search here">
+        <i class="fas fa-search"></i>
+    </div>
+    <h2><%= title %></h2>
+    <article id="piece-form">
+        <div class="table-piece">
+            <div class="table-header"><%= tableTitle %></div>
+            
+            <table cellspacing="0">
+                <tr>
+                    <th>Internal Id</th>
+                    <th>External Id</th>
+                    <th>Thumb</th>
+                    <th>Name</th>
+                    <th>Artist</th>
+                    <th>Type</th>
+                    <th>Released</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Currency</th>
+                </tr>
+
+                <% for (let index = 0; index < data.length; index++) { %>
+                    <tr>
+                        <td><%= data[index].id %></td>
+                        <td><%= data[index].itemId %></td>
+                        <td><img src="<%= data[index].thumb %>" alt="" /></td>
+                        <td><%= data[index].name %></td>
+                        <td><%= data[index].artist %></td>
+                        <td><%= data[index].type %></td>
+                        <td><%= data[index].release_date %></td>
+                        <td><%= data[index].size %></td>
+                        <td><%= data[index].price %></td>
+                        <td><%= data[index].currency %></td>
+                    </tr>
+                <% } %>
+
+            </table>
+        </div>
+    </article>
+</section>
