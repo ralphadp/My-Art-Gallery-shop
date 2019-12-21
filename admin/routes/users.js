@@ -1,6 +1,5 @@
 var express = require('express');
-var users = require('../repository/repo-users');
-var admin = require('../repository/repo-admin');
+var {admins, users} = require('galleryRepository');
 var router = express.Router();
 
 /* GET users listing. */
@@ -20,8 +19,8 @@ router.get('/', function(req, res, next) {
 
 /* GET admin listing. */
 router.get('/admin', function(req, res, next) {
-  const adm = new admin();
-  adm.getAll().then((result) => {
+  const admin = new admins();
+  admin.getAll().then((result) => {
     console.log(result);
       res.render(
         'users', 

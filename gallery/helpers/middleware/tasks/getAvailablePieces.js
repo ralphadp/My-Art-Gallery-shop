@@ -1,15 +1,15 @@
 const {arrayToObject} = require("./util/utilities");
-const piecesRepo = require('../../../repository/repo-pieces');
+const {pieces} = require('galleryRepository');
 
 const getAvailablePieces = (context, next) => {
 
-    const oPieces = new piecesRepo(global.currentUser, context.categoryCode);
+    const oPieces = new pieces(global.currentUser, context.categoryCode);
     
     oPieces.getAvailables()
-    .then(pieces => {
+    .then(piecesResult => {
 
         const {piecePhoto} = context;
-        context.piecePhoto = (piecePhoto || arrayToObject(pieces, 'itemId'));
+        context.piecePhoto = (piecePhoto || arrayToObject(piecesResult, 'itemId'));
 
         next(null, context.piecePhoto);
     })

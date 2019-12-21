@@ -1,5 +1,5 @@
 var express = require('express');
-const cartRepo = require('../repository/repo-cart');
+const {carts} = require('galleryRepository');
 var router = express.Router();
 
 /* GET Add to cart. */
@@ -7,7 +7,7 @@ router.get('/add-to/:pieceId', function(req, res, next) {
 
     let response;
     try {
-        const oCart = new cartRepo();
+        const oCart = new carts();
         oCart.save(global.currentUser, req.params.pieceId)
         .then(result => {
             if (result.affectedRows === 1) {
@@ -48,7 +48,7 @@ router.get('/remove-from/:pieceId', function(req, res, next) {
 
     let response;
     try {
-        const oCart = new cartRepo();
+        const oCart = new carts();
         oCart.delete(req.params.pieceId)
         .then(result => {
             if (result.affectedRows === 1) {

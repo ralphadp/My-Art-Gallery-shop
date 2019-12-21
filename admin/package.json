@@ -1,6 +1,6 @@
 {
   "name": "admin",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -10,8 +10,8 @@
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "galleryRepository": "file:../galleryRepository",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "mysql": "^2.17.1"
+    "morgan": "~1.9.1"
   }
 }

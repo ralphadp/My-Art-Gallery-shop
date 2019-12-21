@@ -1,18 +1,18 @@
 const {MAX_THUMB_PER_PAGE, arrayToObject} = require("./util/utilities");
-const piecesRepo = require('../../../repository/repo-pieces');
+const {pieces} = require('galleryRepository');
 
 const getPiecesPageItems = (context, next) => {
 
-    const oPieces = new piecesRepo(global.currentUser, context.categoryCode);
+    const oPieces = new pieces(global.currentUser, context.categoryCode);
     
     oPieces.getAll (
         MAX_THUMB_PER_PAGE, 
         (context.index - 1) * MAX_THUMB_PER_PAGE
     )
-    .then(pieces => {
+    .then(piecesResult => {
 
         const {piecePhoto} = context;
-        context.piecePhoto = (piecePhoto || arrayToObject(pieces, 'itemId'));
+        context.piecePhoto = (piecePhoto || arrayToObject(piecesResult, 'itemId'));
 
         const {stringPieces} = context;
         context.stringPieces = (stringPieces || JSON.stringify(context.piecePhoto));

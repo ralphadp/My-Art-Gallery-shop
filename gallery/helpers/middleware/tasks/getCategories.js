@@ -1,11 +1,11 @@
-const categoryRepo = require('../../../repository/repo-categories');
+const {categories} = require('galleryRepository');
 
 const getCategories = (context, next) => {
-    const oCategory = new categoryRepo();
+    const oCategory = new categories();
     oCategory.getAll()
-    .then(categories => {
+    .then(categoriesResult => {
 
-        context.categories = categories;
+        context.categories = categoriesResult;
 
         next(null, context.categories);
     })

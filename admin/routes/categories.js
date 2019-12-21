@@ -1,5 +1,5 @@
 var express = require('express');
-var categories = require('../repository/repo-categories');
+var {categories} = require('galleryRepository');
 var router = express.Router();
 
 /* GET categories listing. */

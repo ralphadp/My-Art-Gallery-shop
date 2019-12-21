@@ -1,0 +1,15 @@
+{
+  "name": "galleryRepository",
+  "version": "1.0.0",
+  "description": "Fetch Repository classes to the micro services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "ralph",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.17.1"
+  }
+}

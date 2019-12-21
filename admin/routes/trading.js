@@ -1,11 +1,11 @@
 var express = require('express');
-var trades = require('../repository/repo-cart');
+var {carts} = require('galleryRepository');
 var router = express.Router();
 
 /* GET Trading listing. */
 router.get('/', function(req, res, next) {
-  const trade = new trades();
-  trade.getAll().then((result) => {
+  const possibleTrades = new carts();
+  possibleTrades.getAll().then((result) => {
       res.render(
         'trading', 
         { 

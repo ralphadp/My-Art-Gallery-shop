@@ -1,8 +1,8 @@
-const cartRepo = require('../../../repository/repo-cart');
+const {carts} = require('galleryRepository');
 
 const getCart = (context, next) => {
 
-    const oCart = new cartRepo();
+    const oCart = new carts();
     oCart.getById(global.currentUser)
     .then(picked => {
 

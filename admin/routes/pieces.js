@@ -1,5 +1,5 @@
 var express = require('express');
-var pieces = require('../repository/repo-pieces');
+var {pieces} = require('galleryRepository');
 var router = express.Router();
 
 /* GET pieces listing. */

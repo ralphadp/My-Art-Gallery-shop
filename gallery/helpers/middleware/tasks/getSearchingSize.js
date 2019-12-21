@@ -1,10 +1,9 @@
-const piecesRepo = require('../../../repository/repo-pieces');
-
+const {pieces} = require('galleryRepository');
 const {numPages} = require("./util/utilities");
 
 const getSearchingSize = (context, next) => {
 
-    const oPieces = new piecesRepo(global.currentUser, context.categoryCode);
+    const oPieces = new pieces(global.currentUser, context.categoryCode);
     oPieces.getSizeOfSearching(context.words)
     .then(totalPieces => {
 
