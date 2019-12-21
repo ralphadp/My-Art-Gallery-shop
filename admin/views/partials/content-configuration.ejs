@@ -21,9 +21,12 @@ config.forEach((item) => {
                     </select>
             <%} else if (item.type === 'radio') { %>
                 <% const options = JSON.parse(item.options);
-                    options.forEach((option) => {
+                   options.forEach((option) => {
                 %>
-                <input name="countsocial" type="radio" value="<%= option%>" <%= (item.value === option) ? 'checked' : '' %>/><span><%= option%></span>
+                <div>
+                    <input name="countsocial" type="radio" value="<%= option%>" <%= (item.value === option) ? 'checked' : '' %>/>
+                    <span><%= option%></span>
+                </div>
                 <% }); %>
             <% } %>
         </div>
