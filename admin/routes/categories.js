@@ -1,10 +1,20 @@
 var express = require('express');
-var categories = require('../repository/categories');
+var categories = require('../repository/repo-categories');
 var router = express.Router();
 
 /* GET categories listing. */
 router.get('/', function(req, res, next) {
-  res.render('categories', { title: 'Categories', tableTitle: 'Categories', data: categories });
+  const category = new categories();
+  category.getAll().then((result) => {
+      res.render(
+        'categories', 
+        { 
+          title: 'List of Categories', 
+          tableTitle: 'Categories', 
+          data: result 
+        }
+      );
+  });
 });
 
 /* GET categories 'add'. */

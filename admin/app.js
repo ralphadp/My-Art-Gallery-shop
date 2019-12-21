@@ -12,6 +12,8 @@ var categoriesRouter = require('./routes/categories');
 
 var app = express();
 
+global.currentAdmin = 'lbenedite1';
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

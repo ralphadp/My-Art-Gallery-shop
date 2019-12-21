@@ -1,77 +1,36 @@
 <article id="configuration-form">
-    <div class="configuration-row">
-        <div class="configuration-item">
-            <label for="titlepage">Title App Page</label>
-            <div class="option-wrapper">
-                <input id="titlepage" type="text" size="8"/>
-            </div>
-        </div>
-        <div class="configuration-item">
-            <label for="includephoto">Include admin profile photo</label>
-            <div class="option-wrapper">
-                <input id="includephoto" type="checkbox"/>
-            </div>
-        </div>
-        <div class="configuration-item">
-            <label for="emailuser">Send user msg email back</label>
-            <div class="option-wrapper">
-                <input id="emailuser" type="checkbox"/>
-            </div>
-        </div>
-        <div class="configuration-item">
-            <label for="showbanner">Show banner</label>
-            <div class="option-wrapper">
-                <input id="showbanner" type="checkbox"/>
-            </div>
-        </div>
-        <div class="configuration-item">
-            <label for="showtags">Show tags</label>
-            <div class="option-wrapper">
-                <input id="showtags" type="checkbox"/>
-            </div>
-        </div>
-        <div class="configuration-item">
-            <label for="countnousers">Count no-user views</label>
-            <div class="option-wrapper">
-                <input id="countnousers" type="checkbox"/>
-            </div>
+<%  
+let column = 0;
+config.forEach((item) => { 
+    if ((column % 5) === 0) { %>
+        <div class="configuration-row">
+    <% } %>
+    <div class="configuration-item">
+        <label for="titlepage"><%= item.description %></label>
+        <div class="option-wrapper">
+            <% if (item.type === 'text') { %>   
+                <input id="<%= item.name %>"  name="<%= item.name %>" type="text" size="8" value="<%= item.value %>"/>
+            <%} else if (item.type === 'checkbox') { %>
+                <input id="includephoto" type="checkbox" "<%= Number(item.name) ? 'checked' : '' %>"/>
+            <%} else if (item.type === 'select') { %>
+                <select name="<%= item.name %>" id="<%= item.name %>">
+                    <% const options = JSON.parse(item.options);
+                        for (key in options) { %>
+                        <option value="<%= key %>" <%= (item.value === key) ? 'selected' : '' %>><%= options[key] %></option> 
+                    <% } %>
+                    </select>
+            <%} else if (item.type === 'radio') { %>
+                <% const options = JSON.parse(item.options);
+                    options.forEach((option) => {
+                %>
+                <input name="countsocial" type="radio" value="<%= option%>" <%= (item.value === option) ? 'checked' : '' %>/><span><%= option%></span>
+                <% }); %>
+            <% } %>
         </div>
     </div>
-    <div class="configuration-row">
-        <div class="configuration-item">
-            <label for="thumbsby">Show thumbs by</label>
-            <div class="option-wrapper">
-                <select name="thumbsby" id="thumbsby">
-                    <option value="year">Year</option> 
-                    <option value="daterelease" selected>Date release</option>
-                    <option value="view">Most view</option>
-                </select>
-            </div>
-        </div>
-        <div class="configuration-item">
-            <label for="countsocial">Count Social visited</label>
-            <div class="option-wrapper">
-                <input name="countsocial" type="radio" value="yes"/><span>Yes</span>
-                <input name="countsocial" type="radio" value="no" checked/><span>No</span>
-            </div>
-        </div>
-        <div class="configuration-item">
-            <label for="search">Search on Date</label>
-            <div class="option-wrapper">
-                <input id="search" type="checkbox"/>
-            </div>
-        </div>
-        <div class="configuration-item">
-            <label for="usernameheader">Show username at header</label>
-            <div class="option-wrapper">
-                <input id="usernameheader" type="checkbox"/>
-            </div>
-        </div>
-        <div class="configuration-item">
-            <label for="pieceyear">Show year at piece info</label>
-            <div class="option-wrapper">
-                <input id="pieceyear" type="checkbox"/>
-            </div>
-        </div>
+<% column++;
+   if ((column % 5) === 0) { %>
     </div>
+<% } 
+}); %>
 </article>

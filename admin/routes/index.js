@@ -1,4 +1,6 @@
 var express = require('express');
+var Config = require('../repository/repo-config');
+var Admin = require('../repository/repo-admin');
 var router = express.Router();
 
 /* GET home page. */
@@ -13,7 +15,10 @@ router.get('/documents', function(req, res, next) {
 
 /* GET profile page. */
 router.get('/profile', function(req, res, next) {
-  res.render('profile', { title: 'Profile User Info' });
+  admin = new Admin();
+  admin.getByUsername(global.currentAdmin).then((result) => {
+    res.render('profile', { title: 'Profile User Info', profile: result });
+  });
 });
 
 /* GET messages page. */
@@ -23,7 +28,11 @@ router.get('/messages', function(req, res, next) {
 
 /* GET configuration page. */
 router.get('/configuration', function(req, res, next) {
-  res.render('configuration', { title: 'Configuration' });
+  config = new Config;
+  config.getAll().then((result) => {
+    res.render('configuration', { title: 'Configuration', config: result });
+  });
+  
 });
 
 module.exports = router;

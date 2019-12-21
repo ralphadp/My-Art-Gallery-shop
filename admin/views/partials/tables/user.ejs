@@ -18,16 +18,16 @@
 
             <% for (let index = 0; index < data.length; index++) { %>
                 <tr>
-                    <td><img src="<%= data[index].Picture %>" alt="" /></td>
-                    <td><%= data[index].Name %></td>
-                    <td><%= data[index].Username %></td>
-                    <td><%= data[index].Registration %></td>
-                    <td><%= data[index].Email %></td>
-                    <td><%= data[index].Movile %></td>
-                    <td><%= data[index].Birth %></td>
-                    <td><%= data[index].Country %></td>
-                    <td><%= data[index].City %></td>
-                    <td><%= data[index].PostalCode %></td>
+                    <td><img src="http://lorempixel.com/100/100/people/3" alt="" /></td>
+                    <td><%= data[index].first_name + ' ' + data[index].last_name%></td>
+                    <td><%= data[index].username %></td>
+                    <td><%= data[index].registration_date %></td>
+                    <td><%= data[index].email %></td>
+                    <td><%= data[index].movile %></td>
+                    <td><%= data[index].birth %></td>
+                    <td><%= data[index].country %></td>
+                    <td><%= data[index].city %></td>
+                    <td><%= data[index].postal_code %></td>
                 </tr>
             <% } %>
 

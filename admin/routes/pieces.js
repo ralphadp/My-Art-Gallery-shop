@@ -1,10 +1,20 @@
 var express = require('express');
-var pieces = require('../repository/pieces');
+var pieces = require('../repository/repo-pieces');
 var router = express.Router();
 
 /* GET pieces listing. */
 router.get('/', function(req, res, next) {
-  res.render('pieces', { title: 'Pieces', tableTitle: 'Pieces', data: pieces });
+  const piece = new pieces();
+  piece.getAllOf().then((result) => {
+      res.render(
+        'pieces', 
+        { 
+          title: 'List of Pieces', 
+          tableTitle: 'Pieces', 
+          data: result 
+        }
+      );
+  });
 });
 
 /* GET pieces 'add'. */

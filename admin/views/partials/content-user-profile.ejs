@@ -1,38 +1,38 @@
 <article id="profile-form">
     <div class="profile-row">
-        <label for="firstname">First Name</label><input id="firstname" type="text" size="40" maxlength="50"/>
+        <label for="firstname">First Name</label><input id="firstname" type="text" value="<%= profile[0].first_name %>" size="40" maxlength="50"/>
     </div>
     <div class="profile-row">
-        <label for="lastname">Last Name</label><input id="lastname" type="text" size="40"  maxlength="60"/>
+        <label for="lastname">Last Name</label><input id="lastname" type="text" value="<%= profile[0].last_name %>" size="40" maxlength="60"/>
     </div>
     <div class="profile-row">
-        <label for="birthyear">Birth Year</label><input id="birthyear" type="number"/>
+        <label for="birthyear">Birth Year</label><input id="birthyear" value="<%= profile[0].birth %>" type="date"/>
     </div>
     <div class="profile-row">
-        <label for="username">Username</label><input id="username" type="text" size="30"  maxlength="30"/>
+        <label for="username">Username</label><input id="username" type="text" value="<%= profile[0].username %>" size="30" maxlength="30"/>
     </div>
     <div class="profile-row">
-        <label for="password">Password</label><input id="password" type="text" size="30"  maxlength="30"/>
+        <label for="password">Password</label><input id="password" type="text" value="<%= profile[0].password %>" size="30" maxlength="30"/>
     </div>
     <div class="profile-row">
-        <label for="dateregistration">Date registration</label><input id="dateregistration" type="date"/>
+        <label for="dateregistration">Date registration</label><input id="dateregistration" value="<%= profile[0].date_registration %>" type="date"/>
     </div>
     <div class="profile-row">
-        <label for="email">Email</label><input id="email" type="email"/>
+        <label for="email">Email</label><input id="email" value="<%= profile[0].email %>" type="email"/>
     </div>
     <div class="profile-row">
-        <label for="gender">Gender</label><input name="gender" id="gender-male" type="radio" value="male" checked/><span>Male</span><input id="gender-female" name="gender" type="radio" value="female"/><span>Female</span>
+        <label for="gender">Gender</label><input name="gender" id="gender-male" type="radio" value="1" <%= profile[0].gender ? 'checked' : '' %>/><span>Male</span><input id="gender-female" name="gender" type="radio" value="0" <%= (!profile[0].gender) ? 'checked' : '' %>/><span>Female</span>
     </div>
     <div class="profile-row">
-        <label for="movile">Movile</label><input id="movile" type="tel"/>
+        <label for="movile">Movile</label><input id="movile" value="<%= profile[0].movile %>" type="tel"/>
     </div>
     <div class="profile-row">
         <label for="Country">Country</label><% include ./control/country %>
     </div>
     <div class="profile-row">
-        <label for="City">City</label><input id="City" type="text" size="30" maxlength="30"/>
+        <label for="City">City</label><input id="City" type="text" value="<%= profile[0].city %>" size="30" maxlength="30"/>
     </div>
     <div class="profile-row">
-        <label for="postalcode">Postal Code</label><input id="postalcode" type="text" size="15" maxlength="15"/>
+        <label for="postalcode">Postal Code</label><input id="postalcode" value="<%= profile[0].postal_code %>" type="text" size="15" maxlength="15"/>
     </div>
 </article>

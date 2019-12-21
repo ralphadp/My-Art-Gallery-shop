@@ -130,11 +130,11 @@
 }
 
 .head-users {
-    background-color: #00B7FF;
+    background-color: #00B7FF!important;
 }
 
 .head-categories {
-    background-color: #fad992!important;
+    background-color: #ffb310!important;
 }
 
 .head-pieces {
