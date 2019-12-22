@@ -55,6 +55,7 @@ router.post('/save', function(req, res, next) {
           success: true,
           message: 'The category was added sucessfully.'
       };
+      console.log(result);
   })
   .catch(error => {
       console.log(error);
@@ -88,6 +89,7 @@ router.post('/update', function(req, res, next) {
           success: true,
           message: 'The category was updated sucessfully.'
       };
+      console.log(result);
   })
   .catch(error => {
       console.log(error);

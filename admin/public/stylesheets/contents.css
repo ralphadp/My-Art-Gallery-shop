@@ -121,6 +121,11 @@
     margin: 4px;
 }
 
+.option-wrapper input:focus,
+.option-wrapper select:focus {
+    outline: none;
+}
+
 .documents-row, .configuration-row {
     display: flex;
 }

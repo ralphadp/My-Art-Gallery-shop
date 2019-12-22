@@ -11,7 +11,7 @@ config.forEach((item) => {
             <% if (item.type === 'text') { %>   
                 <input id="<%= item.name %>"  name="<%= item.name %>" type="text" size="8" value="<%= item.value %>"/>
             <%} else if (item.type === 'checkbox') { %>
-                <input id="includephoto" type="checkbox" "<%= Number(item.name) ? 'checked' : '' %>"/>
+                <input id="includephoto" type="checkbox" <%= Number(item.value) ? 'checked' : '' %> value="<%= Number(item.value) %>"/>
             <%} else if (item.type === 'select') { %>
                 <select name="<%= item.name %>" id="<%= item.name %>">
                     <% const options = JSON.parse(item.options);
