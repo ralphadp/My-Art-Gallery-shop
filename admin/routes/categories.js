@@ -1,17 +1,23 @@
 var express = require('express');
 var {categories} = require('galleryRepository');
+var ConfigHandler = require('../model/configHandler');
 var router = express.Router();
 
 /* GET categories listing. */
 router.get('/', function(req, res, next) {
+
+  const response = req.cookies.category_response || null;
+  res.clearCookie('category_response');
+
   const category = new categories();
   category.getAll().then((result) => {
       res.render(
         'categories', 
         { 
-          title: 'List of Categories', 
+          title: 'Categories List', 
           tableTitle: 'Categories', 
-          data: result 
+          data: result, 
+          response: response
         }
       );
   });
@@ -51,7 +57,7 @@ router.post('/save', function(req, res, next) {
       };
   })
   .catch(error => {
-    console.log(error);
+      console.log(error);
       response = {
           success: false,
           message: error.sqlMessage
@@ -74,40 +80,47 @@ router.post('/update', function(req, res, next) {
     name: req.body.category_name
   };
 
-  console.log(categoryParam);
-
   let response = {};
 
   category.update(categoryParam).then(result => {
       response = {
+          data: categoryParam,
           success: true,
           message: 'The category was updated sucessfully.'
       };
   })
   .catch(error => {
-    console.log(error);
+      console.log(error);
       response = {
+          data: categoryParam,
           success: false,
           message: error.sqlMessage
       };
   })
   .finally(() => {
       res.cookie('category_response' , response, {maxAge: 20000});
-      res.redirect( req.header('Referer') || '/');
+      if (ConfigHandler.fetchValue('REDIRECT_UPDATE')) {
+          res.redirect('/categories/');
+      } else {
+          res.redirect( req.header('Referer') || '/');
+      }
   });
 });
 
 /* GET categories 'update'. */
 router.get('/edit/:id/:path/:name', function(req, res, next) {
 
-  let dataToUpdate = req.params || null;
+  const response = req.cookies.category_response || null;
+  res.clearCookie('category_response');
+
+  let dataToUpdate = !response ? (req.params || null) : response.data;
 
   res.render(
     'categories-form', 
     { 
       title: 'Categories', 
-      titleForm: 'Update Category',  
-      result: null,
+      titleForm: 'Update Category', 
+      result: response,
       dataToUpdate: dataToUpdate 
     }
   );

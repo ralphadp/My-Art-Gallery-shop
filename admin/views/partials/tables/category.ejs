@@ -1,3 +1,19 @@
+<% if (response) { %>
+    <div id="message-card" class="<%= response.success ? 'req-sucess' : 'req-error' %>">
+        <span><%= response.message%></span>
+    </div>
+    <script>
+        setTimeout(()=> {
+            document.getElementById("message-card").classList.add("show-fading");
+        }, 100);
+        setTimeout(()=> {
+            document.getElementById("message-card").classList.remove("show-fading");
+        }, 5000);
+    </script>
+<% } else {%>
+<div id="message-card"></div>
+<% } %>
+
 <article id="form-admin">
     <div class="table-admin">
         <div class="table-header head-categories"><%= tableTitle %></div>

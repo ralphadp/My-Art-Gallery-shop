@@ -1,4 +1,4 @@
-<%if (result) { %>
+<% if (result) { %>
 <div id="message-card" class="<%= result.success ? 'req-sucess' : 'req-error' %>">
     <span><%= result.message%></span>
 </div>
@@ -13,6 +13,7 @@
 <% } else {%>
 <div id="message-card"></div>
 <% } %>
+
 <div class="editcard category-card">
     <div class="editcard-body">
         <div class="editcard-title"><%= titleForm%></div>

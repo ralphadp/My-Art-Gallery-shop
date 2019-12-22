@@ -6,12 +6,12 @@ class Config {
 
     }
     
-    getById(id) {
+    getById(name) {
         
-        let sql = 'SELECT * FROM config WHERE id = ?';
+        let sql = 'SELECT * FROM config WHERE name = ?';
 
         return new Promise((resolve, reject) => {
-            sqlConn.query(sql, [id], (err, result) => {
+            sqlConn.query(sql, [name], (err, result) => {
                 if (!err) {
                     resolve(JSON.parse(JSON.stringify(result)));
                 } else {
