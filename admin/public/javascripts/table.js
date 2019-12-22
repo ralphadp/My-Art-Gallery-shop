@@ -31,8 +31,17 @@ for (let index = 0; index < tableCells.length ; index++) {
     button.style.cursor = 'pointer';
     button.addEventListener('click', () => {
 
+        let dataCategory = JSON.parse(tableCells.item(index).getAttribute('data'));
+        document.getElementById('category_to_delete_id').value = dataCategory.id;
+
         deleteCategoryDialog.show();
 
     });
     tableCells.item(index).appendChild(button);
 }
+
+document.getElementById('category-delete-no').addEventListener('click', (event) => {
+    deleteCategoryDialog.close();
+    /*to avoid follow the action form route*/
+    event.preventDefault();
+});

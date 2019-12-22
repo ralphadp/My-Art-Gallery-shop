@@ -136,6 +136,7 @@ router.post('/delete', function(req, res, next) {
           success: true,
           message: 'The category was removed sucessfully.'
       };
+      console.log(result);
   })
   .catch(error => {
     console.log(error);
@@ -143,6 +144,10 @@ router.post('/delete', function(req, res, next) {
           success: false,
           message: error.sqlMessage
       };
+  })
+  .finally(() => {
+    res.cookie('category_response' , response, {maxAge: 20000});
+    res.redirect('/categories/');
   });
 
 });
