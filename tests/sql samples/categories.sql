@@ -1,9 +1,10 @@
 USE gallery_db;
 
 CREATE TABLE categories (
-	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	path VARCHAR(50),
+	id INT NOT NULL AUTO_INCREMENT,
+	path VARCHAR(50) NOT NULL,
 	name VARCHAR(50),
+	PRIMARY KEY (path),
 	INDEX category_index(id)
 );
 

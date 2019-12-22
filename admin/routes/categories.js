@@ -19,19 +19,119 @@ router.get('/', function(req, res, next) {
 
 /* GET categories 'add'. */
 router.get('/add', function(req, res, next) {
-  res.render('categories-form', { title: 'Categories', titleForm: 'New Category'});
+  const response = req.cookies.category_response || null;
+  res.clearCookie('category_response');
+  res.render(
+    'categories-form', 
+    { 
+      title: 'Categories', 
+      titleForm: 'Add new Category', 
+      result: response,
+      dataToUpdate: null 
+    }
+  );
+});
+
+/* POST categories 'save'. */
+router.post('/save', function(req, res, next) {
+
+  const category = new categories();
+
+  const categoryParam = {
+    path: req.body.category_path,
+    name: req.body.category_name
+  };
+
+  let response = {};
+
+  category.save(categoryParam).then(result => {
+      response = {
+          success: true,
+          message: 'The category was added sucessfully.'
+      };
+  })
+  .catch(error => {
+    console.log(error);
+      response = {
+          success: false,
+          message: error.sqlMessage
+      };
+  })
+  .finally(() => {
+      res.cookie('category_response' , response, {maxAge: 20000});
+      res.redirect( req.header('Referer') || '/');
+  });
+});
+
+/* POST categories 'save'. */
+router.post('/update', function(req, res, next) {
+
+  const category = new categories();
+
+  const categoryParam = {
+    id: req.body.category_id,
+    path: req.body.category_path,
+    name: req.body.category_name
+  };
+
+  console.log(categoryParam);
+
+  let response = {};
+
+  category.update(categoryParam).then(result => {
+      response = {
+          success: true,
+          message: 'The category was updated sucessfully.'
+      };
+  })
+  .catch(error => {
+    console.log(error);
+      response = {
+          success: false,
+          message: error.sqlMessage
+      };
+  })
+  .finally(() => {
+      res.cookie('category_response' , response, {maxAge: 20000});
+      res.redirect( req.header('Referer') || '/');
+  });
 });
 
 /* GET categories 'update'. */
-router.get('/update', function(req, res, next) {
-  const categorySelected = {id:888, path:'my-category', name:'My category'};
-  res.render('categories-form', { title: 'Categories', titleForm: 'Categories',  data: categorySelected });
+router.get('/edit/:id/:path/:name', function(req, res, next) {
+
+  let dataToUpdate = req.params || null;
+
+  res.render(
+    'categories-form', 
+    { 
+      title: 'Categories', 
+      titleForm: 'Update Category',  
+      result: null,
+      dataToUpdate: dataToUpdate 
+    }
+  );
 });
 
-/* GET categories 'delete'. */
-router.get('/delete', function(req, res, next) {
-  const categorySelected = {id:888, path:'my-category', name:'My category'};
-  res.render('categories-form', { title: 'Categories', titleForm: 'Categories',  data: categorySelected });
+/* POST categories 'delete'. */
+router.post('/delete', function(req, res, next) {
+
+  const category = new categories();
+
+  category.delete(req.body.id).then(result => {
+      response = {
+          success: true,
+          message: 'The category was removed sucessfully.'
+      };
+  })
+  .catch(error => {
+    console.log(error);
+      response = {
+          success: false,
+          message: error.sqlMessage
+      };
+  });
+
 });
 
 module.exports = router;

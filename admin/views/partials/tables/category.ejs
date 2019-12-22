@@ -4,6 +4,7 @@
         
         <table cellspacing="0">
             <tr>
+                <th class="edition-options"></th>
                 <th>Id</th>
                 <th>Path Code</th>
                 <th>Category Name</th>
@@ -11,9 +12,10 @@
 
             <% for (let index = 0; index < data.length; index++) { %>
                 <tr>
+                    <td class="edition-options-data" data="<%= JSON.stringify(data[index]) %>"></td>
                     <td><%= data[index].id %></td>
                     <td><%= data[index].path %></td>
-                    <td><%= data[index].name %></td>
+                    <td><%= data[index].name %></td
                 </tr>
             <% } %>
 

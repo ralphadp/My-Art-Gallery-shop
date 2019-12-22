@@ -44,3 +44,41 @@
 .icon-close-x {
     fill: #00B7FF!important;
 }
+
+
+#category-delete-frame {
+    border: 1px solid #ffb310;
+    background: white;
+    color: rgba(62, 55, 94, 0.4);
+    width: 300px;
+    height: 150px;
+    border-radius: 5px;
+}
+
+#category-delete-frame h3 {
+    text-align: left;
+    padding: 10px 20px 20px;
+}
+
+#category-delete-frame p {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#category-delete-frame #buttons {
+    text-align: center;
+    width: 200px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+#category-delete-yes, #category-delete-no {
+    flex-basis: 40%;
+    width: 80px;
+    border: 1px solid #00B7FF;
+    color:#00B7FF;
+    background: transparent;
+    border-radius: 5px;
+    outline: none;
+}

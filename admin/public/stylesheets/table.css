@@ -58,6 +58,50 @@ table tr:nth-child(2n + 1) {
     background-color: #edf7f8;
 }
 
+.edition-options {
+    width: 3em;
+    height: 1em;
+    position:relative;
+}
+/*
+td.edition-options:before {
+    content: '+';
+    font-size: 22px;
+    width: 1.2em;
+    height: 1.2em;
+    position: absolute;
+    left: 4px;
+    top: 0;
+    border-radius: 3px;
+    background-color:#61d89d;
+    color:white;
+    box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff;
+    cursor: pointer;
+}
+
+td.edition-options:hover:before {
+    background-color:#76ffbb;
+}
+
+td.edition-options:after {
+    content: '-';
+    font-size: 22px;
+    width: 1.2em;
+    height: 1.2em;
+    position:absolute;
+    right:4px;
+    top:0;
+    border-radius: 3px;
+    background-color:#e73f5b;
+    color:white;
+    box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff;
+    cursor: pointer;
+}
+
+td.edition-options:hover:after {
+    background-color:#ff4765;
+}*/
+
 
 @media screen and (max-width: 700px) {
     table,

@@ -75,3 +75,30 @@
     outline: 0;
     box-shadow: 5px 7px 17px 0rem rgba(64, 104, 223, 0.5); 
 }
+
+#message-card {
+    color: white;
+    height: 15px;
+    width: 1px;
+    border-radius: 3px;
+    align-items: center;
+    padding: 5px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.85s ease;
+}
+  
+.show-fading {
+    height: 15px!important;
+    width: 100%!important;
+    opacity: 1!important;
+}
+
+.req-sucess {
+    background: #82d404;
+}
+
+.req-error {
+    background: red;
+}
