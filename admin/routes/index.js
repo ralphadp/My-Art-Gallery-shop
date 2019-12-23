@@ -15,6 +15,9 @@ router.get('/documents', function(req, res, next) {
 
 /* GET profile page. */
 router.get('/profile', function(req, res, next) {
+  const response = req.cookies.admin_response || null;
+  res.clearCookie('admin_response');
+
   admin = new admins();
   admin.getByUsername(global.currentAdmin).then((result) => {
     let profile = null;
@@ -29,7 +32,8 @@ router.get('/profile', function(req, res, next) {
       'profile', 
       { 
         title: 'Profile User Info', 
-        profile: profile 
+        profile: profile,
+        result: response
       }
     );
  

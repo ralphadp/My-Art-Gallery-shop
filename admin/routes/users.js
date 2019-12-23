@@ -32,7 +32,6 @@ router.get('/admin', function(req, res, next) {
 
   const admin = new admins();
   admin.getAll().then((result) => {
-    console.log(result);
       res.render(
         'admins', 
         { 
@@ -333,10 +332,14 @@ router.post('/admin/update', function(req, res, next) {
   })
   .finally(() => {
       res.cookie('admin_response' , response, {maxAge: 20000});
-      if (ConfigHandler.fetchValue('REDIRECT_UPDATE')) {
-          res.redirect('/users/admin/');
-      } else {
+      if (typeof req.body.profile !== 'undefined' && req.body.profile) {
           res.redirect( req.header('Referer') || '/');
+      } else {
+          if (ConfigHandler.fetchValue('REDIRECT_UPDATE')) {
+              res.redirect('/users/admin/');
+          } else {
+              res.redirect( req.header('Referer') || '/');
+          }
       }
   });
 });
