@@ -14,6 +14,7 @@
 <div id="message-card"></div>
 <% } %>
 
+
 <div class="editcard user-card">
     <div class="editcard-body">
         <div class="editcard-title"><%= titleForm%></div>
@@ -44,7 +45,7 @@
             </div>
             <div class="rowform">
                 <label for="dateregistration">Date registration</label>
-                <input id="dateregistration" name="registration_date" value="<%= (dataToUpdate && dataToUpdate.date_registration) ? dataToUpdate.date_registration : '' %>" <%= !dataToUpdate ? 'onload="TODAY(this)"' : '' %> type="date"/>
+                <input id="dateregistration" name="registration_date" value="<%= (dataToUpdate && dataToUpdate.date_registration) ? dataToUpdate.date_registration : '' %>" type="date" <%= !dataToUpdate ? 'readonly' : '' %>/>
             </div>
             <div class="rowform">
                 <label for="email">Email</label>
@@ -80,3 +81,10 @@
         </form>
     </div>
 </div>
+<% if (!dataToUpdate) {%>
+<script>
+    (() => {
+        document.getElementById('dateregistration').value = TODAY();
+    })();
+</script>
+<% } %>

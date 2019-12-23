@@ -1,5 +1,5 @@
-let TODAY = (target) => {
+let TODAY = () => {
     var local = new Date();
     local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
-    target.value = local.toJSON().slice(0, 10);
+    return local.toJSON().slice(0, 10);
 };
