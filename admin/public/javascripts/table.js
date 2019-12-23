@@ -108,3 +108,26 @@ attachTableButtons('edition-options-data-admin', clickEditAdmin, clickDeleteAdmi
     /*to avoid follow the action form route*/
     event.preventDefault();
 });
+
+/** PIECE BUTTONS **/
+
+const deletePieceDialog = new Frame('delete-piece-dialog');
+
+const clickEditPiece = (event) => {
+    let dataPiece = event.currentTarget.data;
+    window.location.replace(
+        window.location.origin + `/pieces/edit/${dataPiece.id}`
+    );
+};
+
+const clickDeletePiece = (event) => {
+    let dataPiece = event.currentTarget.data;
+    document.getElementById('piece_to_delete_id').value = dataPiece.id;
+    deletePieceDialog.show();
+};
+
+attachTableButtons('edition-options-data-piece', clickEditPiece, clickDeletePiece, 'piece-delete-no',  (event) => {
+    deletePieceDialog.close();
+    /*to avoid follow the action form route*/
+    event.preventDefault();
+});

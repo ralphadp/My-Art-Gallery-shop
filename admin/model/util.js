@@ -1,3 +1,4 @@
+const {categories} = require('galleryRepository');
 
 class Util {
     constructor() {
@@ -19,6 +20,27 @@ class Util {
         }
 
         return datetime;
+    }
+
+    /**
+     * Get all the categories
+     */
+    static async getAllArtCategories() {
+        let results = [];
+
+        try {
+            const category = new categories();
+            results = await category.getAll();
+            results.map(element => {
+                element.path = element.path.toUpperCase();
+                console.log(element.path);
+                return element;
+            });
+        } catch(error) {
+            console.log(error);
+        }
+
+        return results;
     }
 }
 

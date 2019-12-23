@@ -1,40 +1,78 @@
+<% if (response) { %>
+    <div id="message-card" class="<%= response.success ? 'req-sucess' : 'req-error' %>">
+        <span><%= response.message%></span>
+    </div>
+    <script>
+        setTimeout(()=> {
+            document.getElementById("message-card").classList.add("show-fading");
+        }, 100);
+        setTimeout(()=> {
+            document.getElementById("message-card").classList.remove("show-fading");
+        }, 5000);
+    </script>
+<% } else {%>
+<div id="message-card"></div>
+<% } %>
+
 <div class="editcard piece-card">
     <div class="editcard-body">
         <div class="editcard-title"><%= titleForm%></div>
-        <form>
+        <form action="/pieces/<%= dataToUpdate ? 'update' : 'save' %>" method="post">
+            <input name="id" type="hidden" value="<%= (dataToUpdate && dataToUpdate.id) ? dataToUpdate.id : '' %>"/>
             <div class="rowform">
                 <label for="piece-thumb">Thumb</label>
-                <input id="piece-thumb" type="file" placeholder="Enter path"/>
+                <input id="piece-thumb" type="file" placeholder="Enter path" />
             </div>
             <div class="rowform">
-                <label for="piece-name">Name</label>
-                <input id="piece-name" type="text" placeholder="Enter the name"/>
+                <label for="piece-name">Piece Name</label>
+                <input id="piece-name" name="name" type="text" placeholder="Enter the name" value="<%= (dataToUpdate && dataToUpdate.name) ? dataToUpdate.name : '' %>" size="50" maxlength="150"/>
             </div>
             <div class="rowform">
-                <label for="piece-artist">Artist</label>
-                <input id="piece-artist" type="text" placeholder="Enter the artist name"/>
+                <label for="piece-artist">Artist (complete name)</label>
+                <input id="piece-artist" name="artist" type="text" placeholder="Enter the artist name" value="<%= (dataToUpdate && dataToUpdate.artist) ? dataToUpdate.artist : '' %>" size="40" maxlength="50"/>
             </div>
             <div class="rowform">
-                <label for="piece-type">Type</label>
-                <input id="piece-type" type="text" placeholder="Enter the type of the piece"/>
+                <label for="piece-type">Art type</label>
+                <select id="piece-type" name="type">
+                    <option value="NONE" selected>(Select currency)</option>
+                    <% categories.forEach(item => { %>
+                        <option value="<%= item.path%>"><%= item.name%></option>
+                    <% }); %>
+                </select>
             </div>
             <div class="rowform">
                 <label for="piece-released">Released</label>
-                <input id="piece-released" type="text" placeholder="Enter the released date"/>
+                <input id="piece-released" name="release_date" type="date" placeholder="Enter the released date" value="<%= (dataToUpdate && dataToUpdate.release_date) ? dataToUpdate.release_date : '' %>" <%= !dataToUpdate ? 'readonly' : '' %>/>
             </div>
             <div class="rowform">
-                <label for="piece-size">Size</label>
-                <input id="piece-size" type="text" placeholder="Enter the size"/>
+                <label for="piece-size">Size (Measures)</label>
+                <input id="piece-size" name="size" type="text" placeholder="Enter the size" value="<%= (dataToUpdate && dataToUpdate.size) ? dataToUpdate.size : '' %>" size="40" maxlength="50"/>
             </div>
             <div class="rowform">
                 <label for="piece-price">Price</label>
-                <input id="piece-price" type="text" placeholder="Enter the price"/>
+                <input id="piece-price" name="price" type="number" placeholder="Enter the price" value="<%= (dataToUpdate && dataToUpdate.price) ? dataToUpdate.price : '' %>"/>
             </div>
             <div class="rowform">
                 <label for="piece-currency">Currency</label>
-                <input id="piece-currency" type="text" placeholder="Enter reuiere currency"/>
+                <select id="piece-currency" name="currency">
+                    <option selected value="none">(Select currency)</option>
+                    <option value="USD">America (United States) Dollars – USD</option>
+                    <option value="EUR">Euro – EUR</option>
+                    <option value="BO">Bolivia Bolivians – BO</option>
+                </select>
             </div>
             <button class="done_button" type="submit">Save</button>
         </form>
     </div>
 </div>
+<% if (!dataToUpdate) {%>
+    <script>
+        document.getElementById('piece-released').value = TODAY();
+    </script>
+<% } else { %>
+    <script>
+        document.getElementById('piece-type').value = '<%= dataToUpdate.type %>';
+        document.getElementById('piece-currency').value = '<%= dataToUpdate.currency %>';
+    </script>
+
+<% } %>

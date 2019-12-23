@@ -191,18 +191,18 @@ class Pieces {
      * @param {*} piece 
      */
     update(piece) {
-        let data = {
-            itemId: 'UUID()', 
-            thumb: piece.url, 
-            name: piece.name, 
-            artist: piece.artist, 
-            type: piece.type,
-            release_date: piece.release,
-            size: piece.size,
-            price: piece.price,
-            currency: piece.currency
-        };
-        let sql = 'UPDATE piece SET ?';
+        let data = [
+            piece.name, 
+            piece.artist, 
+            piece.type,
+            piece.release_date,
+            piece.size,
+            piece.price,
+            piece.currency,
+            piece.id
+        ];
+
+        let sql = 'UPDATE pieces SET name=?, artist=?, type=?, release_date=?, size=?, price=?, currency=? WHERE id = ?';
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, data, (error, result) => {
@@ -221,7 +221,7 @@ class Pieces {
      * @param {*} pieceId 
      */
     delete(pieceId) {
-        let sql = 'DELETE FROM piece WHERE id = ?';
+        let sql = 'DELETE FROM pieces WHERE id = ?';
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [pieceId], (error, result) => {
@@ -242,15 +242,15 @@ class Pieces {
     save(piece) {
         let data = {
             itemId: 'UUID()', 
-            thumb: piece.url,
             name: piece.name, 
             artist: piece.artist, 
             type: piece.type,
-            release_date: piece.release,
+            release_date: piece.release_date,
             size: piece.size,
             price: piece.price,
             currency: piece.currency
         };
+
         let sql = "INSERT INTO pieces SET ?";
 
         return new Promise((resolve, reject) => {
