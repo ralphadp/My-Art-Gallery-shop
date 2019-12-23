@@ -12,9 +12,11 @@ class ConfigHandler {
         let value = false;
 
         try {
-            const result = await config.getById(key);
+            const oConfig = new config();
+            const result = await oConfig.getById(key);
             value = result[0].value;
-            if (!NaN(value)) {
+            if (!isNaN(value)) {
+                //only if is a number 
                 value = Number(value);
             }
         } catch(error) {
