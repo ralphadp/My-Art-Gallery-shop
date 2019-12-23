@@ -65,7 +65,7 @@
     margin-bottom: 30px;
 }
 
-#category-delete-frame #buttons {
+#category-delete-frame .buttons {
     text-align: center;
     width: 200px;
     display: flex;
@@ -73,7 +73,7 @@
     justify-content: space-between;
 }
 
-#category-delete-yes, #category-delete-no {
+.dialog_buton {
     flex-basis: 40%;
     width: 80px;
     border: 1px solid #00B7FF;

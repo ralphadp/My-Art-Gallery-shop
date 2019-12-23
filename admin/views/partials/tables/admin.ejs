@@ -26,7 +26,9 @@
                 <th>Username</th>
                 <th>Registration</th>
                 <th>Email</th>
+                <th>Second Email</th>
                 <th>Movile</th>
+                <th>Second Movile</th>
                 <th>Birth</th>
                 <th>Country</th>
                 <th>City</th>
@@ -35,13 +37,15 @@
 
             <% for (let index = 0; index < data.length; index++) { %>
                 <tr>
-                    <td class="edition-options-data-user" data="<%= JSON.stringify(data[index]) %>"></td>
-                    <td><img src="http://lorempixel.com/100/100/people/3" alt="" /></td>
+                    <td class="edition-options-data-admin" data="<%= JSON.stringify(data[index]) %>"></td>
+                    <td><img src="http://lorempixel.com/100/100/people/4" alt="" /></td>
                     <td><%= data[index].first_name + ' ' + data[index].last_name%></td>
                     <td><%= data[index].username %></td>
                     <td><%= data[index].registration_date %></td>
                     <td><%= data[index].email %></td>
+                    <td><%= data[index].email2 %></td>
                     <td><%= data[index].movile %></td>
+                    <td><%= data[index].movile2 %></td>
                     <td><%= data[index].birth %></td>
                     <td><%= data[index].country %></td>
                     <td><%= data[index].city %></td>

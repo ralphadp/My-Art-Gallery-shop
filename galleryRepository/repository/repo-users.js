@@ -6,6 +6,10 @@ class Users {
 
     }
     
+    /**
+     * Pick a user by id 
+     * @param {*} id 
+     */
     getById(id) {
         
         let sql = 'SELECT * FROM users WHERE id = ?';
@@ -21,6 +25,9 @@ class Users {
         });
     }
 
+    /**
+     * Return all the users
+     */
     getAll() {
         let sql = "SELECT * FROM users";
 
@@ -35,6 +42,10 @@ class Users {
         });
     }
 
+    /**
+     * Store a new user
+     * @param {*} user 
+     */
     save(user) {
         let data = {
             first_name: user.first_name,
@@ -55,6 +66,60 @@ class Users {
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, data, (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    /**
+     * Update the user by id
+     * @param {*} user 
+     */
+    update(user) {
+
+        let params = [
+            user.first_name, 
+            user.last_name,
+            user.username,
+            user.password,
+            user.registration_date,
+            user.email,
+            user.movile, 
+            user.birth,
+            user.gender,
+            user.country, 
+            user.city,
+            user.postal_code,
+            user.id
+        ]
+
+        let sql = "UPDATE users SET first_name=?, last_name=?, username=?, password=?, registration_date=?, email=?, movile=?, birth=?, gender=?, country=?, city=?, postal_code=? WHERE id = ?";
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, params, (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    /**
+     * REmove an user by id
+     * @param {*} userId 
+     */
+    delete(userId) {
+
+        let sql = "DELETE FROM users WHERE id = ?";
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [userId], (err, result) => {
                 if (!err) {
                     resolve(JSON.parse(JSON.stringify(result)));
                 } else {

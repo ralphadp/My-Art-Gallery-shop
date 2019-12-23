@@ -19,6 +19,7 @@
     <div class="editcard-body">
         <div class="editcard-title"><%= titleForm%></div>
         <form action="/users/<%= dataToUpdate ? 'update' : 'save' %>" method="post">
+            <input name="id" type="hidden" value="<%= (dataToUpdate && dataToUpdate.id) ? dataToUpdate.id : '' %>"/>
             <div class="rowform">
                 <label for="user-thumb">Thumb</label>
                 <input id="user-thumb" type="file" placeholder="Enter path"/>
@@ -45,7 +46,7 @@
             </div>
             <div class="rowform">
                 <label for="dateregistration">Date registration</label>
-                <input id="dateregistration" name="registration_date" value="<%= (dataToUpdate && dataToUpdate.date_registration) ? dataToUpdate.date_registration : '' %>" type="date" <%= !dataToUpdate ? 'readonly' : '' %>/>
+                <input id="dateregistration" name="registration_date" value="<%= (dataToUpdate && dataToUpdate.registration_date) ? dataToUpdate.registration_date : '' %>" type="date" <%= !dataToUpdate ? 'readonly' : '' %>/>
             </div>
             <div class="rowform">
                 <label for="email">Email</label>
