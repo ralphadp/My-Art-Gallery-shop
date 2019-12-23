@@ -1,0 +1,90 @@
+<% if (result) { %>
+    <div id="message-card" class="<%= result.success ? 'req-sucess' : 'req-error' %>">
+        <span><%= result.message%></span>
+    </div>
+    <script>
+        setTimeout(()=> {
+            document.getElementById("message-card").classList.add("show-fading");
+        }, 100);
+        setTimeout(()=> {
+            document.getElementById("message-card").classList.remove("show-fading");
+        }, 5000);
+    </script>
+<% } else {%>
+<div id="message-card"></div>
+<% } %>
+
+<div class="editcard user-card">
+    <div class="editcard-body">
+        <div class="editcard-title"><%= titleForm%></div>
+        <form action="/users/admin/<%= dataToUpdate ? 'update' : 'save' %>" method="post">
+            <div class="rowform">
+                <label for="user-thumb">Thumb</label>
+                <input id="user-thumb" type="file" placeholder="Enter path"/>
+            </div>
+            <div class="rowform">
+                <label for="firstname">First Name</label>
+                <input id="firstname" name="first_name" type="text" value="<%= (dataToUpdate && dataToUpdate.first_name) ? dataToUpdate.first_name : '' %>" size="40" maxlength="50"/>
+            </div>
+            <div class="rowform">
+                <label for="lastname">Last Name</label>
+                <input id="lastname" name="last_name" type="text" value="<%= (dataToUpdate && dataToUpdate.last_name) ? dataToUpdate.last_name : '' %>" size="40" maxlength="60"/>
+            </div>
+            <div class="rowform">
+                <label for="birthyear">Birth Year</label>
+                <input id="birthyear" name="birth" value="<%= (dataToUpdate && dataToUpdate.birth) ? dataToUpdate.birth : '' %>" type="date"/>
+            </div>
+            <div class="rowform">
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" value="<%= (dataToUpdate && dataToUpdate.username) ? dataToUpdate.username : '' %>" size="30" maxlength="30"/>
+            </div>
+            <div class="rowform">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="text" value="<%= (dataToUpdate && dataToUpdate.password) ? dataToUpdate.password : '' %>" size="30" maxlength="30"/>
+            </div>
+            <div class="rowform">
+                <label for="dateregistration">Date registration</label>
+                <input id="dateregistration" name="registration_date" value="<%= (dataToUpdate && dataToUpdate.date_registration) ? dataToUpdate.date_registration : '' %>" <%= !dataToUpdate ? 'onload="TODAY(this)"' : '' %> type="date"/>
+            </div>
+            <div class="rowform">
+                <label for="email">Email</label>
+                <input id="email" name="email" value="<%= (dataToUpdate && dataToUpdate.email) ? dataToUpdate.email : '' %>" type="email"/>
+            </div>
+            <div class="rowform">
+                <label for="email2">Email</label>
+                <input id="email2" name="email2" value="<%= (dataToUpdate && dataToUpdate.email2) ? dataToUpdate.email2 : '' %>" type="email"/>
+            </div>
+            <div class="rowform">
+                <label for="gender">Gender</label>
+                <div class="radio-group-item">
+                    <input id="gender-male" name="gender" type="radio" value="1" <%= (dataToUpdate && (dataToUpdate.gender === 1)) ? 'checked' : '' %> <%= !dataToUpdate ? 'checked' : '' %> />
+                    <span>Male</span>
+                </div>
+                <div class="radio-group-item">
+                    <input id="gender-female" name="gender" type="radio" value="0" <%= (dataToUpdate && (dataToUpdate.gender === 0)) ? 'checked' : '' %>/>
+                    <span>Female</span>
+                </div>
+            </div>
+            <div class="rowform">
+                <label for="movile">Movile</label>
+                <input id="movile" name="movile" value="<%= (dataToUpdate && dataToUpdate.movile) ? dataToUpdate.movile : '' %>" type="tel"/>
+            </div>
+            <div class="rowform">
+                <label for="movile2">Movile</label>
+                <input id="movile2" name="movile2" value="<%= (dataToUpdate && dataToUpdate.movile2) ? dataToUpdate.movile2 : '' %>" type="tel"/>
+            </div>
+            <div class="rowform">
+                <label for="Country">Country</label><% include ../control/country %>
+            </div>
+            <div class="rowform">
+                <label for="City">City</label>
+                <input id="City" name="city" type="text" value="<%= (dataToUpdate && dataToUpdate.city) ? dataToUpdate.city : '' %>" size="30" maxlength="30"/>
+            </div>
+            <div class="rowform">
+                <label for="postalcode">Postal Code</label>
+                <input id="postalcode" name="postal_code" value="<%= (dataToUpdate && dataToUpdate.postal_code) ? dataToUpdate.postal_code : '' %>" type="text" size="15" maxlength="15"/>
+            </div>
+            <button class="done_button" type="submit">Save</button>
+        </form>
+    </div>
+</div>

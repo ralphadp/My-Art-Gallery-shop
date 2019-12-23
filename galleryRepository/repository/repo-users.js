@@ -37,17 +37,18 @@ class Users {
 
     save(user) {
         let data = {
-            first_name: user.firstname,
-            last_name: user.lastname,
+            first_name: user.first_name,
+            last_name: user.last_name,
             username: user.username,
             password: user.password,
-            registration_date: user.registration,
+            registration_date: user.registration_date,
             email: user.email,
             movile: user.movile,
             birth: user.birth,
+            gender: user.gender,
             country: user.country,
             city: user.city,
-            postal_code: user.postalcode,
+            postal_code: user.postal_code,
         };
 
         let sql = "INSERT INTO users SET ?";
