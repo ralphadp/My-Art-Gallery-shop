@@ -6,6 +6,10 @@
     width: fit-content;
 }
 
+.form-initial {
+    width: initial!important;
+}
+
 .table-header {
     background-color: #00B7FF;
     color: white;
