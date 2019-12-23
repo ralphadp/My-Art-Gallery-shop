@@ -25,9 +25,6 @@ router.get('/profile', function(req, res, next) {
         profile.birth = Util.getDateFromDatetime(profile.birth);
     }
 
-    console.log(profile);
-
-    try {
     res.render(
       'profile', 
       { 
@@ -35,9 +32,7 @@ router.get('/profile', function(req, res, next) {
         profile: profile 
       }
     );
-  } catch(error){
-    console.log(error);
-  }
+ 
   });
 });
 
