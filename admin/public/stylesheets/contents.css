@@ -175,3 +175,9 @@
     margin-bottom: 10px;
     display: block;
 }
+
+.documents-item img {
+    max-width: 100%;
+    /* height: auto;*/
+    object-fit: contain;
+}

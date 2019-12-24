@@ -14,7 +14,6 @@ router.get('/documents', function(req, res, next) {
     fetch('http://localhost:8888/api/summary/')
     .then(response => response.json())
     .then(body => {
-        console.log(body);
         res.render(
             'documents', 
             { 

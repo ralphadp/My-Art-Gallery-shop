@@ -1,6 +1,6 @@
 {
-  "name": "picturesprovider",
-  "version": "0.0.0",
+  "name": "galleryPicturesProvider",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
