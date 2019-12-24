@@ -1,41 +1,41 @@
-<article id="documents-form">
-    <div class="documents-row">
+<article id="documents-form-one">
+    <h2>Images</h2>
+    <%  let index = 1;
+        files.images.forEach( imageCode => { %>
+        <% if (index === 1 || ((index - 1) % 6) === 0) { %>
+            <div class="documents-row">
+        <% } %>
         <div class="documents-item">
-            <label for="thumb01">thumb01</label>
+            <label for="<%= imageCode%>"><%= imageCode%></label>
+            <img src="http://localhost:8888/api/image/<%= imageCode%>" alt="<%= imageCode%>" height="150">
         </div>
+        <% if (index !== 1 && ((index) % 6) === 0) { %>
+            </div>
+        <% }
+        index++;
+        }); %>
+    <% if (index !== 1 && ((index) % 6) === 0) { %>
+       </div>
+    <% } %>
+</article>
+
+<article id="documents-form-two">
+    <h2>Images HD</h2>
+    <%  index = 1;
+        files.imagesHD.forEach( imageCode => { %>
+        <% if (index === 1 || ((index - 1) % 6) === 0) { %>
+            <div class="documents-row">
+        <% } %>
         <div class="documents-item">
-            <label for="thumb02">thumb02</label>
+            <label for="<%= imageCode%>"><%= imageCode%></label>
+            <img src="http://localhost:8888/api/image-large/<%= imageCode%>" alt="<%= imageCode%>" height="150">
         </div>
-        <div class="documents-item">
-            <label for="thumb03">thumb03</label>
-        </div>
-        <div class="documents-item">
-            <label for="thumb04">thumb04</label>
-        </div>
-        <div class="documents-item">
-            <label for="thumb05">thumb05</label>
-        </div>
-    </div>
-    <div class="documents-row">
-        <div class="documents-item">
-            <label for="thumb06">thumb06</label>
-        </div>
-        <div class="documents-item">
-            <label for="thumb07">thumb07</label>
-        </div>
-        <div class="documents-item">
-            <label for="thumb08">thumb08</label>
-        </div>
-        <div class="documents-item">
-            <label for="thumb09">thumb09</label>
-        </div>
-        <div class="documents-item">
-            <label for="thumb010">thumb010</label>
-        </div>
-    </div>
-    <div class="documents-row">
-        <div class="documents-item">
-            <label for="thumb011">thumb011</label>
-        </div>
-    </div>
+        <% if (index !== 1 && ((index) % 6) === 0) { %>
+            </div>
+        <% }
+        index++;
+        }); %>
+    <% if (index !== 1 && ((index) % 6) === 0) { %>
+       </div>
+    <% } %>
 </article>

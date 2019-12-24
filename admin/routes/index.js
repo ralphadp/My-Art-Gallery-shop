@@ -1,6 +1,7 @@
 var express = require('express');
 var {admins, config} = require('galleryRepository');
 var Util = require('../model/util');
+var fetch = require('node-fetch');
 var router = express.Router();
 
 /* GET home page. */
@@ -10,7 +11,18 @@ router.get('/', function(req, res, next) {
 
 /* GET documents page. */
 router.get('/documents', function(req, res, next) {
-  res.render('documents', { title: 'Documents' });
+    fetch('http://localhost:8888/api/summary/')
+    .then(response => response.json())
+    .then(body => {
+        console.log(body);
+        res.render(
+            'documents', 
+            { 
+                title: 'Documents', 
+                files: body
+            }
+        );
+    });
 });
 
 /* GET profile page. */

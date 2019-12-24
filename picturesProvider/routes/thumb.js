@@ -9,6 +9,14 @@ router.get('/', function(req, res, next) {
   res.send('api root not valid.');
 });
 
+/* GET all thumbs listed into a json array. */
+router.get('/summary', function(req, res, next) {
+
+  const images = handler.getAllImagesCodes();
+
+  res.send(images);
+});
+
 /* GET thumb by ID service. */
 router.get('/image/:id', function(req, res, next) {
 

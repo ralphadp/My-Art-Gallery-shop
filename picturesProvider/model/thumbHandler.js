@@ -58,6 +58,25 @@ const queryImage = (file) => {
 }
 
 /**
+ * return all the files codes from dirpath, excluding the dirs
+ * @param {*} dirpath 
+ */
+function readFilesFromDir(dirpath) {
+
+    try {
+        let files = fs.readdirSync(dirpath);
+
+        return files
+            .filter(element => !fs.lstatSync(dirpath + element).isDirectory())
+            .map(element => element.split('.')[0]);
+
+    } catch(error) {
+        console.log(error);
+    }
+    
+  };
+
+/**
  * Curry function to fetch the image content
  * @param {*} filepath 
  */
@@ -154,10 +173,28 @@ const deleteImages = (imagesfilePath) => {
     }
 };
 
+/**
+ * Get all the images filename codes from all the directories
+ * @param {*} imagesfilePath 
+ * @param {*} imagesHDfilePath 
+ */
+const getAll = (imagesfilePath, imagesHDfilePath) => {
+
+    return () => {
+
+        return {
+            images: readFilesFromDir(imagesfilePath),
+            imagesHD: readFilesFromDir(imagesHDfilePath)
+        };
+
+    }
+};
+
 module.exports = {
     getImage: imageReader(IMAGES_PATH),
     getHDImage: imageReader(IMAGES_HD_PATH),
     imageResize: imageResize(IMAGES_PATH, IMAGES_HD_PATH),
     deleteImages: deleteImages(IMAGES_PATH),
-    deleteHDImages: deleteImages(IMAGES_HD_PATH)
+    deleteHDImages: deleteImages(IMAGES_HD_PATH),
+    getAllImagesCodes: getAll(IMAGES_PATH, IMAGES_HD_PATH),
 };
