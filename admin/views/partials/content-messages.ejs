@@ -1,37 +1,20 @@
 <article id="messages-form">
-    <div class="messages-row">
-        <div class="wrapper">
-            <h3>Message 01</h3>
-            <textarea rows="4" cols="80" readonly>This is a message for testing...</textarea>
-            <span>Rodrigo Smith</span>
+    <% if (error) {%>
+        <div class="messages-row req-error">
+            <p><%= error %></p>
+        </div>    
+    <% } else { %>
+        <h2><%= box.name + ', ID:[' + box.id + ']' %></h2>
+        <p><%= 'Number of messages: ' + box.count %></p>
+        <% messages.forEach( message => { %>
+        <div class="messages-row">
+            <div class="wrapper">
+                <h3>Message <%= message.id %></h3>
+                <p>Sent at: <%= message.sentAt %></p>
+                <textarea rows="4" cols="80" readonly><%= message.text %></textarea>
+                <span><%= message.subject %></span><a href="mailto:<%= message.from %>">(<%= message.from %>)</a>
+            </div>
         </div>
-    </div>
-    <div class="messages-row">
-        <div class="wrapper">
-            <h3>Message 02</h3>
-            <textarea rows="4" cols="80" readonly>This is a message for testing...</textarea>
-            <span>Eva Doe</span>
-        </div>
-    </div>
-    <div class="messages-row">
-        <div class="wrapper">
-            <h3>Message 03</h3>
-            <textarea rows="4" cols="80" readonly>This is a message for testing...</textarea>
-            <span>Ramiro Ortiz</span>
-        </div>
-    </div>
-    <div class="messages-row">
-        <div class="wrapper">
-            <h3>Message 04</h3>
-            <textarea rows="4" cols="80" readonly>This is a message for testing...</textarea>
-            <span>Lizz Christie</span>
-        </div>
-    </div>
-    <div class="messages-row">
-        <div class="wrapper">
-            <h3>Message 05</h3>
-            <textarea rows="4" cols="80" readonly>This is a message for testing...</textarea>
-            <span>Simone Reyes</span>
-        </div>
-    </div>
+        <% }); 
+    } %>
 </article>

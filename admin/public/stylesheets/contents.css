@@ -46,9 +46,18 @@
     padding: 10px;
 }
 
+#messages-form h2 {
+    margin-top: 1rem!important;
+    margin-bottom: 0.5rem!important;
+}
+
+#messages-form > h2, #messages-form > p {
+    margin-left: 1rem;
+}
+
 .messages-row {
     width: 98%;
-    height: 130px;
+    height: fit-content;
     margin: 10px;
     border: 1px solid rgb(218, 218, 224);
     border-radius: 4px;
@@ -73,6 +82,10 @@
 
 .messages-row span {
     display: block;
+}
+
+.wrapper p {
+    margin-bottom: 10px;
 }
 
 .documents-item {
@@ -180,4 +193,9 @@
     max-width: 100%;
     /* height: auto;*/
     object-fit: contain;
+}
+
+.documents-item .info {
+    width: 120px;
+    align-self: center;
 }
