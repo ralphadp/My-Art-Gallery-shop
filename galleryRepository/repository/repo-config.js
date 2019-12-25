@@ -6,6 +6,10 @@ class Config {
 
     }
     
+    /**
+     * Get the option by kEY-name
+     * @param {*} name 
+     */
     getById(name) {
         
         let sql = 'SELECT * FROM config WHERE name = ?';
@@ -21,6 +25,9 @@ class Config {
         });
     }
 
+    /**
+     * Get all the options columns
+     */
     getAll() {
         let sql = "SELECT * FROM config";
 
@@ -35,6 +42,38 @@ class Config {
         });
     }
 
+    /**
+     * update a batch of options
+     * @param {*} batch 
+     */
+    batchUpdate(batch) {
+
+        const queryUpdate = [];
+
+        for (let keyOptionName in batch) {
+
+            const sql = `UPDATE config SET value = '${batch[keyOptionName]}' WHERE name = '${keyOptionName}'`;
+
+            const sqlPromise = new Promise((resolve, reject) => {
+                sqlConn.query(sql, (err, result) => {
+                    if (!err) {
+                        resolve(JSON.parse(JSON.stringify(result)));
+                    } else {
+                        reject(err);
+                    }
+                });
+            });
+
+            queryUpdate.push(sqlPromise);
+        }
+
+        return Promise.all(queryUpdate);
+    }
+
+    /**
+     * Save a new option
+     * @param {*} config 
+     */
     save(config) {
         let data = {
             name: config.name, 

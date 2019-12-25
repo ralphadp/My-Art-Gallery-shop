@@ -145,11 +145,54 @@ router.get('/messages', function(req, res, next) {
 
 /* GET configuration page. */
 router.get('/configuration', function(req, res, next) {
-  oConfig = new config;
+
+  const response = req.cookies.option_response || null;
+  res.clearCookie('option_response');
+
+  const oConfig = new config;
   oConfig.getAll().then((result) => {
-    res.render('configuration', { title: 'Configuration', config: result });
+      res.render(
+        'configuration', 
+        { 
+          title: 'Configuration', 
+          config: result,
+          response: response
+        }
+      );
   });
   
+});
+
+router.post('/configuration/update', function(req, res, next) {
+  const oConfig = new config;
+
+  let response = {};
+
+  let options = JSON.parse(JSON.stringify(req.body));
+
+  console.log(options);
+
+  oConfig.batchUpdate(options).then(results => {
+      response = {
+          data: options,
+          success: true,
+          message: 'The options were was updated sucessfully.'
+      };
+      console.log(results);
+  })
+  .catch(error => {
+      console.log(error);
+      response = {
+          data: options,
+          success: false,
+          message: error.sqlMessage
+      };
+  })
+  .finally(() => {
+      res.cookie('option_response' , response, {maxAge: 20000});
+      res.redirect( req.header('Referer') || '/');
+  });
+ 
 });
 
 module.exports = router;

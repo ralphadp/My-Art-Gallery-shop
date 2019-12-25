@@ -1,39 +1,64 @@
+<% if (response) { %>
+    <div id="message-card" class="<%= response.success ? 'req-sucess' : 'req-error' %>">
+        <span><%= response.message%></span>
+    </div>
+    <script>
+        setTimeout(()=> {
+            document.getElementById("message-card").classList.add("show-fading");
+        }, 100);
+        setTimeout(()=> {
+            document.getElementById("message-card").classList.remove("show-fading");
+        }, 5000);
+    </script>
+<% } else {%>
+<div id="message-card"></div>
+<% } %>
+
 <article id="configuration-form">
-<%  
-let column = 0;
-config.forEach((item) => { 
-    if ((column % 5) === 0) { %>
+    <form action="/configuration/update/" method="POST">
+    <%  let column = 1;
+    config.forEach( item => { %>
+    <% if (column === 1 || ((column - 1) % 6) === 0) { %>
         <div class="configuration-row">
     <% } %>
     <div class="configuration-item">
         <label for="titlepage"><%= item.description %></label>
         <div class="option-wrapper">
-            <% if (item.type === 'text') { %>   
-                <input id="<%= item.name %>"  name="<%= item.name %>" type="text" size="8" value="<%= item.value %>"/>
+            <% if (item.type === 'text') { %>
+                <input id="<%= item.name %>" name="<%= item.name %>" type="text" size="12" value="<%= item.value %>"/>
             <%} else if (item.type === 'checkbox') { %>
-                <input id="includephoto" type="checkbox" <%= Number(item.value) ? 'checked' : '' %> value="<%= Number(item.value) %>"/>
+                <input class="config-checkbox" id="<%= item.name %>" type="checkbox" <%= Number(item.value) ? 'checked' : '' %> value="<%= Number(item.value) %>"/>
+                <input type="hidden" name="<%= item.name %>" value="<%= Number(item.value) %>"/>
             <%} else if (item.type === 'select') { %>
-                <select name="<%= item.name %>" id="<%= item.name %>">
+                <select id="<%= item.name %>" name="<%= item.name %>">
                     <% const options = JSON.parse(item.options);
                         for (key in options) { %>
                         <option value="<%= key %>" <%= (item.value === key) ? 'selected' : '' %>><%= options[key] %></option> 
                     <% } %>
-                    </select>
+                </select>
             <%} else if (item.type === 'radio') { %>
                 <% const options = JSON.parse(item.options);
                    options.forEach((option) => {
                 %>
                 <div>
-                    <input name="countsocial" type="radio" value="<%= option%>" <%= (item.value === option) ? 'checked' : '' %>/>
+                    <input id="<%= item.name %>" name="<%= item.name %>" type="radio" value="<%= option%>" <%= (item.value === option) ? 'checked' : '' %>/>
                     <span><%= option%></span>
                 </div>
                 <% }); %>
             <% } %>
         </div>
     </div>
-<% column++;
-   if ((column % 5) === 0) { %>
+    <% if (column !== 1 && (column % 6) === 0) { %>
     </div>
-<% } 
-}); %>
+    <% }
+    column++;
+    }); %>
+
+<% if (column !== 1 && (column % 6) === 0) { %>
+</div>
+<% } %>
+    <div class="configuration-row">
+        <button class="done_button profile_input" type="submit">Update</button>
+    </div>
+    </form>
 </article>
