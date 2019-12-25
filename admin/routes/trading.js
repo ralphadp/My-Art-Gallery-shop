@@ -19,6 +19,7 @@ router.get('/', function(req, res, next) {
 
 /* GET Trading 'statistics'. */
 router.get('/statistics', function(req, res, next) {
+  const trade = [3,6,7,4,2];
   res.render('trading-stat', { title: 'Trading', titleForm:'Statistics', data: trade });
 });
 
