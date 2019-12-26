@@ -192,6 +192,7 @@ class Pieces {
      */
     update(piece) {
         let data = [
+            piece.itemId,
             piece.name, 
             piece.artist, 
             piece.type,
@@ -202,7 +203,7 @@ class Pieces {
             piece.id
         ];
 
-        let sql = 'UPDATE pieces SET name=?, artist=?, type=?, release_date=?, size=?, price=?, currency=? WHERE id = ?';
+        let sql = 'UPDATE pieces SET itemId=?, name=?, artist=?, type=?, release_date=?, size=?, price=?, currency=? WHERE id = ?';
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, data, (error, result) => {
@@ -241,7 +242,7 @@ class Pieces {
      */
     save(piece) {
         let data = {
-            itemId: 'UUID()', 
+            itemId: piece.itemId, 
             name: piece.name, 
             artist: piece.artist, 
             type: piece.type,

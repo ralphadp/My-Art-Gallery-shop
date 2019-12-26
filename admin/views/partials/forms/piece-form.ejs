@@ -16,12 +16,22 @@
 
 <div class="editcard piece-card">
     <div class="editcard-body">
+        <form enctype="multipart/form-data" id="imageForm">
+            <div class="rowform">
+                <label for="piece-thumb">Thumb (Generate Owner External Id)</label>
+                <input id="piece-thumb" type="file" name="imgUploader" multiple />
+            </div>
+        </form>
+        <button class="done_button" id="btnSubmit" type="submit">Upload</button>
+    </div>
+
+    <div class="editcard-body">
         <div class="editcard-title"><%= titleForm%></div>
         <form action="/pieces/<%= dataToUpdate ? 'update' : 'save' %>" method="post">
             <input name="id" type="hidden" value="<%= (dataToUpdate && dataToUpdate.id) ? dataToUpdate.id : '' %>"/>
             <div class="rowform">
-                <label for="piece-thumb">Thumb</label>
-                <input id="piece-thumb" type="file" placeholder="Enter path" />
+                <label for="piece-external-id">External Id</label>
+                <input id="piece-external-id" name="itemId" type="text" placeholder="GENERATED AFTER A PIECE PICTURE IS UPLOADED" value="<%= (dataToUpdate && dataToUpdate.itemId) ? dataToUpdate.itemId : '' %>" size="30" maxlength="30" disabled/>
             </div>
             <div class="rowform">
                 <label for="piece-name">Piece Name</label>

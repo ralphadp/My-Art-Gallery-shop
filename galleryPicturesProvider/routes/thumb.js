@@ -66,6 +66,10 @@ router.post("/form/upload", function(req, res) {
             }
           }
 
+          //TODO: set the requester microservice domain in the configuration
+          res.header("Access-Control-Allow-Origin", 'http://localhost:4000');
+          res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
           res.send({
               message: message,
               error: anErrorHappened,

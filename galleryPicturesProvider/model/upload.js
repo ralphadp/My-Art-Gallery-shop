@@ -35,10 +35,10 @@ var storage = multer.diskStorage({
 var upload = multer({
     storage: storage,
     fileFilter: imageFilter,
-    limits: {
+    /*limits: {
         //TODO: need to control to be a big image (how to check if is high resolution?, npm )
         fileSize: 100 * 1024 * 1024,//100kb
-    }
+    }*/
 }).array("imgUploader", 3); //attribute 'name' on HTML, max files allowed, 3
 
 module.exports = upload;

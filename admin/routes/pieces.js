@@ -50,6 +50,7 @@ router.post('/save', function(req, res, next) {
   const piece = new pieces();
 
   const pieceParam = {
+    itemId: req.body.itemId,
     name: req.body.name,
     artist: req.body.artist,
     type: req.body.type,
@@ -120,6 +121,7 @@ router.post('/update', function(req, res, next) {
   const piece = new pieces();
 
   const pieceParam = {
+    itemId: req.body.itemId,
     name: req.body.name,
     artist: req.body.artist,
     type: req.body.type,
