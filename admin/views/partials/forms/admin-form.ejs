@@ -15,14 +15,24 @@
 <% } %>
 
 <div class="editcard user-card">
+    <div class="editcard-body">
+        <form enctype="multipart/form-data" id="imageForm">
+            <div class="rowform">
+                <label for="admin-thumb">Admin Photograpy</label>
+                <input id="admin-thumb" type="file" name="imgUploader" multiple />
+            </div>
+        </form>
+        <button class="done_button" id="btnSubmit" path="adminform" type="submit">Upload</button>
+        <img id="image-stored" src="<%= (dataToUpdate && dataToUpdate.photo) ? ('http://localhost:8888/api/image/admin/' + dataToUpdate.photo) : '' %>" alt="">
+    </div>
 
     <div class="editcard-body">
         <div class="editcard-title"><%= titleForm%></div>
         <form action="/users/admin/<%= dataToUpdate ? 'update' : 'save' %>" method="post">
             <input name="id" type="hidden" value="<%= (dataToUpdate && dataToUpdate.id) ? dataToUpdate.id : '' %>"/>
             <div class="rowform">
-                <label for="user-thumb">Thumb</label>
-                <input id="user-thumb" type="file" placeholder="Enter path"/>
+                <label for="user-photo">Photo</label>
+                <input id="user-photo" name="photo" type="text" placeholder="This field is filled by the App" value="<%= (dataToUpdate && dataToUpdate.photo) ? dataToUpdate.photo : '' %>" readonly/>
             </div>
             <div class="rowform">
                 <label for="firstname">First Name</label>

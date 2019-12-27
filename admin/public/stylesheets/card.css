@@ -122,3 +122,11 @@
     background: red;
     color: white;
 }
+
+.editcard-body img {
+    border-radius: 50%;
+    height: 70px;
+    object-fit: contain;
+    position: absolute;
+    left: 100px;
+}

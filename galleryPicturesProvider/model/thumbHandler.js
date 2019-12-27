@@ -1,10 +1,13 @@
 const fs = require('fs');
 const sharp = require('sharp');
 const sizeOfImage = require('image-size');
-
-const IMAGES_PATH = './private/images/';
-const IMAGES_HD_PATH = './private/images/HD/';
-const SMALL_IMAGE_SIZE_PERCENTAGE = 0.3;
+const {
+    IMAGES_PATH, 
+    IMAGES_HD_PATH, 
+    SMALL_IMAGE_SIZE_PERCENTAGE,
+    IMAGES_USER_PATH,
+    IMAGES_ADMIN_PATH
+} = require('./config');
 
 const mine = {
     jpg: 'image/jpeg',
@@ -130,7 +133,7 @@ const imageResize = (destinationFilePath, sourceFilePath) => {
             )
             .toFile(`${destinationFilePath}/${filename}`);
 
-            console.log(`The new dimmensions: ${width}x${height}`);
+            console.log(`The ${destinationFilePath}/${filename} new dimmensions: ${width}x${height}`);
 
         } catch(error) {
             console.log(error);
@@ -177,14 +180,18 @@ const deleteImages = (imagesfilePath) => {
  * Get all the images filename codes from all the directories
  * @param {*} imagesfilePath 
  * @param {*} imagesHDfilePath 
+ * @param {*} imagesUserfilePath 
+ * @param {*} imagesAdminfilePath 
  */
-const getAll = (imagesfilePath, imagesHDfilePath) => {
+const getAll = (imagesfilePath, imagesHDfilePath, imagesUserfilePath, imagesAdminfilePath) => {
 
     return () => {
 
         return {
             images: readFilesFromDir(imagesfilePath),
-            imagesHD: readFilesFromDir(imagesHDfilePath)
+            imagesHD: readFilesFromDir(imagesHDfilePath),
+            imagesUser: readFilesFromDir(imagesUserfilePath),
+            imagesAdmin: readFilesFromDir(imagesAdminfilePath),
         };
 
     }
@@ -193,8 +200,10 @@ const getAll = (imagesfilePath, imagesHDfilePath) => {
 module.exports = {
     getImage: imageReader(IMAGES_PATH),
     getHDImage: imageReader(IMAGES_HD_PATH),
+    getUserImage: imageReader(IMAGES_USER_PATH),
+    getAdminImage: imageReader(IMAGES_ADMIN_PATH),
     imageResize: imageResize(IMAGES_PATH, IMAGES_HD_PATH),
     deleteImages: deleteImages(IMAGES_PATH),
     deleteHDImages: deleteImages(IMAGES_HD_PATH),
-    getAllImagesCodes: getAll(IMAGES_PATH, IMAGES_HD_PATH),
+    getAllImagesCodes: getAll(IMAGES_PATH, IMAGES_HD_PATH, IMAGES_USER_PATH, IMAGES_ADMIN_PATH),
 };

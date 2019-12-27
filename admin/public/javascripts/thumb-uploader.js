@@ -1,11 +1,12 @@
 (() => {
 
     /**
-     * main function to upload the image in the external microservice 
+     * Main function to upload the image in the external microservice 
+     * @param {*} path 
      * @param {*} callback 
      * @param {*} fallback 
      */
-    const upload = (callback, fallback) => {
+    const upload = (path, callback, fallback) => {
 
         let input = document.querySelector('input[type=file]');
         let file = input.files[0];//taking only one
@@ -26,7 +27,7 @@
         //fd.append("file", file);
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8888/api/form/upload/");
+        xhr.open("POST", `http://localhost:8888/api/${path}/upload/`);
         xhr.setRequestHeader('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3');
 
         xhr.onloadend = function() {
@@ -53,29 +54,14 @@
         xhr.send(fd);
     };
 
-    /**
-     * In case image upload was good, set the new ExternalId
-     * @param {*} response 
-     */
-    const uploadSuccess = (response) => {
-        const newExternalId = response.files[0].split('.')[0];
-        document.getElementById('piece-external-id').value = newExternalId;
-        alert(response.message);
-    };
-
-    /**
-     * In case the failure, show the error
-     * @param {*} responseError 
-     */
-    const uploadFail = (responseError) => {
-        alert(responseError.error);
-    };
-
-
     /**** SUBMIT BUTTON ****/
 
-    document.getElementById('btnSubmit').addEventListener('click', ()=> {
-        upload(uploadSuccess, uploadFail);
+    document.getElementById('btnSubmit').addEventListener('click', (event) => {
+        upload(
+            event.currentTarget.getAttribute('path'), 
+            uploadSuccess, 
+            uploadFail
+        );
     });
 
 })();

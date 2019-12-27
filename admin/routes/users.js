@@ -80,6 +80,7 @@ router.post('/save', function(req, res, next) {
   const user = new users();
 
   const userParam = {
+    photo: req.body.photo,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     birth: req.body.birth,
@@ -122,6 +123,7 @@ router.post('/admin/save', function(req, res, next) {
   const admin = new admins();
 
   const adminParam = {
+    photo: req.body.photo,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     birth: req.body.birth,
@@ -198,6 +200,7 @@ router.post('/update', function(req, res, next) {
 
   const userParam = {
     id: req.body.id,
+    photo: req.body.photo,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     username: req.body.username,
@@ -287,6 +290,7 @@ router.post('/admin/update', function(req, res, next) {
 
   const adminParam = {
     id: req.body.id,
+    photo: req.body.photo,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     username: req.body.username,

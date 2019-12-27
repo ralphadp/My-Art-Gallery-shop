@@ -1,6 +1,7 @@
 var express = require('express');
 var handler = require('../model/thumbHandler');
-var upload = require('../model/upload');
+var uploader = require('../model/upload');
+const {REMOTE_REQUESTER_HOST} = require('../model/config');
 var router = express.Router();
 
 /* GET api root not valid. */
@@ -27,6 +28,27 @@ router.get('/image/:id', function(req, res, next) {
   res.send(image.data);
 });
 
+/* GET user thumb by ID service. */
+router.get('/image/user/:id', function(req, res, next) {
+
+  const image = handler.getUserImage(req.params.id);
+  
+  res.setHeader('Content-Type', image.type);
+  res.setHeader('Picture-Id', req.params.id);
+  res.send(image.data);
+});
+
+/* GET admin thumb by ID service. */
+router.get('/image/admin/:id', function(req, res, next) {
+
+  const image = handler.getAdminImage(req.params.id);
+  
+  res.setHeader('Content-Type', image.type);
+  res.setHeader('Picture-Id', req.params.id);
+  res.send(image.data);
+});
+
+
 /* GET thummb large HD by ID service. */
 router.get('/image-large/:id', function(req, res, next) {
 
@@ -39,8 +61,8 @@ router.get('/image-large/:id', function(req, res, next) {
 
 /* POST to upload thummb service. */
 router.post("/form/upload", function(req, res) {
-
-    upload(req, res, (error) => {
+  console.log(REMOTE_REQUESTER_HOST);
+  uploader.upload(req, res, (error) => {
         let message = '';
         let anErrorHappened = false;
         let files = [];
@@ -64,17 +86,18 @@ router.post("/form/upload", function(req, res) {
                   return item.filename;
               });
             }
-          }
+        }
 
-          //TODO: set the requester microservice domain in the configuration
-          res.header("Access-Control-Allow-Origin", 'http://localhost:4000');
-          res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        //TODO: set the requester microservice domain in the configuration
+        res.header("Access-Control-Allow-Origin", REMOTE_REQUESTER_HOST);
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-          res.send({
-              message: message,
-              error: anErrorHappened,
-              files: files
-          });
+        res.send({
+            message: message,
+            error: anErrorHappened,
+            files: files,
+            type: 'gallery'
+        });
     });
 });
 
@@ -82,6 +105,86 @@ router.post("/form/upload", function(req, res) {
 router.get('/form/test', function(req, res, next) {
 
   res.sendFile('index.html', { root: './private' });
+});
+
+/* POST to upload user thumb service. */
+router.post("/userform/upload", function(req, res) {
+  console.log(REMOTE_REQUESTER_HOST);
+  uploader.uploadUser(req, res, (error) => {
+      let message = '';
+      let anErrorHappened = false;
+      let files = [];
+
+      if (req.fileValidationError !== undefined) {
+          message = req.fileValidationError;
+          anErrorHappened = true;
+      } else if (error) {
+          message = error;
+          anErrorHappened = true;
+      } else {
+          if (req.files === undefined || !req.files) {
+              message = 'None image was provided to upload.';
+              anErrorHappened = true;
+          } else {
+            message = 'Files uploaded sucessfully';
+            files = req.files.map((item) => {
+              //save the filename in the array response
+              return item.filename;
+            });
+          }
+      }
+
+      //TODO: set the requester microservice domain in the configuration
+      res.header("Access-Control-Allow-Origin", REMOTE_REQUESTER_HOST);
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+      res.send({
+          message: message,
+          error: anErrorHappened,
+          files: files,
+          type: 'user'
+      });
+  });
+});
+
+/* POST to upload admin thumb service. */
+router.post("/adminform/upload", function(req, res) {
+console.log(REMOTE_REQUESTER_HOST);
+  uploader.uploadAdmin(req, res, (error) => {
+      let message = '';
+      let anErrorHappened = false;
+      let files = [];
+
+      if (req.fileValidationError !== undefined) {
+          message = req.fileValidationError;
+          anErrorHappened = true;
+      } else if (error) {
+          message = error;
+          anErrorHappened = true;
+      } else {
+          if (req.files === undefined || !req.files) {
+              message = 'None image was provided to upload.';
+              anErrorHappened = true;
+          } else {
+              message = 'Files uploaded sucessfully';
+              files = req.files.map((item) => {
+                //save the filename in the array response
+                return item.filename;
+              });
+          }
+      }
+
+      //TODO: set the requester microservice domain in the configuration
+      res.header("Access-Control-Allow-Origin", REMOTE_REQUESTER_HOST);
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+      res.send({
+          message: message,
+          error: anErrorHappened,
+          files: files,
+          type: 'admin'
+      });
+  });
 });
 
 /*DELETE remove images from images directory */

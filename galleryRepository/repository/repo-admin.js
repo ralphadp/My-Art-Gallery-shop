@@ -67,6 +67,7 @@ class Admins {
      */
     save(admin) {
         let data = {
+            photo: admin.photo,
             first_name: admin.first_name,
             last_name: admin.last_name,
             username: admin.username,
@@ -103,6 +104,7 @@ class Admins {
     update(admin) {
 
         let params = [
+            admin.photo,
             admin.first_name, 
             admin.last_name,
             admin.username,
@@ -120,7 +122,7 @@ class Admins {
             admin.id
         ]
 
-        let sql = "UPDATE admin SET first_name=?, last_name=?, username=?, password=?, registration_date=?, email=?, email2=?, movile=?, movile2=?, birth=?, gender=?, country=?, city=?, postal_code=? WHERE id = ?";
+        let sql = "UPDATE admin SET photo=?, first_name=?, last_name=?, username=?, password=?, registration_date=?, email=?, email2=?, movile=?, movile2=?, birth=?, gender=?, country=?, city=?, postal_code=? WHERE id = ?";
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, params, (err, result) => {
