@@ -26,7 +26,28 @@ class Pieces {
         let wherePattern = '';
 
         if (pattern) {
-            wherePattern = ` WHERE (name REGEXP "${pattern}") or (artist REGEXP "${pattern}") or (type REGEXP "${pattern}")`;
+            wherePattern = ` WHERE (name REGEXP "${pattern}") ` + 
+            `or (artist REGEXP "${pattern}") ` + 
+            `or (type REGEXP "${pattern}")`;
+        }
+
+        return wherePattern;
+    }
+
+    /**
+     * Set the ppattern for Admin app
+     * @param {*} pattern 
+     */
+    fetchSearchQueryForAdmin(pattern) {
+        let wherePattern = '';
+
+        if (pattern) {
+            wherePattern = ` WHERE (name REGEXP "${pattern}") ` + 
+            `or (artist REGEXP "${pattern}") ` + 
+            `or (type REGEXP "${pattern}")` + 
+            `or (currency REGEXP "${pattern}")` + 
+            `or (size REGEXP "${pattern}")` + 
+            `or (cart.userId REGEXP "${pattern}")`;
         }
 
         return wherePattern;
@@ -176,6 +197,26 @@ class Pieces {
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [maxItems, pageOffset], (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    /**
+     * Get all the pieces according the pattern searching text 
+     * @param {*} pattern 
+     */
+    getAllSearchingForAdmin(pattern) {
+ 
+        let sql = `SELECT pieces.*, cart.userId FROM pieces LEFT JOIN cart ON pieces.itemId = cart.pieceId ${this.fetchSearchQueryForAdmin(pattern)} order by release_date desc`;
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (error, result) => {
                 if (!error) {
                     const cleanJson = JSON.parse(JSON.stringify(result));
                     resolve(cleanJson);

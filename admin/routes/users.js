@@ -401,4 +401,57 @@ router.post('/admin/delete', function(req, res, next) {
     });
 });
 
+/* GET users 'search'. */
+router.get('/search/:textPattern', function(req, res, next) {
+
+  const response = req.cookies.user_response || null;
+  res.clearCookie('user_response');
+
+  const words = req.params.textPattern.split('+');
+  const pattern = words.join('|');
+  const phrase = words.join(' ');
+
+  const user = new users();
+
+  user.getAllSearching(pattern).then((result) => {
+      res.render(
+        'users', 
+        { 
+          title: `External Users search by: "${phrase}" `, 
+          tableTitle: 'Users', 
+          data: result, 
+          response: response,
+          searchText: phrase
+        }
+      );
+  });
+});
+
+/* GET admin 'search'. */
+router.get('/admin/search/:textPattern', function(req, res, next) {
+
+  const response = req.cookies.admin_response || null;
+  res.clearCookie('admin_response');
+
+  const words = req.params.textPattern.split('+');
+  const pattern = words.join('|');
+  const phrase = words.join(' ');
+
+  const admin = new admins();
+
+  admin.getAllSearching(pattern).then((result) => {
+      res.render(
+        'admins', 
+        { 
+          title: `Internal admins search by: "${phrase}" `, 
+          tableTitle: 'Admins', 
+          data: result, 
+          response: response,
+          searchText: phrase
+        }
+      );
+  });
+});
+
+
 module.exports = router;

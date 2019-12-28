@@ -365,6 +365,10 @@ footer p#stack-top-message {
   width: 95%;
 }
 
+.search-bar i {
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   nav#left {
       display:none;

@@ -154,4 +154,30 @@ router.post('/delete', function(req, res, next) {
 
 });
 
+/* GET categories 'search'. */
+router.get('/search/:textPattern', function(req, res, next) {
+
+  const response = req.cookies.category_response || null;
+  res.clearCookie('category_response');
+
+  const words = req.params.textPattern.split('+');
+  const pattern = words.join('|');
+  const phrase = words.join(' ');
+
+  const category = new categories();
+
+  category.getAllSearching(pattern).then((result) => {
+      res.render(
+        'categories', 
+        { 
+          title: `Categories search by: "${phrase}" `, 
+          tableTitle: 'Categories', 
+          data: result, 
+          response: response,
+          searchText: phrase
+        }
+      );
+  });
+});
+
 module.exports = router;

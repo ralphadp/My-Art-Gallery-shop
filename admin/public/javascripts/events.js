@@ -28,7 +28,7 @@
     };
 
     /**
-     * Activate the search area
+     * function to show/hide the search input area
      * @param {*} menuItem 
      * @param {*} target 
      */
@@ -40,6 +40,30 @@
                 target.style.display = 'flex';
             }
         });
+    };
+
+    /**
+     * Search method to call GET search/ 
+     * @param {*} textPattern 
+     */
+    const search = (textPattern) => {
+        if (textPattern && textPattern.length) {
+            //remove spaces and stick words with +
+            textPattern = textPattern.trim();
+            textPattern = textPattern.replace(/\s+/g, "+");
+
+            //check if the curren href already have the /search/ path
+            let href = window.location.href;
+            const position = document.location.href.indexOf("/search/");
+            if (position > 0) {
+                href = document.location.href.substr(0, position + 1);
+            }
+
+            //relocate
+            window.location.replace(
+                href + `search/${textPattern}`
+            );
+        }
     };
 
     toogleMenu(
@@ -94,6 +118,16 @@
 
     document.getElementById('option-configuration').addEventListener('click', () => {
         window.location.replace(window.location.origin + '/configuration');
+    });
+
+    document.getElementById('search-button').addEventListener('click', () => {
+        search(document.getElementById('search-input').value);
+    });
+
+    document.getElementById('search-input').addEventListener('keypress', (event) => {
+        if (event.keyCode === 13) {
+            search(document.getElementById('search-input').value);
+        }
     });
 
 })();

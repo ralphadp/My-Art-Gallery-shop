@@ -5,6 +5,16 @@ class Categories {
     constructor() {
 
     }
+
+    fetchSearchQuery(pattern) {
+        let wherePattern = '';
+
+        if (pattern) {
+            wherePattern = ` WHERE (name REGEXP "${pattern}") `;
+        }
+
+        return wherePattern;
+    }
     
     /**
      * Select a single category
@@ -37,6 +47,22 @@ class Categories {
                     resolve(JSON.parse(JSON.stringify(result)));
                 } else {
                     reject(err);
+                }
+            });
+        });
+    }
+
+    getAllSearching(pattern) {
+ 
+        let sql = `SELECT * FROM categories ${this.fetchSearchQuery(pattern)} order by id`;
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
                 }
             });
         });

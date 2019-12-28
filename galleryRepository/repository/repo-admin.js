@@ -6,6 +6,24 @@ class Admins {
 
     }
 
+    fetchSearchQuery(pattern) {
+        let wherePattern = '';
+
+        if (pattern) {
+            wherePattern = ` WHERE (first_name REGEXP "${pattern}") ` +
+            `or (last_name REGEXP "${pattern}") ` +
+            `or (username REGEXP "${pattern}")` +
+            `or (email REGEXP "${pattern}")` +
+            `or (email2 REGEXP "${pattern}")` +
+            `or (movile REGEXP "${pattern}")` +
+            `or (movile2 REGEXP "${pattern}")` +
+            `or (country REGEXP "${pattern}")` +
+            `or (city REGEXP "${pattern}")`;
+        }
+
+        return wherePattern;
+    }
+
     /**
      * Get a user admin by id 
      * @param {*} id 
@@ -56,6 +74,22 @@ class Admins {
                     resolve(JSON.parse(JSON.stringify(result)));
                 } else {
                     reject(err);
+                }
+            });
+        });
+    }
+
+    getAllSearching(pattern) {
+ 
+        let sql = `SELECT * FROM admin ${this.fetchSearchQuery(pattern)}`;
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
                 }
             });
         });

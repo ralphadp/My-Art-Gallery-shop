@@ -5,6 +5,22 @@ class Users {
     constructor() {
 
     }
+
+    fetchSearchQuery(pattern) {
+        let wherePattern = '';
+
+        if (pattern) {
+            wherePattern = ` WHERE (first_name REGEXP "${pattern}") ` +
+            `or (last_name REGEXP "${pattern}") ` +
+            `or (username REGEXP "${pattern}")` +
+            `or (email REGEXP "${pattern}")` +
+            `or (movile REGEXP "${pattern}")` +
+            `or (country REGEXP "${pattern}")` +
+            `or (city REGEXP "${pattern}")`;
+        }
+
+        return wherePattern;
+    }
     
     /**
      * Pick a user by id 
@@ -37,6 +53,26 @@ class Users {
                     resolve(JSON.parse(JSON.stringify(result)));
                 } else {
                     reject(err);
+                }
+            });
+        });
+    }
+
+    /**
+     * Get all the users according the pattern searching text 
+     * @param {*} pattern 
+     */
+    getAllSearching(pattern) {
+ 
+        let sql = `SELECT * FROM users ${this.fetchSearchQuery(pattern)}`;
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
                 }
             });
         });

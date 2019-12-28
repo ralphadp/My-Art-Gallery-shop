@@ -196,5 +196,30 @@ router.post('/delete', function(req, res, next) {
 
 });
 
+/* GET pieces 'search'. */
+router.get('/search/:textPattern', function(req, res, next) {
+
+  const response = req.cookies.piece_response || null;
+  res.clearCookie('piece_response');
+
+  const words = req.params.textPattern.split('+');
+  const pattern = words.join('|');
+  const phrase = words.join(' ');
+
+  const piece = new pieces();
+
+  piece.getAllSearchingForAdmin(pattern).then((result) => {
+      res.render(
+        'pieces', 
+        { 
+          title: `Pieces search by: "${phrase}" `,
+          tableTitle: 'Pieces', 
+          data: result, 
+          response: response,
+          searchText: phrase
+        }
+      );
+  });
+});
 
 module.exports = router;

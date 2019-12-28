@@ -1,5 +1,6 @@
-<div class="search-bar">
-    <input type="text" placeholder="Type search here">
-    <i class="fas fa-search"></i>
+<% let text = (typeof searchText !== 'undefined') ? searchText : '' %>
+<div class="search-bar" <%= text.length ? 'style=display:flex;' : '' %>>
+    <input id="search-input" type="text" placeholder="Type search here" value="<%= text %>" >
+    <i id="search-button" class="fas fa-search"></i>
 </div>
 <h2><%= title %></h2>
