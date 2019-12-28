@@ -1,7 +1,32 @@
 <div class="editcard trading-card">
     <div class="editcard-body">
-        <div class="editcard-title"><%= titleForm%></div>
-        <div id="my_dataviz"></div>
-        <script src="../../../javascripts/statistics.js"></script>
+        <div class="editcard-title"><%= titleFormStat1%></div>
+        <div id="chart1" class="c3"></div>
+        <div class="editcard-title"><%= titleFormStat2%></div>
+        <div id="chart2" class="c3"></div>
+        <script>
+            const years = JSON.parse('<%= data.cartByYear %>');
+
+            const chart1 = c3.generate({
+                bindto: '#chart1',
+                data: {
+                    columns: years,
+                    type : 'pie',
+                    onclick: function (data, c3Path) { console.log("onclick", data, c3Path); },
+                    onmouseover: function (data, c3Path) { console.log("onmouseover", data, c3Path); },
+                    onmouseout: function (data, c3Path) { console.log("onmouseout", data, c3Path); }
+                }
+            });
+
+            const linearYears = JSON.parse('<%- data.linearCartByYear %>');
+            console.log(linearYears);
+            const chart2 = c3.generate({
+                bindto: '#chart2',
+                data: {
+                    x: 'x',
+                    columns: linearYears
+                }
+            });
+        </script>
     </div>
 </div>

@@ -12,7 +12,7 @@ class Cart {
      * @param {*} userId 
      */
     getById(userId) {
-        let sql = 'SELECT cart.id, cart.userId, pieces.itemId as pieceId, pieces.name FROM cart INNER JOIN pieces ON cart.pieceId = pieces.itemId WHERE userId = ?';
+        let sql = 'SELECT cart.id, cart.userId, pieces.itemId as pieceId, pieces.name, pickedAt FROM cart INNER JOIN pieces ON cart.pieceId = pieces.itemId WHERE userId = ?';
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [userId], (err, result) => {
@@ -29,7 +29,21 @@ class Cart {
      * Get all the possible trades from all the users 
      */
     getAll() {
-        let sql = "SELECT cart.id, cart.userId, pieces.itemId as pieceId, pieces.name FROM cart INNER JOIN pieces ON cart.pieceId = pieces.itemId";
+        let sql = "SELECT cart.id, cart.userId, pieces.itemId as pieceId, pieces.name, pickedAt FROM cart INNER JOIN pieces ON cart.pieceId = pieces.itemId";
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    getCountByYear() {
+        let sql = "SELECT YEAR(pickedAt) as Year, count(id) as Picked FROM cart GROUP BY YEAR(pickedAt)";
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, (err, result) => {
@@ -65,12 +79,14 @@ class Cart {
      * Save a picked piece for an user
      * 
      * @param {*} userId 
-     * @param {*} pickedPieceId 
+     * @param {*} pickedPieceId
+     * @param {*} pickedAt 
      */
-    save(userId, pickedPieceId) {
+    save(userId, pickedPieceId, pickedAt) {
         let data = {
             userId: userId, 
-            pieceId: pickedPieceId
+            pieceId: pickedPieceId,
+            pickedAt: pickedAt
         };
 
         let sql = 'INSERT INTO cart SET ?';

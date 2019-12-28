@@ -1,6 +1,6 @@
 {
   "name": "galleryRepository",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Fetch Repository classes to the micro services",
   "main": "index.js",
   "scripts": {

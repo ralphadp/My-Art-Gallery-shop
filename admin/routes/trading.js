@@ -9,8 +9,8 @@ router.get('/', function(req, res, next) {
       res.render(
         'trading', 
         { 
-          title: 'List of Trading', 
-          tableTitle: 'Trading', 
+          title: 'List of Possible Trading', 
+          tableTitle: 'Carts', 
           data: result 
         }
       );
@@ -19,8 +19,39 @@ router.get('/', function(req, res, next) {
 
 /* GET Trading 'statistics'. */
 router.get('/statistics', function(req, res, next) {
-  const trade = [3,6,7,4,2];
-  res.render('trading-stat', { title: 'Trading', titleForm:'Statistics', data: trade });
+
+  const cart = new carts();
+
+  cart.getCountByYear().then((result) => {
+
+      /* Convert a array of object to array of arrays */
+      let cartByYear = result.map(function(object) {
+          let item = [];
+          item.push(object.Year);
+          item.push(object.Picked);
+          return item;
+      });
+
+      let linearCartByYear = [['x'],['Year']];
+      result.forEach(function(object) {
+        linearCartByYear[0].push(object.Year);
+        linearCartByYear[1].push(object.Picked);
+      });
+
+      res.render(
+        'trading-stat', 
+        { 
+          title: '(Carts) Possible Trading', 
+          titleFormStat1: 'Statistics by year', 
+          titleFormStat2: 'Linear view by Year', 
+          data: {
+            cartByYear: JSON.stringify(cartByYear),
+            linearCartByYear: JSON.stringify(linearCartByYear)
+          }
+        }
+      );
+  });
+
 });
 
 module.exports = router;
