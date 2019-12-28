@@ -23,7 +23,7 @@
             </div>
         </form>
         <button class="done_button" id="btnSubmit" path="form" type="submit">Upload</button>
-        <img id="image-stored" src="" alt="">
+        <img id="image-stored" src="<%= (dataToUpdate && dataToUpdate.itemId) ? ('http://localhost:8888/api/image/' + dataToUpdate.itemId) : '' %>" alt="">
     </div>
 
     <div class="editcard-body">
