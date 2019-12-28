@@ -23,9 +23,22 @@
 <% } %>
     
 <div id="profile-form">
+    <div class="profile-image-uploader">
+        <form enctype="multipart/form-data" id="imageForm">
+            <div class="profile-row">
+                <label for="admin-thumb">Admin Photograpy</label>
+                <input id="admin-thumb" class="profile_input" type="file" name="imgUploader" size="40" maxlength="50" multiple readonly disabled/>
+            </div>
+        </form>
+        <div class="profile-row">
+            <button class="done_button profile_input" id="btnSubmit" path="adminform" type="submit" disabled>Upload Profile Image</button>
+            <img id="profile-image-stored" src="<%= profile.photo ? ('http://localhost:8888/api/image/admin/' + profile.photo) : '' %>" alt="">
+        </div>
+    </div>
     <form action="/users/admin/update" method="POST">
         <input name="profile" type="hidden" value="true"/>
         <input name="id" type="hidden" value="<%= profile.id %>"/>
+        <input id="profile-photo-id" name="photo" type="hidden" value="<%= profile.photo %>"/>
         <div class="profile-row">
             <label for="firstname">First Name</label>
             <input id="firstname" name="first_name" class="profile_input" type="text" value="<%= profile.first_name %>" size="40" maxlength="50" readonly disabled/>
@@ -85,7 +98,7 @@
             <input id="postalcode" name="postal_code" class="profile_input" value="<%= profile.postal_code %>" type="text" size="15" maxlength="15" readonly disabled/>
         </div>
         <div class="profile-row">
-            <input type="checkbox" id="enable_profile_edition">Enable edition
+            <input type="checkbox" id="enable_profile_edition">
         </div>
         <div class="profile-row">
             <button class="done_button profile_input" type="submit" disabled>Update</button>
