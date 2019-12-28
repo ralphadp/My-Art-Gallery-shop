@@ -39,3 +39,45 @@
        </div>
     <% } %>
 </article>
+
+<article id="documents-form-three">
+    <h2>User</h2>
+    <%  index = 1;
+        files.imagesUser.forEach( imageCode => { %>
+        <% if (index === 1 || ((index - 1) % 6) === 0) { %>
+            <div class="documents-row">
+        <% } %>
+        <div class="documents-item">
+            <label for="<%= imageCode%>"><%= imageCode%></label>
+            <img src="http://localhost:8888/api/image/user/<%= imageCode%>" alt="<%= imageCode%>" height="150">
+        </div>
+        <% if (index !== 1 && ((index) % 6) === 0) { %>
+            </div>
+        <% }
+        index++;
+        }); %>
+    <% if (index !== 1 && ((index) % 6) === 0) { %>
+       </div>
+    <% } %>
+</article>
+
+<article id="documents-form-four">
+    <h2>Admin</h2>
+    <%  index = 1;
+        files.imagesAdmin.forEach( imageCode => { %>
+        <% if (index === 1 || ((index - 1) % 6) === 0) { %>
+            <div class="documents-row">
+        <% } %>
+        <div class="documents-item">
+            <label for="<%= imageCode%>"><%= imageCode%></label>
+            <img src="http://localhost:8888/api/image/admin/<%= imageCode%>" alt="<%= imageCode%>" height="150">
+        </div>
+        <% if (index !== 1 && ((index) % 6) === 0) { %>
+            </div>
+        <% }
+        index++;
+        }); %>
+    <% if (index !== 1 && ((index) % 6) === 0) { %>
+       </div>
+    <% } %>
+</article>

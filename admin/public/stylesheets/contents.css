@@ -179,7 +179,10 @@
     width: 600px;
 }
 
-#documents-form-one, #documents-form-two {
+#documents-form-one, 
+#documents-form-two, 
+#documents-form-three, 
+#documents-form-four {
     width: fit-content;
 }
 
