@@ -8,11 +8,16 @@
         <p><%= 'Number of messages: ' + box.count %></p>
         <% messages.forEach( message => { %>
         <div class="messages-row">
-            <div class="wrapper">
+            <div id="message-complete-<%= message.id %>" class="wrapper message-complete">
+                <button class="message-button hide-message-button" id="hide-message" code="<%= message.id %>">&#x276f;</button>
                 <h3>Message <%= message.id %></h3>
                 <p>Sent at: <%= message.sentAt %></p>
                 <textarea rows="4" cols="80" readonly><%= message.text %></textarea>
                 <span><%= message.subject %></span><a href="mailto:<%= message.from %>">(<%= message.from %>)</a>
+            </div>
+            <div id="message-title-<%= message.id %>" class="wrapper message-title">
+                <button class="message-button show-message-button" id="show-message" code="<%= message.id %>">&#x276f;</button>
+                <h3>Message <%= message.id %></h3>
             </div>
         </div>
         <% }); 

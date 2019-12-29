@@ -228,3 +228,37 @@
     width: 120px;
     align-self: center;
 }
+
+.message-button {
+    font-size: 20px;
+    position: absolute;
+    top: 4px;
+    left: 170px;
+    border-radius: 10px;
+    border: 1px solid rgb(167, 166, 166);
+    background: transparent;
+    cursor: pointer;
+}
+
+.message-button:hover, .message-button:focus {
+    outline: none;
+    background: #00B7FF;
+}
+
+.hide-message-button {
+    transform: rotate(-90deg);
+}
+
+.show-message-button {
+    transform: rotate(90deg);
+}
+
+.message-complete {
+    display: none;
+    position: relative;
+}
+
+.message-title {
+    display: inline-block;
+    position: relative;
+}

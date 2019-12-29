@@ -3,16 +3,19 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const {emailEventEmitter} = require('./model/emailFetcher');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var piecesRouter = require('./routes/pieces');
 var tradingRouter = require('./routes/trading');
 var categoriesRouter = require('./routes/categories');
+var messagesRouter = require('./routes/messages');
 
 var app = express();
 
 global.currentAdmin = 'lbenedite1';
+global.currentEmailCounter = 0;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,6 +32,11 @@ app.use('/users', usersRouter);
 app.use('/pieces', piecesRouter);
 app.use('/trading', tradingRouter);
 app.use('/categories', categoriesRouter);
+app.use('/message', messagesRouter);
+
+emailEventEmitter(20).on('new-email', (count) => {
+  global.currentEmailCounter = count;
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

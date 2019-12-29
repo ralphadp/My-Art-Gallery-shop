@@ -95,11 +95,32 @@ router.get('/messages', function(req, res, next) {
    .then(content => {
 
         if (typeof content.error !== 'undefined') {
+          res.render('messages', { title: 'Inbox messages', error: content.error });
+          return;
+        }
 
-            res.render('messages', { title: 'Inbox messages', error: content.error });
-
+        if (!content.length) {
+            res.render('messages', { title: 'Inbox messages', error: 'Content is empty'});
             return;
         }
+
+        /*Saving the counter of messages */
+        Util.getValueOfStorage(
+            'READED_MESSAGES_COUNTER', 
+            (messagesCount) => {
+                if (isNaN(messagesCount)) {
+                    console.log('Could not found the COUNTER');
+                     /*TODO: need the emiter */
+                    global.currentEmailCounter = Number(content[0].emails_count);
+                } else {
+                    /*TODO: need the emiter */
+                    global.currentEmailCounter = Number(content[0].emails_count) - Number(messagesCount);
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
 
         /* Taking the first inbox only, no several vendors */
         const inboxData = {
@@ -130,6 +151,22 @@ router.get('/messages', function(req, res, next) {
                     sentAt: element.sent_at,
                     urlTextComment: 'https://mailtrap.io' + element.txt_path
                 };
+
+                /*Saving messages in util table*/
+                Util.getValueOfStorage(element.id, (value) => {
+                    if (value === 'empty') {
+                        Util.setKeyValueInStorage(element.id, 0, 
+                          (result) => {
+                            console.log(result);
+                            console.log(`Message id: ${element.id} saved`);
+                          },
+                          (error) => {
+                            console.log('Couln\'t save message id ' + error);
+                          });
+                    }
+                  }, 
+                  (error) => console.log(error)
+                );
 
                 textRequests.push(
                     fetch(item.urlTextComment, {method: 'GET', headers: txtHeaders}).then(response => response.text())
