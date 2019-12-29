@@ -1,12 +1,64 @@
 var express = require('express');
-var {admins, config} = require('galleryRepository');
+var {admins, users, pieces, config} = require('galleryRepository');
 var Util = require('../model/util');
 var fetch = require('node-fetch');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Admin - Art Gallery' });
+
+  const user = new users();
+  const piece = new pieces();
+
+  user.getGroupByCountry().then((result) => {
+      /* Convert a array of object to array of arrays */
+      let others = ['Others', 0];
+      let userByCountry = result.map((object) => {
+        let item = [];
+
+        if (Number(object.number) <= 1) {
+            others[1]++;
+            return;
+        }
+        item.push(object.country ? object.country : 'Unknown');
+        item.push(object.number);
+        return item;
+      }).filter(item => item !== undefined);
+      userByCountry.push(others);
+
+      user.getMouthYearSignin(12, 2019).then((result) => {
+          const userTable = result;
+
+          piece.getGroupByType().then((result) => {
+
+              let piecesByType = result.map((object) => {
+                let item = [];
+                item.push(object.type);
+                item.push(object.number);
+                return item;
+              });
+
+              piece.getGroupByYear().then((result) => {
+
+                  let piecesReleasedYear = result.map((object) => {
+                    let item = [];
+                    item.push(object.year);
+                    item.push(object.number);
+                    return item;
+                  });
+
+                  res.render('index', { 
+                      title: 'Admin - Art Gallery', 
+                      userByCountry: JSON.stringify(userByCountry),
+                      data: userTable,
+                      piecesByType: JSON.stringify(piecesByType),
+                      piecesReleasedYear: JSON.stringify(piecesReleasedYear)
+                  });
+              });
+          });
+      });
+  });
+
 });
 
 router.get('/sms-test', function(req, res, next) {

@@ -228,6 +228,45 @@ class Pieces {
     }
 
     /**
+     * Group by piece type , counting
+     */
+    getGroupByType() {
+ 
+        let sql = `SELECT type, count(*) as number FROM pieces GROUP BY type`;
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    /**
+     * Group pieces by year
+     */
+    getGroupByYear() {
+ 
+        let sql = `SELECT YEAR(release_date) as year, count(*) as number FROM pieces GROUP BY YEAR(release_date) ORDER BY YEAR(release_date)`;
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+
+    /**
      * Update the infofor a piece of the gallery
      * @param {*} piece 
      */

@@ -1,0 +1,33 @@
+<article id="form-admin" class="form-initial">
+    <div class="editcard-title">Pieces By Type</div>
+    <div id="chart_type" class="c3"></div>
+    <div class="editcard-title">Pieces Released by Year</div>
+    <div id="chart_released" class="c3"></div>
+    <script>
+        const piecesType = JSON.parse('<%- piecesByType %>');
+
+        const chart_type = c3.generate({
+            bindto: '#chart_type',
+            data: {
+                columns: piecesType,
+                type : 'pie',
+                onclick: function (data, c3Path) { console.log("onclick", data, c3Path); },
+                onmouseover: function (data, c3Path) { console.log("onmouseover", data, c3Path); },
+                onmouseout: function (data, c3Path) { console.log("onmouseout", data, c3Path); }
+            }
+        });
+
+        const piecesReleased = JSON.parse('<%- piecesReleasedYear %>');
+
+        const chart_released = c3.generate({
+            bindto: '#chart_released',
+            data: {
+                columns: piecesReleased,
+                type : 'pie',
+                onclick: function (data, c3Path) { console.log("onclick", data, c3Path); },
+                onmouseover: function (data, c3Path) { console.log("onmouseover", data, c3Path); },
+                onmouseout: function (data, c3Path) { console.log("onmouseout", data, c3Path); }
+            }
+        });
+    </script>
+</article>

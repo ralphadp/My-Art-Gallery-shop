@@ -79,6 +79,49 @@ class Users {
     }
 
     /**
+     * Get Users by mouth and year
+     * @param {*} mouth 
+     * @param {*} year 
+     */
+    getMouthYearSignin(mouth, year) {
+
+        const WHERE = [
+            mouth ? `MONTH(registration_date) = "${mouth}"` : null,
+            year ? `YEAR(registration_date) = "${year}"` : null
+        ].filter(Boolean).join(" AND ");
+
+        let sql = `SELECT first_name, last_name, YEAR(CURDATE()) - YEAR(birth) AS age, email, movile, country FROM users WHERE ${WHERE}`;
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    /**
+     * Get count of users by country
+     */
+    getGroupByCountry() {
+
+        let sql = `SELECT country, count(*) as number FROM users group by country`;
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    /**
      * Store a new user
      * @param {*} user 
      */

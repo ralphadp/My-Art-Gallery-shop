@@ -1,0 +1,26 @@
+<article id="form-admin" class="form-initial">
+    <div class="table-admin">
+        <table id="table-basis" cellspacing="0" style="width:100%">
+            <tr>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+                <th>EMAIL</th>
+                <th>COUNTRY</th>
+                <th>MOVILE</th>
+                <th>AGE</th>
+            </tr>
+
+            <% for (let index = 0; index < data.length; index++) { %>
+                <tr>
+                    <td><%= data[index].first_name %></td>
+                    <td><%= data[index].last_name %></td>
+                    <td><%= data[index].email %></td>
+                    <td><%= data[index].country %></td>
+                    <td><%= data[index].movile %></td>
+                    <td><%= data[index].age %></td>
+                </tr>
+            <% } %>
+
+        </table>
+    </div>
+</article>

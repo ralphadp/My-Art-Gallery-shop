@@ -38,18 +38,29 @@ router.get('/statistics', function(req, res, next) {
         linearCartByYear[1].push(object.Picked);
       });
 
-      res.render(
-        'trading-stat', 
-        { 
-          title: '(Carts) Possible Trading', 
-          titleFormStat1: 'Statistics by year', 
-          titleFormStat2: 'Linear view by Year', 
-          data: {
-            cartByYear: JSON.stringify(cartByYear),
-            linearCartByYear: JSON.stringify(linearCartByYear)
-          }
-        }
-      );
+      cart.getCountByYearMouth().then((result) => {
+          let cartByYearMouth = result.map(function(object) {
+              let item = [];
+              item.push(object.Year + ' ' + object.Mouth);
+              item.push(object.Picked);
+              return item;
+          });
+
+          res.render(
+            'trading-stat', 
+            { 
+              title: '(Carts) Possible Trading', 
+              titleFormStat1: 'Picked by year', 
+              titleFormStat2: 'Linear view Picked by Year', 
+              titleFormStat3: 'Picked by Year-Month', 
+              data: {
+                cartByYear: JSON.stringify(cartByYear),
+                linearCartByYear: JSON.stringify(linearCartByYear),
+                cartByYearMouth: JSON.stringify(cartByYearMouth)
+              }
+            }
+          );
+      });
   });
 
 });

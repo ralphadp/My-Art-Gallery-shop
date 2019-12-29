@@ -42,8 +42,28 @@ class Cart {
         });
     }
 
+    /**
+     * Get all picked by year
+     */
     getCountByYear() {
         let sql = "SELECT YEAR(pickedAt) as Year, count(id) as Picked FROM cart GROUP BY YEAR(pickedAt)";
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    /**
+     * Picked grouped by Year and Mouth
+     */
+    getCountByYearMouth() {
+        let sql = "SELECT YEAR(pickedAt) as Year, MONTHNAME(pickedAt) as Mouth, count(*) as Picked FROM cart GROUP BY MONTH(pickedAt)";
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, (err, result) => {

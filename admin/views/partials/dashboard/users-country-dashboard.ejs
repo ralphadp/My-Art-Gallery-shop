@@ -1,0 +1,25 @@
+<article id="form-admin" class="form-initial">
+    <div class="editcard-title">Users By Country</div>
+    <div id="chart_country" class="c3"></div>
+    <script>
+        const userCountry = JSON.parse('<%- userByCountry %>');
+
+        const chart_country = c3.generate({
+            bindto: '#chart_country',
+            data: {
+                columns: userCountry,
+                type : 'bar',
+                onclick: function (data, c3Path) { console.log("onclick", data, c3Path); },
+                onmouseover: function (data, c3Path) { console.log("onmouseover", data, c3Path); },
+                onmouseout: function (data, c3Path) { console.log("onmouseout", data, c3Path); }
+            },
+            bar: {
+                width: {
+                    ratio: 0.5 
+                }
+                // or
+                //width: 100 // this makes bar width 100px
+            }
+        });
+    </script>
+</article>
