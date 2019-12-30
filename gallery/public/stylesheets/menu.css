@@ -7,7 +7,8 @@ header {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    box-shadow: 0 2px 4px #5a5763;
+    box-shadow: 2px 2px 20px 0px #9e1103;
+    position: relative;
 }
 
 a {

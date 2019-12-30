@@ -47,3 +47,24 @@ svg:not(:root) {
     border-top: 1px solid #4F4D55;
     box-shadow: 0 1px 3px #16151B;
 }
+
+#banner {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    border-top: 1px solid #4F4D55;
+    box-shadow: 3px 5px 11px #16151B;
+}
+
+.banner-main {
+    background-image: url('/images/banner.png');
+}
+
+.banner-learn {
+    background-image: url('/images/banner-lot.jpg');
+}
+
+.banner-write {
+    background-image: url('/images/banner.jpg');
+}
