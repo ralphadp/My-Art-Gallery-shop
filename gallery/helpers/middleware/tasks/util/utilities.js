@@ -106,11 +106,36 @@ const fromCategoryPathToCategoryName = (path) => {
     return path.replace(/-/g, " ");
 };
 
+/**
+ * Split an array ig groups of size set by chunkSize
+ * @param {*} array 
+ * @param {*} chunkSize 
+ */
+function chunk(array, chunkSize) {
+    if (!(array instanceof Array)) {
+        return array;
+    }
+
+    var results = [];
+
+    while (array.length) {
+        results.push(
+            array.splice(
+                0, 
+                chunkSize
+            )
+        );
+    }
+    
+    return results;
+}
+
 module.exports = {
     MAX_THUMB_PER_PAGE,
     calculateThumbPerPage,
     numPages,
     arrayToObject,
     calculatePagerButtons,
-    fromCategoryPathToCategoryName
+    fromCategoryPathToCategoryName,
+    chunk
 };
