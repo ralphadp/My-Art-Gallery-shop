@@ -108,6 +108,14 @@
         logoutDialog.show();
     });
 
+    document.getElementById('logout-yes').addEventListener('click', () => {
+        window.location.replace(window.location.origin + '/logout');
+    });
+
+    document.getElementById('logout-no').addEventListener('click', () => {
+        logoutDialog.close();
+    });
+
     document.getElementById('option-profile').addEventListener('click', () => {
         window.location.replace(window.location.origin + '/profile');
     });

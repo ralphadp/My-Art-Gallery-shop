@@ -4,8 +4,57 @@ var Util = require('../model/util');
 var fetch = require('node-fetch');
 var router = express.Router();
 
+/* GET login page. */
+router.get('/login', function(req, res, next) {
+  
+  const response = req.cookies.authorization_response || null;
+  res.clearCookie('authorization_response');
+
+  res.render('login', {
+      title: 'Login - Admin', 
+      titleForm: 'Login',
+      response: response
+  });
+
+});
+
+/* POST verification route. */
+router.post('/login/verification', function(req, res, next) {
+
+    const user = req.body.user.trim();
+    const pass = req.body.pass.trim();
+    const admin = new admins();
+
+    admin.verify(user, pass).then(result => {
+        console.log(result);
+        if (result.length) {
+            console.log(`... App will send id [${result[0].id}] to JWT service if it is ok then will response its token`);
+            const jwtToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+            const jwtCookie = `access_token=${jwtToken}; Path=/; Max-Age=604800; HttpOnly;`;
+
+            res.header("Set-Cookie", jwtCookie);
+            res.redirect('/');
+        } else {
+            const response = 'The username or password is incorrect';
+            res.header("Set-Cookie", `authorization_response=${response}; Path=/; Max-Age=5000; HttpOnly;`);
+            res.redirect('/login');
+        }
+    }).catch(error => console.log(error));
+
+});
+
+/* GET login page. */
+router.get('/logout', function(req, res, next) {
+  
+  res.clearCookie('access_token');
+  res.redirect('/login');
+
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
+
+  console.log('token:', req.cookies.access_token);
 
   const user = new users();
   const piece = new pieces();

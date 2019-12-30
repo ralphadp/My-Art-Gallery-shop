@@ -1,0 +1,80 @@
+#login-body {
+    background-color: #00B7FF;
+    background-image: url(/images/night.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: sans-serif;
+    width: 100%;
+    height: 100vh;
+}
+
+#login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 240px;
+    overflow: hidden;
+    color: white;
+}
+
+#login-box h1 {
+    font-size: 40px;
+    color: white;
+    border-bottom: 6px solid #00B7FF;
+    padding: 5px 0;
+    float: left;
+    margin-bottom: 30px;
+}
+
+.textform {
+    border-bottom: 2px solid #00B7FF;
+    margin-bottom: 20px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.textform i {
+    width: 26px;
+    float: left;
+    text-align: center;
+}
+
+#login-box input {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 5px;
+    color: white;
+}
+
+#login-box input:-webkit-autofill,
+#login-box input:-webkit-autofill:hover, 
+#login-box input:-webkit-autofill:focus,
+#login-box input:focus {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 5px;
+    color: white;
+}
+
+#login-box input[type=submit] {
+    width: 100%;
+    border: 2px solid #00B7FF;
+    cursor: pointer;
+    color: white;
+    padding: 5px;
+    margin: 10px 0;
+}
+
+#login-box p {
+    visibility: hidden;
+    opacity: 0;
+    font-size: 11px;
+    border: 1px solid black;
+    background: rgb(251, 251, 200);
+    color: black;
+    padding: 4px;
+    transition: visibility 0s, opacity 0.5s linear;
+}

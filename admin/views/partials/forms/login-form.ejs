@@ -1,0 +1,31 @@
+<div id="login-body">
+    <div id="login-box">
+        <h1><%= titleForm %></h1>
+        <form method="POST" action="/login/verification">
+            <div class="textform">
+                <i class="fa fa-user"></i>
+                <input type="text" name="user" id="user" placeholder="username" maxlength="50" required/>
+            </div>
+            <div class="textform">
+                <i class="fa fa-lock"></i>
+                <input type="password" name="pass" id="pass" placeholder="password" maxlength="50" required/>
+            </div>
+            <input type="submit" name="sign" id="sign" value="Sign in" />
+        </form>
+        <p id="server_response"><%= response ? response : '&nbsp;' %></p>
+    </div>
+</div>
+<% if (response) {%>
+<script>
+    if (document.getElementById('server_response')) {
+        setTimeout(()=> {
+            document.getElementById('server_response').style.visibility = 'visible';
+            document.getElementById('server_response').style.opacity = 1;
+        }, 500);
+        setTimeout(()=> {
+            document.getElementById('server_response').style.visibility = 'none';
+            document.getElementById('server_response').style.opacity = 0;
+        }, 4000);
+    }
+</script>
+<% } %>

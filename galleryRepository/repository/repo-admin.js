@@ -79,6 +79,10 @@ class Admins {
         });
     }
 
+    /**
+     * Search in admin data, by pattern phrase
+     * @param {*} pattern 
+     */
     getAllSearching(pattern) {
  
         let sql = `SELECT * FROM admin ${this.fetchSearchQuery(pattern)}`;
@@ -180,6 +184,25 @@ class Admins {
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [adminId], (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    /**
+     * Verify user
+     * @param {*} user 
+     * @param {*} pass 
+     */
+    verify(user, pass) {
+        let sql = "SELECT id FROM admin WHERE username = ? AND password = ?";
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [user, pass], (err, result) => {
                 if (!err) {
                     resolve(JSON.parse(JSON.stringify(result)));
                 } else {
