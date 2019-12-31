@@ -5,9 +5,12 @@
         </svg>
         <span class="logo-name">ART GALLERY SHOPPING</span>
     </a>
+    <div id="logged-user" <%= global.currentUsername ? 'class=valid-user' : '' %>>User:<a href="mailto:<%= global.currentUserEmail %>"><%= global.currentUsername%></a></div>
 </div>
 <nav class="menu">
     <div 
+        class="item" id="register"><a href="/register/">Register</a></div><div 
+        class="item" id="login"><a href="/login/">Login</a></div><div 
         class="item" id="open-picked"><a>Picking</a></div><div 
         class="item" id="open-list"><a>List</a></div><div 
         class="item"><a href="/learning/">Learning</a></div><div 

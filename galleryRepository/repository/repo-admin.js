@@ -194,7 +194,7 @@ class Admins {
     }
 
     /**
-     * Verify user
+     * Verify administrator
      * @param {*} user 
      * @param {*} pass 
      */

@@ -5,4 +5,5 @@ exports.users = require('./repository/repo-users');
 exports.admins = require('./repository/repo-admin');
 exports.config = require('./repository/repo-config');
 exports.util = require('./repository/repo-util');
+exports.registration = require('./repository/repo-registration');
 

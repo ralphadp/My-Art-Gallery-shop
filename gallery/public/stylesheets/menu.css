@@ -80,6 +80,7 @@ a {
     padding: 20px;
     display: inline-block;
     transition: .3s;
+    cursor: pointer;
 }
 
 .item:hover {
@@ -99,14 +100,24 @@ a {
     transition: 0.4s;
 }
 
+#logged-user {
+    position: absolute;
+    right: 0px;
+    bottom: 6px;
+    color: yellow;
+    font-weight: 100;
+    font-size: 14px;
+    display: none;
+}
+
+.valid-user {
+    display: block!important;
+}
+
 .search:hover > #input-search-art {
     width: 200px;
     background-color: white;
     padding-left: 10px;
-}
-
-#open-picked, #open-list, #input-search-art-anchor {
-    cursor: pointer;
 }
 
 @media (max-width: 976px) {
@@ -135,7 +146,7 @@ a {
         width: 388px;
     }
     header {
-        height: 200px;
+        height: 250px;
     }
     .menu {
         margin-left: 160px;
@@ -152,6 +163,8 @@ a {
 @media (max-width: 674px) {
     header {
         display: block;
+        height: 290px;
+        padding-top: 20px;
     }
     .menu {
         margin-left: 1%;
@@ -199,7 +212,13 @@ a {
         padding: 20px 15px;
     }
     .search {
-        width: 248px;
+        width: 320px;
+    }
+    header {
+        height: 300px;
+    }
+    .search:hover > #input-search-art {
+        width: 250px;
     }
 }
 
@@ -208,6 +227,21 @@ a {
         padding: 20px 10px;
     }
     .search {
-        width: 198px;
+        width: 300px;
+    }
+}
+
+@media (max-width: 240px) {
+    .item {
+        padding: 20px 10px;
+    }
+    .search {
+        width: 230px;
+    }
+    .search:hover > #input-search-art {
+        width: 180px;
+    }
+    .logo-name {
+        width: 150px;
     }
 }

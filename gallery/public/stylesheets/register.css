@@ -1,0 +1,194 @@
+#register-frame {
+    padding: 20px 100px;
+}
+
+#register-frame .title {
+    padding: 10px 0!important;
+    box-shadow: 0 1px 0 0 #3d3d3d;
+    margin-bottom: 40px;
+    
+}
+#register-frame .title h1 {
+    font-weight: normal;
+    font-size: 22px;
+    margin: 20px 2px 0 2px;
+}   
+
+.row {
+    margin-bottom: 30px;
+}
+
+.row label {
+    color: #5fcf80;
+    width: 135px;
+    display: inline-block;
+}
+
+.row label[for=msg-description] {
+    position: relative;
+    bottom: 188px;
+}
+
+.row input {
+    width: 360px;
+    height: 25px;
+}
+
+.row textarea {
+    width: 360px;
+    height: 200px;
+    resize: none;
+}
+
+.row textarea, .row input {
+    color: #0b0b0e;
+    outline: none;
+    border-radius: 3px;
+    padding: 2px 4px;
+    border:1px solid #cccccc;
+    font-family: -system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+}
+
+.register-body {
+    margin: 0 auto;
+    width: 500px;
+}
+
+.register-body button {
+    float: right;
+    height: 30px;
+    background: linear-gradient(to bottom,#e74c3c,#c0392b); 
+    border-color: #e74c3c;
+    color:whitesmoke;
+    font-size: 14px;
+    outline: none;
+    border-radius: 3px;
+}
+
+#waiting-register-response {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.row input[type=radio] {
+    width: 20px;
+    height: 15px;
+    margin-right: 10px;
+}
+
+.radio-group-item {
+    display: inline-block;
+}
+
+label[for=gender] {
+    float: left;
+}
+
+@media (max-width: 1022px) {
+    #register-frame {
+        padding: 10px 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    #social {
+        top: 270px;
+    }
+}
+
+@media (max-width: 660px) {
+    #register-frame {
+        padding: 10px 30px;
+    }
+
+    .register-body {
+        width: 400px;
+    }
+    
+    .row label[for=description] {
+        position: static;
+        bottom: 0;
+    }
+
+    .row input, .row textarea {
+        width: 400px;
+    }
+    #social {
+        top: 310px;
+    }
+}
+
+@media (max-width: 575px) {
+    #register-frame {
+        padding: 10px 30px;
+    }
+
+    .register-body {
+        width: 280px;
+    }
+
+    .row input, .row textarea {
+        width: 280px;
+    }
+
+    #social {
+        top: 320px;
+    }
+}
+
+@media (max-width: 411px) {
+    #register-frame {
+        padding: 10px 20px;
+    }
+
+    .register-body {
+        width: 250px;
+    }
+
+    .row input, .row textarea {
+        width: 250px;
+    }
+    #social {
+        top: 320px;
+    }
+}
+
+@media (max-width: 375px) {
+    #register-frame {
+        padding: 10px 20px;
+    }
+
+    .register-body {
+        width: 220px;
+    }
+
+    .row input, .row textarea {
+        width: 220px;
+    }
+    #social {
+        top: 320px;
+    }
+}
+
+@media (max-width: 320px) {
+    #register-frame {
+        padding: 10px 10px;
+    }
+
+    .register-body {
+        width: 180px;
+    }
+
+    .row input, .row textarea {
+        width: 180px;
+    }
+}
+
+@media (max-width: 240px) {
+    #social {
+        top: 200px;
+    }
+}

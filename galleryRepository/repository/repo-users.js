@@ -127,6 +127,7 @@ class Users {
      */
     save(user) {
         let data = {
+            external_id: user.external_id,
             photo: user.photo,
             first_name: user.first_name,
             last_name: user.last_name,
@@ -209,6 +210,45 @@ class Users {
             });
         });
     }
+
+    /**
+     * Verify user
+     * @param {*} user 
+     * @param {*} pass 
+     */
+    verify(user, pass) {
+        let sql = "SELECT id, external_id, first_name, last_name, email, username FROM users WHERE username = ? AND password = ?";
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [user, pass], (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    /**
+     * Activate user
+     * @param {*} code
+     */
+    activate(code) {
+
+        let sql = "UPDATE users SET active=1 WHERE external_id = (SELECT external_userId FROM registration WHERE code = ?)";
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [code], (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
 }
 
 module.exports = Users;

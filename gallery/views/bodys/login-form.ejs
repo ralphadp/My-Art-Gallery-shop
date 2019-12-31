@@ -1,0 +1,30 @@
+<section id="login-frame">
+    <div class="title">
+        <h1>Login</h1>
+    </div>
+
+    <div class="login-body">
+        <div class="row">
+            <p>You have 4 attempts, otherwise yoo need to wait 10 min to try it later</p>
+        </div>
+        <form enctype="multipart/form-data" id="login-form" method="POST">
+            <div class="row">
+                <label for="username">username:</label>
+                <input id="username" name="username" type="text" placeholder="Please enter your first name"/>
+            </div>
+            <div class="row">
+                <label for="password">password:</label>
+                <input id="password" name="password" type="password" placeholder="Please enter your last name"/>
+            </div>
+        </form>
+        <div id="waiting-login-response">
+            <img src="/images/loading.gif"/>
+        </div>
+        <div class="row">
+            <button id="login-user">Login</button>
+        </div>
+        <div class="row">
+            <a id="forgoteen-email">Did you forgot your credentials?</a>
+        </div>
+    </div>
+</section>

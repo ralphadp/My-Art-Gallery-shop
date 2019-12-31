@@ -51,6 +51,12 @@
 
 @media (max-width: 870px) {
     #social {
-        top: 250px;
+        top: 270px;
+    }
+}
+
+@media (max-width: 674px) {
+    #social {
+        top: 310px;
     }
 }

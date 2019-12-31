@@ -2,32 +2,25 @@
 <html lang="en">
 <head>
     <% include ./partials/head %>
-    <% include ./partials/css/write-us %>
+    <% include ./partials/css/register %>
 </head>
 <body>
     <header>
-        <% include ./partials/header %>
+        <% include ./partials/header-unregister %>
     </header>
     <div id="banner" class="banner-write"></div>
-
-    <% include ./partials/frames %>
 
     <% include ./partials/social %>
 
     <article class="body-content">
-        <% include ./bodys/write-us %>
-    </article>
-
-    <article class="body-content">
-        <% include ./partials/categories %>
+        <% include ./bodys/register-form %>
     </article>
 
     <% include ./partials/footer %>
 
     <% include ./partials/svg %>
 
-    <% include ./partials/scripts %>
     <script type="text/javascript" src="/javascripts/requests.js"></script>
-    <script type="text/javascript" src="/javascripts/email.js"></script>
+    <script type="text/javascript" src="/javascripts/register.js"></script>
 </body>
 </html>

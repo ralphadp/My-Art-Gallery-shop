@@ -22,4 +22,12 @@ router.get('/', function(req, res, next) {
 
 });
 
+/* GET logout page. */
+router.get('/logout', function(req, res, next) {
+  
+    res.clearCookie('access_token');
+    res.redirect('/login');
+  
+});
+
 module.exports = router;

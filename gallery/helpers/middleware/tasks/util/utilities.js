@@ -111,7 +111,7 @@ const fromCategoryPathToCategoryName = (path) => {
  * @param {*} array 
  * @param {*} chunkSize 
  */
-function chunk(array, chunkSize) {
+const chunk = (array, chunkSize) => {
     if (!(array instanceof Array)) {
         return array;
     }
@@ -128,7 +128,16 @@ function chunk(array, chunkSize) {
     }
     
     return results;
-}
+};
+
+/**
+ * Get the current date only
+ */
+const TODAY = () => {
+    var local = new Date();
+    local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
+    return local.toJSON().slice(0, 10);
+};
 
 module.exports = {
     MAX_THUMB_PER_PAGE,
@@ -137,5 +146,6 @@ module.exports = {
     arrayToObject,
     calculatePagerButtons,
     fromCategoryPathToCategoryName,
-    chunk
+    chunk,
+    TODAY
 };
