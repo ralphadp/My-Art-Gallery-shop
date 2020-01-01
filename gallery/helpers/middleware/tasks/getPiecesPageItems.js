@@ -3,7 +3,7 @@ const {pieces} = require('galleryRepository');
 
 const getPiecesPageItems = (context, next) => {
 
-    const oPieces = new pieces(global.currentUser, context.categoryCode);
+    const oPieces = new pieces(context.currentUser.userExtId, context.categoryCode);
     
     oPieces.getAll (
         MAX_THUMB_PER_PAGE, 

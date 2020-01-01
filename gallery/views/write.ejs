@@ -6,7 +6,11 @@
 </head>
 <body>
     <header>
-        <% include ./partials/header %>
+        <% if (currentUser.userExtId) { %>
+            <% include ./partials/header %>
+        <% } else { %>
+            <% include ./partials/header-unregister %>
+        <% } %>
     </header>
     <div id="banner" class="banner-write"></div>
 
@@ -22,12 +26,24 @@
         <% include ./partials/categories %>
     </article>
 
-    <% include ./partials/footer %>
+    <% if (currentUser.userExtId) { %>
+        <% include ./partials/footer %>
+    <% } else { %>
+        <% include ./partials/footer-unregister %>
+    <% } %>
 
     <% include ./partials/svg %>
 
-    <% include ./partials/scripts %>
+    <script type="text/javascript" src="/javascripts/dialog/foggy.js"></script>
+    <script type="text/javascript" src="/javascripts/dialog/frame.js"></script>
+    <script type="text/javascript" src="/javascripts/dialog/photo.js"></script>
+    <script type="text/javascript" src="/javascripts/events.js"></script>
+    <script type="text/javascript" src="/javascripts/search.js"></script>
     <script type="text/javascript" src="/javascripts/requests.js"></script>
     <script type="text/javascript" src="/javascripts/email.js"></script>
+    <% if (currentUser.userExtId) { %>
+        <script type="text/javascript" src="/javascripts/logged-in-features.js"></script>
+        <script type="text/javascript" src="/javascripts/logout.js"></script>
+    <% } %>
 </body>
 </html>

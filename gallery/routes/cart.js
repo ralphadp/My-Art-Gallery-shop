@@ -8,7 +8,7 @@ router.get('/add-to/:pieceId', function(req, res, next) {
     let response;
     try {
         const oCart = new carts();
-        oCart.save(global.currentUser, req.params.pieceId)
+        oCart.save(req.session.userExtId, req.params.pieceId)
         .then(result => {
             if (result.affectedRows === 1) {
                 response = {

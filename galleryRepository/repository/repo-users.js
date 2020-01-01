@@ -217,7 +217,8 @@ class Users {
      * @param {*} pass 
      */
     verify(user, pass) {
-        let sql = "SELECT id, external_id, first_name, last_name, email, username FROM users WHERE username = ? AND password = ?";
+
+        let sql = "SELECT id, external_id, first_name, last_name, email, username, active FROM users WHERE username = ? AND password = ?";
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [user, pass], (err, result) => {
@@ -237,6 +238,25 @@ class Users {
     activate(code) {
 
         let sql = "UPDATE users SET active=1 WHERE external_id = (SELECT external_userId FROM registration WHERE code = ?)";
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [code], (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    /**
+     * Get user by activation code
+     * @param {*} code 
+     */
+    getByActivationCode(code) {
+
+        let sql = "SELECT * FROM users LEFT JOIN registration ON users.external_id = registration.external_userId WHERE registration.code = ?";
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [code], (err, result) => {

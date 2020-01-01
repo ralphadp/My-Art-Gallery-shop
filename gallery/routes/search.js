@@ -9,7 +9,8 @@ router.get('/:phrase', function(req, res, next) {
 
     middlewareManager({
         key: keys.SEARCHING,
-        wordPattern: phraseList, 
+        wordPattern: phraseList,
+        currentUser: req.session, 
         resolve: (error, payload) => {
 
             if (error) {

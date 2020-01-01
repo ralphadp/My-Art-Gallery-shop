@@ -5,13 +5,16 @@ var router = express.Router();
 /* GET login Page. */
 router.get('/', function(req, res, next) {
 
-    res.render('login', {title: 'login'});
+    const response = req.cookies.activation_response || null;
+    res.clearCookie('activation_response');
+
+    res.render('login', {title: 'login', response: response});
 
 });
 
 /* POST login process request route. */
 router.post('/validation', function(req, res, next) {
-    console.log(req.body);
+
     let response = {};
 
     const user = new users();
@@ -19,14 +22,24 @@ router.post('/validation', function(req, res, next) {
     user.verify(req.body.username, req.body.password).then(result => {
         if (result.length) {
             const validUser = result[0];
-            global.currentUsername = validUser.first_name + ' ' + validUser.last_name;
-            global.currentUser = validUser.external_id;
-            global.currentUserEmail = validUser.email;
-            response = {
-                result: true,
-                data: validUser,
-                message: 'Autentication sucessfull'
-            };
+            if (validUser.active === 1) {
+
+                req.session.name = validUser.first_name + ' ' + validUser.last_name;
+                req.session.email = validUser.email;
+                req.session.userExtId = validUser.external_id;
+
+                response = {
+                    result: true,
+                    data: validUser,
+                    message: 'Successful Autentication'
+                };
+            } else {
+                response = {
+                    result: false,
+                    data: validUser,
+                    message: 'User not active yet.'
+                };
+            }
         } else {
             response = {
                 result: false,

@@ -2,6 +2,7 @@
     --red1: #c0392b;
     --red2: #e74c3c;
     --sea: #5fcf80;
+    --lightyellow: #ffffd1;
     --dark1: #09080d;
     --dark2: #111;
     --dark3: #16151B;
@@ -67,4 +68,9 @@ svg:not(:root) {
 
 .banner-write {
     background-image: url('/images/banner.jpg');
+}
+
+pre {
+    border: 1px solid var(--gray-dark9);
+    background: var(--lightyellow);
 }

@@ -3,7 +3,7 @@ const {pieces} = require('galleryRepository');
 
 const getAvailablePieces = (context, next) => {
 
-    const oPieces = new pieces(global.currentUser, context.categoryCode);
+    const oPieces = new pieces(context.currentUser.userExtId, context.categoryCode);
     
     oPieces.getAvailables()
     .then(piecesResult => {

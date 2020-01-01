@@ -24,6 +24,7 @@ const keys = {
  * @param {*} params: {
  *                        key
  *                        index
+ *                        currentUser
  *                        category 
  *                        wordPattern 
  *                        resolve callback function
@@ -36,6 +37,7 @@ let middlewareManager = (params) => {
         let pageFeed = {
             title: 'Art Shoping',
             index: params.index || 1,
+            currentUser: params.currentUser || {userExtId:null},
             categoryCode: params.category || 'all',
             words: params.wordPattern || ''
         };

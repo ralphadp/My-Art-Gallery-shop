@@ -1,0 +1,38 @@
+#logout-frame {
+    padding: 20px;
+}
+
+#logout-frame h3 {
+    padding: 0 0 5px;
+    color: #111;
+}
+
+#logout-frame p {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#logout-frame #buttons {
+    text-align: center;
+    width: 200px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+#logout-frame #buttons button {
+    color: whitesmoke;
+    font-size: 14px;
+    outline: none;
+    border-radius: 3px;
+}
+
+#logout-frame #buttons #logout-yes {
+    background: linear-gradient(to bottom,#e74c3c,#c0392b);
+    border-color: #e74c3c;
+}
+
+#logout-frame #buttons #logout-no {
+    background: linear-gradient(to bottom, var(--sea),#317c48);
+    border-color: var(--sea);
+}

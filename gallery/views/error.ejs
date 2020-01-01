@@ -1,3 +1,49 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ./partials/head %>
+    <% include ./partials/css/main %>
+</head>
+<body>
+    <header>
+        <% if (currentUser.userExtId) { %>
+            <% include ./partials/header %>
+        <% } else { %>
+            <% include ./partials/header-unregister %>
+        <% } %>
+    </header>
+    <div id="banner" class="banner-main"></div>
+
+    <% if (currentUser.userExtId) { %>
+        <% include ./partials/frames %>
+    <% } %>
+
+    <% include ./partials/social %>
+
+    <article class="body-content">
+        <h1><%= message %></h1>
+        <h2><%= error.status %></h2>
+        <pre><%= error.stack %></pre>
+    </article>
+
+    <% if (currentUser.userExtId) { %>
+        <article class="body-content">
+            <% include ./partials/categories %>
+        </article>
+    <% } %>
+
+    <% if (currentUser.userExtId) { %>
+        <% include ./partials/footer %>
+    <% } else { %>
+        <% include ./partials/footer-unregister %>
+    <% } %>
+
+    <% include ./partials/svg %>
+
+    <script type="text/javascript" src="/javascripts/search.js"></script>
+    <% if (currentUser.userExtId) { %>
+        <script type="text/javascript" src="/javascripts/logged-in-features.js"></script>
+        <script type="text/javascript" src="/javascripts/logout.js"></script>
+    <% } %>
+</body>
+</html>

@@ -7,6 +7,7 @@ router.get('/', function(req, res, next) {
 
     middlewareManager({
         key: keys.INDEX,
+        currentUser: req.session,
         resolve: (error, payload) => {
 
             if (error) {
@@ -24,10 +25,12 @@ router.get('/', function(req, res, next) {
 
 /* GET logout page. */
 router.get('/logout', function(req, res, next) {
-  
+
     res.clearCookie('access_token');
+    req.session.destroy();
+
     res.redirect('/login');
-  
+
 });
 
 module.exports = router;

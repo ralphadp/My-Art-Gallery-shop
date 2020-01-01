@@ -3,7 +3,7 @@ const {numPages} = require("./util/utilities");
 
 const getSearchingSize = (context, next) => {
 
-    const oPieces = new pieces(global.currentUser, context.categoryCode);
+    const oPieces = new pieces(context.currentUser.userExtId, context.categoryCode);
     oPieces.getSizeOfSearching(context.words)
     .then(totalPieces => {
 

@@ -7,6 +7,7 @@ router.get('/:indexPage', function(req, res, next) {
 
     middlewareManager({
       key: keys.INDEX,
+      currentUser: req.session,
       index: req.params.indexPage,
       resolve: (error, payload) => {
 

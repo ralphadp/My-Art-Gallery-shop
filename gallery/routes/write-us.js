@@ -7,6 +7,7 @@ router.get('/', function(req, res, next) {
 
     middlewareManager({
       key: keys.WRITEUS,
+      currentUser: req.session,
       resolve: (error, payload) => {
 
           if (error) {

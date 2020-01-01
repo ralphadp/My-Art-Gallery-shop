@@ -10,6 +10,7 @@ router.get('/:categoryName', function(req, res, next) {
 
   middlewareManager({
       key: keys.INDEX,
+      currentUser: req.session,
       category: categoryCode,
       resolve: (error, payload) => {
 

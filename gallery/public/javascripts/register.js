@@ -22,6 +22,7 @@
             document.getElementById('waiting-register-response').style.display = 'none';
             let response = JSON.parse(data);
             alert (response.message);
+            window.location.replace(window.location.origin + '/');
         })
         .catch(error => {
             document.getElementById('waiting-register-response').style.display = 'none';
