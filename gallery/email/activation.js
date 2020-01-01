@@ -4,8 +4,8 @@ var renderTemplate = require('./templates/render');
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'galleryart@gmail.com',
-        pass: 'nuggetsession!0'
+        user: process.env.APP_EMAIL,
+        pass: process.env.APP_EMAIL_PASSWORD
     }
 });
 
@@ -14,7 +14,7 @@ const sendActivationRequest = (activationCode, userInfo) => {
     userInfo.activationCode = activationCode;
 
     var mailOptions = {
-        from: 'galleryart@gmail.com',
+        from: process.env.APP_EMAIL,
         to: userInfo.email,
         subject: 'Activation Account - Gallery Art',
         html: renderTemplate('./email/templates/activate.html', userInfo)
@@ -32,7 +32,7 @@ const sendActivationRequest = (activationCode, userInfo) => {
 const sendSucessfulActivation = (userInfo) => {
 
     var mailOptions = {
-        from: 'galleryart@gmail.com',
+        from: process.env.APP_EMAIL,
         to: userInfo.email,
         subject: 'Sucessfully Activation Account - Gallery Art',
         html: renderTemplate('./email/templates/sucessful-activation.html', userInfo)

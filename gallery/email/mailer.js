@@ -1,13 +1,13 @@
 const nodemailer = require('nodemailer');
 
-const companyEmail = 'ralphadp@gmail.com';
+const companyEmail = process.env.APP_EMAIL;
 
 let transport = nodemailer.createTransport({
-    host: 'smtp.mailtrap.io',
+    host: process.env.MAILTRAP_HOST,
     port: 2525,
     auth: {
-       user: 'd5f012266dac6a',
-       pass: '8bb5cd4b841330'
+       user: process.env.MAILTRAP_USER,
+       pass: process.env.MAILTRAP_PASSWORD
     }
 });
 
