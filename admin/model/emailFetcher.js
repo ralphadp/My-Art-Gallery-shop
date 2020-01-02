@@ -4,13 +4,13 @@ var {EventEmitter} = require('events');
 
 /*TODO: need to hide the mailtrap.io token and set it from configuration*/
 const headers = {
-    "Api-Token": "c91bb9378f5f7860b45ae4a1f0b29fab",
+    "Api-Token": process.env.MAILTRAP_API_TOKEN,
     "Accept": "application/json",
     "Content-Type": "application/json"
 };
 
 const txtHeaders = {
-    "Api-Token": "c91bb9378f5f7860b45ae4a1f0b29fab",
+    "Api-Token": process.env.MAILTRAP_API_TOKEN,
     "Accept": "text/plain",
 };
 

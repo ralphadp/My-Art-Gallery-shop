@@ -122,25 +122,6 @@ router.get('/', tokenCheck, function(req, res, next) {
 
 });
 
-router.get('/sms-test', function(req, res, next) {
-  const accountSid = 'ACe26cde0d05a99da7b947f5b66e63e490';
-  const authToken = '66b2bac3daf56a062abf154f100142d4';
-  const client = require('twilio')(accountSid, authToken);
-console.log('sending sms');
-  client.messages
-      .create({body: 'Hi there!', from: '+59177989726', to: '+59177989726'})
-      .then(message => console.log(message.sid));
-
-  /*client.messages
-      .create({
-         body: 'Phantom Menace was clearly the best of the prequel trilogy.',
-         messagingServiceSid: 'MG9752274e9e519418a7406176694466fa',
-         to: '+59177989726'
-       })
-      .then(message => console.log(message.sid));*/
-});
-
-
 /* GET documents page. */
 router.get('/documents', tokenCheck, function(req, res, next) {
     fetch('http://localhost:8888/api/summary/')
@@ -188,13 +169,13 @@ router.get('/messages', tokenCheck, function(req, res, next) {
 
   /*TODO: need to hide the mailtrap.io token and set it from configuration*/
   let headers = {
-    "Api-Token": "c91bb9378f5f7860b45ae4a1f0b29fab",
+    "Api-Token": process.env.MAILTRAP_API_TOKEN,
     "Accept": "application/json",
     "Content-Type": "application/json"
   };
 
   let txtHeaders = {
-    "Api-Token": "c91bb9378f5f7860b45ae4a1f0b29fab",
+    "Api-Token": process.env.MAILTRAP_API_TOKEN,
     "Accept": "text/plain",
   };
 

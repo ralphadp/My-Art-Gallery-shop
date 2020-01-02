@@ -6,6 +6,8 @@ var logger = require('morgan');
 const session = require('express-session');
 const {emailEventEmitter} = require('./model/emailFetcher');
 
+require('dotenv').config();
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var piecesRouter = require('./routes/pieces');
