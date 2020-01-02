@@ -1,9 +1,10 @@
 var express = require('express');
 const {keys, middlewareManager} = require('../helpers/middleware/manager');
+var tokenCheck = require('../helpers/tokenCheck');
 var router = express.Router();
 
 /* GET index page. */
-router.get('/', function(req, res, next) {
+router.get('/', tokenCheck, function(req, res, next) {
 
     middlewareManager({
         key: keys.INDEX,
@@ -24,7 +25,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET logout page. */
-router.get('/logout', function(req, res, next) {
+router.get('/logout', tokenCheck, function(req, res, next) {
 
     res.clearCookie('access_token');
     req.session.destroy();

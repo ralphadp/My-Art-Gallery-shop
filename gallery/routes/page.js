@@ -1,9 +1,10 @@
 var express = require('express');
+var tokenCheck = require('../helpers/tokenCheck');
 const {keys, middlewareManager} = require('../helpers/middleware/manager');
 var router = express.Router();
 
 /* GET page/{index} Page. */
-router.get('/:indexPage', function(req, res, next) {
+router.get('/:indexPage', tokenCheck, function(req, res, next) {
 
     middlewareManager({
       key: keys.INDEX,

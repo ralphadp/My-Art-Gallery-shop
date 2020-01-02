@@ -1,10 +1,11 @@
 var express = require('express');
+var tokenCheck = require('../model/tokenCheck');
 var {categories} = require('galleryRepository');
 var ConfigHandler = require('../model/configHandler');
 var router = express.Router();
 
 /* GET categories listing. */
-router.get('/', function(req, res, next) {
+router.get('/', tokenCheck, function(req, res, next) {
 
   const response = req.cookies.category_response || null;
   res.clearCookie('category_response');
@@ -24,7 +25,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET categories 'add'. */
-router.get('/add', function(req, res, next) {
+router.get('/add', tokenCheck, function(req, res, next) {
   const response = req.cookies.category_response || null;
   res.clearCookie('category_response');
   res.render(
@@ -39,7 +40,7 @@ router.get('/add', function(req, res, next) {
 });
 
 /* POST categories 'save'. */
-router.post('/save', function(req, res, next) {
+router.post('/save', tokenCheck, function(req, res, next) {
 
   const category = new categories();
 
@@ -71,7 +72,7 @@ router.post('/save', function(req, res, next) {
 });
 
 /* POST categories 'save'. */
-router.post('/update', function(req, res, next) {
+router.post('/update', tokenCheck, function(req, res, next) {
 
   const category = new categories();
 
@@ -110,7 +111,7 @@ router.post('/update', function(req, res, next) {
 });
 
 /* GET categories 'update'. */
-router.get('/edit/:id/:path/:name', function(req, res, next) {
+router.get('/edit/:id/:path/:name', tokenCheck, function(req, res, next) {
 
   const response = req.cookies.category_response || null;
   res.clearCookie('category_response');
@@ -129,7 +130,7 @@ router.get('/edit/:id/:path/:name', function(req, res, next) {
 });
 
 /* POST categories 'delete'. */
-router.post('/delete', function(req, res, next) {
+router.post('/delete', tokenCheck, function(req, res, next) {
 
   const category = new categories();
 
@@ -155,7 +156,7 @@ router.post('/delete', function(req, res, next) {
 });
 
 /* GET categories 'search'. */
-router.get('/search/:textPattern', function(req, res, next) {
+router.get('/search/:textPattern', tokenCheck, function(req, res, next) {
 
   const response = req.cookies.category_response || null;
   res.clearCookie('category_response');

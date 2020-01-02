@@ -1,9 +1,10 @@
 var express = require('express');
 const {carts} = require('galleryRepository');
+var tokenCheck = require('../helpers/tokenCheck');
 var router = express.Router();
 
 /* GET Add to cart. */
-router.get('/add-to/:pieceId', function(req, res, next) {
+router.get('/add-to/:pieceId', tokenCheck, function(req, res, next) {
 
     let response;
     try {
@@ -44,7 +45,7 @@ router.get('/add-to/:pieceId', function(req, res, next) {
 });
 
 /* GET Remove from cart. */
-router.get('/remove-from/:pieceId', function(req, res, next) {
+router.get('/remove-from/:pieceId', tokenCheck, function(req, res, next) {
 
     let response;
     try {

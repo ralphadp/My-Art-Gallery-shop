@@ -20,13 +20,14 @@ router.get('/check/:token', function(req, res, next) {
                 (error, decoded) => {
                     if (error) {
                         res.json({
-                            response: false,
+                            success: false,
                             message: 'Token is not valid'
                         });
                     } else {
                         console.log(decoded);
                         res.json({
-                            response: true,
+                            success: true,
+                            username: decoded.username,
                             message: 'Token is valid'
                         });
                     }
@@ -45,6 +46,8 @@ router.get('/check/:token', function(req, res, next) {
         });
     }
 });
+
+/*TODO: create a route POST to request user info, to avoid client session use */
 
 /* GET generate token route api. */
 router.get('/generate/:username/expiration/:hours', function(req, res, next) {

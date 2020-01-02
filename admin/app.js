@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
 const {emailEventEmitter} = require('./model/emailFetcher');
 
 var indexRouter = require('./routes/index');
@@ -14,7 +15,6 @@ var messagesRouter = require('./routes/messages');
 
 var app = express();
 
-global.currentAdmin = 'lbenedite1';
 global.currentEmailCounter = 0;
 
 // view engine setup
@@ -26,6 +26,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'adminGalleryArtSession', 
+  resave: true,
+  saveUninitialized: true
+}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

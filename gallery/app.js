@@ -8,7 +8,6 @@ const session = require('express-session');
 require('dotenv').config();
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var learningRouter = require('./routes/learning');
 var writeUsRouter = require('./routes/write-us');
 var pageRouter = require('./routes/page');
@@ -37,7 +36,6 @@ app.use(session({
 }));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/learning', learningRouter);
 app.use('/write-us', writeUsRouter);
 app.use('/page', pageRouter);

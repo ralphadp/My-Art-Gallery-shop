@@ -1,9 +1,10 @@
 var express = require('express');
+var tokenCheck = require('../helpers/tokenCheck');
 var mailer = require('../email/mailer');
 var router = express.Router();
 
 /* POST send an email message. */
-router.post('/', function(req, res, next) {
+router.post('/', tokenCheck, function(req, res, next) {
 
     let response;
 

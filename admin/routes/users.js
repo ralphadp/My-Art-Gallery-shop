@@ -1,11 +1,12 @@
 var express = require('express');
+var tokenCheck = require('../model/tokenCheck');
 var {admins, users} = require('galleryRepository');
 var ConfigHandler = require('../model/configHandler');
 var Util = require('../model/util');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', tokenCheck, function(req, res, next) {
 
   const response = req.cookies.user_response || null;
   res.clearCookie('user_response');
@@ -25,7 +26,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET admin listing. */
-router.get('/admin', function(req, res, next) {
+router.get('/admin', tokenCheck, function(req, res, next) {
 
   const response = req.cookies.admin_response || null;
   res.clearCookie('admin_response');
@@ -45,7 +46,7 @@ router.get('/admin', function(req, res, next) {
 });
 
 /* GET new users form. */
-router.get('/new', function(req, res, next) {
+router.get('/new', tokenCheck, function(req, res, next) {
     const response = req.cookies.user_response || null;
     res.clearCookie('user_response');
 
@@ -60,7 +61,7 @@ router.get('/new', function(req, res, next) {
 });
 
 /* GET new admin form. */
-router.get('/admin/new', function(req, res, next) {
+router.get('/admin/new', tokenCheck, function(req, res, next) {
   const response = req.cookies.admin_response || null;
   res.clearCookie('admin_response');
 
@@ -75,7 +76,7 @@ router.get('/admin/new', function(req, res, next) {
 });
 
 /* POST users 'save'. */
-router.post('/save', function(req, res, next) {
+router.post('/save', tokenCheck, function(req, res, next) {
 
   const user = new users();
 
@@ -118,7 +119,7 @@ router.post('/save', function(req, res, next) {
 });
 
 /* POST admins 'save'. */
-router.post('/admin/save', function(req, res, next) {
+router.post('/admin/save', tokenCheck, function(req, res, next) {
 
   const admin = new admins();
 
@@ -163,7 +164,7 @@ router.post('/admin/save', function(req, res, next) {
 });
 
 /* GET user 'edit'. */
-router.get('/edit/:id', function(req, res, next) {
+router.get('/edit/:id', tokenCheck, function(req, res, next) {
 
   const response = req.cookies.user_response || null;
   res.clearCookie('user_response');
@@ -194,7 +195,7 @@ router.get('/edit/:id', function(req, res, next) {
 });
 
 /* POST user 'update'. */
-router.post('/update', function(req, res, next) {
+router.post('/update', tokenCheck, function(req, res, next) {
 
   const user = new users();
 
@@ -253,7 +254,7 @@ router.post('/update', function(req, res, next) {
 });
 
 /* GET admin 'edit'. */
-router.get('/admin/edit/:id', function(req, res, next) {
+router.get('/admin/edit/:id', tokenCheck, function(req, res, next) {
 
   const response = req.cookies.admin_response || null;
   res.clearCookie('admin_response');
@@ -284,7 +285,7 @@ router.get('/admin/edit/:id', function(req, res, next) {
 });
 
 /* POST admin 'update'. */
-router.post('/admin/update', function(req, res, next) {
+router.post('/admin/update', tokenCheck, function(req, res, next) {
 
   const admin = new admins();
 
@@ -349,7 +350,7 @@ router.post('/admin/update', function(req, res, next) {
 });
 
 /* POST users 'delete'. */
-router.post('/delete', function(req, res, next) {
+router.post('/delete', tokenCheck, function(req, res, next) {
 
   const user = new users();
 
@@ -376,7 +377,7 @@ router.post('/delete', function(req, res, next) {
 });
 
 /* POST admin 'delete'. */
-router.post('/admin/delete', function(req, res, next) {
+router.post('/admin/delete', tokenCheck, function(req, res, next) {
 
   const admin = new admins();
 
@@ -402,7 +403,7 @@ router.post('/admin/delete', function(req, res, next) {
 });
 
 /* GET users 'search'. */
-router.get('/search/:textPattern', function(req, res, next) {
+router.get('/search/:textPattern', tokenCheck, function(req, res, next) {
 
   const response = req.cookies.user_response || null;
   res.clearCookie('user_response');
@@ -428,7 +429,7 @@ router.get('/search/:textPattern', function(req, res, next) {
 });
 
 /* GET admin 'search'. */
-router.get('/admin/search/:textPattern', function(req, res, next) {
+router.get('/admin/search/:textPattern', tokenCheck, function(req, res, next) {
 
   const response = req.cookies.admin_response || null;
   res.clearCookie('admin_response');

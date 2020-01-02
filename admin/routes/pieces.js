@@ -1,11 +1,12 @@
 var express = require('express');
+var tokenCheck = require('../model/tokenCheck');
 var {pieces} = require('galleryRepository');
 var Util = require('../model/util');
 var ConfigHandler = require('../model/configHandler');
 var router = express.Router();
 
 /* GET pieces listing. */
-router.get('/', function(req, res, next) {
+router.get('/', tokenCheck, function(req, res, next) {
 
   const response = req.cookies.piece_response || null;
   res.clearCookie('piece_response');
@@ -25,7 +26,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET pieces 'add'. */
-router.get('/add', function(req, res, next) {
+router.get('/add', tokenCheck, function(req, res, next) {
 
     const response = req.cookies.piece_response || null;
     res.clearCookie('piece_response');
@@ -45,7 +46,7 @@ router.get('/add', function(req, res, next) {
 });
 
 /* POST pieces 'save'. */
-router.post('/save', function(req, res, next) {
+router.post('/save', tokenCheck, function(req, res, next) {
 
   const piece = new pieces();
 
@@ -83,7 +84,7 @@ router.post('/save', function(req, res, next) {
 });
 
 /* GET pieces 'edit'. */
-router.get('/edit/:id', function(req, res, next) {
+router.get('/edit/:id', tokenCheck, function(req, res, next) {
 
   const response = req.cookies.piece_response || null;
   res.clearCookie('piece_response');
@@ -116,7 +117,7 @@ router.get('/edit/:id', function(req, res, next) {
 });
 
 /* POST pieces 'update'. */
-router.post('/update', function(req, res, next) {
+router.post('/update', tokenCheck, function(req, res, next) {
 
   const piece = new pieces();
 
@@ -170,7 +171,7 @@ router.post('/update', function(req, res, next) {
 });
 
 /* POST pieces 'delete'. */
-router.post('/delete', function(req, res, next) {
+router.post('/delete', tokenCheck, function(req, res, next) {
 
   const piece = new pieces();
 
@@ -197,7 +198,7 @@ router.post('/delete', function(req, res, next) {
 });
 
 /* GET pieces 'search'. */
-router.get('/search/:textPattern', function(req, res, next) {
+router.get('/search/:textPattern', tokenCheck, function(req, res, next) {
 
   const response = req.cookies.piece_response || null;
   res.clearCookie('piece_response');

@@ -1,10 +1,11 @@
 var express = require('express');
+var tokenCheck = require('../helpers/tokenCheck');
 const {fromCategoryPathToCategoryName} = require('../helpers/middleware/tasks/util/utilities');
 const {keys, middlewareManager} = require('../helpers/middleware/manager');
 var router = express.Router();
 
 /* GET category/<type> page. */
-router.get('/:categoryName', function(req, res, next) {
+router.get('/:categoryName', tokenCheck, function(req, res, next) {
 
   const categoryCode = req.params.categoryName;
 
@@ -29,7 +30,7 @@ router.get('/:categoryName', function(req, res, next) {
 });
 
 /* GET category/<type>/page/<number> page. */
-router.get('/:categoryName/page/:indexPage', function(req, res, next) {
+router.get('/:categoryName/page/:indexPage', tokenCheck, function(req, res, next) {
 
   const categoryCode = req.params.categoryName;
 

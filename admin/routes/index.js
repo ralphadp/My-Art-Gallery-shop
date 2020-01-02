@@ -1,6 +1,7 @@
 var express = require('express');
 var {admins, users, pieces, config} = require('galleryRepository');
 var Util = require('../model/util');
+var tokenCheck = require('../model/tokenCheck');
 var fetch = require('node-fetch');
 var router = express.Router();
 
@@ -21,6 +22,7 @@ router.get('/login', function(req, res, next) {
 /* POST verification route. */
 router.post('/login/verification', function(req, res, next) {
 
+    /*TODO: Clean username and password */
     const user = req.body.user.trim();
     const pass = req.body.pass.trim();
     const admin = new admins();
@@ -28,12 +30,21 @@ router.post('/login/verification', function(req, res, next) {
     admin.verify(user, pass).then(result => {
         console.log(result);
         if (result.length) {
-            console.log(`... App will send id [${result[0].id}] to JWT service if it is ok then will response its token`);
-            const jwtToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
-            const jwtCookie = `access_token=${jwtToken}; Path=/; Max-Age=604800; HttpOnly;`;
-
-            res.header("Set-Cookie", jwtCookie);
-            res.redirect('/');
+            fetch(`http://localhost:3333/api/generate/${result[0].username}/expiration/1h`)
+            .then(jwtResponse => jwtResponse.json())
+            .then(jwtResponse => {
+                if (jwtResponse.success) {
+                    const jwtCookie = `auth_token=${jwtResponse.token}; Path=/; Max-Age=604800; HttpOnly;`;
+                    res.header("Set-Cookie", jwtCookie);
+                } 
+                console.log('jwt generate response:', jwtResponse.message);
+                res.redirect('/');
+            }).catch(error => {
+                console.log(error);
+                const response = 'Could not get authorization from jwt remote server, try later';
+                res.header("Set-Cookie", `authorization_response=${response}; Path=/; Max-Age=5000; HttpOnly;`);
+                res.redirect('/login');
+            })
         } else {
             const response = 'The username or password is incorrect';
             res.header("Set-Cookie", `authorization_response=${response}; Path=/; Max-Age=5000; HttpOnly;`);
@@ -44,15 +55,16 @@ router.post('/login/verification', function(req, res, next) {
 });
 
 /* GET login page. */
-router.get('/logout', function(req, res, next) {
+router.get('/logout', tokenCheck, function(req, res, next) {
   
-  res.clearCookie('access_token');
+  res.clearCookie('auth_token');
+  req.session.destroy();
   res.redirect('/login');
 
 });
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', tokenCheck, function(req, res, next) {
 
   console.log('token:', req.cookies.access_token);
 
@@ -130,7 +142,7 @@ console.log('sending sms');
 
 
 /* GET documents page. */
-router.get('/documents', function(req, res, next) {
+router.get('/documents', tokenCheck, function(req, res, next) {
     fetch('http://localhost:8888/api/summary/')
     .then(response => response.json())
     .then(body => {
@@ -145,12 +157,12 @@ router.get('/documents', function(req, res, next) {
 });
 
 /* GET profile page. */
-router.get('/profile', function(req, res, next) {
+router.get('/profile', tokenCheck, function(req, res, next) {
   const response = req.cookies.admin_response || null;
   res.clearCookie('admin_response');
 
   admin = new admins();
-  admin.getByUsername(global.currentAdmin).then((result) => {
+  admin.getByUsername(req.session.adminUsername).then((result) => {
     let profile = null;
 
     if (result.length) {
@@ -172,7 +184,7 @@ router.get('/profile', function(req, res, next) {
 });
 
 /* GET messages page. */
-router.get('/messages', function(req, res, next) {
+router.get('/messages', tokenCheck, function(req, res, next) {
 
   /*TODO: need to hide the mailtrap.io token and set it from configuration*/
   let headers = {
@@ -301,7 +313,7 @@ router.get('/messages', function(req, res, next) {
 });
 
 /* GET configuration page. */
-router.get('/configuration', function(req, res, next) {
+router.get('/configuration', tokenCheck, function(req, res, next) {
 
   const response = req.cookies.option_response || null;
   res.clearCookie('option_response');
@@ -320,7 +332,7 @@ router.get('/configuration', function(req, res, next) {
   
 });
 
-router.post('/configuration/update', function(req, res, next) {
+router.post('/configuration/update', tokenCheck, function(req, res, next) {
   const oConfig = new config;
 
   let response = {};

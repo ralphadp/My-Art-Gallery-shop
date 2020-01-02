@@ -1,9 +1,10 @@
 var express = require('express');
+var tokenCheck = require('../helpers/tokenCheck');
 const {keys, middlewareManager} = require('../helpers/middleware/manager');
 var router = express.Router();
 
 /* GET write us Page. */
-router.get('/', function(req, res, next) {
+router.get('/', tokenCheck, function(req, res, next) {
 
     middlewareManager({
       key: keys.WRITEUS,

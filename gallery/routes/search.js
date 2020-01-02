@@ -1,9 +1,10 @@
 var express = require('express');
+var tokenCheck = require('../helpers/tokenCheck');
 const {keys, middlewareManager} = require('../helpers/middleware/manager');
 var router = express.Router();
 
 /* GET search phrase in DB. */
-router.get('/:phrase', function(req, res, next) {
+router.get('/:phrase', tokenCheck, function(req, res, next) {
 
     const phraseList = req.params.phrase.split('+');
 

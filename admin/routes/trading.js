@@ -1,9 +1,10 @@
 var express = require('express');
+var tokenCheck = require('../model/tokenCheck');
 var {carts} = require('galleryRepository');
 var router = express.Router();
 
-/* GET Trading listing. */
-router.get('/', function(req, res, next) {
+/* GET Carts listing. */
+router.get('/', tokenCheck, function(req, res, next) {
   const possibleTrades = new carts();
   possibleTrades.getAll().then((result) => {
       res.render(
@@ -17,8 +18,8 @@ router.get('/', function(req, res, next) {
   });
 });
 
-/* GET Trading 'statistics'. */
-router.get('/statistics', function(req, res, next) {
+/* GET Carts 'statistics'. */
+router.get('/statistics', tokenCheck, function(req, res, next) {
 
   const cart = new carts();
 

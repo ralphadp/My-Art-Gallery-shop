@@ -1,9 +1,10 @@
 var express = require('express');
+var tokenCheck = require('../model/tokenCheck');
 var Util = require('../model/util');
 var router = express.Router();
 
 /* GET checking and saving for message readed. */
-router.get('/reading/:code', function(req, res, next) {
+router.get('/reading/:code', tokenCheck, function(req, res, next) {
     const CODE = req.params.code;
 
     Util.getValueOfStorage(CODE, (value) => {

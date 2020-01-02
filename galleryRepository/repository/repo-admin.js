@@ -199,7 +199,7 @@ class Admins {
      * @param {*} pass 
      */
     verify(user, pass) {
-        let sql = "SELECT id FROM admin WHERE username = ? AND password = ?";
+        let sql = "SELECT id, username FROM admin WHERE username = ? AND password = ?";
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [user, pass], (err, result) => {
