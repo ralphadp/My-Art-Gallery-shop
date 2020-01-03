@@ -9,8 +9,8 @@
 </div>
 <nav class="menu">
     <div 
-        class="item" id="open-logout"><a>LogOut</a></div><div 
-        class="item" id="open-picked"><a>Picking</a></div><div 
+        class="item" id="open-logout"><a>Logout</a></div><div 
+        class="item" id="open-picked"><a>My cart</a></div><div 
         class="item" id="open-list"><a>List</a></div><div 
         class="item" id="register"><a href="/bought/">Bought</a></div><div 
         class="item"><a href="/learning/">Learning</a></div><div 
@@ -24,3 +24,4 @@
             </a>
         </div>
 </nav>
+<script src="https://www.paypal.com/sdk/js?client-id=<%= process.env.SB_CLIENT_ID %>"></script>

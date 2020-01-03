@@ -1,64 +1,64 @@
-<div class="fog-frame-x" id="piece-form">
-    <section class="frame">
-        <div id="piece-info">
-            <div class="row">
-                <div class="label">Name:</div><div class="content" id="pieceName"></div>
-            </div>
-            <div class="row">
-                <div class="label">Artist:</div><div class="content" id="pieceArtist"></div>
-            </div>
-            <div class="row">
-                <div class="label">Type:</div><div class="content" id="pieceType"></div>
-            </div>
-            <div class="row">
-                <div class="label">Date:</div><div class="content" id="pieceDate"></div>
-            </div>
-            <div class="row">
-                <div class="label">Size:</div><div class="content" id="pieceSize"></div>
-            </div>
-            <div class="row">
-                <div class="label">Price:</div><div class="content" id="piecePrice"></div>
-            </div>
-            <div class="row">
-                <div class="label">State:</div><div class="content" id="piecePicked"></div>
-            </div>
-        </div>
-    </section>
-</div>
-
-<div class="fog-frame-x" id="piece-maximized">
-    <section class="photo">
-        <img id="photo-image" >
-    </section>
-</div>
-
 <div class="fog-frame-x" id="list">
     <section class="frame">
         <div id="available-list-of-pieces">
             <h3>ALL AVAILABLE PIECES</h3>
-            <%  for (let key in piecePhoto) { 
-                    if (piecePhoto.hasOwnProperty(key)) { 
-                        const item = piecePhoto[key];
+            <% for (let key in piecePhoto) { 
+                   if (piecePhoto.hasOwnProperty(key)) { 
+                       const item = piecePhoto[key];
             %>
-                    <div class="list-item-row" id="<%= item.id %>">
-                        <div id="a-piece-name"><%= item.name %></div>
-                        <div id="a-artist"><%= item.artist %></div>
-                    </div>
-            <%  }} %>
-            
-        </div>
+                   <div class="list-item-row" id="<%= item.id %>">
+                       <div id="a-piece-name"><%= item.name %></div>
+                       <div id="a-artist"><%= item.artist %></div>
+                   </div>
+            <% }}; %>
+         </div>
     </section>
     </div>
 
 <div class="fog-frame-x" id="cart-picking">
     <section class="frame">
         <div id="picked-pieces">
-            <h3>In-cart pieces</h3>
-            <% for(let index = 0; index < cart.length; index++) { %>
-                <div class="pick-item-row"><input type="checkbox" id="<%= cart[index].id %>" checked><%= cart[index].name %></div>
-            <% } %>
-            <button id="update-picked">Update</button>
+            <h3>My Cart</h3>
+            <% cart.forEach (cartItem => { %>
+                <div class="pick-item-row">
+                    <div class="attach_cart_item"><input type="checkbox" id="<%= cartItem.id %>" amount="<%= cartItem.USDprice %>" class="attach-cart-item-checkbox" <%= cartItem.active ? 'checked' : '' %>></div>
+                    <div class="cart_item_name"><%= cartItem.name %></div>
+                    <div class="origin_cart_item_price"><%= cartItem.price %> <%= cartItem.currency %></div>
+                    <div class="cart_item_price"><%= cartItem.USDprice %> USD</div>
+                </div>
+            <% }); %>
+            <div class="pick-item-row total" id="picked-total" list="<%= purchaseItems %>" paused="<%= purchasePaused %>" unchecked="<%= unchecked %>" checked="<%= checked %>"><span id="amountSum" sum="<%= totalPurchase %>">Total: <%= totalPurchase %> USD</span></div>
+            <div id="paypal-button-container"></div>
         </div>
+        <script>
+            const purchaseUnits = JSON.parse(`<%- purchaseItems %>`);
+
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [
+                            purchaseUnits[0]
+                        ]
+                    });
+                },
+                onApprove: function(data, actions) {
+                     return actions.order.capture().then(function(details) {
+                        alert('Transaction [' + data.orderID + '] completed by ' + details.payer.name.given_name);
+                        /* return request('/bought/save', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify([{
+                                orderId: data.orderID,
+                                pieceId: 'SelectedId',
+                                userExternalId: currentUser.userExtId    
+                            }])
+                        });*/
+                    });
+                }
+            }).render('#paypal-button-container');
+        </script>
     </section>
 </div>
 

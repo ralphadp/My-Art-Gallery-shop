@@ -5,6 +5,7 @@ CREATE TABLE cart (
 	userId VARCHAR(50),
 	pieceId VARCHAR(40),
 	pickedAt datetime,
+	active int(11) DEFAULT 1,
 	INDEX cart_index(id)
 );
 

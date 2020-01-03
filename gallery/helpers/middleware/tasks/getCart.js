@@ -3,7 +3,8 @@ const {carts} = require('galleryRepository');
 const getCart = (context, next) => {
 
     const oCart = new carts();
-    oCart.getById(context.currentUser.userExtId)
+
+    oCart.getByUserId(context.currentUser.userExtId)
     .then(picked => {
 
         context.cart = picked;

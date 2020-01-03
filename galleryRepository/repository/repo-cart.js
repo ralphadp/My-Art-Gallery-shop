@@ -3,7 +3,6 @@ var sqlConn = require('../database/db');
 class Cart {
 
     constructor() {
-
     }
     
     /**
@@ -11,8 +10,8 @@ class Cart {
      * 
      * @param {*} userId 
      */
-    getById(userId) {
-        let sql = 'SELECT cart.id, cart.userId, pieces.itemId as pieceId, pieces.name, pickedAt FROM cart INNER JOIN pieces ON cart.pieceId = pieces.itemId WHERE userId = ?';
+    getByUserId(userId) {
+        let sql = 'SELECT cart.id, cart.userId, pieces.itemId as pieceId, pieces.name, cart.pickedAt, pieces.price, pieces.currency, cart.active  FROM cart INNER JOIN pieces ON cart.pieceId = pieces.itemId WHERE userId = ?';
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [userId], (err, result) => {
@@ -29,7 +28,7 @@ class Cart {
      * Get all the possible trades from all the users 
      */
     getAll() {
-        let sql = "SELECT cart.id, cart.userId, pieces.itemId as pieceId, pieces.name, pickedAt FROM cart INNER JOIN pieces ON cart.pieceId = pieces.itemId";
+        let sql = "SELECT cart.id, cart.userId, pieces.itemId as pieceId, pieces.name, pieces.pickedAt, cart.active FROM cart INNER JOIN pieces ON cart.pieceId = pieces.itemId";
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, (err, result) => {
@@ -120,6 +119,48 @@ class Cart {
                 }
             });
         });
+    }
+
+    /**
+     * Used to change the active column in batch
+     * @param {*} state 
+     * @param {*} list 
+     */
+    updateActive(state, list) {
+        let elements = '-1';
+        if (list && list.length) {
+            elements = list.join(',');    
+        }
+
+        let sql = `UPDATE cart SET active = ${state} WHERE id IN (${elements})`;
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    /**
+     * Set to inactive some cart elements
+     * @param {*} inactiveList 
+     */
+    updateToInactive(inactiveList) {
+
+        return this.updateActive(0, inactiveList);
+    }
+
+    /**
+     * Update to Active
+     * @param {*} activeList 
+     */
+    updateToActive(activeList) {
+
+        return this.updateActive(1, activeList);
     }
 }
 

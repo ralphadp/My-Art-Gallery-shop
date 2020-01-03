@@ -17,6 +17,7 @@ var emailerRouter = require('./routes/emailer');
 var searchRouter = require('./routes/search');
 var registerRouter = require('./routes/register');
 var loginRouter = require('./routes/login');
+var boughtRouter = require('./routes/bought');
 
 var app = express();
 
@@ -30,9 +31,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  secret: 'galleryArtSession', 
-  resave: true,
-  saveUninitialized: true
+	secret: 'galleryArtSession', 
+	resave: true,
+	saveUninitialized: true
 }));
 
 app.use('/', indexRouter);
@@ -45,6 +46,7 @@ app.use('/send-message', emailerRouter);
 app.use('/search', searchRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
+app.use('/bought', boughtRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

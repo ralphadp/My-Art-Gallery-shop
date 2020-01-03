@@ -1,0 +1,120 @@
+{
+  "purchased": [
+    {
+      "custom_id": "26b22d6c-d112-410a-8192-7cd6d7f3e90b",
+      "description": "Eichhornia paniculata (Spreng.) Solms",
+      "invoice_id": "03-028-2484",
+      "amount": {
+        "currency_code": "USD",
+        "value": "110.33"
+      }
+    },
+    {
+      "custom_id": "6df14d69-c39e-49a3-a01e-fa7bbd4771c5",
+      "description": "Bletia purpurea (Lam.) DC.",
+      "invoice_id": "03-028-2484",
+      "amount": {
+        "currency_code": "USD",
+        "value": "318.60"
+      }
+    },
+    {
+      "custom_id": "e934b117-bb36-4e51-829e-4e4ee93d6987",
+      "description": "Sedum nanifolium Fröd.",
+      "invoice_id": "03-028-2484",
+      "amount": {
+        "currency_code": "USD",
+        "value": "584.60"
+      }
+    },
+    {
+      "custom_id": "f3e9cfa9-82e5-40d7-868a-58a30a6e78ac",
+      "description": "Dalea neomexicana (A. Gray) Cory var. neomexicana",
+      "invoice_id": "03-028-2484",
+      "amount": {
+        "currency_code": "USD",
+        "value": "93.34"
+      }
+    },
+    {
+      "custom_id": "1ddff1bf-26ac-4968-ba53-34477938fb5a",
+      "description": "Phryma L.",
+      "invoice_id": "03-028-2484",
+      "amount": {
+        "currency_code": "USD",
+        "value": "106.84"
+      }
+    },
+    {
+      "custom_id": "3d73f473-f41f-4af0-af09-ade890906d8b",
+      "description": "Primula tschuktschorum Kjellm.",
+      "invoice_id": "03-028-2484",
+      "amount": {
+        "currency_code": "USD",
+        "value": "143.80"
+      }
+    },
+    {
+      "custom_id": "bf630f11-b930-47f3-b661-15aa640b7431",
+      "description": "Tripterocalyx carneus (Greene) L.A. Galloway var. wootonii (Standl.) L.A. Galloway",
+      "invoice_id": "03-028-2484",
+      "amount": {
+        "currency_code": "USD",
+        "value": "565.90"
+      }
+    },
+    {
+      "custom_id": "fd677751-7a54-4b54-82bd-ad9944482311",
+      "description": "Desmatodon latifolius (Hedw.) Brid.",
+      "invoice_id": "03-028-2484",
+      "amount": {
+        "currency_code": "USD",
+        "value": "199.00"
+      }
+    },
+    {
+      "custom_id": "04c54a59-7d2c-4e95-a025-60860b6510c0",
+      "description": "Stereocaulon grande (H. Magn.) H. Magn.",
+      "invoice_id": "03-028-2484",
+      "amount": {
+        "currency_code": "USD",
+        "value": "527.10"
+      }
+    },
+    {
+      "custom_id": "1d2d6458-eff0-4efb-ae40-ff46e7fe02cc",
+      "description": "Dacrycarpus dacrydioides (A. Rich.) de Laub.",
+      "invoice_id": "03-028-2484",
+      "amount": {
+        "currency_code": "USD",
+        "value": "168.10"
+      }
+    },
+    {
+      "custom_id": "29664d75-1c85-4845-94e6-b02ba17194bd",
+      "description": "Lepidium ramosissimum A. Nelson var. divergens (Osterh.) Rollins",
+      "invoice_id": "03-028-2484",
+      "amount": {
+        "currency_code": "USD",
+        "value": "714.50"
+      }
+    }
+  ],
+  "purchasePaused": [
+    null,
+    {
+      "custom_id": "12ceb724-cca4-4ef5-8395-bf78ec64a4bb",
+      "description": "Eriogonum umbellatum Torr. var. minus I.M. Johnst.",
+      "invoice_id": "03-028-2484",
+      "amount": {
+        "currency_code": "USD",
+        "value": "557.10"
+      }
+    },
+    null,
+    null,
+    null,
+    null,
+    null
+  ]
+}

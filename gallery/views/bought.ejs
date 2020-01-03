@@ -14,15 +14,12 @@
     </header>
     <div id="banner" class="banner-main"></div>
 
-    <% include ./partials/frames-unregister %>
-    <% if (currentUser.userExtId) { %>
-        <% include ./partials/frames %>
-    <% } %>
+    <% include ./partials/frames %>
 
     <% include ./partials/social %>
 
     <article class="body-content">
-        <% include ./bodys/main %>
+        <% include ./bodys/checkout-orders %>
     </article>
 
     <article class="body-content">
@@ -37,12 +34,7 @@
 
     <% include ./partials/svg %>
 
-    <script type="text/javascript" src="/javascripts/dialog/foggy.js"></script>
-    <script type="text/javascript" src="/javascripts/dialog/frame.js"></script>
-    <script type="text/javascript" src="/javascripts/dialog/photo.js"></script>
-    <script type="text/javascript" src="/javascripts/events-index.js"></script>
     <script type="text/javascript" src="/javascripts/search.js"></script>
-
     <% if (currentUser.userExtId) { %>
         <script type="text/javascript" src="/javascripts/events-purchase.js"></script>
         <script type="text/javascript" src="/javascripts/logged-in-features.js"></script>

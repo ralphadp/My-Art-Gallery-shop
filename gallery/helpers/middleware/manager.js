@@ -8,6 +8,7 @@ const getPiecesPageItems = require("./tasks/getPiecesPageItems");
 const calculateButtons = require("./tasks/calculateButtons");
 const getCategories = require("./tasks/getCategories");
 const getCart = require("./tasks/getCart");
+const addCartToPaypalPurchase = require("./tasks/addCartToPaypalPurchase");
 
 const async = require('async');
 
@@ -15,7 +16,8 @@ const keys = {
     INDEX: 'index',
     LEARNING: 'learning',
     WRITEUS: 'write-us',
-    SEARCHING: 'searching'
+    SEARCHING: 'searching',
+	BOUGHT: 'bought'
 };
 
 /**
@@ -42,7 +44,7 @@ let middlewareManager = (params) => {
             words: params.wordPattern || ''
         };
 
-        let resolve = params.resolve || ((error, payload) => { console.log('resolve() function not defined')});
+        let resolve = params.resolve || ((error, payload) => {console.log('resolve() function not defined')});
 
         const tasks = {
             [keys.INDEX]: [
@@ -51,17 +53,20 @@ let middlewareManager = (params) => {
                 getPiecesPageItems.bind(null, pageFeed),
                 calculateButtons.bind(null, pageFeed),
                 getCategories.bind(null, pageFeed),
-                getCart.bind(null, pageFeed)
+                getCart.bind(null, pageFeed),
+                addCartToPaypalPurchase.bind(null, pageFeed)
             ],
             [keys.LEARNING]: [
                 getAvailablePieces.bind(null, pageFeed),
                 getCategories.bind(null, pageFeed),
-                getCart.bind(null, pageFeed)
+                getCart.bind(null, pageFeed),
+                addCartToPaypalPurchase.bind(null, pageFeed)
             ],
             [keys.WRITEUS]: [
                 getAvailablePieces.bind(null, pageFeed),
                 getCategories.bind(null, pageFeed),
-                getCart.bind(null, pageFeed)
+                getCart.bind(null, pageFeed),
+                addCartToPaypalPurchase.bind(null, pageFeed)
             ],
             [keys.SEARCHING]: [
                 verifyWordPattern.bind(null, pageFeed),
@@ -69,7 +74,14 @@ let middlewareManager = (params) => {
                 getSearchingPageItems.bind(null, pageFeed),
                 calculateButtons.bind(null, pageFeed),
                 getCategories.bind(null, pageFeed),
-                getCart.bind(null, pageFeed)
+                getCart.bind(null, pageFeed),
+                addCartToPaypalPurchase.bind(null, pageFeed)
+            ],
+            [keys.BOUGHT]: [
+                getAvailablePieces.bind(null, pageFeed),
+                getCategories.bind(null, pageFeed),
+                getCart.bind(null, pageFeed),
+                addCartToPaypalPurchase.bind(null, pageFeed)
             ]
         };
 
