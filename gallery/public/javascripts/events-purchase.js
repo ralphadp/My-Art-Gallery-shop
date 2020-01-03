@@ -20,7 +20,7 @@
                 //remove from purchase list
                 purchased.splice(index, 1);
                 //Add unselected 'carts' Ids
-                checked.splice(checked.indexOf(event.currentTarget.getAttribute('id')), 1);
+                checked.splice(checked.indexOf(Number(event.currentTarget.getAttribute('id'))), 1);
                 unchecked.push(Number(event.currentTarget.getAttribute('id')));
                 //Update last Total
                 sum = sum - Number(event.currentTarget.getAttribute('amount'));
@@ -31,7 +31,7 @@
                 purchasePaused.splice(index, 1);
                 //remove unselected ids
                 checked.push(Number(event.currentTarget.getAttribute('id')));
-                unchecked.splice(unchecked.indexOf(event.currentTarget.getAttribute('id')), 1);
+                unchecked.splice(unchecked.indexOf(Number(event.currentTarget.getAttribute('id'))), 1);
                 //Update last Total
                 sum = sum + Number(event.currentTarget.getAttribute('amount'));
             }
