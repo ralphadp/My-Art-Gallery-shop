@@ -9,6 +9,7 @@ header {
     align-items: center;
     box-shadow: 2px 2px 20px 0px #9e1103;
     position: relative;
+    font-weight: normal;
 }
 
 a {
