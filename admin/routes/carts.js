@@ -8,7 +8,7 @@ router.get('/', tokenCheck, function(req, res, next) {
   const possibleTrades = new carts();
   possibleTrades.getAll().then((result) => {
       res.render(
-        'trading', 
+        'carts', 
         { 
           title: 'List of Possible Trading', 
           tableTitle: 'Carts', 

@@ -11,7 +11,7 @@ require('dotenv').config();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var piecesRouter = require('./routes/pieces');
-var tradingRouter = require('./routes/trading');
+var cartsRouter = require('./routes/carts');
 var categoriesRouter = require('./routes/categories');
 var messagesRouter = require('./routes/messages');
 
@@ -37,7 +37,7 @@ app.use(session({
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/pieces', piecesRouter);
-app.use('/trading', tradingRouter);
+app.use('/carts', cartsRouter);
 app.use('/categories', categoriesRouter);
 app.use('/message', messagesRouter);
 
