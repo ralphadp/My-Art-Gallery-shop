@@ -14,6 +14,8 @@ const tokenCheck = function(req, res, next) {
             if (jwtResponse.success) {
                 req.session.adminUsername = jwtResponse.username;
                 next();
+            } else {
+                res.redirect('/login');
             }
         }).catch(error => {
             console.log(error);
