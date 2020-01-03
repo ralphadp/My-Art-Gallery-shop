@@ -28,7 +28,7 @@ class Cart {
      * Get all the possible trades from all the users 
      */
     getAll() {
-        let sql = "SELECT cart.id, cart.userId, pieces.itemId as pieceId, pieces.name, pieces.pickedAt, cart.active FROM cart INNER JOIN pieces ON cart.pieceId = pieces.itemId";
+        let sql = "SELECT cart.id, cart.userId, pieces.itemId as pieceId, pieces.name, cart.pickedAt, cart.active FROM cart INNER JOIN pieces ON cart.pieceId = pieces.itemId";
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, (err, result) => {
