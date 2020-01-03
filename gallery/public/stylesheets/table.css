@@ -1,0 +1,70 @@
+#form-admin  {
+    border-radius: 5px;
+    box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.08);
+    border: 0;
+    padding: 10px;
+    width: fit-content;
+}
+
+.form-initial {
+    width: initial!important;
+}
+
+.table-header {
+    background-color: var(--red1);
+    color: white;
+    font-size: 1.5em;
+    padding: 1rem;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+td img {
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+}
+
+.table-admin {
+    border-radius: 5px;
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    margin: 1em auto;
+    overflow: hidden;
+    width: auto;
+}
+
+table {
+    width: 100%;
+}
+
+table td,
+table th {
+    color: var(--gray-dark2);
+    padding: 10px;
+}
+
+table td {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
+}
+
+table th {
+    background-color: var(--gray-dark8);
+    font-weight: 600;
+}
+
+table tr:nth-child(2n) {
+    background-color: white;
+}
+
+table tr:nth-child(2n + 1) {
+    background-color: var(--gray-dark10);
+}
+
+.edition-options {
+    width: 3em;
+    height: 1em;
+    position:relative;
+}

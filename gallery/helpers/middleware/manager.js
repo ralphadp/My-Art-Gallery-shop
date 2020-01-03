@@ -9,6 +9,7 @@ const calculateButtons = require("./tasks/calculateButtons");
 const getCategories = require("./tasks/getCategories");
 const getCart = require("./tasks/getCart");
 const addCartToPaypalPurchase = require("./tasks/addCartToPaypalPurchase");
+const getOrders = require("./tasks/getOrders");
 
 const async = require('async');
 
@@ -81,7 +82,8 @@ let middlewareManager = (params) => {
                 getAvailablePieces.bind(null, pageFeed),
                 getCategories.bind(null, pageFeed),
                 getCart.bind(null, pageFeed),
-                addCartToPaypalPurchase.bind(null, pageFeed)
+                addCartToPaypalPurchase.bind(null, pageFeed),
+                getOrders.bind(null, pageFeed)
             ]
         };
 

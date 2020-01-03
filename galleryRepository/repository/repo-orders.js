@@ -3,7 +3,6 @@ var sqlConn = require('../database/db');
 class Orders {
 
     constructor() {
-
     }
 
     /**

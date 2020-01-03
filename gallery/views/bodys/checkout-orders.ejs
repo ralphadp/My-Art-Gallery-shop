@@ -3,9 +3,30 @@
 </div>
 
 <div class="thumbs-content">
-<p>TODO</p>
-</div>
-
-<div class="pages">
-    <p>TODO BUTTONS</p>
+    <article id="form-admin">
+        <div class="table-admin">
+            <div class="table-header head-trading"><%= tableTitle %></div>
+            
+            <table cellspacing="0">
+                <tr>
+                    <th>Id</th>
+                    <th>Order Id</th>
+                    <th>Piece Id</th>
+                    <th>User Id</th>
+                    <th>Buy Datetime</th>
+                </tr>
+    
+                <% orders.forEach(row => { %>
+                    <tr>
+                        <td><%= row.id %></td>
+                        <td><%= row.orderId %></td>
+                        <td><%= row.pieceId %></td>
+                        <td><%= row.userExternalId %></td>
+                        <td><%= row.buyDatetime %></td>
+                    </tr>
+                <% }); %>
+    
+            </table>
+        </div>
+    </article>
 </div>

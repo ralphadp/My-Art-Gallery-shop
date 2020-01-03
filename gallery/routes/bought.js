@@ -53,16 +53,18 @@ router.get('/', tokenCheck, function(req, res, next) {
         key: keys.BOUGHT,
         currentUser: req.session,
         resolve: (error, payload) => {
-  
+
             if (error) {
                 res.locals.message = 'Error';
                 res.locals.error = payload;
                 res.status(500);
                 res.render('error', {message:'not found', error: "error", status: 404});
+            } else {
+                payload.titlePage = 'Bought Pieces';
+                payload.tableTitle = 'Orders';
+
+                res.render('bought', payload);
             }
-            payload.titlePage = 'Bought Pieces';
-  
-            res.render('bought', payload);
         }
     });
 
