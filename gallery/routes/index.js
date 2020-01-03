@@ -16,9 +16,9 @@ router.get('/', tokenCheck, function(req, res, next) {
                 res.locals.error = payload;
                 res.status(500);
                 res.render('error', {message:'not found', error: "error", status: 404});
+            } else {
+                res.render('index', payload);
             }
-
-            res.render('index', payload);
         }
     });
 

@@ -73,4 +73,6 @@ svg:not(:root) {
 pre {
     border: 1px solid var(--gray-dark9);
     background: var(--lightyellow);
+    text-align: left;
+    white-space: pre-line;
 }
