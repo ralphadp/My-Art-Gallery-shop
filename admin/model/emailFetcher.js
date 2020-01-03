@@ -2,19 +2,19 @@ var fetch = require('node-fetch');
 var Util = require('./util');
 var {EventEmitter} = require('events');
 
-/*TODO: need to hide the mailtrap.io token and set it from configuration*/
-const headers = {
-    "Api-Token": process.env.MAILTRAP_API_TOKEN,
-    "Accept": "application/json",
-    "Content-Type": "application/json"
-};
-
-const txtHeaders = {
-    "Api-Token": process.env.MAILTRAP_API_TOKEN,
-    "Accept": "text/plain",
-};
-
 const checkIncomingMessages = (resolve, failback) => {
+
+    const headers = {
+        "Api-Token": process.env.MAILTRAP_API_TOKEN,
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    };
+
+    const txtHeaders = {
+        "Api-Token": process.env.MAILTRAP_API_TOKEN,
+        "Accept": "text/plain",
+    };
+
     fetch(
         'https://mailtrap.io/api/v1/inboxes',
         {
@@ -56,6 +56,7 @@ const checkIncomingMessages = (resolve, failback) => {
 };
 
 const verifyMessagesCounter = (emitter) => {
+
     checkIncomingMessages(
         (count) => {
             if (count) {
