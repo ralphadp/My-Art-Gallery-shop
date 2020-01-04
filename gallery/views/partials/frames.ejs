@@ -28,37 +28,25 @@
                 </div>
             <% }); %>
             <div class="pick-item-row total" id="picked-total" list="<%= purchaseItems %>" paused="<%= purchasePaused %>" unchecked="<%= unchecked %>" checked="<%= checked %>"><span id="amountSum" sum="<%= totalPurchase %>">Total: <%= totalPurchase %> USD</span></div>
-            <div id="paypal-button-container"></div>
+            <br/>
+            <FORM action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                <INPUT type="hidden" name="upload" value="1">
+                <INPUT TYPE="hidden" name="charset" value="utf-8">
+                <INPUT TYPE="hidden" name="cmd" value="_cart">
+                <INPUT type="hidden" name="business" value="gallery.art.shopp@gmail.com">
+                <% const purchase = JSON.parse(purchaseItems);
+                   purchase.forEach ((cartItem, index) => {
+                %>
+                <INPUT TYPE="hidden" name="item_name_<%= index %>" value="<%= cartItem.custom_id %>">
+                <INPUT TYPE="hidden" name="quantity_<%= index %>" value="1">
+                <INPUT type="hidden" name="amount_<%= index %>" value="<%= cartItem.amount.value %>">
+                <% }); %>
+                <INPUT type="hidden" name="currency_code" value="USD">
+                <INPUT type="hidden" name="amount" value="<%= totalPurchase %>">
+                <INPUT type="image" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
+                <IMG alt="" width="1" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
+            </FORM>
         </div>
-        <script>
-            const purchaseUnits = JSON.parse(`<%- purchaseItems %>`);
-
-            paypal.Buttons({
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [
-                            purchaseUnits[0]
-                        ]
-                    });
-                },
-                onApprove: function(data, actions) {
-                     return actions.order.capture().then(function(details) {
-                        alert('Transaction [' + data.orderID + '] completed by ' + details.payer.name.given_name);
-                        /* return request('/bought/save', {
-                            method: 'POST',
-                            headers: {
-                                'content-type': 'application/json'
-                            },
-                            body: JSON.stringify([{
-                                orderId: data.orderID,
-                                pieceId: 'SelectedId',
-                                userExternalId: currentUser.userExtId    
-                            }])
-                        });*/
-                    });
-                }
-            }).render('#paypal-button-container');
-        </script>
     </section>
 </div>
 
