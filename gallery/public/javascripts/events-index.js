@@ -9,7 +9,7 @@
 
     /*INFORMATION PIECE */
 
-    getPickedType = (picked) => {
+    let getPickedType = (picked) => {
         if (picked === 'PRIVATE') {
             return 'Not Available';
         } else {
@@ -33,6 +33,8 @@
             document.getElementById("pieceSize").innerHTML   = allpieces[ID].size;
             document.getElementById("piecePrice").innerHTML  = allpieces[ID].price;
             document.getElementById("piecePicked").innerHTML = getPickedType(allpieces[ID].picked);
+
+            setPaypalPurchase(allpieces[ID]);
 
             pieceFrame.show()
         });

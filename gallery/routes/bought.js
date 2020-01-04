@@ -9,41 +9,32 @@ router.post('/save', tokenCheck, function(req, res, next) {
 
     let response = {};
 
-    try {
-        const order = new orders();
-        order.save(req.body)
-        .then(result => {
-            if (result.affectedRows) {
-                response = {
-                    success: true,
-                    message: `The orders were saved successfully.`
-                };    
-            } else {
-                response = {
-                    success: false,
-                    message: `The orders were not saved.`
-                };
-            }
-            res.send(response);
-        })
-        .catch(error => {
+    const order = new orders();
+    order.save(req.body)
+    .then(result => {
+        if (result.affectedRows) {
+            response = {
+                success: true,
+                message: `The orders were saved successfully.`
+            };    
+        } else {
             response = {
                 success: false,
-                message: error.message
+                message: `The orders were not saved.`
             };
-
-            res.send(response);
-        });
-       
-    } catch (error) {
-
+        }
+    })
+    .catch(error => {
+        console.log(error);
         response = {
             success: false,
             message: error.message
         };
+    })
+    .finally(() => {
         res.send(response);
-    }
-
+    });
+   
 });
 
 /* GET orders summary. To check the orders paypal */

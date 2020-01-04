@@ -5,9 +5,11 @@
     <% include ./partials/css/main %>
 </head>
 <body>
+    <% include ./partials/user-id %>
     <header>
         <% if (currentUser.userExtId) { %>
             <% include ./partials/header %>
+            <script type="text/javascript" src="/javascripts/paypal.js"></script>
         <% } else { %>
             <% include ./partials/header-unregister %>
         <% } %>
