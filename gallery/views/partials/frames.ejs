@@ -13,7 +13,7 @@
             <% }}; %>
          </div>
     </section>
-    </div>
+</div>
 
 <div class="fog-frame-x" id="cart-picking">
     <section class="frame">
@@ -29,23 +29,63 @@
             <% }); %>
             <div class="pick-item-row total" id="picked-total" list="<%= purchaseItems %>" paused="<%= purchasePaused %>" unchecked="<%= unchecked %>" checked="<%= checked %>"><span id="amountSum" sum="<%= totalPurchase %>">Total: <%= totalPurchase %> USD</span></div>
             <br/>
+            <!-- FORM compra modo Cart -->
             <FORM action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-                <INPUT type="hidden" name="upload" value="1">
-                <INPUT TYPE="hidden" name="charset" value="utf-8">
-                <INPUT TYPE="hidden" name="cmd" value="_cart">
-                <INPUT type="hidden" name="business" value="gallery.art.shopp@gmail.com">
-                <% const purchase = JSON.parse(purchaseItems);
-                   purchase.forEach ((cartItem, index) => {
+                <INPUT TYPE="hidden" NAME="upload" value="1">
+                <!--<INPUT TYPE="hidden" NAME="charset" value="utf-8">-->
+                <INPUT TYPE="hidden" NAME="cmd" value="_cart">
+                <!-- Specify a PayPal shopping cart View Cart button. -->
+                <!--<input TYPE="hidden" NAME="display" value="1">-->
+                <INPUT TYPE="hidden" NAME="business" value="gallery.art.shopp@gmail.com">
+                <% const purchaseCartItem = JSON.parse(purchaseItems);
+                    purchaseCartItem.forEach ((cartItem, index) => { 
+                        const itemIndex = index + 1; 
                 %>
-                <INPUT TYPE="hidden" name="item_name_<%= index %>" value="<%= cartItem.custom_id %>">
-                <INPUT TYPE="hidden" name="quantity_<%= index %>" value="1">
-                <INPUT type="hidden" name="amount_<%= index %>" value="<%= cartItem.amount.value %>">
+                        <INPUT TYPE="hidden" name="item_name_<%= itemIndex %>" id="item_name_<%= itemIndex %>" value="<%= cartItem.description %>">
+                        <INPUT TYPE="hidden" name="item_number_<%= itemIndex %>" id="item_number_<%= itemIndex %>" value="<%= cartItem.custom_id %>">
+                        <!--<INPUT TYPE="hidden" name="quantity_<%= itemIndex %>" id="quantity_<%= itemIndex %>" value="1">-->
+                        <INPUT TYPE="hidden" name="amount_<%= itemIndex %>" id="amount_<%= itemIndex %>" value="<%= cartItem.amount.value %>">
                 <% }); %>
-                <INPUT type="hidden" name="currency_code" value="USD">
-                <INPUT type="hidden" name="amount" value="<%= totalPurchase %>">
-                <INPUT type="image" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
+                <INPUT TYPE="hidden" NAME="currency_code" value="USD">
+                <INPUT TYPE="hidden" NAME="amount" value="<%= totalPurchase %>">
+                <INPUT TYPE="hidden" NAME="return" value="http://localhost:3000/bought">
+                <INPUT TYPE="hidden" NAME="shopping_url" value="http://localhost:3000/">
+                <INPUT TYPE="image" NAME="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
                 <IMG alt="" width="1" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
+                <!-- ENABLE OVERRIDE of buyers's address stored with PayPal . -->
+                <!--<input type="hidden" name="address_override" value="1">-->
+                <!-- BUYER INFO AUTO-FILL FORM -->
+                <!--<input type="hidden" name="first_name" value="John">
+                <input type="hidden" name="last_name" value="Doe">
+                <input type="hidden" name="address1" value="9 Elm Street">
+                <input type="hidden" name="address2" value="Apt 5">
+                <input type="hidden" name="city" value="Berwyn">
+                <input type="hidden" name="state" value="PA">
+                <input type="hidden" name="zip" value="19312">
+                <input type="hidden" name="night_phone_a" value="610">
+                <input type="hidden" name="night_phone_b" value="555">
+                <input type="hidden" name="night_phone_c" value="1234">
+                <input type="hidden" name="email" value="jdoe@zyzzyu.com">-->
             </FORM>
+            <!-- FORM Factura o recibo o ticket (informal) -->
+            <!--<FORM action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                <INPUT TYPE="hidden" NAME="upload" value="1">
+                <INPUT TYPE="hidden" NAME="charset" value="utf-8">
+                <INPUT TYPE="hidden" NAME="cmd" value="_xclick-auto-billing">
+                <INPUT TYPE="hidden" NAME="business" value="gallery.art.shopp@gmail.com">
+                <% const purchase = JSON.parse(purchaseItems);
+                   purchase.forEach ((cartItem, index) => { %>
+                    <INPUT TYPE="hidden" NAME="item_name_<%= index %>" value="<%= cartItem.description %>">
+                    <INPUT TYPE="hidden" NAME="item_number_<%= index %>" value="<%= cartItem.custom_id %>">
+                    <INPUT TYPE="hidden" NAME="quantity_<%= index %>" value="1">
+                    <INPUT TYPE="hidden" NAME="amount_<%= index %>" value="<%= cartItem.amount.value %>">
+                <% }); %>
+                <INPUT TYPE="hidden" NAME="currency_code" value="USD">
+                <INPUT TYPE="hidden" NAME="amount" value="<%= totalPurchase %>">
+                <INPUT TYPE="hidden" NAME="return" value="http://localhost:3000/bought">
+                <INPUT TYPE="image" NAME="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
+                <IMG alt="" width="1" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
+            </FORM>-->
         </div>
     </section>
 </div>
