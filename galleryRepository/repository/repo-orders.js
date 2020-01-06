@@ -41,6 +41,37 @@ class Orders {
         });
     }
 
+    /**
+     * Save a captured paypal order
+     * @param {*} order 
+     */
+    save(order) {
+        let data = {
+            orderId: order.orderId, 
+            pieceId: order.pieceId,
+            pieceDescription: order.pieceDescription,
+            userExternalId: order.userExternalId,
+            paypalBuyTimestamp: order.paypalBuyTimestamp,
+            payerId: order.payerId,
+            payerCompleteName: order.payerCompleteName,
+            payerAmount: order.payerAmount,
+            payerCurrency: order.payerCurrency,
+            rawDetails: order.rawDetails
+        };
+
+        let sql = 'INSERT INTO orders SET ?';
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, data, (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
 }
 
 module.exports = Orders;
