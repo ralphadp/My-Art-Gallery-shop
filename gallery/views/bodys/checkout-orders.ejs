@@ -12,8 +12,12 @@
                     <th>Id</th>
                     <th>Order Id</th>
                     <th>Piece Id</th>
-                    <th>User Id</th>
+                    <th>Piece Description</th>
                     <th>Buy Datetime</th>
+                    <th>Payer Id</th>
+                    <th>Payer Complete Name</th>
+                    <th>Payer Amount</th>
+                    <th>Payer Currency</th>
                 </tr>
     
                 <% orders.forEach(row => { %>
@@ -21,8 +25,12 @@
                         <td><%= row.id %></td>
                         <td><%= row.orderId %></td>
                         <td><%= row.pieceId %></td>
-                        <td><%= row.userExternalId %></td>
+                        <td><%= row.pieceDescription %></td>
                         <td><%= row.buyDatetime %></td>
+                        <td><%= row.payerId %></td>
+                        <td><%= row.payerCompleteName %></td>
+                        <td><%= row.payerAmount %></td>
+                        <td><%= row.payerCurrency %></td>
                     </tr>
                 <% }); %>
     
