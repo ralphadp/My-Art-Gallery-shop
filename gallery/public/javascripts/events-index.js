@@ -29,12 +29,14 @@
             document.getElementById("pieceName").innerHTML   = allpieces[ID].name;
             document.getElementById("pieceArtist").innerHTML = allpieces[ID].artist;
             document.getElementById("pieceType").innerHTML   = allpieces[ID].type;
-            document.getElementById("pieceDate").innerHTML   = allpieces[ID].date;
+            document.getElementById("pieceDate").innerHTML   = allpieces[ID].release_date;
             document.getElementById("pieceSize").innerHTML   = allpieces[ID].size;
-            document.getElementById("piecePrice").innerHTML  = allpieces[ID].price;
+            document.getElementById("piecePrice").innerHTML  = allpieces[ID].price + ' ' + allpieces[ID].currency;
             document.getElementById("piecePicked").innerHTML = getPickedType(allpieces[ID].picked);
 
-            setPaypalPurchase(allpieces[ID]);
+            if (typeof setPaypalPurchase !== 'undefined') {
+                setPaypalPurchase(allpieces[ID]);
+            }
 
             pieceFrame.show()
         });
