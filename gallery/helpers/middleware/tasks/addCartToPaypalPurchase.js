@@ -18,7 +18,7 @@ const addCartToPaypalPurchase = (context, next) => {
         const purchaseItem = {
             custom_id: element.pieceId,
             description: element.name,
-            invoice_id: element.userId,
+            //invoice_id: element.userId, //TODO: need a invoice ID if required
             amount: {
                 currency_code: TARGET_CURRENCY,
                 value: price
@@ -28,10 +28,12 @@ const addCartToPaypalPurchase = (context, next) => {
         if (!element.active) {
             unchecked.push(element.id);
             purchasePaused.push(purchaseItem);
+            purchaseList.push(null);
         } else {
             TOTAL += Number(price);
             checked.push(element.id);
             purchaseList.push(purchaseItem);
+            purchasePaused.push(null);
         }
 
     });
