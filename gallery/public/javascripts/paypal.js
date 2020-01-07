@@ -18,7 +18,8 @@ const setPaypalPurchase = (piece) => {
     let unit = {
         custom_id: piece.itemId,
         description: piece.name,
-        invoice_id: USER_ID,//Num Factura ID
+        invoice_id: USER_ID,//Num Factura ID (formal)
+        bill_id: '', //Factura o recibo o ticket (informal)
         amount: {
             currency_code: 'USD',
             value: priceUSD
