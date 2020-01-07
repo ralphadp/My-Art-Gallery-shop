@@ -72,6 +72,25 @@ class Orders {
         });
     }
 
+    /**
+     * Save a bulk of orders, used in the Cart buy
+     * @param {*} orders 
+     */
+    saveBatch(orders) {
+
+        let sql = 'INSERT INTO orders(orderId, pieceId, pieceDescription, userExternalId, paypalBuyTimestamp, payerId, payerCompleteName, rawDetails, payerAmount, payerCurrency) VALUES ?';
+        
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [orders], (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
 }
 
 module.exports = Orders;

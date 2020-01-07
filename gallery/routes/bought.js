@@ -2,6 +2,7 @@ var express = require('express');
 var tokenCheck = require('../helpers/tokenCheck');
 const {orders, carts} = require('galleryRepository');
 const {keys, middlewareManager} = require('../helpers/middleware/manager');
+const {parsePaypalCartReturnData} = require('../helpers/middleware/tasks/util/utilities');
 var router = express.Router();
 
 /* POST save Paypal Orders. */
@@ -44,6 +45,7 @@ router.post('/save', tokenCheck, function(req, res, next) {
 
 /* GET orders summary. To check the orders paypal */
 router.get('/', tokenCheck, function(req, res, next) {
+    console.log(req.body);
 
     middlewareManager({
         key: keys.BOUGHT,
@@ -99,6 +101,51 @@ router.post('/updateActiveCarts', tokenCheck, async function(req, res, next) {
     }
 
     res.send(response);
+});
+
+/* POST store paypal payment data */
+router.post('/cart-done', tokenCheck, async function(req, res, next) {
+
+    console.log(req.body);
+    const paypal_return_contents = req.body || null;
+
+    const ordersRows = parsePaypalCartReturnData(
+            req.session.userExtId, 
+            paypal_return_contents
+    );
+
+    console.log(ordersRows);
+
+    try {
+        const order = new orders();
+        order.saveBatch(ordersRows)
+        .then(result => {
+            if (result.affectedRows) {
+                response = {
+                    success: true,
+                    message: 'The orders were saved successfully.'
+                };    
+            } else {
+                response = {
+                    success: false,
+                    message: 'The orders were not saved. ' + result.sqlMessage
+                };
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            response = {
+                success: false,
+                message: error.message
+            };
+        })
+        .finally(() => {
+            res.redirect('/bought');
+        });
+    } catch(error) {
+        console.log(error);
+        res.redirect('/');
+    }
 });
 
 module.exports = router;

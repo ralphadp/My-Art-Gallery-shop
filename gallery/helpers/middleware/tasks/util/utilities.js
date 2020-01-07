@@ -139,6 +139,124 @@ const TODAY = () => {
     return local.toJSON().slice(0, 10);
 };
 
+/**
+ * Parse the json response from paypal after the cart transaction
+ * @param {*} userId 
+ * @param {*} data 
+ * 
+ * sample data:
+ * {
+        payer_email: 'sb-me0fz818012@personal.example.com',
+        payer_id: '5K9MQKFDS8KP2',
+        payer_status: 'VERIFIED',
+        first_name: 'Susan',
+        last_name: 'Bithsmith',
+        address_name: 'Susan Bithsmith',
+        address_street: 'Free Trade Zone',
+        address_city: 'Buenos Aires',
+        address_state: 'Buenos Aires',
+        address_country_code: 'AR',
+        address_zip: 'B1675',
+        residence_country: 'AR',
+        txn_id: '5WN21147E47847143',//order id
+        mc_currency: 'USD',
+        mc_gross: '9.22',
+        protection_eligibility: 'INELIGIBLE',
+        payment_gross: '9.22',
+        payment_status: 'Pending',
+        pending_reason: 'unilateral',
+        payment_type: 'instant',
+        handling_amount: '0.00',
+        shipping: '0.00',
+        item_name1: 'Dalea neomexicana (A. Gray) Cory var. neomexicana',
+        item_number1: 'f3e9cfa9-82e5-40d7-868a-58a30a6e78ac',
+        quantity1: '1',
+        mc_gross_1: '9.22',
+        tax1: '0.00',
+        num_cart_items: '1',
+        txn_type: 'cart',
+        payment_date: '2020-01-07T01:05:44Z',
+        notify_version: 'UNVERSIONED',
+        verify_sign: 'AMfhQUcOeRKOxZX.4q9FzrZXYdoOAAHk7-RdhjeWVJj.MVnNzK.b9VTE'
+    };
+ */
+const parsePaypalCartReturnData = (userId, data) => {
+
+    /**
+     * Just to have an order of what we need
+     * 
+     * @param {*} orderId 
+     * @param {*} pieceId 
+     * @param {*} pieceDescription 
+     * @param {*} userId 
+     * @param {*} payTime 
+     * @param {*} payerId 
+     * @param {*} payerName 
+     * @param {*} raw 
+     * @param {*} amount 
+     * @param {*} currency 
+     */
+    const setOrder = (
+            orderId, 
+            pieceId, 
+            pieceDescription,
+            userId, 
+            payTime, 
+            payerId, 
+            payerName, 
+            raw, 
+            amount, 
+            currency
+        ) => {
+        return [
+            orderId,
+            pieceId,
+            pieceDescription,
+            userId,
+            payTime,
+            payerId,
+            payerName,
+            raw,
+            amount,
+            currency
+        ];
+    };
+
+    let index = 0;
+    let order = [];
+
+    while (index < Number(data.num_cart_items)) {
+        index++;
+        order.push(setOrder(
+            data.txn_id,
+            data['item_number' + index],
+            data['item_name' + index],
+            userId,
+            data.payment_date,
+            data.payer_id,
+            data.first_name + ' ' + data.last_name,
+            JSON.stringify(data),
+            data['mc_gross_' + index],
+            data.mc_currency
+        ));
+    }
+
+    order.push(setOrder(
+        data.txn_id,
+        'Total',
+        'total',
+        userId,
+        data.payment_date,
+        data.payer_id,
+        data.first_name + ' ' + data.last_name,
+        JSON.stringify(data),
+        data.mc_gross,
+        data.mc_currency
+    ));
+
+    return order;
+}
+
 module.exports = {
     MAX_THUMB_PER_PAGE,
     calculateThumbPerPage,
@@ -147,5 +265,6 @@ module.exports = {
     calculatePagerButtons,
     fromCategoryPathToCategoryName,
     chunk,
-    TODAY
+    TODAY,
+    parsePaypalCartReturnData
 };
