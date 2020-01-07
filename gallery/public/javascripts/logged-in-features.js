@@ -9,7 +9,7 @@
         if (typeof saveChangesInPicked !== 'undefined') {
             saveChangesInPicked();
         } else {
-            console.log('Cannot sae changes from My Cart');
+            console.log('Cannot save changes from My Cart');
         }
     }
 
