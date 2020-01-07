@@ -13,13 +13,17 @@ const tokenCheck = function(req, res, next) {
             console.log('jwt response:', jwtResponse);
             if (jwtResponse.success) {
                 req.session.userExtId = jwtResponse.username;
+                next();
             }
         }).catch(error => {
             console.log(error);
+            res.redirect('/login');
         });
+    } else {
+        res.redirect('/login');
     }
 
-    next();
+    
 }
 
 module.exports = tokenCheck;
