@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 /* POST login process request route. */
 router.post('/validation', function(req, res, next) {
 
-    let userExtId;
+    let userInfo = {};
     let response = {};
 
     //TODO: clean username and password
@@ -28,9 +28,9 @@ router.post('/validation', function(req, res, next) {
             const validUser = result[0];
             if (validUser.active === 1) {
 
-                req.session.name = validUser.first_name + ' ' + validUser.last_name;
-                req.session.email = validUser.email;
-                userExtId = validUser.external_id;
+                userInfo.username = validUser.first_name + ' ' + validUser.last_name;
+                userInfo.userEmail = validUser.email;
+                userInfo.userId = validUser.external_id;
 
                 response = {
                     result: true,
@@ -67,7 +67,19 @@ router.post('/validation', function(req, res, next) {
         }
     }).finally(() => {
         if (response.result) {
-            fetch(`http://localhost:3333/api/generate/${userExtId}/expiration/1h`)
+
+            userInfo.hours = '1h';
+
+            fetch(
+                'http://localhost:3333/api/generate-by-info/',
+                {
+                    method: 'POST',
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userInfo)
+                }
+            )
             .then(jwtResponse => jwtResponse.json())
             .then(jwtResponse => {
                 if (jwtResponse.success) {

@@ -7,12 +7,14 @@ const tokenCheck = function(req, res, next) {
     console.log('access_token:', token);
 
     if (typeof token !== 'undefined') {
-         fetch(`http://localhost:3333/api/check/${token}`)
+         fetch(`http://localhost:3333/api/check-auth/${token}`)
         .then(jwtResponse => jwtResponse.json())
         .then(jwtResponse => {
             console.log('jwt response:', jwtResponse);
             if (jwtResponse.success) {
-                req.session.userExtId = jwtResponse.username;
+                req.session.userExtId = jwtResponse.data.userId;
+                req.session.name = jwtResponse.data.username;
+                req.session.email = jwtResponse.data.userEmail;
             }
         }).catch(error => {
             console.log(error);
