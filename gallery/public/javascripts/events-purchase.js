@@ -1,3 +1,33 @@
+const saveChangesInPicked = () => {
+    if (!document.getElementById('picked-total')) {
+        return;
+    }
+
+    const unchecked = JSON.parse(document.getElementById('picked-total').getAttribute('unchecked'));
+    const checked = JSON.parse(document.getElementById('picked-total').getAttribute('checked'));
+
+    let requestConfig = {
+        url: '/bought/updateActiveCarts',
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json;charset=UTF-8"
+        },
+        body: JSON.stringify({
+            unchecked: unchecked,
+            checked: checked
+        })
+    };
+
+    request(requestConfig)
+    .then(result => {
+        let response = JSON.parse(result);
+        console.log(response.message);
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}
+
 (() => 
 {
     /* ATTACH / DETACH ITEM OF CART */
@@ -51,34 +81,7 @@
     
         event = event || window.event;
         if (event) {
-            if (!document.getElementById('picked-total')) {
-                return;
-            }
-
-            const unchecked = JSON.parse(document.getElementById('picked-total').getAttribute('unchecked'));
-            const checked = JSON.parse(document.getElementById('picked-total').getAttribute('checked'));
-
-            let requestConfig = {
-                url: '/bought/updateActiveCarts',
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json;charset=UTF-8"
-                },
-                body: JSON.stringify({
-                    unchecked: unchecked,
-                    checked: checked
-                })
-            };
-
-            request(requestConfig)
-            .then(result => {
-                let response = JSON.parse(result);
-                console.log(response.message);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+            saveChangesInPicked();
         }
-
     }
 })();

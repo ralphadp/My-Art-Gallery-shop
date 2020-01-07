@@ -51,6 +51,7 @@ function Foggy (
 
     /*not right, need a change to Module*/
     this.openEvent = (event) => {
+        this.onOpen(event);
         this.beforeShow(event);
         showPiece();
         disableScrolling();
@@ -61,6 +62,7 @@ function Foggy (
         this.beforeClose(event);
         hidePiece();
         enableScrolling();
+        this.onClose(event);
     };
 
     const stopEventsChain = (event) => {
@@ -112,4 +114,10 @@ Foggy.prototype.close = function(event) {
         return;
     }
     this.closeEvent(event);
+};
+
+Foggy.prototype.onOpen = function(event) {
+};
+
+Foggy.prototype.onClose = function(event) {
 };

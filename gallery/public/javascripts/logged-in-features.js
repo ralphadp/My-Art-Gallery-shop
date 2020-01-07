@@ -5,6 +5,14 @@
     const availableFrame = new Frame('list');
     const pickedFrame = new Frame('cart-picking');
 
+    pickedFrame.onClose = (event) => {
+        if (typeof saveChangesInPicked !== 'undefined') {
+            saveChangesInPicked();
+        } else {
+            console.log('Cannot sae changes from My Cart');
+        }
+    }
+
     /***********************************************************************************************/
 
     /*LIST PIECE */
