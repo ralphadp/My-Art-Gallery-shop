@@ -4,7 +4,7 @@
     top: 120px;
     width: 90px;
     height: 210px;
-    background-color: blanchedalmond;
+    background-color: transparent;
     font-size: 12px;
     border-radius: 13px;
     display: inline-flex;
@@ -12,21 +12,25 @@
 
 .social-hidden {
     width: 20px;
-    height: 205px;
+    height: 150px;
 }
 
 .icons-social-menu {
     display: inline-block;
-    width: 80px;
-    height: 205px;
+    width: 50px;
+    height: 150px;
  }
 
 .social-item {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     color: blanchedalmond !important;
     text-align: center;
-    line-height: 70px;
+}
+
+.fb {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
 }
 
 .fb img {
@@ -43,10 +47,6 @@
     width: 100%;
     height: 100%;
     /*color:lightskyblue !important;*/
-}
-
-.social-item:hover {
-    background: rgba(255,255,255, 0.1);
 }
 
 @media (max-width: 870px) {
