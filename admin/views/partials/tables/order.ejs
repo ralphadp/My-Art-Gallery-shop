@@ -1,0 +1,38 @@
+<article id="form-admin">
+    <div class="table-admin">
+        <div class="table-header head-trading"><%= tableTitle %></div>
+        
+        <table cellspacing="0">
+            <tr>
+                <th>Id</th>
+                <th>Order Id</th>
+                <th>Piece Id</th>
+                <th>Piece Description</th>
+                <th>User External Id</th>
+                <th>Buy Datetime</th>
+                <th>Paypal Buy Timestamp</th>
+                <th>Payer Id</th>
+                <th>Payer Complete Name</th>
+                <th>Payer Amount</th>
+                <th>Payer Currency</th>
+            </tr>
+
+            <% data.forEach(item => { %>
+                <tr>
+                    <td><%= item.id %></td>
+                    <td><%= item.orderId %></td>
+                    <td><%= item.pieceId %></td>
+                    <td><%= item.pieceDescription %></td>
+                    <td><%= item.userExternalId %></td>
+                    <td><%= item.buyDatetime %></td>
+                    <td><%= item.paypalBuyTimestamp %></td>
+                    <td><%= item.payerId %></td>
+                    <td><%= item.payerCompleteName %></td>
+                    <td><%= item.payerAmount %></td>
+                    <td><%= item.payerCurrency %></td>
+                </tr>
+            <% }); %>
+
+        </table>
+    </div>
+</article>

@@ -91,6 +91,23 @@ class Orders {
         });
     }
 
+    /**
+     * Get all the traansactions history
+     */
+    getAll() {
+        let sql = "SELECT * FROM orders";
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
 }
 
 module.exports = Orders;

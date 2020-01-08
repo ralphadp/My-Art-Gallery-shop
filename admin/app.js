@@ -14,6 +14,7 @@ var piecesRouter = require('./routes/pieces');
 var cartsRouter = require('./routes/carts');
 var categoriesRouter = require('./routes/categories');
 var messagesRouter = require('./routes/messages');
+var ordersRouter = require('./routes/orders');
 
 var app = express();
 
@@ -40,6 +41,7 @@ app.use('/pieces', piecesRouter);
 app.use('/carts', cartsRouter);
 app.use('/categories', categoriesRouter);
 app.use('/message', messagesRouter);
+app.use('/orders', ordersRouter);
 
 emailEventEmitter(20).on('new-email', (count) => {
   global.currentEmailCounter = count;
