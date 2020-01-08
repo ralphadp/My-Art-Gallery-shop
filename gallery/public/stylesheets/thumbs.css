@@ -56,7 +56,7 @@
 .thumb .description {
     display: block;
     font-size: 12px;
-    margin: 0px 5px 0 5px;
+    margin: 10px 5px 0 5px;
     line-height: 15px;
     height: 15px;
     color: white;
@@ -64,6 +64,14 @@
 
 .description {
     margin-right: 0 !important;
+}
+
+.pieceName {
+    display: inline-block;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .piece-info-button {

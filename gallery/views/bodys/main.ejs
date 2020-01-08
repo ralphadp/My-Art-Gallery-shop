@@ -14,9 +14,10 @@
             <div class="thumb frame-gallery" id="<%= item.itemId %>">
                 <input class="thumb-checkbox" id="<%= item.itemId %>" type="checkbox" <%= item.picked ? 'checked' : '' %> <%= (item.picked === 'PRIVATE') ? 'readonly disabled' : '' %>/>
                 <div class="thumb-pic">
-                    <img src="http://localhost:8888/api/image/<%= item.itemId %>" alt="<%= item.itemId %>"/>
+                    <img src="http://localhost:8888/api/image/<%= item.itemId %>" alt="<%= item.itemId %>" title="<%= item.name %>"/>
                 </div>
-                <div class="description"><%= ((item.name.length > 46) ? (item.name.substring(0, 46) + ' ...') : item.name) %>
+                <div class="description">
+                    <div class="pieceName" title="<%= item.name %>"><%= item.name %></div>
                     <button reference="<%= item.itemId %>" class="piece-info-button">...</button>
                 </div>
             </div>
