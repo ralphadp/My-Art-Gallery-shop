@@ -13,6 +13,7 @@
 .footer-menu a {
     color: #c0392b !important;
 }
+
 .footer {
     width: 90%;
     margin: 0 auto;
@@ -30,7 +31,7 @@
     color: #c0392b !important;
 }
 
-#open-picked-footer, #open-list-footer {
+#open-picked-footer, #open-list-footer, #open-logout-footer {
     cursor: pointer;
 }
 
