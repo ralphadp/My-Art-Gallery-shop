@@ -1,8 +1,8 @@
 USE gallery_db;
 
 CREATE TABLE pieces (
-  id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  itemId varchar(40),
+  id int(11) NOT NULL AUTO_INCREMENT,
+  itemId varchar(40) NOT NULL,
   thumb varchar(50),
   name varchar(150),
   artist varchar(50),
@@ -11,6 +11,8 @@ CREATE TABLE pieces (
   size varchar(50),
   price decimal(5,1),
   currency varchar(50),
+  PRIMARY KEY (id, itemId),
+  UNIQUE KEY unique_id (itemId),
   INDEX pieces_index (id, release_date)
 );
 

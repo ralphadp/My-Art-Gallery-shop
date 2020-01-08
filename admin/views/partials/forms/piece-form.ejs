@@ -32,7 +32,7 @@
             <input name="id" type="hidden" value="<%= (dataToUpdate && dataToUpdate.id) ? dataToUpdate.id : '' %>"/>
             <div class="rowform">
                 <label for="piece-external-id">External Id</label>
-                <input id="piece-external-id" name="itemId" type="text" placeholder="GENERATED AFTER A PIECE PICTURE IS UPLOADED" value="<%= (dataToUpdate && dataToUpdate.itemId) ? dataToUpdate.itemId : '' %>" size="30" maxlength="30" disabled/>
+                <input id="piece-external-id" name="itemId" type="text" placeholder="GENERATED AFTER A PIECE PICTURE IS UPLOADED" value="<%= (dataToUpdate && dataToUpdate.itemId) ? dataToUpdate.itemId : '' %>" size="30" maxlength="30" readonly/>
             </div>
             <div class="rowform">
                 <label for="piece-name">Piece Name</label>
