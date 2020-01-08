@@ -6,6 +6,7 @@ function Foggy (
     const FOG_ELEMENT_CLASS = 'fog-frame-x';
 
     this.frame = document.getElementById(frameElementId);
+    this.frame.setAttribute('tabindex', 0);
 
     if (!this.frame) {
         console.log(`The current element "${frameElementId}" does exists.`);
@@ -55,6 +56,7 @@ function Foggy (
         this.beforeShow(event);
         showPiece();
         disableScrolling();
+        this.frame.focus();
     };
 
     /*not right, need a change to Module*/
@@ -71,6 +73,12 @@ function Foggy (
 
     this.frame.addEventListener('click', this.closeEvent);
     this.internalFrame.addEventListener('click', stopEventsChain);
+    this.frame.addEventListener('keydown', (event) => {
+        console.log(event.currentTarget);
+        if (event.which == 27 || event.charCode === 27) {
+            this.close();
+        }
+    });
 
     if (hasClosebutton) {
         const classAnchor = 'box-close-x';
