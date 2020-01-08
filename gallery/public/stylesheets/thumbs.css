@@ -37,16 +37,18 @@
 }
 
 .thumb-pic {
-    background-color: #16151B;
+    background-color: transparent;
     color: #7A797F;
     padding: 1px;
     overflow: hidden;
 }
 
 .thumb-pic img {
-    width: 100%;
-    height: auto;
-    max-height: 180px;
+    max-width: 100%;
+    height: 230px;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
 }
 
 /*thumb title*/
@@ -87,11 +89,6 @@
 @media (min-width: 1022px) {
     .body-content {
         width: 1002px;
-    }
-
-    .thumb img {
-        width: 320px;
-        height: 180px;
     }
 }
 
