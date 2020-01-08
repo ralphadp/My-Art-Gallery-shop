@@ -74,7 +74,7 @@ class Orders {
 
     /**
      * Save a bulk of orders, used in the Cart buy
-     * @param {*} orders 
+     * @param {*} orders array
      */
     saveBatch(orders) {
 
