@@ -1,10 +1,33 @@
-const saveChangesInPicked = () => {
-    if (!document.getElementById('picked-total')) {
+/**
+ * Check if total sum had any changes
+ */
+const myCartHasChanges = () => {
+    //TODO: check the indexes array from pieces selected
+    const hiddenTotal = document.getElementById('initTotal');
+    const spanTotal = document.getElementById('amountSum');
+    const initTotat = hiddenTotal.getAttribute('sum');
+    const currentTotal = spanTotal.getAttribute('sum');
+
+    return initTotat !== currentTotal;
+}
+
+/**
+ * Save checked/unchecked activity from my cart
+ */
+const saveChangesFromMyCart = () => {
+    const totalsDiv = document.getElementById('picked-total');
+    if (!totalsDiv) {
+        console.log('Totals DIV does not exists or has another Id');
         return;
     }
 
-    const unchecked = JSON.parse(document.getElementById('picked-total').getAttribute('unchecked'));
-    const checked = JSON.parse(document.getElementById('picked-total').getAttribute('checked'));
+    if (!myCartHasChanges()) {
+        console.debug('My cart does not have any changes');
+        return;
+    }
+
+    const unchecked = JSON.parse(totalsDiv.getAttribute('unchecked'));
+    const checked = JSON.parse(totalsDiv.getAttribute('checked'));
 
     let requestConfig = {
         url: '/bought/updateActiveCarts',
@@ -22,6 +45,11 @@ const saveChangesInPicked = () => {
     .then(result => {
         let response = JSON.parse(result);
         console.log(response.message);
+        //update the initial sum
+        document.getElementById('initTotal').setAttribute(
+            'sum', 
+            document.getElementById('amountSum').getAttribute('sum')
+        );
     })
     .catch(error => {
         console.log(error);
@@ -135,7 +163,7 @@ const saveChangesInPicked = () => {
     
         event = event || window.event;
         if (event) {
-            saveChangesInPicked();
+            saveChangesFromMyCart();
         }
     }
 })();

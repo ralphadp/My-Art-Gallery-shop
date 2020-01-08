@@ -28,6 +28,7 @@
                 </div>
             <% }); %>
             <div class="pick-item-row total" id="picked-total" list="<%= purchaseItems %>" paused="<%= purchasePaused %>" unchecked="<%= unchecked %>" checked="<%= checked %>"><span id="amountSum" sum="<%= totalPurchase %>">Total: <%= totalPurchase %> USD</span></div>
+            <input type="hidden" id="initTotal" sum="<%= totalPurchase %>"/>
             <br/>
             <!-- FORM compra modo Cart -->
             <FORM action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="paypal-cart-form">

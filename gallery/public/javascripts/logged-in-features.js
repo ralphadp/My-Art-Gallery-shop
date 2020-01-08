@@ -6,8 +6,8 @@
     const pickedFrame = new Frame('cart-picking');
 
     pickedFrame.onClose = (event) => {
-        if (typeof saveChangesInPicked !== 'undefined') {
-            saveChangesInPicked();
+        if (typeof saveChangesFromMyCart !== 'undefined') {
+            saveChangesFromMyCart();
         } else {
             console.log('Cannot save changes from My Cart');
         }
