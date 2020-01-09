@@ -6,6 +6,7 @@ function Foggy (
     const FOG_ELEMENT_CLASS = 'fog-frame-x';
 
     this.frame = document.getElementById(frameElementId);
+    this.frame.setAttribute('tabindex', 0);
 
     if (!this.frame) {
         console.log(`The current element "${frameElementId}" does exists.`);
@@ -51,9 +52,11 @@ function Foggy (
 
     /*not right, need a change to Module*/
     this.openEvent = (event) => {
+        this.onOpen(event);
         this.beforeShow(event);
         showPiece();
         disableScrolling();
+        this.frame.focus();
     };
 
     /*not right, need a change to Module*/
@@ -61,6 +64,7 @@ function Foggy (
         this.beforeClose(event);
         hidePiece();
         enableScrolling();
+        this.onClose(event);
     };
 
     const stopEventsChain = (event) => {
@@ -69,6 +73,12 @@ function Foggy (
 
     this.frame.addEventListener('click', this.closeEvent);
     this.internalFrame.addEventListener('click', stopEventsChain);
+    this.frame.addEventListener('keydown', (event) => {
+        console.log(event.currentTarget);
+        if (event.which == 27 || event.charCode === 27) {
+            this.close();
+        }
+    });
 
     if (hasClosebutton) {
         const classAnchor = 'box-close-x';
@@ -112,4 +122,10 @@ Foggy.prototype.close = function(event) {
         return;
     }
     this.closeEvent(event);
+};
+
+Foggy.prototype.onOpen = function(event) {
+};
+
+Foggy.prototype.onClose = function(event) {
 };
