@@ -6,17 +6,11 @@
 </head>
 <body>
     <header>
-        <% if (currentUser.userExtId) { %>
-            <% include ./partials/header %>
-        <% } else { %>
-            <% include ./partials/header-unregister %>
-        <% } %>
+        <% include ./partials/header-error %>
     </header>
     <div id="banner" class="banner-main"></div>
 
-    <% if (currentUser.userExtId) { %>
-        
-    <% } %>
+    <% include ./partials/frame-logout %>
 
     <% include ./partials/social %>
 
@@ -26,17 +20,7 @@
         <pre><%= error.stack %></pre>
     </article>
 
-    <% if (currentUser.userExtId) { %>
-        <article class="body-content">
-            
-        </article>
-    <% } %>
-
-    <% if (currentUser.userExtId) { %>
-        <% include ./partials/footer %>
-    <% } else { %>
-        <% include ./partials/footer-unregister %>
-    <% } %>
+    <% include ./partials/footer-error %>
 
     <% include ./partials/svg %>
 

@@ -1,0 +1,23 @@
+<div class="app-logo">
+    <a href="/">
+        <svg class="icon-logo" width="35px" height="35px">
+            <use xlink:href="#icon-nav-palette"></use>
+        </svg>
+        <span class="logo-name">ART GALLERY SHOPPING</span>
+    </a>
+    <div id="logged-user" class="<%= currentUser.userExtId ? 'valid-user' : '' %>">Hi <a href="mailto:<%= currentUser.email %>"><%= currentUser.name %></a></div>
+</div>
+<nav class="menu">
+    <a><div class="item" id="open-logout">Logout</div></a>
+    <a href="/bought/"><div class="item" id="register">Bought</div></a>
+    <a href="/learning/"><div class="item">Learning</div></a>
+    <a href="/write-us/"><div class="item">Write Us</div></a>
+    <div class="item search">
+        <input id="input-search-art" type="search" placeholder="Enter your searching here"/>
+        <a id="input-search-art-anchor">
+            <svg class="icon-search">
+                <use xlink:href="#icon-search"></use>
+            </svg>
+        </a>
+    </div>
+</nav>
