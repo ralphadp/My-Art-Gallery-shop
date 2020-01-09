@@ -93,6 +93,23 @@ class Config {
             });
         });
     }
+
+    /**
+     * Get options for Gallery app
+     */
+    getGalleryOptions() {
+        let sql = "SELECT name, value FROM config WHERE app = 'GALLERY'";
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
 }
 
 module.exports = Config;

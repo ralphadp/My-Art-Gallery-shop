@@ -7,6 +7,7 @@ const session = require('express-session');
 
 require('dotenv').config();
 
+var optionsUpdate = require('./helpers/optionsUpdate');
 var indexRouter = require('./routes/index');
 var learningRouter = require('./routes/learning');
 var writeUsRouter = require('./routes/write-us');
@@ -18,6 +19,7 @@ var searchRouter = require('./routes/search');
 var registerRouter = require('./routes/register');
 var loginRouter = require('./routes/login');
 var boughtRouter = require('./routes/bought');
+var remoteRouter = require('./routes/remote');
 
 var app = express();
 
@@ -36,6 +38,8 @@ app.use(session({
 	saveUninitialized: true
 }));
 
+optionsUpdate();
+
 app.use('/', indexRouter);
 app.use('/learning', learningRouter);
 app.use('/write-us', writeUsRouter);
@@ -47,6 +51,7 @@ app.use('/search', searchRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/bought', boughtRouter);
+app.use('/remote', remoteRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -329,6 +329,11 @@ router.post('/configuration/update', tokenCheck, function(req, res, next) {
           message: 'The options were was updated sucessfully.'
       };
       console.log(results);
+      fetch('http://localhost:3000/remote//update-config/')
+      .then(response => response.json())
+      .then(body => {
+         console.log('response from app', body);
+      });
   })
   .catch(error => {
       console.log(error);
