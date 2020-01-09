@@ -6,21 +6,37 @@
 </head>
 <body>
     <header>
-        <% include ./partials/header-error %>
+        <% if (currentUser.userExtId) { %>
+            <% include ./partials/header-error %>
+        <% } else { %>
+            <% include ./partials/header-unregister %>
+        <% } %>
     </header>
     <div id="banner" class="banner-main"></div>
 
-    <% include ./partials/frame-logout %>
+    <% if (currentUser.userExtId) { %>
+        <% include ./partials/frame-logout %>
+    <% } %>
 
     <% include ./partials/social %>
 
     <article class="body-content">
-        <h1><%= message %></h1>
-        <h2><%= error.status %></h2>
-        <pre><%= error.stack %></pre>
+        <% if (error.status === 404) { %>
+            <section id="error-frame">
+                <img src="/images/404.png" alt="Error 404: Not found">
+            </section>
+        <% } else { %>
+            <h1><%= message %></h1>
+            <h2><%= error.status %></h2>
+            <pre><%= error.stack %></pre>
+        <% } %>
     </article>
 
-    <% include ./partials/footer-error %>
+    <% if (currentUser.userExtId) { %>
+        <% include ./partials/footer-error %>
+    <% } else { %>
+        <% include ./partials/footer-unregister %>
+    <% } %>
 
     <% include ./partials/svg %>
 

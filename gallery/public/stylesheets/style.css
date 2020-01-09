@@ -76,3 +76,7 @@ pre {
     text-align: left;
     white-space: pre-line;
 }
+
+#error-frame {
+    margin: 80px 0 50px;
+}
