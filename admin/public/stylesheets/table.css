@@ -136,18 +136,6 @@ td.edition-options:hover:after {
         left: 0;
         position: absolute;
     }
-    td:nth-child(2):before {
-        content: "Name:";
-    }
-    td:nth-child(3):before {
-        content: "Email:";
-    }
-    td:nth-child(4):before {
-        content: "Phone:";
-    }
-    td:nth-child(5):before {
-        content: "Comments:";
-    }
     tr {
         padding: 10px 0;
         position: relative;
