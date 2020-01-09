@@ -5,7 +5,7 @@
         </svg>
         <span class="logo-name">ART GALLERY SHOPPING</span>
     </a>
-    <div id="logged-user" <%= currentUser.userExtId ? 'class=valid-user' : '' %>>User:<a href="mailto:<%= currentUser.email %>"><%= currentUser.name %></a></div>
+    <div id="logged-user" class="<%= currentUser.userExtId ? 'valid-user' : '' %>">Hi <a href="mailto:<%= currentUser.email %>"><%= currentUser.name %></a></div>
 </div>
 <nav class="menu">
     <div 
