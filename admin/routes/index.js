@@ -304,7 +304,7 @@ router.get('/configuration', tokenCheck, function(req, res, next) {
       res.render(
         'configuration', 
         { 
-          title: 'Configuration', 
+          title: 'Global Configuration', 
           config: result,
           response: response
         }
