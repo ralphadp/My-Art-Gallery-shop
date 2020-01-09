@@ -1,17 +1,46 @@
 .body-content {
-    margin: 5px 10px;
+    margin: 5px 0;
 }
 
 .title {
-    padding: 5px 100px;
+    padding: 10px 0;
+    box-shadow: 0 1px 0 0 #3d3d3d;
+    margin-bottom: 40px;
+}
+
+.title h1 {
+    font-weight: normal;
+    font-size: 22px;
+    margin: 20px 2px 0 2px;
+}
+
+#learning-frame {
+    padding: 10px 8%;
 }
 
 .art-classification {
-    padding: 10px 100px;
+    padding: 10px 0;
 }
 
 .art-classification p {
     margin-bottom: 100px;
+    font-size: 14px;
+    color: #555555;
+    line-height: 1.6;
+    letter-spacing: .25px;
+    text-align: justify;
+}
+
+.art-classification a {
+    color: #006600;
+}
+
+.art-classification h4 {
+    font-weight: 600;
+}
+
+.dark-wrap {
+    padding: 0 8%;
 }
 
 @media (max-width: 660px) {
@@ -19,13 +48,9 @@
         font-size: 14px;
     }
     .title {
-        padding: 5px 70px;
+        padding: 5px 0;
     }
-    
-    .art-classification {
-        padding: 10px 70px;
-    }
-    
+
     .art-classification p {
         margin-bottom: 70px;
     }
