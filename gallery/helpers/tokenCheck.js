@@ -22,7 +22,7 @@ const tokenCheck = function(req, res, next) {
             next();
         });
     } else {
-        res.redirect('/login');
+        next();
     }
     
 }
