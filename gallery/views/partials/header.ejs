@@ -3,7 +3,7 @@
         <svg class="icon-logo" width="35px" height="35px">
             <use xlink:href="#icon-nav-palette"></use>
         </svg>
-        <span class="logo-name">ART GALLERY SHOPPING</span>
+        <span class="logo-name"><%= global.options.TITLE_APP || 'Art Gallery Shopping' %></span>
     </a>
     <div id="logged-user" class="<%= currentUser.userExtId ? 'valid-user' : '' %>">Hi <a href="mailto:<%= currentUser.email %>"><%= currentUser.name %></a></div>
 </div>

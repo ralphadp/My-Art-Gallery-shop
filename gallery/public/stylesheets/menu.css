@@ -51,6 +51,7 @@ a {
 .logo-name {
     width: 140px;
     margin-left: 10px;
+    text-transform: uppercase;
 }
 
 .icon-search, .icon-logo-text {
