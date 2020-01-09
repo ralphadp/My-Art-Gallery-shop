@@ -1,0 +1,25 @@
+#legal {
+    width: 480px;
+    height: 500px;
+    padding: 10px;
+    overflow-x: auto;
+}
+
+#legal h3 {
+    padding: 0 0 5px;
+    color: #111;
+    border-bottom: 1px solid #111;
+}
+
+#legal div.contract {
+    padding: 5px 10px;
+}
+
+#legal div.contract p{
+    margin-bottom: 100px;
+    font-size: 14px;
+    color: #555555;
+    line-height: 1.6;
+    letter-spacing: .25px;
+    text-align: justify;
+}
