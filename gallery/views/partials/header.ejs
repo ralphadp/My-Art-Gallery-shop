@@ -8,20 +8,19 @@
     <div id="logged-user" class="<%= currentUser.userExtId ? 'valid-user' : '' %>">Hi <a href="mailto:<%= currentUser.email %>"><%= currentUser.name %></a></div>
 </div>
 <nav class="menu">
-    <div 
-        class="item" id="open-logout"><a>Logout</a></div><div 
-        class="item" id="open-picked"><a>My cart</a></div><div 
-        class="item" id="open-list"><a>List</a></div><div 
-        class="item" id="register"><a href="/bought/">Bought</a></div><div 
-        class="item"><a href="/learning/">Learning</a></div><div 
-        class="item"><a href="/write-us/">Write Us</a></div><div 
-        class="item search">
-            <input id="input-search-art" type="search" placeholder="Enter your searching here"/>
-            <a id="input-search-art-anchor">
-                <svg class="icon-search">
-                    <use xlink:href="#icon-search"></use>
-                </svg>
-            </a>
-        </div>
+    <a><div class="item" id="open-logout">Logout</div></a>
+    <a><div class="item" id="open-picked">My cart</div></a>
+    <a><div class="item" id="open-list">List</div></a>
+    <a href="/bought/"><div class="item" id="register">Bought</div></a>
+    <a href="/learning/"><div class="item">Learning</div></a>
+    <a href="/write-us/"><div class="item">Write Us</div></a>
+    <div class="item search">
+        <input id="input-search-art" type="search" placeholder="Enter your searching here"/>
+        <a id="input-search-art-anchor">
+            <svg class="icon-search">
+                <use xlink:href="#icon-search"></use>
+            </svg>
+        </a>
+    </div>
 </nav>
 <script src="https://www.paypal.com/sdk/js?client-id=<%= process.env.SB_CLIENT_ID %>"></script>
