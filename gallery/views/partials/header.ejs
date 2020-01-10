@@ -5,7 +5,9 @@
         </svg>
         <span class="logo-name"><%= global.options.TITLE_APP || 'Art Gallery Shopping' %></span>
     </a>
+    <% if (global.options.SHOW_USERNAME) { %>
     <div id="logged-user" class="<%= currentUser.userExtId ? 'valid-user' : '' %>">Hi <a href="mailto:<%= currentUser.email %>"><%= currentUser.name %></a></div>
+    <% } %>
 </div>
 <nav class="menu">
     <a><div class="item" id="open-logout">Logout</div></a>
