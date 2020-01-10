@@ -105,12 +105,17 @@ a {
 
 #logged-user {
     position: absolute;
-    right: 0px;
+    right: 0;
     bottom: 6px;
     color: yellow;
     font-weight: 100;
     font-size: 14px;
     display: none;
+}
+
+#logged-user img {
+    width: 25px;
+    height: 25px;
 }
 
 .valid-user {
