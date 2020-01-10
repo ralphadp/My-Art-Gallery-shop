@@ -8,7 +8,9 @@
     <header>
         <% include ./partials/header-unregister %>
     </header>
-    <div id="banner" class="banner-write"></div>
+    <% if (global.options.SHOW_BANNER) { %>
+        <div id="banner" class="banner-write"></div>
+    <% } %>
 
     <% include ./partials/social %>
 

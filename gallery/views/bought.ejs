@@ -13,7 +13,9 @@
             <% include ./partials/header-unregister %>
         <% } %>
     </header>
-    <div id="banner" class="banner-main"></div>
+    <% if (global.options.SHOW_BANNER) { %>
+        <div id="banner" class="banner-main"></div>
+    <% } %>
 
     <% include ./partials/frames %>
     <% include ./partials/frame-logout %>
