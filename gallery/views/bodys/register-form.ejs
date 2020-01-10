@@ -7,19 +7,19 @@
         <form enctype="multipart/form-data" id="register-form" method="POST">
             <div class="row">
                 <label for="first_name">First Name:</label>
-                <input id="first_name" name="first_name" type="text" placeholder="Please enter your first name" maxlength="50"/>
+                <input id="first_name" name="first_name" type="text" placeholder="Please enter your first name" maxlength="50" required/>
             </div>
             <div class="row">
                 <label for="last_name">Last name:</label>
-                <input id="last_name" name="last_name" type="text" placeholder="Please enter your last name" maxlength="50"/>
+                <input id="last_name" name="last_name" type="text" placeholder="Please enter your last name" maxlength="50" required/>
             </div>
             <div class="row">
                 <label for="email">Email (username):</label>
-                <input id="email" name="email" type="email" placeholder="Enter your email"/>
+                <input id="email" name="email" type="email" placeholder="Enter your email" required/>
             </div>
             <div class="row">
                 <label for="password">Password</label>
-                <input id="password" name="password" type="text" placeholder="Please enter your preference password" size="30" maxlength="30"/>
+                <input id="password" name="password" type="password" placeholder="Please enter your preference password" size="30" maxlength="30" required/>
             </div>
             <div class="row">
                 <label for="birth">Birth:</label>
@@ -27,7 +27,7 @@
             </div>
             <div class="row">
                 <label for="movile">Movile:</label>
-                <input id="movile" name="movile" type="tel" placeholder="Enter your movile number"/>
+                <input id="movile" name="movile" type="tel" placeholder="Enter your movile number" required/>
             </div>
             <div class="row">
                 <label for="gender">Gender:</label>
@@ -48,15 +48,15 @@
             </div>
             <div class="row">
                 <label for="City">City</label>
-                <input id="City" name="city" type="text" placeholder="Enter the name of your city" size="30" maxlength="30"/>
+                <input id="City" name="city" type="text" placeholder="Enter the name of your city" size="30" maxlength="30" required/>
             </div>
             <div class="row">
                 <label for="postal_code">Postal Code:</label>
-                <input id="postal_code" name="postal_code" type="text" placeholder="Enter your postal code" maxlength="15"/>
+                <input id="postal_code" name="postal_code" type="text" placeholder="Enter your postal code" maxlength="15" required/>
             </div>
             <div class="row">
                 <label for="accept_legal">Accept registration legal rules: </label>
-                <input id="accept_legal" name="accept_legal" type="checkbox"/><a id="display-rules" >Read here...</a>
+                <input id="accept_legal" name="accept_legal" type="checkbox" value="1" required/><a id="display-rules" >Read here...</a>
             </div>
         </form>
         <div id="waiting-register-response">

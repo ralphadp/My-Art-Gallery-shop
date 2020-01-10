@@ -141,6 +141,7 @@ class Users {
             country: user.country,
             city: user.city,
             postal_code: user.postal_code,
+            accept_legal: user.accept_legal
         };
 
         let sql = "INSERT INTO users SET ?";

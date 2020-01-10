@@ -7,6 +7,11 @@
         let form = document.getElementById('register-form');
         var fd = new FormData(form);
 
+        if (!fd.get('accept_legal')) {
+            alert ('You must accept the legal rules');
+            return false;
+        }
+
         let requestConfig = {
             url: '/register/new',
             method: 'POST',
@@ -22,7 +27,9 @@
             document.getElementById('waiting-register-response').style.display = 'none';
             let response = JSON.parse(data);
             alert (response.message);
-            window.location.replace(window.location.origin + '/');
+            if (response.result) {
+                window.location.replace(window.location.origin + '/');
+            }
         })
         .catch(error => {
             document.getElementById('waiting-register-response').style.display = 'none';
