@@ -38,14 +38,14 @@ router.post('/new', function(req, res, next) {
                 } else {
                     response = {
                         result: false,
-                        message: result.message
+                        message: result.sqlMessage
                     };
                 }
             }).catch(error => {
                 console.log(error);
                 response = {
                     result: false,
-                    message: error
+                    message: error.sqlMessage || error
                 };
             }).finally(() => {
                 res.send(response);
@@ -53,7 +53,7 @@ router.post('/new', function(req, res, next) {
         } else {
             response = {
                 result: false,
-                message: result.message
+                message: result.sqlMessage
             };
             res.send(response);
         }
@@ -62,7 +62,7 @@ router.post('/new', function(req, res, next) {
         console.log(error);
         response = {
             result: false,
-            message: error
+            message: error.sqlMessage || error
         };
         res.send(response);
     });
@@ -87,16 +87,17 @@ router.get('/activation/:code', function(req, res, next) {
                 } else {
                     response = {
                         result: false,
-                        message: 'There was a error at time to set your user. Please contact our Technical services.'
+                        message: 'There was a error at time to activate your account. Please try later.'
                     };
                 }
             }).catch(error => {
+                console.log('user.getByActivationCode error:', error);
                 response = {
                     result: false,
-                    message: error
+                    message: error.message
                 };
-            }).finaly(()=> {
-                res.cookie('activation_response' , response, {maxAge: 20000});
+            }).finally(()=> {
+                res.cookie('activation_response', response, {maxAge: 20000});
                 res.redirect('/login');
             }); 
         } else {
@@ -108,9 +109,10 @@ router.get('/activation/:code', function(req, res, next) {
             res.redirect('/login');
         }
     }).catch(error => {
+        console.log('user.activate error: ', error);
         response = {
             result: false,
-            message: error
+            message: error.message
         };
         res.cookie('activation_response' , response, {maxAge: 20000});
         res.redirect('/login');

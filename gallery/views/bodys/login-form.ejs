@@ -1,3 +1,19 @@
+<% if (response) { %>
+    <div id="message-label" class="<%= response.result ? 'req-sucess' : 'req-error' %>">
+        <span><%= response.message %></span>
+    </div>
+    <script>
+        setTimeout(()=> {
+            document.getElementById("message-label").classList.add("show-fading");
+        }, 100);
+        setTimeout(()=> {
+            document.getElementById("message-label").classList.remove("show-fading");
+        }, 5000);
+    </script>
+<% } else {%>
+<div id="message-label"></div>
+<% } %>
+
 <section id="login-frame">
     <div class="title">
         <h1>Login</h1>
