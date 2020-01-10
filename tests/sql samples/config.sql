@@ -22,3 +22,4 @@ insert into config (name, description, value, type, options, app) values ('SOCIA
 insert into config (name, description, value, type, options, app) values ('SEARCH_DATE','Search on Date', '0', 'checkbox', null, 'GALLERY');
 insert into config (name, description, value, type, options, app) values ('SHOW_USERNAME','Show username at header', '1', 'checkbox', null, 'GALLERY');
 insert into config (name, description, value, type, options, app) values ('SHOW_YEAR_PIECE','Show year at piece info', '1', 'checkbox', null, 'GALLERY');
+insert into config (name, description, value, type, options, app) values ('REDIRECT_UPDATE','Redirect Update', '1', 'checkbox', null, 'ADMIN');
