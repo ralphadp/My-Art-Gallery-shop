@@ -1,7 +1,7 @@
 var express = require('express');
 const {users, registration} = require('galleryRepository');
 const {TODAY} = require('../helpers/middleware/tasks/util/utilities');
-var {sendActivationRequest, sendSucessfulActivation} = require('../email/activation');
+var {sendActivationRequest, sendSuccessfulActivation} = require('../email/activation');
 var shortid = require('shortid');
 var generator = require('generate-serial-number');
 var router = express.Router();
@@ -79,7 +79,8 @@ router.get('/activation/:code', function(req, res, next) {
         if (result.affectedRows) {
             user.getByActivationCode(req.params.code).then(result => {
                 if (result.length) {
-                    sendSucessfulActivation(result[0]);
+                    sendSuccessfulActivation(result[0]);
+
                     response = {
                         result: true,
                         message: 'Your account has been activated, you can login now. Thank you.'

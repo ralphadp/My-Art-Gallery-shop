@@ -42,12 +42,17 @@ const sendActivationRequest = (activationCode, userInfo) => {
  * Send email of activation
  * @param {*} userInfo 
  */
-const sendSucessfulActivation = (userInfo) => {
+const sendSuccessfulActivation = (userInfo) => {
+    if (!global.options.EMAIL_BACK) {
+        console.log('Send successful User Accout Activation INACTIVE');
+        return;
+    }
+
     try {
         var mailOptions = {
             from: process.env.APP_EMAIL,
             to: userInfo.email,
-            subject: 'Sucessfully Activation Account - Gallery Art',
+            subject: 'Successfully Activation Account - Gallery Art',
             html: renderTemplate('./email/templates/sucessful-activation.html', userInfo)
         };
 
@@ -64,4 +69,4 @@ const sendSucessfulActivation = (userInfo) => {
 }
 
 module.exports.sendActivationRequest = sendActivationRequest;
-module.exports.sendSucessfulActivation = sendSucessfulActivation;
+module.exports.sendSuccessfulActivation = sendSuccessfulActivation;
