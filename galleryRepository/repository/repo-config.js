@@ -98,7 +98,7 @@ class Config {
      * Get options for Gallery app
      */
     getGalleryOptions() {
-        let sql = "SELECT name, value FROM config WHERE app = 'GALLERY'";
+        let sql = "SELECT name, value, type FROM config WHERE app = 'GALLERY'";
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, (err, result) => {

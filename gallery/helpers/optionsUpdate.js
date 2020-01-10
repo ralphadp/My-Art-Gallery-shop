@@ -10,10 +10,10 @@ const optionsUpdate = async function() {
         const options = await conf.getGalleryOptions();
         let objectOptions = {};
         options.forEach(option => {
-            objectOptions[option.name] = option.value;
+            objectOptions[option.name] = (option.type === 'checkbox') ? Number(option.value) : option.value;
         });
         global.options = objectOptions;
-        console.log('Configuration:', global.options);
+        console.log('Global Configuration: ', global.options);
     } catch(error) {
         console.log(error);
         return false;
