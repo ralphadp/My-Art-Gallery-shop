@@ -3,11 +3,11 @@
  * @param {*} response 
  */
 const uploadSuccess = (response) => {
-    let newExternalId = 'ERROR, no file name code was back from server.';
+    let photoId = 'SERVER ERROR, none filename was return';
     if (response.files.length) {
-        newExternalId = response.files[0].split('.')[0];    
+        photoId = response.files[0].split('.')[0];
     }
-    document.getElementById('user-photo').value = newExternalId;
+    document.getElementById('user-photo').value = photoId;
     document.getElementById('image-stored').src = `http://localhost:8888/api/image/${response.type}/${newExternalId}`;
 
     alert(response.message);
