@@ -8,7 +8,9 @@
             <div class="row pic">
                 <label for="user-photo">Photograpy:</label>
                 <input id="user-photo" name="imgUploader" type="file" accept="image/png, image/jpeg"/>
-                <div id="preview"></div>
+                <div id="preview">
+                    <img src="/images/user.svg" alt="">
+                </div>
             </div>
             <div class="row">
                 <label for="first_name">First Name:</label>
@@ -28,7 +30,7 @@
             </div>
             <div class="row">
                 <label for="birth">Birth:</label>
-                <input id="birth" name="birth" type="date" placeholder="Enter your birthdate"/>
+                <input id="birth" name="birth" type="date" placeholder="Enter your birthdate" required/>
             </div>
             <div class="row">
                 <label for="movile">Movile:</label>
@@ -63,11 +65,11 @@
                 <label for="accept_legal">Accept registration legal rules: </label>
                 <input id="accept_legal" name="accept_legal" type="checkbox" value="1" required/><a id="display-rules" >Read here...</a>
             </div>
-        </form>
 
-        <div id="waiting-register-response">
-            <img src="/images/loading.gif"/>
-        </div>
-        <button id="register-user" type="submit">Register</button>
+            <div id="waiting-register-response">
+                <img src="/images/loading.gif"/>
+            </div>
+            <button id="register-user" type="submit">Register</button>
+        </form>
     </div>
 </section>

@@ -1,122 +1,180 @@
 (() => 
 {
-    /**
-     * Verify the image type
-     */
-    const verifyImage = () => {
-        let input = document.querySelector('input[type=file]');
-        let file = input.files[0];
+    class registerAccount {
 
-        if (!file || !file.type.match(/image.*/)) {
-            alert ('The file is not present or is not an image.');
-            return false;
+        constructor(waitingID, formId, previewId) {
+            this.WAITING_GIF_ID = waitingID;
+            this.FORM_ID = formId;
+            this.PREVIEW_ID = previewId;
         }
 
-        return true;
-    }
+        /**
+         * Verify the image type
+         */
+        doesIncludeImage() {
+            let input = document.querySelector('input[type=file]');
+            let file = input.files[0];
 
-    /**
-     * Verify the requiered data in the form
-     * @param {*} formdata 
-     */
-    const verifyRequired = (formdata) => {
-        if (!formdata.get('accept_legal')) {
-            alert ('You must accept the legal rules');
-            return false;
+            if (!file || !file.type.match(/image.*/)) {
+                
+                return false;
+            }
+
+            return true;
         }
 
-        return true;
-    }
+        /**
+         * Verify the requiered data in the form
+         * @param {*} formdata 
+         */
+        verifyRequired(formdata) {
+            if (!formdata.get('accept_legal')) {
+                alert ('You must accept the legal rules');
+                return false;
+            }
 
-    /**
-     * enable/disable waiting animated gif
-     * @param {*} enable 
-     */
-    const displayWaitingGif = (enable) => {
-        const waitingGif = document.getElementById('waiting-register-response');
-        waitingGif.style.display = enable ? 'block' : 'none';
-    }
-
-    /* REGISTER A NEW USER */
-
-    document.getElementById('register-user').addEventListener('click', () => {
-
-        if (!verifyImage()) {
-            return false;
+            return true;
         }
 
-        let form = document.getElementById('register-form');
-        let fd = new FormData(form);
-
-        if (!verifyRequired(fd)) {
-            return false;
+        /**
+         * enable/disable waiting animated gif
+         * @param {*} enable 
+         */
+        displayWaitingGif(enable) {
+            const waitingGif = document.getElementById(this.WAITING_GIF_ID);
+            waitingGif.style.display = enable ? 'block' : 'none';
         }
 
-        displayWaitingGif(true);
+        /**
+         * Get the all the data form 
+         */
+        getFormdata() {
+            let form = document.getElementById(this.FORM_ID);
+            return new FormData(form);
+        }
 
-        let requestConfig = {
-            url: 'http://localhost:8888/api/register/upload',
-            method: 'POST',
-            headers: {
-                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"
-            },
-            body: fd
+        /**
+         * Register new account user Info
+         * @param {*} fd 
+         * @param {*} message 
+         */
+        registerUser(fd, messageExtended = null) {
+            const requestConfig = {
+                url: '/register/new',
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json;charset=UTF-8"
+                },
+                body: JSON.stringify(Object.fromEntries(fd))
+            };
+
+            request(requestConfig)
+            .then(data => {
+                this.displayWaitingGif(false);
+                const response = JSON.parse(data);
+
+                alert ((messageExtended ? (messageExtended + '\n') : '') + response.message);
+                if (response.result) {
+                    window.location.replace(window.location.origin + '/');
+                } else {
+                    console.log('Couln not register user info.');
+                }
+            })
+            .catch(error => {
+                this.displayWaitingGif(false);
+                console.log(error);
+                alert (error);
+            });
+        }
+
+        /**
+         * Register new account user photo
+         * @param {*} fd 
+         * @param {*} nextRegister 
+         */
+        registerPhotoUser(fd, nextRegister) {
+
+            let requestConfig = {
+                url: 'http://localhost:8888/api/register/upload',
+                method: 'POST',
+                headers: {
+                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"
+                },
+                body: fd
+            };
+
+            request(requestConfig)
+            .then(data => {
+                const response = JSON.parse(data);
+                const messageImage = response.message;
+
+                if (response.result) {
+                    const photoId = response.code;
+                    fd.append('photo', photoId);
+                    
+                } else {
+                    console.log('Could not save user image.');
+                } 
+                //Next step, register user data
+                this.registerUser(fd, messageImage)
+            })
+            .catch(error => {
+                this.displayWaitingGif(false);
+                console.log(error);
+                alert (error);
+            });
+        }
+
+        /**
+         * Main function to register an account
+         * @param {*} event 
+         */
+        registerNewAccount(event) {
+
+            const fd = this.getFormdata();
+            
+            if (!this.verifyRequired(fd)) {
+                return false;
+            }
+
+            this.displayWaitingGif(true);
+
+            if (!this.doesIncludeImage()) {
+                console.log('Warning: The file is not present or is not an image.');
+                this.registerUser(fd);
+            } else {
+                this.registerPhotoUser(fd, this.registerUser);
+            }
+
+            if (event) {
+                event.preventDefault();
+            }
         };
 
-        request(requestConfig)
-        .then(data => {
-            const response = JSON.parse(data);
-            const messageImage = response.message;
-
-            if (response.result) {
-                const photoId = response.code;
-                fd.append('photo', photoId);
-
-                requestConfig = {
-                    url: '/register/new',
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json;charset=UTF-8"
-                    },
-                    body: JSON.stringify(Object.fromEntries(fd))
-                };
-
-                request(requestConfig)
-                .then(data => {
-                    displayWaitingGif(false);
-                    const response = JSON.parse(data);
-                    alert (messageImage + '\n' + response.message);
-                    if (response.result) {
-                        window.location.replace(window.location.origin + '/');
-                    }
-                })
-                .catch(error => {
-                    displayWaitingGif(false);
-                    console.log(error);
-                    alert (error);
-                });
-            }
-        })
-        .catch(error => {
-            displayWaitingGif(false);
-            console.log(error);
-            alert (error);
-        });
-
-    });
-
-    /* Display preview user image */
-
-    document.getElementById('user-photo').onchange = (event) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]);
-        reader.onload = (res) => {
-            const preview = document.getElementById('preview');
-            const image = document.createElement('img');
-            image.src = reader.result;
-            preview.innerHTML = '';
-            preview.append(image);
+        /**
+         * Set the upload image preview
+         * @param {*} event 
+         */
+        displayPreviewPhoto(event) {
+            const reader = new FileReader();
+            reader.readAsDataURL(event.target.files[0]);
+            let i=this.PREVIEW_ID;
+            reader.onload = (res) => {
+                const preview = document.getElementById(this.PREVIEW_ID);
+                const image = document.createElement('img');
+                image.src = reader.result;
+                preview.innerHTML = '';
+                preview.append(image);
+            };
         };
     };
+
+    const account = new registerAccount('waiting-register-response', 'register-form', 'preview');
+
+    /* REGISTER A NEW USER ACCOUNT */
+    document.getElementById('register-form').onsubmit = account.registerNewAccount.bind(account);
+
+    /* DISPLAY USER PREVIEW IMAGE TO UPLOAD */
+    document.getElementById('user-photo').onchange = account.displayPreviewPhoto.bind(account);
 
 })();
