@@ -15,6 +15,7 @@ const tokenCheck = function(req, res, next) {
                 req.session.userExtId = jwtResponse.data.userId;
                 req.session.name = jwtResponse.data.username;
                 req.session.email = jwtResponse.data.userEmail;
+                req.session.photo = jwtResponse.data.photo;
             }
         }).catch(error => {
             console.log(error);

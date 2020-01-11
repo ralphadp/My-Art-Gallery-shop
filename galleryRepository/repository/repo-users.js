@@ -219,7 +219,7 @@ class Users {
      */
     verify(user, pass) {
 
-        let sql = "SELECT id, external_id, first_name, last_name, email, username, active FROM users WHERE username = ? AND password = ?";
+        let sql = "SELECT id, external_id, first_name, last_name, email, username, photo, active FROM users WHERE username = ? AND password = ?";
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [user, pass], (err, result) => {

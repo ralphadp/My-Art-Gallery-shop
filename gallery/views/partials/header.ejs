@@ -10,7 +10,8 @@
         <span>Hi</span>
         <a href="mailto:<%= currentUser.email %>"><%= currentUser.name %></a>
         <% } %>
-        <a href="mailto:<%= currentUser.email %>"><img src="/images/user.svg" alt="" title="<%= currentUser.name %>"></a>
+        <% const userPhoto = currentUser.photo ? ('http://localhost:8888/api/image/user/' + currentUser.photo) : '/images/user.svg'; %>
+        <a href="mailto:<%= currentUser.email %>"><img src="<%= userPhoto %>" alt="" title="<%= currentUser.name %>"></a>
     </div>
 </div>
 <nav class="menu">

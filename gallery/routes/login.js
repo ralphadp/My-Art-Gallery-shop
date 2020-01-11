@@ -31,6 +31,7 @@ router.post('/validation', function(req, res, next) {
                 userInfo.username = validUser.first_name + ' ' + validUser.last_name;
                 userInfo.userEmail = validUser.email;
                 userInfo.userId = validUser.external_id;
+                userInfo.photo = validUser.photo;
 
                 response = {
                     result: true,

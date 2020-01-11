@@ -69,7 +69,8 @@ router.get('/check-auth/:token', function(req, res, next) {
                             data: {
                                 userId: decoded.userId,
                                 username: decoded.username,
-                                userEmail: decoded.userEmail
+                                userEmail: decoded.userEmail,
+                                photo: decoded.photo
                             },
                             message: 'Token is valid'
                         });
@@ -129,6 +130,7 @@ router.post('/generate-by-info', function(req, res, next) {
         const userId = req.body.userId;
         const username = req.body.username;
         const userEmail = req.body.userEmail;
+        const photo = req.body.photo;
         const hours = req.body.hours;
 
         if (userId && username) {
@@ -136,7 +138,8 @@ router.post('/generate-by-info', function(req, res, next) {
                 {
                     userId: userId, 
                     username: username, 
-                    userEmail: userEmail
+                    userEmail: userEmail,
+                    photo: photo
                 },
                 config.secret,
                 {expiresIn: hours} //sample '24h'

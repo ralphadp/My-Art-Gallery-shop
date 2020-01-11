@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 
 /* POST register new user, request route. */
 router.post('/new', function(req, res, next) {
-    console.log(req.body);
+
     let response = {};
     req.body.username = req.body.email;
     req.body.registration_date = TODAY();
