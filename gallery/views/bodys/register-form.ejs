@@ -5,6 +5,11 @@
 
     <div class="register-body">
         <form enctype="multipart/form-data" id="register-form" method="POST">
+            <div class="row pic">
+                <label for="user-photo">Photograpy:</label>
+                <input id="user-photo" name="imgUploader" type="file" accept="image/png, image/jpeg"/>
+                <div id="preview"></div>
+            </div>
             <div class="row">
                 <label for="first_name">First Name:</label>
                 <input id="first_name" name="first_name" type="text" placeholder="Please enter your first name" maxlength="50" required/>
@@ -59,6 +64,7 @@
                 <input id="accept_legal" name="accept_legal" type="checkbox" value="1" required/><a id="display-rules" >Read here...</a>
             </div>
         </form>
+
         <div id="waiting-register-response">
             <img src="/images/loading.gif"/>
         </div>

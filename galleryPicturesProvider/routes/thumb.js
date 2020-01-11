@@ -1,7 +1,7 @@
 var express = require('express');
 var handler = require('../model/thumbHandler');
 var uploader = require('../model/upload');
-const {REMOTE_REQUESTER_HOST} = require('../model/config');
+const {REMOTE_REQUESTER_HOST, REMOTE_REQUESTER_APP_HOST} = require('../model/config');
 var router = express.Router();
 
 /* GET api root not valid. */
@@ -186,6 +186,43 @@ console.log(REMOTE_REQUESTER_HOST);
       });
   });
 });
+
+/* POST to upload user photo from signin. */
+router.post("/register/upload", function(req, res) {
+
+  uploader.uploadUserSingle(req, res, (error) => {
+      let message = '';
+      let anErrorHappened = false;
+      let code = 'unknown';
+
+      if (req.fileValidationError !== undefined) {
+          message = req.fileValidationError;
+          anErrorHappened = true;
+      } else if (error) {
+          message = error;
+          anErrorHappened = true;
+      } else {
+          if (req.file === undefined || !req.file) {
+              message = 'None image was provided to upload.';
+              anErrorHappened = true;
+          } else {
+            message = 'Files uploaded sucessfully';
+            //save the image code
+            code = req.file.filename.split('.')[0];
+          }
+      }
+
+      //TODO: set the requester microservice domain in the configuration
+      res.header("Access-Control-Allow-Origin", REMOTE_REQUESTER_APP_HOST);
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+      res.send({
+          message: message,
+          result: !anErrorHappened,
+          code: code
+      });
+  });
+})
 
 /*DELETE remove images from images directory */
 router.delete('/image/:id', function(req, res, next) {

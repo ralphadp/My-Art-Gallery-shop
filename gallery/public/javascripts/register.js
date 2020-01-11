@@ -4,39 +4,89 @@
 
     document.getElementById('register-user').addEventListener('click', () => {
 
+        let input = document.querySelector('input[type=file]');
+        let file = input.files[0];
+
+        if (!file || !file.type.match(/image.*/)) {
+            alert ('The file is not present or is not an image.');
+            return false;
+        }
+
         let form = document.getElementById('register-form');
-        var fd = new FormData(form);
+        let fd = new FormData(form);
 
         if (!fd.get('accept_legal')) {
             alert ('You must accept the legal rules');
             return false;
         }
 
+        const waitingGif = document.getElementById('waiting-register-response');
+
         let requestConfig = {
-            url: '/register/new',
+            url: 'http://localhost:8888/api/register/upload',
             method: 'POST',
             headers: {
-                "Content-Type": "application/json;charset=UTF-8"
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"
             },
-            body: JSON.stringify(Object.fromEntries(fd))
+            body: fd
         };
 
-        document.getElementById('waiting-register-response').style.display = 'block';
+        waitingGif.style.display = 'block';
+
         request(requestConfig)
         .then(data => {
-            document.getElementById('waiting-register-response').style.display = 'none';
-            let response = JSON.parse(data);
-            alert (response.message);
+            const response = JSON.parse(data);
+            const messageImage = response.message;
+
             if (response.result) {
-                window.location.replace(window.location.origin + '/');
+                const photoId = response.code;
+                fd.append('photo', photoId);
+
+                requestConfig = {
+                    url: '/register/new',
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json;charset=UTF-8"
+                    },
+                    body: JSON.stringify(Object.fromEntries(fd))
+                };
+
+                request(requestConfig)
+                .then(data => {
+                    waitingGif.style.display = 'none';
+                    const response = JSON.parse(data);
+                    alert (messageImage + '\n' + response.message);
+                    if (response.result) {
+                        window.location.replace(window.location.origin + '/');
+                    }
+                })
+                .catch(error => {
+                    waitingGif.style.display = 'none';
+                    console.log(error);
+                    alert (error);
+                });
             }
         })
         .catch(error => {
-            document.getElementById('waiting-register-response').style.display = 'none';
+            waitingGif.style.display = 'none';
             console.log(error);
             alert (error);
         });
 
     });
+
+    /* Set preview user image */
+
+    document.getElementById('user-photo').onchange = (event) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = (res) => {
+            const preview = document.getElementById('preview');
+            const image = document.createElement('img');
+            image.src = reader.result;
+            preview.innerHTML = '';
+            preview.append(image);
+        };
+    };
 
 })();

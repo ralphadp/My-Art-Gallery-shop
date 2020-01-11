@@ -93,6 +93,37 @@ label[for=gender] {
     float: left;
 }
 
+.pic {
+    height: 90px;
+}
+
+input#user-photo {
+    width: 250px;
+}
+
+input[type='file']{
+    color:#5fcf80;
+  }
+
+#preview {
+    display: inline-block;
+    position: absolute;
+    margin-left: 10px;
+    width: 100px;
+    height: 100px;
+    padding: 4px 0 5px;
+    border-radius: 10px;
+    border: 1px solid #d2d2d2;
+}
+
+#preview img {
+    max-width: 96%;
+    height: 90px;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+}
+
 @media (max-width: 1022px) {
     #register-frame {
         padding: 10px 50px;

@@ -27,7 +27,7 @@ const imageFilter = (request, file, callback) => {
  * Main function to upload images
  * @param {*} storagePath 
  */
-let imagesUpload = (storagePath) => {
+let imagesUpload = (storagePath, single = false) => {
 
     /**
      * Reference of multer disk Storage
@@ -41,8 +41,22 @@ let imagesUpload = (storagePath) => {
         }
     });
 
+    if (single) {
+        /**
+         * return instance multer for a sinle file
+         */
+        return multer({
+            storage: storage,
+            fileFilter: imageFilter,
+            /*limits: {
+                //TODO: need to control to be a big image (how to check if is high resolution?, npm )
+                fileSize: 100 * 1024 * 1024,//100kb
+            }*/
+        }).single("imgUploader");
+    }
+
     /**
-     * instance multer
+     * return instance multer for multiple files
      */
     return multer({
         storage: storage,
@@ -58,5 +72,6 @@ let imagesUpload = (storagePath) => {
 module.exports = {
     upload: imagesUpload(IMAGES_HD_PATH),
     uploadUser: imagesUpload(IMAGES_USER_PATH),
-    uploadAdmin: imagesUpload(IMAGES_ADMIN_PATH)
+    uploadAdmin: imagesUpload(IMAGES_ADMIN_PATH),
+    uploadUserSingle: imagesUpload(IMAGES_USER_PATH, true)
 };
