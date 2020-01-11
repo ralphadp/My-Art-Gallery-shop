@@ -10,7 +10,8 @@
         <span>Hi</span>
         <a href="mailto:<%= currentUser.email %>"><%= currentUser.name %></a>
         <% } %>
-        <% const userPhoto = currentUser.photo ? ('http://localhost:8888/api/image/user/' + currentUser.photo) : '/images/user.svg'; %>
+
+        <% const userPhoto = (global.options.PROFILE_PHOTO && currentUser.photo) ? ('http://localhost:8888/api/image/user/' + currentUser.photo) : '/images/user.svg'; %>
         <a href="mailto:<%= currentUser.email %>"><img src="<%= userPhoto %>" alt="" title="<%= currentUser.name %>"></a>
     </div>
 </div>
