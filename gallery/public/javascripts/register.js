@@ -37,6 +37,23 @@
         }
 
         /**
+         * Tootle password input visility 
+         */
+        tooglePassword() {
+            const password = document.getElementById('password');
+            const icon = document.getElementById('eye-icon');
+            if (password.type === 'password') {
+                password.type = 'text';
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            } else {
+                password.type = 'password'
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            }
+        }
+
+        /**
          * enable/disable waiting animated gif
          * @param {*} enable 
          */
@@ -176,5 +193,8 @@
 
     /* DISPLAY USER PREVIEW IMAGE TO UPLOAD */
     document.getElementById('user-photo').onchange = account.displayPreviewPhoto.bind(account);
+
+    /* TOOGLE PASSWORD VISIVILITY */
+    document.getElementById('eye').onclick = account.tooglePassword.bind(account);
 
 })();

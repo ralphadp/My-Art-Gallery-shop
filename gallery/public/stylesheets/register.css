@@ -125,6 +125,15 @@ input[type='file']{
     display: block;
 }
 
+#password {
+    width: 330px;
+}
+
+#password + a {
+    margin-left: 10px;
+}
+
+
 @media (max-width: 1022px) {
     #register-frame {
         padding: 10px 50px;
