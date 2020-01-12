@@ -1,4 +1,4 @@
-const {body, validationResult} = require('express-validator/check');
+const {body, validationResult, sanitizeBody} = require('express-validator');
 const {users} = require('galleryRepository');
 
 /**
@@ -28,6 +28,13 @@ const validate = (method) => {
                     body('city', "City doesn't exists").exists(),
                     body('postal_code', "Postal code is incorrect").exists().isAlphanumeric(),
                     body('accept_legal', "Accept legal rules is not checked").exists(),
+                ]
+            }
+            case 'login': {
+                return [
+                    body('username', 'Invalid username, should be your email').isEmail().normalizeEmail(),
+                    body('password', 'You should enter a valid password').not().isEmpty().trim().escape(),
+                    sanitizeBody('notifyOnReply').toBoolean()
                 ]
             }
         }

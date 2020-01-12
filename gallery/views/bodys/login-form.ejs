@@ -26,19 +26,19 @@
         <form enctype="multipart/form-data" id="login-form" method="POST">
             <div class="row">
                 <label for="username">username:</label>
-                <input id="username" name="username" type="text" placeholder="Please enter your first name"/>
+                <input id="username" name="username" type="text" placeholder="Please enter your username" required/>
             </div>
             <div class="row">
                 <label for="password">password:</label>
-                <input id="password" name="password" type="password" placeholder="Please enter your last name"/>
+                <input id="password" name="password" type="password" placeholder="Please enter your password" required/>
+            </div>
+            <div id="waiting-login-response">
+                <img src="/images/loading.gif"/>
+            </div>
+            <div class="row">
+                <button id="login-user" type="submit">Login</button>
             </div>
         </form>
-        <div id="waiting-login-response">
-            <img src="/images/loading.gif"/>
-        </div>
-        <div class="row">
-            <button id="login-user">Login</button>
-        </div>
         <div class="row">
             <a id="forgoteen-email">Did you forgot your credentials?</a>
         </div>

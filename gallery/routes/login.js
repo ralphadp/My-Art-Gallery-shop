@@ -1,6 +1,7 @@
 var express = require('express');
 const {users} = require('galleryRepository');
 var fetch = require('node-fetch');
+const {validate, validateResult} = require('../helpers/validate');
 var router = express.Router();
 
 /* GET login Page. */
@@ -14,13 +15,23 @@ router.get('/', function(req, res, next) {
 });
 
 /* POST login process request route. */
-router.post('/validation', function(req, res, next) {
+router.post('/validation', validate('login'), function(req, res, next) {
 
     let userInfo = {};
     let response = {};
+    console.log(req.body.username, req.body.password);
+    const errors = validateResult(req);
 
-    //TODO: clean username and password
+    if (!errors.isEmpty()) {
 
+        response = {
+            result: false,
+            message: errors.array().join('\n')
+        };
+        res.send(response);
+        return;
+    }
+    console.log(req.body.username, req.body.password);
     const user = new users();
 
     user.verify(req.body.username, req.body.password).then(result => {
@@ -49,7 +60,7 @@ router.post('/validation', function(req, res, next) {
             response = {
                 result: false,
                 data: null,
-                message: 'User not authenticated.'
+                message: 'Wrong username or password.'
             };
         }
     }).catch(error => {

@@ -253,7 +253,7 @@
     /* TOOGLE PASSWORD VISIVILITY */
     document.getElementById('eye').onclick = account.tooglePassword.bind(account);
 
-    /* CHECk PASSWORD STRENGTH */
+    /* CHECK PASSWORD STRENGTH */
     document.getElementById('password').onkeyup = account.validatePassword.bind(account);
 
 })();
