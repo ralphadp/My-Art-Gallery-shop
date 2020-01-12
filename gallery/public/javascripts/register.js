@@ -53,8 +53,13 @@
          * @param {*} formdata 
          */
         verifyRequired(formdata) {
+            if (formdata.get('password').length < 8) {
+                alert ('Password must be at least 8 chars long.');
+                return false;
+            }
+
             if (!formdata.get('accept_legal')) {
-                alert ('You must accept the legal rules');
+                alert ('You must accept the legal rules.');
                 return false;
             }
 
@@ -146,7 +151,7 @@
                 if (response.result) {
                     window.location.replace(window.location.origin + '/');
                 } else {
-                    console.log('Couln not register user info.');
+                    console.log('Could not register user info.');
                 }
             })
             .catch(error => {
@@ -159,9 +164,8 @@
         /**
          * Register new account user photo
          * @param {*} fd 
-         * @param {*} nextRegister 
          */
-        registerPhotoUser(fd, nextRegister) {
+        registerPhotoUser(fd) {
 
             let requestConfig = {
                 url: 'http://localhost:8888/api/register/upload',
@@ -212,7 +216,7 @@
                 console.log('Warning: The file is not present or is not an image.');
                 this.registerUser(fd);
             } else {
-                this.registerPhotoUser(fd, this.registerUser);
+                this.registerPhotoUser(fd);
             }
 
             if (event) {

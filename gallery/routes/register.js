@@ -2,6 +2,7 @@ var express = require('express');
 const {users, registration} = require('galleryRepository');
 const {TODAY} = require('../helpers/middleware/tasks/util/utilities');
 var {sendActivationRequest, sendSuccessfulActivation} = require('../email/activation');
+const {validate, validateResult} = require('../helpers/validate');
 var shortid = require('shortid');
 var generator = require('generate-serial-number');
 var router = express.Router();
@@ -14,9 +15,22 @@ router.get('/', function(req, res, next) {
 });
 
 /* POST register new user, request route. */
-router.post('/new', function(req, res, next) {
+router.post('/new', validate('newAccount'), function(req, res, next) {
 
     let response = {};
+
+    const errors = validateResult(req);
+
+    if (!errors.isEmpty()) {
+
+        response = {
+            result: false,
+            message: errors.array().join('\n')
+        };
+        res.send(response);
+        return;
+    }
+
     req.body.username = req.body.email;
     req.body.registration_date = TODAY();
     req.body.external_id = shortid.generate();

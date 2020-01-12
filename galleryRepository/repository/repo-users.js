@@ -42,6 +42,25 @@ class Users {
     }
 
     /**
+     * Pick a user by email
+     * @param {*} email
+     */
+    getByEmail(email) {
+
+        let sql = 'SELECT * FROM users WHERE email = ?';
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [email], (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    /**
      * Return all the users
      */
     getAll() {

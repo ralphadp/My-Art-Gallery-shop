@@ -26,15 +26,16 @@
             </div>
             <div class="row">
                 <label for="password">Password</label>
-                <input id="password" name="password" type="password" placeholder="Please enter your preference password" size="30" maxlength="30" required/><a id="eye"><i id="eye-icon" class="far fa-eye-slash"></i></a>
+                <input id="password" name="password" type="password" placeholder="Enter your preference password" size="30" maxlength="30" required pattern=".{8,}" title="8 characters minimum"/><a id="eye"><i id="eye-icon" class="far fa-eye-slash"></i></a>
+                <div id="password-calification"></div>
             </div>
             <div class="row">
                 <label for="birth">Birth:</label>
                 <input id="birth" name="birth" type="date" placeholder="Enter your birthdate" required/>
             </div>
             <div class="row">
-                <label for="movile">Movile:</label>
-                <input id="movile" name="movile" type="tel" placeholder="Enter your movile number" required/>
+                <label for="mobile">Mobile:</label>
+                <input id="mobile" name="movile" type="tel" placeholder="Enter your mobile number" required/>
             </div>
             <div class="row">
                 <label for="gender">Gender:</label>
