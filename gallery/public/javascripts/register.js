@@ -2,10 +2,35 @@
 {
     class registerAccount {
 
-        constructor(waitingID, formId, previewId) {
+        constructor(waitingID, formId, previewId, calificationId) {
             this.WAITING_GIF_ID = waitingID;
             this.FORM_ID = formId;
             this.PREVIEW_ID = previewId;
+            this.CALIFICATION_ID = calificationId;
+
+            this.matchedCase = [
+                "[$@$!%*#?&]", // Special Charector
+                "[A-Z]",       // Uppercase Alpabates
+                "[0-9]",       // Numbers
+                "[a-z]",       // Lowercase Alphabates
+            ];
+
+            const WEAK = {
+                strength: 'Very Weak',
+                color: 'red'
+            }
+
+            const MEDIUM = {
+                strength: 'Medium',
+                color: 'orange'
+            }
+
+            const STRONG = {
+                strength: 'Strong',
+                color: 'green'
+            }
+
+            this.calification = [WEAK, WEAK, WEAK, MEDIUM, STRONG];
         }
 
         /**
@@ -51,6 +76,33 @@
                 icon.classList.remove("fa-eye");
                 icon.classList.add("fa-eye-slash");
             }
+        }
+
+        /**
+         * Check the type of password strength
+         * @param {*} password 
+         */
+        validatePassword(event) {
+
+            const calification = document.getElementById(this.CALIFICATION_ID);
+            const password = event.currentTarget.value;
+
+            if (!password.length) {
+                calification.innerHTML = '';
+                return;
+            }
+
+            // Check the conditions
+            let check = 0;
+            this.matchedCase.forEach(item => {
+                if (new RegExp(item).test(password)) {
+                    check++;
+                }
+            });
+
+            const value = this.calification[check];
+            calification.innerHTML = value.strength;
+            calification.style.color = value.color;
         }
 
         /**
@@ -186,7 +238,7 @@
         };
     };
 
-    const account = new registerAccount('waiting-register-response', 'register-form', 'preview');
+    const account = new registerAccount('waiting-register-response', 'register-form', 'preview', 'password-calification');
 
     /* REGISTER A NEW USER ACCOUNT */
     document.getElementById('register-form').onsubmit = account.registerNewAccount.bind(account);
@@ -196,5 +248,8 @@
 
     /* TOOGLE PASSWORD VISIVILITY */
     document.getElementById('eye').onclick = account.tooglePassword.bind(account);
+
+    /* CHECk PASSWORD STRENGTH */
+    document.getElementById('password').onkeyup = account.validatePassword.bind(account);
 
 })();

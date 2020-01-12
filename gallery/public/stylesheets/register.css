@@ -133,6 +133,11 @@ input[type='file']{
     margin-left: 10px;
 }
 
+#password-calification {
+    margin-left: 140px;
+    position: absolute;
+    font-size: smaller;
+}
 
 @media (max-width: 1022px) {
     #register-frame {
