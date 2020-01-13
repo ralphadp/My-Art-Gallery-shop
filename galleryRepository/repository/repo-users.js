@@ -289,6 +289,26 @@ class Users {
         });
     }
 
+    /**
+     * Change the password of certain user
+     * @param {*} user 
+     * @param {*} pass 
+     */
+    changePassword(user, pass) {
+
+        let sql = "UPDATE users SET password = ? WHERE username = ?";
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [pass, user], (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
 }
 
 module.exports = Users;
