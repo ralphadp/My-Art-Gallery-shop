@@ -10,9 +10,9 @@
 
             this.matchedCase = [
                 "[$@$!%*#?&]", // Special Charector
-                "[A-Z]",       // Uppercase Alpabates
+                "[A-Z]",       // Uppercase Alphabate
                 "[0-9]",       // Numbers
-                "[a-z]",       // Lowercase Alphabates
+                "[a-z]",       // Lowercase Alphabate
             ];
 
             const WEAK = {
@@ -133,6 +133,10 @@
          * @param {*} message 
          */
         registerUser(fd, messageExtended = null) {
+
+            const captcha = document.getElementById('g-recaptcha-response');
+            fd.append('captcha', captcha.value);
+
             const requestConfig = {
                 url: '/register/new',
                 method: 'POST',
@@ -144,7 +148,6 @@
 
             request(requestConfig)
             .then(data => {
-                this.displayWaitingGif(false);
                 const response = JSON.parse(data);
 
                 alert ((messageExtended ? (messageExtended + '\n') : '') + response.message);
@@ -155,9 +158,11 @@
                 }
             })
             .catch(error => {
-                this.displayWaitingGif(false);
                 console.log(error);
                 alert (error);
+            })
+            .finally(() => {
+                this.displayWaitingGif(false);
             });
         }
 
@@ -184,7 +189,7 @@
                 if (response.result) {
                     const photoId = response.code;
                     fd.append('photo', photoId);
-                    
+
                 } else {
                     console.log('Could not save user image.');
                 } 
@@ -196,6 +201,19 @@
                 console.log(error);
                 alert (error);
             });
+        }
+
+        /**
+         * Procced to register
+         * @param {*} fd
+         */
+        processRegister(fd) {
+            if (!this.doesIncludeImage()) {
+                console.log('Warning: The file is not present or is not an image.');
+                this.registerUser(fd);
+            } else {
+                this.registerPhotoUser(fd);
+            }
         }
 
         /**
@@ -212,12 +230,7 @@
 
             this.displayWaitingGif(true);
 
-            if (!this.doesIncludeImage()) {
-                console.log('Warning: The file is not present or is not an image.');
-                this.registerUser(fd);
-            } else {
-                this.registerPhotoUser(fd);
-            }
+            this.processRegister(fd);
 
             if (event) {
                 event.preventDefault();
@@ -231,7 +244,7 @@
         displayPreviewPhoto(event) {
             const reader = new FileReader();
             reader.readAsDataURL(event.target.files[0]);
-            let i=this.PREVIEW_ID;
+
             reader.onload = (res) => {
                 const preview = document.getElementById(this.PREVIEW_ID);
                 const image = document.createElement('img');

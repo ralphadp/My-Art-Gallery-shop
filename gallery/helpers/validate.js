@@ -1,5 +1,6 @@
 const {body, validationResult, sanitizeBody} = require('express-validator');
 const {users} = require('galleryRepository');
+const verifyRecaptcha = require('./verifyRecaptcha');
 
 /**
  * Validate account input
@@ -28,6 +29,13 @@ const validate = (method) => {
                     body('city', "City doesn't exists").exists(),
                     body('postal_code', "Postal code is incorrect").exists().isAlphanumeric(),
                     body('accept_legal', "Accept legal rules is not checked").exists(),
+                    body('captcha').custom(async value => {
+                        const result = await verifyRecaptcha(value);
+                        if (!result) {
+                            return Promise.reject('Missing captcha or invalid');
+                        }
+                        return result;
+                    }),
                 ]
             }
             case 'login': {

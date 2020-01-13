@@ -63,10 +63,12 @@
                 <input id="postal_code" name="postal_code" type="text" placeholder="Enter your postal code" maxlength="15" required/>
             </div>
             <div class="row">
-                <label for="accept_legal">Accept registration legal rules: </label>
+                <label for="accept_legal">Accept the terms of service registration: </label>
                 <input id="accept_legal" name="accept_legal" type="checkbox" value="1" required/><a id="display-rules" >Read here...</a>
             </div>
-
+            <div class="row">
+                <div class="g-recaptcha" data-sitekey="<%= process.env.RECAPTCHA_SITE_KEY %>"></div>
+            </div>
             <div id="waiting-register-response">
                 <img src="/images/loading.gif"/>
             </div>

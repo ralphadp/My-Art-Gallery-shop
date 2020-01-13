@@ -30,11 +30,11 @@ router.post('/new', validate('newAccount'), function(req, res, next) {
         res.send(response);
         return;
     }
-
+console.log('continue the registration......');
     req.body.username = req.body.email;
     req.body.registration_date = TODAY();
     req.body.external_id = shortid.generate();
-
+    
     const user = new users();
     const register = new registration();
 
