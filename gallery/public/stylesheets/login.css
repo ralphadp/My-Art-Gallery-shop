@@ -83,6 +83,7 @@
     cursor: pointer;
     display: inline-block;
     margin-top: 10px;
+    font-size: smaller;
 }
 
 #forgoteen-email:hover {

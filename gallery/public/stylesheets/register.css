@@ -85,6 +85,10 @@
     margin-right: 10px;
 }
 
+.row select {
+    border-color: #d2d2d2;
+}
+
 .radio-group-item {
     display: inline-block;
 }
