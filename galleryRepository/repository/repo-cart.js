@@ -11,7 +11,7 @@ class Cart {
      * @param {*} userId 
      */
     getByUserId(userId) {
-        let sql = 'SELECT cart.id, cart.userId, pieces.itemId as pieceId, pieces.name, cart.pickedAt, pieces.price, pieces.currency, cart.active  FROM cart INNER JOIN pieces ON cart.pieceId = pieces.itemId WHERE userId = ?';
+        let sql = 'SELECT cart.id, cart.userId, pieces.itemId as pieceId, pieces.name, cart.pickedAt, pieces.price, pieces.currency, cart.active FROM cart INNER JOIN pieces ON cart.pieceId = pieces.itemId WHERE userId = ?';
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [userId], (err, result) => {
@@ -161,6 +161,29 @@ class Cart {
     updateToActive(activeList) {
 
         return this.updateActive(1, activeList);
+    }
+
+    /**
+     * Remove a bulk of pieces from cart
+     * @param {*} pieces
+     */
+    batchDelete(pieces) {
+        let ids = '"-1"';
+        if (pieces && pieces.length) {
+            ids = '"' + pieces.join('","') + '"';
+        }
+
+        let sql = `DELETE FROM cart WHERE pieceId IN (${ids})`;
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [pieces], (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
     }
 }
 

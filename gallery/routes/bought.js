@@ -37,6 +37,10 @@ router.post('/save', tokenCheck, function(req, res, next) {
                 piece.bought(req.body.pieceId)
                 .then(result => console.log(result.affectedRows ? `Piece [${req.body.pieceId}] WAS BOUGHT`: `Cannot save [${req.body.pieceId}] after it was bought.`))
                 .catch(error => console.log('Bought piece error: ', error));
+                const cart = new carts();
+                cart.delete(req.body.pieceId)
+                .then(result => console.log(result.affectedRows ? `Piece [${req.body.pieceId}] removed from cart`: `Cannot remove [${req.body.pieceId}] after it was bought from cart.`))
+                .catch(error => console.log('Remove piece from cart after bought error: ', error));
             } else {
                 response = {
                     success: false,
@@ -144,6 +148,10 @@ router.post('/cart-done', tokenCheck, async function(req, res, next) {
                 piece.batchBought(rows.piece)
                 .then(result => console.log(result.affectedRows ? `Cart pieces [${rows.piece}] WERE BOUGHT`: `Cannot save cart pieces [${rows.piece}] after it was bought.`))
                 .catch(error => console.log('Bought cart pieces error: ', error));
+                const cart = new carts();
+                cart.batchDelete(rows.piece)
+                .then(result => console.log(result.affectedRows ? `Pieces [${rows.piece}] removed from cart`: `Cannot remove [${req.body.pieceId}] after they were bought from cart.`))
+                .catch(error => console.log('Remove pieces from cart after bought error: ', error));
             } else {
                 response = {
                     success: false,
