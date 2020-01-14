@@ -1,8 +1,10 @@
 #legal {
-    width: 480px;
-    height: 500px;
-    padding: 10px;
+    width: 500px;
+    height: 600px;
+    padding: 30px;
     overflow-x: auto;
+    font-size: smaller;
+}
 }
 
 #legal h3 {
@@ -22,4 +24,8 @@
     line-height: 1.6;
     letter-spacing: .25px;
     text-align: justify;
+}
+
+#legal a {
+    color:#c0392b;
 }
