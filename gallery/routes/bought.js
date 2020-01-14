@@ -1,11 +1,23 @@
 var express = require('express');
 var tokenCheck = require('../helpers/tokenCheck');
-const {orders, carts} = require('galleryRepository');
+const {orders, carts, pieces} = require('galleryRepository');
 const {keys, middlewareManager} = require('../helpers/middleware/manager');
 const {parsePaypalCartReturnData} = require('../helpers/middleware/tasks/util/utilities');
 var router = express.Router();
 
 /* POST save Paypal Orders. */
+/* Request body:
+    ·orderId
+    ·pieceId
+    ·pieceDescription
+    ·userExternalId
+    ·paypalBuyTimestamp
+    ·payerId
+    ·payerAmount
+    ·payerCurrency
+    ·payerCompleteName
+    ·rawDetails
+*/
 router.post('/save', tokenCheck, function(req, res, next) {
 
     let response = {};
@@ -20,7 +32,11 @@ router.post('/save', tokenCheck, function(req, res, next) {
                 response = {
                     success: true,
                     message: 'The orders were saved successfully.'
-                };    
+                };
+                const piece = new pieces();
+                piece.bought(req.body.pieceId)
+                .then(result => console.log(result.affectedRows ? `Piece [${req.body.pieceId}] WAS BOUGHT`: `Cannot save [${req.body.pieceId}] after it was bought.`))
+                .catch(error => console.log('Bought piece error: ', error));
             } else {
                 response = {
                     success: false,
@@ -45,7 +61,6 @@ router.post('/save', tokenCheck, function(req, res, next) {
 
 /* GET orders summary. To check the orders paypal */
 router.get('/', tokenCheck, function(req, res, next) {
-    console.log(req.body);
 
     middlewareManager({
         key: keys.BOUGHT,
@@ -103,28 +118,32 @@ router.post('/updateActiveCarts', tokenCheck, async function(req, res, next) {
     res.send(response);
 });
 
-/* POST store paypal payment data */
+/* POST store cart paypal payment data */
 router.post('/cart-done', tokenCheck, async function(req, res, next) {
 
     console.log(req.body);
     const paypal_return_contents = req.body || null;
 
-    const ordersRows = parsePaypalCartReturnData(
+    const rows = parsePaypalCartReturnData(
             req.session.userExtId, 
             paypal_return_contents
     );
 
-    console.log(ordersRows);
+    console.log(rows);
 
     try {
         const order = new orders();
-        order.saveBatch(ordersRows)
+        order.saveBatch(rows.order)
         .then(result => {
             if (result.affectedRows) {
                 response = {
                     success: true,
                     message: 'The orders were saved successfully.'
-                };    
+                };
+                const piece = new pieces();
+                piece.batchBought(rows.piece)
+                .then(result => console.log(result.affectedRows ? `Cart pieces [${rows.piece}] WERE BOUGHT`: `Cannot save cart pieces [${rows.piece}] after it was bought.`))
+                .catch(error => console.log('Bought cart pieces error: ', error));
             } else {
                 response = {
                     success: false,

@@ -11,6 +11,7 @@ CREATE TABLE pieces (
   size varchar(50),
   price decimal(5,1),
   currency varchar(50),
+  bought tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (id, itemId),
   UNIQUE KEY unique_id (itemId),
   INDEX pieces_index (id, release_date)

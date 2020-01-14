@@ -345,6 +345,49 @@ class Pieces {
             });
         });
     }
+
+    /**
+     * Buy a single piece
+     * @param {*} pieceId
+     */
+    bought(pieceId) {
+        let sql = 'UPDATE pieces SET bought=1 WHERE itemId = ?';
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [pieceId], (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    /**
+     * Update a bulk of pieces
+     * @param {*} pieces array
+     */
+    batchBought(pieces) {
+        let ids = '"-1"';
+        if (pieces && pieces.length) {
+            ids = '"' + pieces.join('","') + '"';
+        }
+
+        let sql = `UPDATE pieces SET bought=1 WHERE itemId IN (${ids})`;
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [pieces], (error, result) => {
+                if (!error) {
+                    const cleanJson = JSON.parse(JSON.stringify(result));
+                    resolve(cleanJson);
+                } else {
+                    reject(error);
+                }
+            });
+        });
+    }
 }
 
 module.exports = Pieces;

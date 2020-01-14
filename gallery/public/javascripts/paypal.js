@@ -69,6 +69,7 @@ const setPaypalPurchase = (piece) => {
                 }).then(result => {
                     let response = JSON.parse(result);
                     alert(response.message);
+                    window.location.replace(window.location.origin + '/');
                 }).catch(error => {
                     alert(error);
                 });

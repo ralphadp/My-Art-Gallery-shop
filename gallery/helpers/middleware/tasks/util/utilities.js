@@ -224,6 +224,7 @@ const parsePaypalCartReturnData = (userId, data) => {
 
     let index = 0;
     let order = [];
+    let piece = [];
 
     while (index < Number(data.num_cart_items)) {
         index++;
@@ -239,6 +240,7 @@ const parsePaypalCartReturnData = (userId, data) => {
             data['mc_gross_' + index],
             data.mc_currency
         ));
+        piece.push(data['item_number' + index]);
     }
 
     order.push(setOrder(
@@ -254,7 +256,7 @@ const parsePaypalCartReturnData = (userId, data) => {
         data.mc_currency
     ));
 
-    return order;
+    return {order, piece};
 }
 
 module.exports = {
