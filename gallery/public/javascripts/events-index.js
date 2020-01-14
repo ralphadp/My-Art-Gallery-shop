@@ -9,14 +9,19 @@
 
     /*INFORMATION PIECE */
 
-    let getPickedType = (picked) => {
-        if (picked === 'PRIVATE') {
+    /**
+     * Get the state of the piece for sale
+     * @param {*} item 
+     */
+    let getPickedType = (item) => {
+        if (item.bought) {
+            return 'BOUGHT';
+        } else if (item.picked === 'PRIVATE') {
             return 'Not Available';
-        } else {
-            if (picked) {
-                return 'In cart';
-            }
+        } else if (item.picked) {
+            return 'In cart';
         }
+
         return 'Available';
     }
 
@@ -32,9 +37,9 @@
             document.getElementById("pieceDate").innerHTML   = allpieces[ID].release_date;
             document.getElementById("pieceSize").innerHTML   = allpieces[ID].size;
             document.getElementById("piecePrice").innerHTML  = allpieces[ID].price + ' ' + allpieces[ID].currency;
-            document.getElementById("piecePicked").innerHTML = getPickedType(allpieces[ID].picked);
+            document.getElementById("piecePicked").innerHTML = getPickedType(allpieces[ID]);
 
-            if (typeof setPaypalPurchase !== 'undefined') {
+            if (typeof setPaypalPurchase !== 'undefined' && !allpieces[ID].bought) {
                 setPaypalPurchase(allpieces[ID]);
             }
 

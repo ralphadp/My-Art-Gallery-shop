@@ -12,12 +12,16 @@
     %>
         <div class="thumb-col">
             <div class="thumb frame-gallery" id="<%= item.itemId %>">
-                <% if (currentUser.userExtId) { %>
+                <% if (currentUser.userExtId && !item.bought) { %>
                 <input class="thumb-checkbox" id="<%= item.itemId %>" type="checkbox" <%= item.picked ? 'checked' : '' %> <%= (item.picked === 'PRIVATE') ? 'readonly disabled' : '' %>/>
                 <% } %>
                 <div class="thumb-pic">
+                    <% if (item.bought) { %>
+                    <img class="sale-image" src="/images/sale.png" title="<%= item.name %>"/>
+                    <% } %>
                     <img src="http://localhost:8888/api/image/<%= item.itemId %>" alt="<%= item.itemId %>" title="<%= item.name %>"/>
                 </div>
+
                 <div class="description">
                     <div class="pieceName" title="<%= item.name %>"><%= item.name %></div>
                     <button reference="<%= item.itemId %>" class="piece-info-button">...</button>
