@@ -104,6 +104,31 @@ class Util {
         });
     }
 
+    /**
+     * Get current formated date
+     */
+    static getCurrentDate() {
+        const today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth() + 1;
+        let yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+
+        return {
+            fullText: (dd + '/' + mm + '/' + yyyy),
+            halfText: (mm + '/' + yyyy),
+            month: Number(mm),
+            day: Number(dd),
+            year: yyyy
+        }
+    }
+
 }
 
 module.exports = Util;

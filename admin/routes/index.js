@@ -66,8 +66,6 @@ router.get('/logout', tokenCheck, function(req, res, next) {
 /* GET home page. */
 router.get('/', tokenCheck, function(req, res, next) {
 
-  console.log('token:', req.cookies.access_token);
-
   const user = new users();
   const piece = new pieces();
 
@@ -87,7 +85,9 @@ router.get('/', tokenCheck, function(req, res, next) {
       }).filter(item => item !== undefined);
       userByCountry.push(others);
 
-      user.getMouthYearSignin(12, 2019).then((result) => {
+      const currentDate = Util.getCurrentDate();
+
+      user.getMouthYearSignin(currentDate.month, currentDate.year).then((result) => {
           const userTable = result;
 
           piece.getGroupByType().then((result) => {
@@ -111,6 +111,7 @@ router.get('/', tokenCheck, function(req, res, next) {
                   res.render('index', { 
                       title: 'Admin - Art Gallery', 
                       userByCountry: JSON.stringify(userByCountry),
+                      currentDate: currentDate.halfText,
                       data: userTable,
                       piecesByType: JSON.stringify(piecesByType),
                       piecesReleasedYear: JSON.stringify(piecesReleasedYear)
