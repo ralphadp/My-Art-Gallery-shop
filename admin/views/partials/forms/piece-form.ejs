@@ -19,11 +19,15 @@
         <form enctype="multipart/form-data" id="imageForm">
             <div class="rowform">
                 <label for="piece-thumb">Thumb (Generate Owner External Id)</label>
-                <input id="piece-thumb" type="file" name="imgUploader" multiple />
+                <div id="image-input">
+                    <div id="input-file">
+                        <input id="input-thumb" type="file" name="imgUploader" multiple />
+                    </div>
+                    <div id="preview"></div>
+                </div>
             </div>
         </form>
         <button class="done_button" id="btnSubmit" path="form" type="submit">Upload</button>
-        <img id="image-stored" src="<%= (dataToUpdate && dataToUpdate.itemId) ? ('http://localhost:8888/api/image/' + dataToUpdate.itemId) : '' %>" alt="">
     </div>
 
     <div class="editcard-body">

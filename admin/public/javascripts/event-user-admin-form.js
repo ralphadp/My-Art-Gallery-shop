@@ -8,7 +8,6 @@ const uploadSuccess = (response) => {
         photoId = response.files[0].split('.')[0];
     }
     document.getElementById('user-photo').value = photoId;
-    document.getElementById('image-stored').src = `http://localhost:8888/api/image/${response.type}/${newExternalId}`;
 
     alert(response.message);
 };

@@ -53,6 +53,38 @@
     height: calc(1.9695rem + 10px)!important;
 }
 
+input[type=file] {
+    width: 90%;
+}
+
+#input-file {
+    width: 80%;
+    float: left;
+}
+
+div#preview {
+    background: #f8f9fa;
+    border: 1px solid #ced4da;
+    width: 120px;
+    height: 120px;
+    border-radius: 0.25rem;
+    right: 0;
+    position: absolute;
+}
+
+div#preview img{
+    height: 90%;
+    width: 90%;
+    object-fit: contain;
+    padding: 5px;
+}
+
+#image-input:after {
+    content:'';
+    display: block;
+    clear: both;
+}
+
 .radio-group-item {
     display: flex;
 }
@@ -123,10 +155,10 @@
     color: white;
 }
 
-.editcard-body img {
+/*.editcard-body img {
     border-radius: 50%;
     height: 70px;
     object-fit: contain;
     position: absolute;
     left: 100px;
-}
+}*/

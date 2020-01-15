@@ -19,11 +19,15 @@
         <form enctype="multipart/form-data" id="imageForm">
             <div class="rowform">
                 <label for="user-thumb">User Photograpy</label>
-                <input id="user-thumb" type="file" name="imgUploader" multiple />
+                <div id="image-input">
+                    <div id="input-file">
+                        <input id="input-thumb" type="file" name="imgUploader" multiple />
+                    </div>
+                    <div id="preview"></div>
+                </div>
             </div>
         </form>
         <button class="done_button" id="btnSubmit" path="userform" type="submit">Upload</button>
-        <img id="image-stored" src="<%= (dataToUpdate && dataToUpdate.photo) ? ('http://localhost:8888/api/image/user/' + dataToUpdate.photo) : '' %>" alt="">
     </div>
 
     <div class="editcard-body">
@@ -31,7 +35,7 @@
         <form action="/users/<%= dataToUpdate ? 'update' : 'save' %>" method="post">
             <input name="id" type="hidden" value="<%= (dataToUpdate && dataToUpdate.id) ? dataToUpdate.id : '' %>"/>
             <div class="rowform">
-                <label for="user-photo">Photo</label>
+                <label for="user-photo">Photo Code Id</label>
                 <input id="user-photo" name="photo" type="text" placeholder="This field is filled by the App" value="<%= (dataToUpdate && dataToUpdate.photo) ? dataToUpdate.photo : '' %>" readonly/>
             </div>
             <div class="rowform">

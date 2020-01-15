@@ -54,6 +54,19 @@
         xhr.send(fd);
     };
 
+    const displayPreviewPhoto = (event) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+
+        reader.onload = (res) => {
+            const preview = document.getElementById('preview');
+            const image = document.createElement('img');
+            image.src = reader.result;
+            preview.innerHTML = '';
+            preview.append(image);
+        };
+    };
+
     /**** SUBMIT BUTTON ****/
 
     document.getElementById('btnSubmit').addEventListener('click', (event) => {
@@ -63,5 +76,7 @@
             uploadFail
         );
     });
+
+    document.getElementById('input-thumb').onchange = displayPreviewPhoto;
 
 })();

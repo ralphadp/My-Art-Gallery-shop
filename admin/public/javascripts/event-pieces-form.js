@@ -8,7 +8,6 @@ const uploadSuccess = (response) => {
         newExternalId = response.files[0].split('.')[0];    
     }
     document.getElementById('piece-external-id').value = newExternalId;
-    document.getElementById('image-stored').src = `http://localhost:8888/api/image/${response.type}/${newExternalId}`;
 
     alert(response.message);
 };
