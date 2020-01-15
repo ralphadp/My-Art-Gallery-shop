@@ -1,0 +1,15 @@
+<article id="form-admin" class="dash-right">
+    <div class="editcard-title">Profit by Month</div>
+    <div id="pie_profit" class="c3"></div>
+    <script>
+        const profitMonth = JSON.parse('<%- profitByMonth %>');
+
+        const pie_profit = c3.generate({
+            bindto: '#pie_profit',
+            data: {
+                columns: profitMonth,
+                type : 'pie'
+            }
+        });
+    </script>
+</article>

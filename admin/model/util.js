@@ -129,6 +129,20 @@ class Util {
         }
     }
 
+    /**
+     * Convert the camel case to a simple string separated by spaces
+     * @param {*} camel 
+     */
+    static camelCaseToPhrase(camel) {
+        if (typeof camel !== 'string') {
+            return '';
+        }
+
+        let phase = camel.replace(/([a-z])([A-Z])/g, '$1 $2');
+
+        return phase.charAt(0).toUpperCase() + phase.slice(1);
+    }
+
 }
 
 module.exports = Util;

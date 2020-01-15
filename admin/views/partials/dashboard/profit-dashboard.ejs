@@ -1,0 +1,9 @@
+<article id="form-admin" class="dash-left">
+    <div class="editcard-title">Profit totals</div>
+    <% profit.forEach(item => { %>
+    <div class="row-dash">
+        <span class="data-label"><%= item.label %>: </span>
+        <span class="data-value"><%= item.value %></span>
+    </div>
+    <% }); %>
+</article>

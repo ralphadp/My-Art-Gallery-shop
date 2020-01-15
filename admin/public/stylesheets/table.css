@@ -10,6 +10,44 @@
     width: initial!important;
 }
 
+.row-dash {
+    height: 30px;
+    padding: 5px;
+}
+
+.row-dash span{
+    width: 45%;
+    display: inline-block;
+    color: #2b686e;
+}
+
+.row-dash span:nth-child(even) {
+    color: #2b686e;
+}
+
+.row-dash span:nth-child(odd) {
+    color: #00B7FF;
+}
+
+
+.dash-right {
+    float: right;
+    width: 47%!important;
+    height: fit-content;
+}
+
+.dash-plenty:after {
+    content: '';
+    display: block;
+    clear: right;
+}
+
+.dash-left {
+    float: left;
+    width: 47%!important;
+    height: fit-content;
+}
+
 .table-header {
     background-color: #00B7FF;
     color: white;

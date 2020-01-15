@@ -1,5 +1,5 @@
 var express = require('express');
-var {admins, users, pieces, config} = require('galleryRepository');
+var {admins, users, pieces, config, orders} = require('galleryRepository');
 var Util = require('../model/util');
 var tokenCheck = require('../model/tokenCheck');
 var fetch = require('node-fetch');
@@ -66,55 +66,82 @@ router.get('/logout', tokenCheck, function(req, res, next) {
 /* GET home page. */
 router.get('/', tokenCheck, function(req, res, next) {
 
+  const currentDate = Util.getCurrentDate();
+
+  const order = new orders();
   const user = new users();
   const piece = new pieces();
 
-  user.getGroupByCountry().then((result) => {
-      /* Convert a array of object to array of arrays */
-      let others = ['Others', 0];
-      let userByCountry = result.map((object) => {
-        let item = [];
+  order.getTotals().then(result => {
 
-        if (Number(object.number) <= 1) {
-            others[1]++;
-            return;
-        }
-        item.push(object.country ? object.country : 'Unknown');
-        item.push(object.number);
-        return item;
-      }).filter(item => item !== undefined);
-      userByCountry.push(others);
+      const profit = [];
+      const totals = result[0];
+      for (key in totals) {
+          profit.push({
+              label: Util.camelCaseToPhrase(key), 
+              value: totals[key]
+          });
+      }
+      console.log(profit);
 
-      const currentDate = Util.getCurrentDate();
+      order.getTotalsByMonth(currentDate.year).then(result => {
 
-      user.getMouthYearSignin(currentDate.month, currentDate.year).then((result) => {
-          const userTable = result;
+          let profitByMonth = result.map((object) => {
+              let item = [];
+              item.push(object.month);
+              item.push(object.total);
+              return item;
+          });
+          console.log(profitByMonth);
 
-          piece.getGroupByType().then((result) => {
-
-              let piecesByType = result.map((object) => {
+          user.getGroupByCountry().then((result) => {
+              /* Convert a array of object to array of arrays */
+              let others = ['Others', 0];
+              let userByCountry = result.map((object) => {
                 let item = [];
-                item.push(object.type);
+
+                if (Number(object.number) <= 1) {
+                    others[1]++;
+                    return;
+                }
+                item.push(object.country ? object.country : 'Unknown');
                 item.push(object.number);
                 return item;
-              });
+              }).filter(item => item !== undefined);
+              userByCountry.push(others);
 
-              piece.getGroupByYear().then((result) => {
+              user.getMouthYearSignin(currentDate.month, currentDate.year).then((result) => {
+                  const userTable = result;
 
-                  let piecesReleasedYear = result.map((object) => {
-                    let item = [];
-                    item.push(object.year);
-                    item.push(object.number);
-                    return item;
-                  });
+                  piece.getGroupByType().then((result) => {
 
-                  res.render('index', { 
-                      title: 'Admin - Art Gallery', 
-                      userByCountry: JSON.stringify(userByCountry),
-                      currentDate: currentDate.halfText,
-                      data: userTable,
-                      piecesByType: JSON.stringify(piecesByType),
-                      piecesReleasedYear: JSON.stringify(piecesReleasedYear)
+                      let piecesByType = result.map((object) => {
+                        let item = [];
+                        item.push(object.type);
+                        item.push(object.number);
+                        return item;
+                      });
+
+                      piece.getGroupByYear().then((result) => {
+
+                          let piecesReleasedYear = result.map((object) => {
+                            let item = [];
+                            item.push(object.year);
+                            item.push(object.number);
+                            return item;
+                          });
+
+                          res.render('index', { 
+                              title: 'Admin - Art Gallery',
+                              profit: profit,
+                              profitByMonth: JSON.stringify(profitByMonth),
+                              userByCountry: JSON.stringify(userByCountry),
+                              currentDate: currentDate.halfText,
+                              data: userTable,
+                              piecesByType: JSON.stringify(piecesByType),
+                              piecesReleasedYear: JSON.stringify(piecesReleasedYear)
+                          });
+                      });
                   });
               });
           });

@@ -108,6 +108,44 @@ class Orders {
         });
     }
 
+    /**
+     * Get the total profit Total and from last month
+     */
+    getTotals() {
+        let sql = 
+        "SELECT (SELECT CONCAT(sum(payerAmount), CONCAT(' ', payerCurrency)) FROM orders WHERE pieceId = 'Total') AS cartTotal, " +
+        "(SELECT CONCAT(sum(payerAmount), CONCAT(' ', payerCurrency)) FROM orders WHERE pieceId <> 'Total') AS Total, " +
+        "(SELECT CONCAT(sum(payerAmount), CONCAT(' ', payerCurrency)) FROM orders WHERE pieceId = 'Total' AND MONTH(buyDatetime) = MONTH(CURRENT_DATE()) AND YEAR(buyDatetime) = YEAR(CURRENT_DATE())) AS currentMonthCartTotal, " +
+        "(SELECT CONCAT(sum(payerAmount), CONCAT(' ', payerCurrency)) FROM orders WHERE pieceId <> 'Total' AND MONTH(buyDatetime) = MONTH(CURRENT_DATE()) AND YEAR(buyDatetime) = YEAR(CURRENT_DATE())) AS currentMonthTotal";
+
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    /**
+     * Get the totals by month for a single year
+     * @param {*} year 
+     */
+    getTotalsByMonth(year) {
+        let sql = "SELECT MONTHNAME(buyDatetime) AS month, sum(payerAmount) AS total, payerCurrency FROM orders WHERE pieceId <> 'Total' AND YEAR(buyDatetime) = ? GROUP BY MONTH(buyDatetime)";
+        
+        return new Promise((resolve, reject) => {
+            sqlConn.query(sql, [year], (err, result) => {
+                if (!err) {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
 }
 
 module.exports = Orders;
