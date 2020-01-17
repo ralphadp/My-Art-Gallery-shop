@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gallery-mysql8-service
+  labels:
+    app: gallery
+spec:
+  type: NodePort
+  ports:
+  - name: db-port
+    port: 6601
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    app: gallery

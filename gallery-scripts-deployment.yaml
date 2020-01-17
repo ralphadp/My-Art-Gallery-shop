@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gallery-scripts-deploy
+  labels:
+    app: gallery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gallery
+  template:
+    metadata:
+      labels:
+        app: gallery
+    spec:
+      containers:
+      - image: gallery-scripts:v1
+        name: gallery-scripts
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 2000

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gallery-scripts-service
+  labels:
+    run: gallery-scripts-service
+spec:
+  type: NodePort
+  ports:
+  - port: 2001
+    protocol: TCP
+    targetPort: 2000
+  selector:
+    app: gallery

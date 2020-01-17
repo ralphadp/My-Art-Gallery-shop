@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gallery-pictures-deploy
+  labels:
+    app: gallery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gallery
+  template:
+    metadata:
+      labels:
+        app: gallery
+    spec:
+      containers:
+      - image: gallery-pictures:v1
+        name: gallery-pictures
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8888
