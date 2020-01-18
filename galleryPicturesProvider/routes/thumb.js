@@ -104,7 +104,7 @@ router.post("/form/upload", function(req, res) {
 /* GET upload test route. */
 router.get('/form/test', function(req, res, next) {
 
-  res.sendFile('index.html', { root: './private' });
+  res.sendFile('index.html', { root: './private/test' });
 });
 
 /* POST to upload user thumb service. */
