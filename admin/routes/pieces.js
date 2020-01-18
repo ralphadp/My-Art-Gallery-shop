@@ -1,8 +1,9 @@
 var express = require('express');
 var tokenCheck = require('../model/tokenCheck');
-var {pieces} = require('galleryRepository');
+var {pieces} = require('gallery-repository');
 var Util = require('../model/util');
 var ConfigHandler = require('../model/configHandler');
+var services = require('../model/servicesPath');
 var router = express.Router();
 
 /* GET pieces listing. */
@@ -19,7 +20,8 @@ router.get('/', tokenCheck, function(req, res, next) {
           title: 'List of Pieces', 
           tableTitle: 'Pieces', 
           data: result,
-          response: response
+          response: response,
+          services: services
         }
       );
   });
@@ -39,7 +41,8 @@ router.get('/add', tokenCheck, function(req, res, next) {
             titleForm: 'New Piece',
             categories: categories,
             response: response,
-            dataToUpdate: null
+            dataToUpdate: null,
+            services: services
           }
         )
     );
@@ -105,7 +108,8 @@ router.get('/edit/:id', tokenCheck, function(req, res, next) {
                 titleForm: 'Edit Piece',
                 categories: categories,
                 response: response,
-                dataToUpdate: dataToUpdate 
+                dataToUpdate: dataToUpdate,
+                services: services
               }
             )
         );
@@ -217,7 +221,8 @@ router.get('/search/:textPattern', tokenCheck, function(req, res, next) {
           tableTitle: 'Pieces', 
           data: result, 
           response: response,
-          searchText: phrase
+          searchText: phrase,
+          services: services
         }
       );
   });

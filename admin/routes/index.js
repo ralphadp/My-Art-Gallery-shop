@@ -1,8 +1,9 @@
 var express = require('express');
-var {admins, users, pieces, config, orders} = require('galleryRepository');
+var {admins, users, pieces, config, orders} = require('gallery-repository');
 var Util = require('../model/util');
 var tokenCheck = require('../model/tokenCheck');
 var fetch = require('node-fetch');
+const services = require('../model/servicesPath');
 var router = express.Router();
 
 /* GET login page. */
@@ -14,7 +15,8 @@ router.get('/login', function(req, res, next) {
   res.render('login', {
       title: 'Login - Admin', 
       titleForm: 'Login',
-      response: response
+      response: response,
+      services: services
   });
 
 });
@@ -30,7 +32,7 @@ router.post('/login/verification', function(req, res, next) {
     admin.verify(user, pass).then(result => {
         console.log(result);
         if (result.length) {
-            fetch(`http://localhost:3333/api/generate/${result[0].username}/expiration/1h`)
+            fetch(`${services.jwtHost}/api/generate/${result[0].username}/expiration/1h`)
             .then(jwtResponse => jwtResponse.json())
             .then(jwtResponse => {
                 if (jwtResponse.success) {
@@ -139,7 +141,8 @@ router.get('/', tokenCheck, function(req, res, next) {
                               currentDate: currentDate.halfText,
                               data: userTable,
                               piecesByType: JSON.stringify(piecesByType),
-                              piecesReleasedYear: JSON.stringify(piecesReleasedYear)
+                              piecesReleasedYear: JSON.stringify(piecesReleasedYear),
+                              services: services
                           });
                       });
                   });
@@ -152,14 +155,15 @@ router.get('/', tokenCheck, function(req, res, next) {
 
 /* GET documents page. */
 router.get('/documents', tokenCheck, function(req, res, next) {
-    fetch('http://localhost:8888/api/summary/')
+    fetch(`${services.imagesHost}/api/summary/`)
     .then(response => response.json())
     .then(body => {
         res.render(
             'documents', 
             { 
                 title: 'Documents', 
-                files: body
+                files: body,
+                services: services
             }
         );
     });
@@ -185,7 +189,8 @@ router.get('/profile', tokenCheck, function(req, res, next) {
       { 
         title: 'Profile User Info', 
         profile: profile,
-        result: response
+        result: response,
+        services: services
       }
     );
  
@@ -208,7 +213,7 @@ router.get('/messages', tokenCheck, function(req, res, next) {
   };
 
   fetch(
-    'https://mailtrap.io/api/v1/inboxes',
+    `${process.env.MAILTRAP_HOST}/api/v1/inboxes`,
     {
       method: 'GET', 
       headers: headers
@@ -217,12 +222,12 @@ router.get('/messages', tokenCheck, function(req, res, next) {
    .then(content => {
 
         if (typeof content.error !== 'undefined') {
-          res.render('messages', { title: 'Inbox messages', error: content.error });
+          res.render('messages', { title: 'Inbox messages', error: content.error, services: services });
           return;
         }
 
         if (!content.length) {
-            res.render('messages', { title: 'Inbox messages', error: 'Content is empty'});
+            res.render('messages', { title: 'Inbox messages', error: 'Content is empty', services: services});
             return;
         }
 
@@ -253,7 +258,7 @@ router.get('/messages', tokenCheck, function(req, res, next) {
 
         /*Get all the messages from the inbox */
         fetch(
-          `https://mailtrap.io/api/v1/inboxes/${inboxData.id}/messages`,
+          `${process.env.MAILTRAP_HOST}/api/v1/inboxes/${inboxData.id}/messages`,
           {
             method: 'GET', 
             headers: headers
@@ -271,7 +276,7 @@ router.get('/messages', tokenCheck, function(req, res, next) {
                     subject: element.subject,
                     from: element.from_email,
                     sentAt: element.sent_at,
-                    urlTextComment: 'https://mailtrap.io' + element.txt_path
+                    urlTextComment: process.env.MAILTRAP_HOST + element.txt_path
                 };
 
                 /*Saving messages in util table*/
@@ -308,7 +313,7 @@ router.get('/messages', tokenCheck, function(req, res, next) {
             .catch (error => console.log(error))
             .finally(() => {
  
-                res.render('messages', { title: 'Inbox messages', box: inboxData, messages: emailContents, error: null });
+                res.render('messages', { title: 'Inbox messages', box: inboxData, messages: emailContents, error: null, services: services });
             });
 
          })
@@ -317,7 +322,7 @@ router.get('/messages', tokenCheck, function(req, res, next) {
     .catch (error => {
       console.log(error);
 
-      res.render('messages', { title: 'Inbox messages', error: error });
+      res.render('messages', { title: 'Inbox messages', error: error, services: services });
     });
 });
 
@@ -334,7 +339,8 @@ router.get('/configuration', tokenCheck, function(req, res, next) {
         { 
           title: 'Global Configuration', 
           config: result,
-          response: response
+          response: response,
+          services: services
         }
       );
   });
@@ -357,7 +363,7 @@ router.post('/configuration/update', tokenCheck, function(req, res, next) {
           message: 'The options were was updated sucessfully.'
       };
       console.log(results);
-      fetch('http://localhost:3000/remote//update-config/')
+      fetch(`${services.appHost}/remote/update-config/`)
       .then(response => response.json())
       .then(body => {
          console.log('response from app', body);

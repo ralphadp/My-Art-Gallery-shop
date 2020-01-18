@@ -1,4 +1,4 @@
-const {config} = require('galleryRepository');
+const {config} = require('gallery-repository');
 
 class ConfigHandler {
     constructor() {

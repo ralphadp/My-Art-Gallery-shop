@@ -7,7 +7,7 @@
         <% } %>
         <div class="documents-item">
             <label for="<%= imageCode%>"><%= imageCode%></label>
-            <img src="http://localhost:8888/api/image/<%= imageCode%>" alt="<%= imageCode%>" height="150">
+            <img src="<%= services.imagesHost %>/api/image/<%= imageCode%>" alt="<%= imageCode%>" height="150">
         </div>
         <% if (index !== 1 && ((index) % 6) === 0) { %>
             </div>
@@ -28,7 +28,7 @@
         <% } %>
         <div class="documents-item">
             <label for="<%= imageCode%>"><%= imageCode%></label>
-            <img src="http://localhost:8888/api/image-large/<%= imageCode%>" alt="<%= imageCode%>" height="150">
+            <img src="<%= services.imagesHost %>/api/image-large/<%= imageCode%>" alt="<%= imageCode%>" height="150">
         </div>
         <% if (index !== 1 && ((index) % 6) === 0) { %>
             </div>
@@ -49,7 +49,7 @@
         <% } %>
         <div class="documents-item">
             <label for="<%= imageCode%>"><%= imageCode%></label>
-            <img src="http://localhost:8888/api/image/user/<%= imageCode%>" alt="<%= imageCode%>" height="150">
+            <img src="<%= services.imagesHost %>/api/image/user/<%= imageCode%>" alt="<%= imageCode%>" height="150">
         </div>
         <% if (index !== 1 && ((index) % 6) === 0) { %>
             </div>
@@ -70,7 +70,7 @@
         <% } %>
         <div class="documents-item">
             <label for="<%= imageCode%>"><%= imageCode%></label>
-            <img src="http://localhost:8888/api/image/admin/<%= imageCode%>" alt="<%= imageCode%>" height="150">
+            <img src="<%= services.imagesHost %>/api/image/admin/<%= imageCode%>" alt="<%= imageCode%>" height="150">
         </div>
         <% if (index !== 1 && ((index) % 6) === 0) { %>
             </div>

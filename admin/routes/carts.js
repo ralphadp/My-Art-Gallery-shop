@@ -1,6 +1,7 @@
 var express = require('express');
 var tokenCheck = require('../model/tokenCheck');
-var {carts} = require('galleryRepository');
+var {carts} = require('gallery-repository');
+const services = require('../model/servicesPath');
 var router = express.Router();
 
 /* GET Carts listing. */
@@ -12,7 +13,8 @@ router.get('/', tokenCheck, function(req, res, next) {
         { 
           title: 'List of Possible Trading', 
           tableTitle: 'Carts', 
-          data: result 
+          data: result,
+          services: services
         }
       );
   });
@@ -58,7 +60,8 @@ router.get('/statistics', tokenCheck, function(req, res, next) {
                 cartByYear: JSON.stringify(cartByYear),
                 linearCartByYear: JSON.stringify(linearCartByYear),
                 cartByYearMouth: JSON.stringify(cartByYearMouth)
-              }
+              },
+              services: services
             }
           );
       });

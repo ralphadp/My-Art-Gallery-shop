@@ -1,8 +1,9 @@
 var express = require('express');
 var tokenCheck = require('../model/tokenCheck');
-var {admins, users} = require('galleryRepository');
+var {admins, users} = require('gallery-repository');
 var ConfigHandler = require('../model/configHandler');
 var Util = require('../model/util');
+var services = require('../model/servicesPath');
 var router = express.Router();
 
 /* GET users listing. */
@@ -19,7 +20,8 @@ router.get('/', tokenCheck, function(req, res, next) {
           title: 'External Users', 
           tableTitle: 'Users', 
           data: result,
-          response: response
+          response: response,
+          services: services
         }
       );
   });
@@ -39,7 +41,8 @@ router.get('/admin', tokenCheck, function(req, res, next) {
           title: 'Internal Users', 
           tableTitle: 'Admins', 
           data: result,
-          response: response
+          response: response,
+          services: services
         }
       );
   });
@@ -55,7 +58,8 @@ router.get('/new', tokenCheck, function(req, res, next) {
         title: 'Users', 
         titleForm: 'New User',
         result: response,
-        dataToUpdate: null
+        dataToUpdate: null,
+        services: services
       }
     );
 });
@@ -70,7 +74,8 @@ router.get('/admin/new', tokenCheck, function(req, res, next) {
       title: 'Admin', 
       titleForm: 'New Admin',
       result: response,
-      dataToUpdate: null
+      dataToUpdate: null,
+      services: services
     }
   );
 });
@@ -184,7 +189,8 @@ router.get('/edit/:id', tokenCheck, function(req, res, next) {
             title: 'Users', 
             titleForm: 'Update User',
             result: response,
-            dataToUpdate: dataToUpdate 
+            dataToUpdate: dataToUpdate,
+            services: services
           }
         );
     })
@@ -274,7 +280,8 @@ router.get('/admin/edit/:id', tokenCheck, function(req, res, next) {
             title: 'Admin', 
             titleForm: 'Update Admin',
             result: response,
-            dataToUpdate: dataToUpdate 
+            dataToUpdate: dataToUpdate,
+            services: services
           }
         );
     })
@@ -422,7 +429,8 @@ router.get('/search/:textPattern', tokenCheck, function(req, res, next) {
           tableTitle: 'Users', 
           data: result, 
           response: response,
-          searchText: phrase
+          searchText: phrase,
+          services: services
         }
       );
   });
@@ -448,7 +456,8 @@ router.get('/admin/search/:textPattern', tokenCheck, function(req, res, next) {
           tableTitle: 'Admins', 
           data: result, 
           response: response,
-          searchText: phrase
+          searchText: phrase,
+          services: services,
         }
       );
   });

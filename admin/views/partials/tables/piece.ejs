@@ -39,7 +39,7 @@
                     <td class="edition-options-data-piece" data="<%= JSON.stringify(data[index]) %>"></td>
                     <td><%= data[index].id %></td>
                     <td><%= data[index].itemId %></td>
-                    <td><img src="<%= 'http://localhost:8888/api/image/' + (data[index].itemId ? data[index].itemId : 'empty') %>" alt="" /></td>
+                    <td><img src="<%= `${services.imagesHost}/api/image/` + (data[index].itemId ? data[index].itemId : 'empty') %>" alt="" /></td>
                     <td><%= data[index].name %></td>
                     <td><%= data[index].artist %></td>
                     <td><%= data[index].type %></td>

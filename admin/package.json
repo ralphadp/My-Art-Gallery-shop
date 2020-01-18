@@ -12,7 +12,7 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-session": "^1.17.0",
-    "galleryRepository": "file:../galleryRepository",
+    "gallery-repository": "file:../galleryRepository",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "node-fetch": "^2.6.0",

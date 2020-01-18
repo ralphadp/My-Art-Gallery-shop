@@ -1,7 +1,8 @@
 var express = require('express');
 var tokenCheck = require('../model/tokenCheck');
-var {categories} = require('galleryRepository');
+var {categories} = require('gallery-repository');
 var ConfigHandler = require('../model/configHandler');
+const services = require('../model/servicesPath');
 var router = express.Router();
 
 /* GET categories listing. */
@@ -18,7 +19,8 @@ router.get('/', tokenCheck, function(req, res, next) {
           title: 'Categories List', 
           tableTitle: 'Categories', 
           data: result, 
-          response: response
+          response: response,
+          services: services
         }
       );
   });
@@ -34,7 +36,8 @@ router.get('/add', tokenCheck, function(req, res, next) {
       title: 'Categories', 
       titleForm: 'Add new Category', 
       result: response,
-      dataToUpdate: null 
+      dataToUpdate: null,
+      services: services
     }
   );
 });
@@ -124,7 +127,8 @@ router.get('/edit/:id/:path/:name', tokenCheck, function(req, res, next) {
       title: 'Categories', 
       titleForm: 'Update Category', 
       result: response,
-      dataToUpdate: dataToUpdate 
+      dataToUpdate: dataToUpdate,
+      services: services
     }
   );
 });
@@ -175,7 +179,8 @@ router.get('/search/:textPattern', tokenCheck, function(req, res, next) {
           tableTitle: 'Categories', 
           data: result, 
           response: response,
-          searchText: phrase
+          searchText: phrase,
+          services: services
         }
       );
   });

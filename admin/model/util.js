@@ -1,4 +1,4 @@
-const {categories, util} = require('galleryRepository');
+const {categories, util} = require('gallery-repository');
 
 class Util {
     constructor() {
