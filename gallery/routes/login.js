@@ -1,5 +1,5 @@
 var express = require('express');
-const {users, passwordRequest} = require('galleryRepository');
+const {users, passwordRequest} = require('gallery-repository');
 var fetch = require('node-fetch');
 var {sendNewPasswordRequest, sendSuccessfulPasswordChange} = require('../email/activation');
 const {validate, validateResult} = require('../helpers/validate');

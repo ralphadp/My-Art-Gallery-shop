@@ -1,5 +1,5 @@
 var express = require('express');
-const {users, registration} = require('galleryRepository');
+const {users, registration} = require('gallery-repository');
 const {TODAY} = require('../helpers/middleware/tasks/util/utilities');
 var {sendActivationRequest, sendSuccessfulActivation} = require('../email/activation');
 const {validate, validateResult} = require('../helpers/validate');

@@ -1,4 +1,4 @@
-const {categories} = require('galleryRepository');
+const {categories} = require('gallery-repository');
 const {chunk} = require("./util/utilities");
 
 const getCategories = (context, next) => {

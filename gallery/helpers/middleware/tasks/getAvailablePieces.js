@@ -1,5 +1,5 @@
 const {arrayToObject} = require("./util/utilities");
-const {pieces} = require('galleryRepository');
+const {pieces} = require('gallery-repository');
 
 const getAvailablePieces = (context, next) => {
 

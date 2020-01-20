@@ -1,5 +1,5 @@
 const {body, validationResult, sanitizeBody} = require('express-validator');
-const {users} = require('galleryRepository');
+const {users} = require('gallery-repository');
 const verifyRecaptcha = require('./verifyRecaptcha');
 
 /**

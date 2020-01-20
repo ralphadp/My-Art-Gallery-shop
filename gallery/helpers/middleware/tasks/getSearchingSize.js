@@ -1,4 +1,4 @@
-const {pieces} = require('galleryRepository');
+const {pieces} = require('gallery-repository');
 const {numPages} = require("./util/utilities");
 
 const getSearchingSize = (context, next) => {

@@ -1,4 +1,4 @@
-const {orders} = require('galleryRepository');
+const {orders} = require('gallery-repository');
 
 const getOrders = (context, next) => {
 

@@ -1,5 +1,5 @@
 const {numPages} = require("./util/utilities");
-const {pieces} = require('galleryRepository');
+const {pieces} = require('gallery-repository');
 
 const getPiecesSize = (context, next) => {
     const oPieces = new pieces(context.currentUser.userExtId, context.categoryCode);

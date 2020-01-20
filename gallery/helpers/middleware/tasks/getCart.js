@@ -1,4 +1,4 @@
-const {carts} = require('galleryRepository');
+const {carts} = require('gallery-repository');
 
 const getCart = (context, next) => {
 

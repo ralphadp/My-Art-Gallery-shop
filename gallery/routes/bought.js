@@ -1,6 +1,6 @@
 var express = require('express');
 var tokenCheck = require('../helpers/tokenCheck');
-const {orders, carts, pieces} = require('galleryRepository');
+const {orders, carts, pieces} = require('gallery-repository');
 const {keys, middlewareManager} = require('../helpers/middleware/manager');
 const {parsePaypalCartReturnData} = require('../helpers/middleware/tasks/util/utilities');
 var router = express.Router();

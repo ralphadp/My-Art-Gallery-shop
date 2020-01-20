@@ -1,5 +1,5 @@
 var express = require('express');
-const {carts} = require('galleryRepository');
+const {carts} = require('gallery-repository');
 var tokenCheck = require('../helpers/tokenCheck');
 var router = express.Router();
 
