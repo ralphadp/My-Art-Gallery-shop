@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gallery-admin-service
+  namespace: art
+  labels:
+    run: gallery-admin-service
+spec:
+  type: NodePort
+  ports:
+  - port: 4001
+    nodePort: 32600
+    protocol: TCP
+    targetPort: 4000
+  selector:
+    app: gallery

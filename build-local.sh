@@ -23,5 +23,7 @@ cd galleryPicturesProvider/
 docker build -t gallery-images:v1 .
 cd ..
 
+docker build -f admin/Dockerfile -t gallery-admin:v1 .
+
 echo "Images done..."
 docker images
