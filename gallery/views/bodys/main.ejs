@@ -19,7 +19,7 @@
                     <% if (item.bought) { %>
                     <img class="sale-image" src="/images/sale.png" title="<%= item.name %>"/>
                     <% } %>
-                    <img src="http://localhost:8888/api/image/<%= item.itemId %>" alt="<%= item.itemId %>" title="<%= item.name %>"/>
+                    <img src="<%= service.imagesHost %>/api/image/<%= item.itemId %>" alt="<%= item.itemId %>" title="<%= item.name %>"/>
                 </div>
 
                 <div class="description">

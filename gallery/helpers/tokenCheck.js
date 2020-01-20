@@ -1,4 +1,5 @@
 var fetch = require('node-fetch');
+const service = require('./servicesPath');
 
 const tokenCheck = function(req, res, next) {
 
@@ -7,7 +8,7 @@ const tokenCheck = function(req, res, next) {
     console.log('access_token:', token);
 
     if (typeof token !== 'undefined') {
-         fetch(`http://localhost:3333/api/check-auth/${token}`)
+         fetch(`${service.jwtHost}/api/check-auth/${token}`)
         .then(jwtResponse => jwtResponse.json())
         .then(jwtResponse => {
             console.log('jwt response:', jwtResponse);

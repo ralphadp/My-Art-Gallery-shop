@@ -4,6 +4,7 @@ var fetch = require('node-fetch');
 var {sendNewPasswordRequest, sendSuccessfulPasswordChange} = require('../email/activation');
 const {validate, validateResult} = require('../helpers/validate');
 var generator = require('generate-serial-number');
+const service = require('../helpers/servicesPath');
 var router = express.Router();
 
 /* GET login Page. */
@@ -12,7 +13,7 @@ router.get('/', function(req, res, next) {
     const response = req.cookies.activation_response || null;
     res.clearCookie('activation_response');
 
-    res.render('login', {title: 'login', response: response});
+    res.render('login', {title: 'login', response: response, service: service});
 
 });
 
@@ -85,7 +86,7 @@ router.post('/validation', validate('login'), function(req, res, next) {
             userInfo.hours = '1h';
 
             fetch(
-                'http://localhost:3333/api/generate-by-info/',
+                `${service.jwtHost}/api/generate-by-info/`,
                 {
                     method: 'POST',
                     headers:{
@@ -187,7 +188,7 @@ router.get('/change-password/:code', function(req, res, next) {
     let response = req.cookies.password_response || null;
     res.clearCookie('password_response');
     if (response) {
-        res.render('changePassword', {title: 'Change password', response: response});
+        res.render('changePassword', {title: 'Change password', response: response, service: service});
         return false;
     }
 
@@ -222,7 +223,7 @@ router.get('/change-password/:code', function(req, res, next) {
         };
     })
     .finally(() => {
-        res.render('changePassword', {title: 'Change password', response: response});
+        res.render('changePassword', {title: 'Change password', response: response, service: service});
     });
 });
 
@@ -313,7 +314,7 @@ router.get('/password-result/:code', function(req, res, next) {
         };
     })
     .finally(() => {
-        res.render('changePasswordResult', {title: 'Result', response_password: response1, response_code: response2});
+        res.render('changePasswordResult', {title: 'Result', response_password: response1, response_code: response2, service: service});
     });
 });
 

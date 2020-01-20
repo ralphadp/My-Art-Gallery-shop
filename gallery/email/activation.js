@@ -1,5 +1,6 @@
 var nodemailer = require('nodemailer');
 var renderTemplate = require('./templates/render');
+const service = require('../helpers/servicesPath');
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -18,6 +19,7 @@ const sendActivationRequest = (activationCode, userInfo) => {
 
     try {
         userInfo.activationCode = activationCode;
+        userInfo.appHost = service.appHost;
 
         var mailOptions = {
             from: process.env.APP_EMAIL,
@@ -49,6 +51,8 @@ const sendSuccessfulActivation = (userInfo) => {
     }
 
     try {
+        userInfo.appHost = service.appHost;
+
         var mailOptions = {
             from: process.env.APP_EMAIL,
             to: userInfo.email,
@@ -78,6 +82,7 @@ const sendNewPasswordRequest = (codeRequest, userInfo) => {
     try {
 
         userInfo.codeRequest = codeRequest;
+        userInfo.appHost = service.appHost;
 
         var mailOptions = {
             from: process.env.APP_EMAIL,
@@ -109,6 +114,8 @@ const sendSuccessfulPasswordChange = (userInfo) => {
     }
 console.log(userInfo);
     try {
+        userInfo.appHost = service.appHost;
+
         var mailOptions = {
             from: process.env.APP_EMAIL,
             to: userInfo.email || userInfo.username, //Error: No recipients defined

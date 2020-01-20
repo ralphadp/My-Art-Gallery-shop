@@ -49,11 +49,11 @@
                 <INPUT TYPE="hidden" NAME="currency_code" value="USD">
                 <INPUT TYPE="hidden" id="cart-total" NAME="amount" value="<%= totalPurchase %>">
 
-                <INPUT TYPE="hidden" NAME="return" value="http://localhost:3000/bought/cart-done">
-                <INPUT TYPE="hidden" NAME="cancel_return" value="http://localhost:3000/bought">
+                <INPUT TYPE="hidden" NAME="return" value="<%= service.appHost %>/bought/cart-done">
+                <INPUT TYPE="hidden" NAME="cancel_return" value="<%= service.appHost %>/bought">
                 <INPUT TYPE="hidden" NAME="rm" value="2">
-                <INPUT TYPE="hidden" NAME="notify_url" value="http://localhost:3000/learning">
-                <INPUT TYPE="hidden" NAME="shopping_url" value="http://localhost:3000/">
+                <INPUT TYPE="hidden" NAME="notify_url" value="<%= service.appHost %>/learning">
+                <INPUT TYPE="hidden" NAME="shopping_url" value="<%= service.appHost %>/">
                 <!--<input type="hidden" name="paymentaction" value="authorization">  https://www.sandbox.paypal.com/webapps/shoppingcart/error?flowlogging_id=d73d68aefaf75&code=GENERIC_ERROR&mfid=1578354677745_d73d68aefaf75-->
                 <!--<input type="hidden" name="bn" value="PP-BuyNowBF" />-->
                 <INPUT TYPE="image" NAME="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">

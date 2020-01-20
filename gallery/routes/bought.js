@@ -3,6 +3,7 @@ var tokenCheck = require('../helpers/tokenCheck');
 const {orders, carts, pieces} = require('gallery-repository');
 const {keys, middlewareManager} = require('../helpers/middleware/manager');
 const {parsePaypalCartReturnData} = require('../helpers/middleware/tasks/util/utilities');
+const service = require('../helpers/servicesPath');
 var router = express.Router();
 
 /* POST save Paypal Orders. */
@@ -75,10 +76,11 @@ router.get('/', tokenCheck, function(req, res, next) {
                 res.locals.message = 'Error';
                 res.locals.error = payload;
                 res.status(500);
-                res.render('error', {message:'not found', error: "error", status: 404});
+                res.render('error', {message:'not found', error: "error", status: 404, service: service});
             } else {
                 payload.titlePage = 'Bought Pieces';
                 payload.tableTitle = 'Orders';
+                payload.service = service;
 
                 res.render('bought', payload);
             }

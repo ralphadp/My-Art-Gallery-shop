@@ -5,12 +5,13 @@ var {sendActivationRequest, sendSuccessfulActivation} = require('../email/activa
 const {validate, validateResult} = require('../helpers/validate');
 var shortid = require('shortid');
 var generator = require('generate-serial-number');
+const service = require('../helpers/servicesPath');
 var router = express.Router();
 
 /* GET register Page. */
 router.get('/', function(req, res, next) {
 
-    res.render('register', {title: 'SignIn'});
+    res.render('register', {title: 'SignIn', service: service});
     
 });
 
