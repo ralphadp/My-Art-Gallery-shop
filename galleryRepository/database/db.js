@@ -2,8 +2,8 @@ const mysql = require('mysql');
 
 //Config DB
 const config = {
-    host: process.env.MYSQL_HOST || 'localhost',
-    port: process.env.MYSQL_PORT || '3306',
+    host: (process.env.MYSQL_HOST_CONTAINER || process.env.MYSQL_HOST) || 'localhost',
+    port: (process.env.MYSQL_PORT_CONTAINER || process.env.MYSQL_PORT) || '3306',
     user: 'root',
     password: 'root',
     database: process.env.MYSQL_DATABASE || 'gallery_db'
