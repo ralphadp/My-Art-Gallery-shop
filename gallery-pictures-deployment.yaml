@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gallery-pictures-deploy
+  namespace: art
   labels:
     app: gallery
 spec:
@@ -15,8 +16,8 @@ spec:
         app: gallery
     spec:
       containers:
-      - image: gallery-pictures:v1
-        name: gallery-pictures
+      - image: gallery-images:v1
+        name: gallery-images
         imagePullPolicy: Never
         ports:
         - containerPort: 8888

@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gallery-jwt-deploy
+  namespace: art
   labels:
     app: gallery
 spec:
@@ -9,6 +10,11 @@ spec:
   selector:
     matchLabels:
       app: gallery
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -20,3 +26,9 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 3333
+          name: http-jwt-api
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

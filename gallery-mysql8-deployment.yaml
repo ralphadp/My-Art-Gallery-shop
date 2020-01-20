@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gallery-mysql8-deploy
+  namespace: art
+  labels:
+    app: gallery
 spec:
   selector:
     matchLabels:

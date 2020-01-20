@@ -2,13 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: gallery-jwt-service
+  namespace: art
   labels:
     run: gallery-jwt-service
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
-  - port: 3334
-    protocol: TCP
-    targetPort: 3333
+  - port: 3333
+    targetPort: http-jwt-api
   selector:
     app: gallery

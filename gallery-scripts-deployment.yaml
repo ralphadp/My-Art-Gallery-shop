@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gallery-scripts-deploy
+  namespace: art
   labels:
     app: gallery
 spec:
