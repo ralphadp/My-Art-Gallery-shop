@@ -1,4 +1,4 @@
-FROM node:12.14-alpine
+FROM node:carbon
 
 RUN mkdir -p /usr/src/artapp/galleryPicturesProvider
 WORKDIR /usr/src/artapp/galleryPicturesProvider

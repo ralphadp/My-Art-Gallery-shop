@@ -1,4 +1,4 @@
-FROM node:12.14-alpine
+FROM node:10-alpine
 
 RUN mkdir -p /usr/src/artapp/gscripts
 WORKDIR /usr/src/artapp/gscripts
