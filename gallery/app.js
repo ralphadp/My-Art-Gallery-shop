@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
+const service = require('./helpers/servicesPath');
 
 require('dotenv').config();
 
@@ -64,6 +65,7 @@ app.use(function(err, req, res, next) {
   res.locals.title = (err.status === 404) ? 'Page Not found' : 'Error';
   res.locals.currentUser = req.session;
   res.locals.message = err.message;
+  res.locals.service = service;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
