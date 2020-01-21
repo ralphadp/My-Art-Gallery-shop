@@ -1,4 +1,4 @@
-FROM node:carbon
+FROM node:12-stretch
 
 RUN mkdir -p /usr/src/artapp/gallery
 WORKDIR /usr/src/artapp/gallery
@@ -9,6 +9,7 @@ COPY tests/ ../tests/
 RUN npm install
 
 COPY ./gallery/ .
+VOLUME  ./gallery:/usr/src/artapp/gallery
 #Checking image directories 
 RUN ls -ah .
 RUN ls -ah ../
