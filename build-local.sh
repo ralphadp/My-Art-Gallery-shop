@@ -25,5 +25,7 @@ cd ..
 
 docker build -f admin/Dockerfile -t gallery-admin:v1 .
 
+docker build -f gallery/Dockerfile -t gallery-app:v1 .
+
 echo "Images done..."
 docker images

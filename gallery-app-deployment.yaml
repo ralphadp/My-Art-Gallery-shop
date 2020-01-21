@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gallery-app-deploy
+  namespace: art
+  labels:
+    app: gallery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gallery
+  template:
+    metadata:
+      labels:
+        app: gallery
+    spec:
+      containers:
+      - image: gallery-app:v1
+        name: gallery-app
+        env:
+        - name: MYSQL_HOST_CONTAINER
+          value: "gallery-mysql8-service"
+        - name: MYSQL_PORT_CONTAINER
+          value: "6601"
+        - name: JWT_SERVICE_HOST_CONTAINER
+          value: "gallery-jwt-service"
+        - name: JWT_SERVICE_PORT_CONTAINER
+          value: "3333"
+        - name: IMAGES_SERVICE_HOST_CONTAINER
+          value: "192.168.99.101"
+        - name: IMAGES_SERVICE_PORT_CONTAINER
+          value: "30050"
+        - name: SCRIPTS_SERVICE_HOST_CONTAINER
+          value: "192.168.99.101"
+        - name: SCRIPTS_SERVICE_PORT_CONTAINER
+          value: "32626"
+        - name: APP_SERVICE_HOST_CONTAINER
+          value: "192.168.99.101"
+        - name: APP_SERVICE_PORT_CONTAINER
+          value: "30008"
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
