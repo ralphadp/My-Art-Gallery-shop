@@ -3,9 +3,9 @@ FROM node:12-stretch
 RUN mkdir -p /usr/src/artapp/gallery
 WORKDIR /usr/src/artapp/gallery
 
-COPY gallery/package.json ./
-COPY galleryRepository/ ../galleryRepository/
-COPY tests/ ../tests/
+ADD gallery/package.json ./
+ADD galleryRepository/ ../galleryRepository/
+ADD tests/ ../tests/
 RUN npm install
 
 COPY ./gallery/ .

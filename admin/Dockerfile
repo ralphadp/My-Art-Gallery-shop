@@ -3,8 +3,8 @@ FROM node:carbon
 RUN mkdir -p /usr/src/artapp/admin
 WORKDIR /usr/src/artapp/admin
 
-COPY admin/package.json ./
-COPY galleryRepository/ ../galleryRepository/
+ADD admin/package.json ./
+ADD galleryRepository/ ../galleryRepository/
 RUN npm install
 
 COPY ./admin/ .
