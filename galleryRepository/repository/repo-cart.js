@@ -62,7 +62,7 @@ class Cart {
      * Picked grouped by Year and Mouth
      */
     getCountByYearMouth() {
-        let sql = "SELECT YEAR(pickedAt) as Year, MONTHNAME(pickedAt) as Mouth, count(*) as Picked FROM cart GROUP BY MONTH(pickedAt)";
+        let sql = "SELECT YEAR(pickedAt) as Year, MONTHNAME(pickedAt) as Mouth, count(*) as Picked FROM cart GROUP BY MONTH(pickedAt), pickedAt";
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, (err, result) => {

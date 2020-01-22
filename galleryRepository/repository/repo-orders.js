@@ -113,10 +113,10 @@ class Orders {
      */
     getTotals() {
         let sql = 
-        "SELECT (SELECT CONCAT(sum(payerAmount), CONCAT(' ', payerCurrency)) FROM orders WHERE pieceId = 'Total') AS cartTotal, " +
-        "(SELECT CONCAT(sum(payerAmount), CONCAT(' ', payerCurrency)) FROM orders WHERE pieceId <> 'Total') AS Total, " +
-        "(SELECT CONCAT(sum(payerAmount), CONCAT(' ', payerCurrency)) FROM orders WHERE pieceId = 'Total' AND MONTH(buyDatetime) = MONTH(CURRENT_DATE()) AND YEAR(buyDatetime) = YEAR(CURRENT_DATE())) AS currentMonthCartTotal, " +
-        "(SELECT CONCAT(sum(payerAmount), CONCAT(' ', payerCurrency)) FROM orders WHERE pieceId <> 'Total' AND MONTH(buyDatetime) = MONTH(CURRENT_DATE()) AND YEAR(buyDatetime) = YEAR(CURRENT_DATE())) AS currentMonthTotal";
+        "SELECT (SELECT CONCAT(sum(payerAmount), CONCAT(' ', payerCurrency)) FROM orders WHERE pieceId = 'Total' GROUP BY payerCurrency) AS cartTotal, " +
+        "(SELECT CONCAT(sum(payerAmount), CONCAT(' ', payerCurrency)) FROM orders WHERE pieceId <> 'Total' GROUP BY payerCurrency) AS Total, " +
+        "(SELECT CONCAT(sum(payerAmount), CONCAT(' ', payerCurrency)) FROM orders WHERE pieceId = 'Total' AND MONTH(buyDatetime) = MONTH(CURRENT_DATE()) AND YEAR(buyDatetime) = YEAR(CURRENT_DATE()) GROUP BY payerCurrency) AS currentMonthCartTotal, " +
+        "(SELECT CONCAT(sum(payerAmount), CONCAT(' ', payerCurrency)) FROM orders WHERE pieceId <> 'Total' AND MONTH(buyDatetime) = MONTH(CURRENT_DATE()) AND YEAR(buyDatetime) = YEAR(CURRENT_DATE()) GROUP BY payerCurrency) AS currentMonthTotal";
 
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, (err, result) => {
@@ -134,7 +134,7 @@ class Orders {
      * @param {*} year 
      */
     getTotalsByMonth(year) {
-        let sql = "SELECT MONTHNAME(buyDatetime) AS month, sum(payerAmount) AS total, payerCurrency FROM orders WHERE pieceId <> 'Total' AND YEAR(buyDatetime) = ? GROUP BY MONTH(buyDatetime)";
+        let sql = "SELECT MONTHNAME(buyDatetime) AS month, sum(payerAmount) AS total, payerCurrency FROM orders WHERE pieceId <> 'Total' AND YEAR(buyDatetime) = ? GROUP BY MONTH(buyDatetime), buyDatetime, payerCurrency";
         
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [year], (err, result) => {
