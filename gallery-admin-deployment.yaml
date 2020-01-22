@@ -38,7 +38,7 @@ spec:
         - name: APP_SERVICE_HOST_CONTAINER
           value: "192.168.99.101"
         - name: APP_SERVICE_PORT_CONTAINER
-          value: "30008"
+          value: "32260"
         - name: JWT_URI
           value: "http://gallery-jwt-service.art.svc.cluster.local:3333"
         imagePullPolicy: Never
