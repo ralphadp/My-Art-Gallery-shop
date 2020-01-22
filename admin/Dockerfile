@@ -8,6 +8,7 @@ COPY galleryRepository/ ../galleryRepository/
 RUN npm install
 
 COPY ./admin/ .
+VOLUME  ./admin:/usr/src/artapp/admin
 #Checking image directories 
 RUN ls -ah .
 RUN ls -ah ../
