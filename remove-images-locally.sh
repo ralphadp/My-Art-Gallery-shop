@@ -53,4 +53,4 @@ echo -e "${RED}Removing gallery-mysql:v1 image${NC}"
 docker rmi gallery-mysql:v1
 
 docker images
-echo -e "${BLINK}${GREEN}All images were removed.${NC}"
+echo -e "\n${BLINK}${GREEN}All images were removed.${NC}"

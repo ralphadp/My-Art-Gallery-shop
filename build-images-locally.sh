@@ -38,29 +38,29 @@ buildDir=$(pwd)
 cd sqlDump/
 docker build -t gallery-mysql:v1 .
 cd $buildDir
-echo -e "${BLUE}gallery-mysql image created${NC}"
+echo -e "${BLUE}gallery-mysql image was created${NC}\n"
 
 cd gscripts/
 docker build -t gallery-scripts:v1 .
 cd $buildDir
-echo -e "${BLUE}gallery-scripts image created${NC}"
+echo -e "${BLUE}gallery-scripts image was created${NC}\n"
 
 cd galleryJWT/
 docker build -t gallery-jwt:v1 .
 cd $buildDir
-echo -e "${BLUE}gallery-jwt image created${NC}"
+echo -e "${BLUE}gallery-jwt image was created${NC}\n"
 
 cd galleryPicturesProvider/
 docker build -t gallery-images:v1 .
 cd $buildDir
-echo -e "${BLUE}gallery-images image created${NC}"
+echo -e "${BLUE}gallery-images image was created${NC}\n"
 
 docker build -f admin/Dockerfile -t gallery-admin:v1 .
-echo -e "${BLUE}gallery-admin image created${NC}"
+echo -e "${BLUE}gallery-admin image was created${NC}\n"
 
 docker build -f gallery/Dockerfile -t gallery-app:v1 .
-echo -e "${BLUE}gallery-app image created${NC}"
+echo -e "${BLUE}gallery-app image created${NC}\n"
 
 echo -e "${GREEN}Build done.${NC}"
 docker images
-echo -e "${BLINK}${RED}GalleryArt ${GREEN}Images have been created...${NC}"
+echo -e "\n${BLINK}${RED}GalleryArt ${GREEN}Images have been created...${NC}"
