@@ -10,7 +10,10 @@ spec:
     matchLabels:
       app: gallery
   strategy:
-    type: Recreate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -18,7 +21,7 @@ spec:
     spec:
       containers:
       - image: gallery-mysql:v1
-        name: gallery-mysql-8
+        name: gallery-mysql
         imagePullPolicy: Never
         args: ["--default-authentication-plugin=mysql_native_password"]
         ports:
