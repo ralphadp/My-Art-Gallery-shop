@@ -134,7 +134,7 @@ class Orders {
      * @param {*} year 
      */
     getTotalsByMonth(year) {
-        let sql = "SELECT MONTHNAME(buyDatetime) AS month, sum(payerAmount) AS total, payerCurrency FROM orders WHERE pieceId <> 'Total' AND YEAR(buyDatetime) = ? GROUP BY MONTH(buyDatetime), buyDatetime, payerCurrency";
+        let sql = "SELECT MONTHNAME(buyDatetime) AS month, sum(payerAmount) AS total, payerCurrency FROM orders WHERE pieceId <> 'Total' AND YEAR(buyDatetime) = ? GROUP BY MONTHNAME(buyDatetime), payerCurrency";
         
         return new Promise((resolve, reject) => {
             sqlConn.query(sql, [year], (err, result) => {
