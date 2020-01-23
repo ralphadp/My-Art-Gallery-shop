@@ -34,6 +34,7 @@ kubectl create -f gallery-admin-svc.yaml
 kubectl create -f gallery-app-svc.yaml
 
 echo -e "\n${GREEN}Listing${NC}";
+kubectl get services -n art
 kubectl get pods -n art
 minikube service list
 echo -e "\n${BLINK}${GREEN}Deploy done...${NC}";
