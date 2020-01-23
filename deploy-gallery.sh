@@ -17,6 +17,7 @@ minikubeHost=$(minikube ip)
 echo -e "${GREEN}Creating namespace ${RED}art${NC}";
 kubectl create -f gallery-namespace.yaml 
 
+#Deploy containers in order
 echo -e "${GREEN}Deploying containers${NC}";
 kubectl create -f gallery-mysql8-deployment.yaml
 kubectl create -f gallery-scripts-deployment.yaml 
@@ -25,6 +26,7 @@ kubectl create -f gallery-jwt-deployment.yaml
 kubectl create -f gallery-admin-deployment.yaml
 kubectl create -f gallery-app-deployment.yaml
 
+#Create services in order
 echo -e "${GREEN}Creating services${NC}";
 kubectl create -f gallery-mysql8-svc.yaml 
 kubectl create -f gallery-scripts-svc.yaml 
