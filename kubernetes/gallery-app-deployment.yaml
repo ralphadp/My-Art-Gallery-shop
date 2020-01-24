@@ -25,7 +25,7 @@ spec:
         name: gallery-app
         env:
         - name: MYSQL_HOST_CONTAINER
-          value: "gallery-mysql8-service"
+          value: "gallery-mysql"
         - name: MYSQL_PORT_CONTAINER
           value: "6601"
         - name: JWT_SERVICE_HOST_CONTAINER

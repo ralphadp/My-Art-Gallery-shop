@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gallery-admin-deploy
+  name: gallery-admin
   namespace: art
   labels:
-    app: gallery
+    app: gallery-admin
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gallery
+      app: gallery-admin
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -18,14 +18,14 @@ spec:
   template:
     metadata:
       labels:
-        app: gallery
+        app: gallery-admin
     spec:
       containers:
       - image: gallery-admin:v1
         name: gallery-admin
         env:
         - name: MYSQL_HOST_CONTAINER
-          value: "gallery-mysql8-service"
+          value: "gallery-mysql"
         - name: MYSQL_PORT_CONTAINER
           value: "6601"
         - name: JWT_SERVICE_HOST_CONTAINER
