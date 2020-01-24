@@ -1,6 +1,6 @@
 FROM mysql
 
-LABEL MAINTAINER Ralph A <ralphadp@gmail.com>
+LABEL maintainer Ralph A <ralphadp@gmail.com>
 
 ENV MYSQL_DATABASE=gallery_db \
     MYSQL_ROOT_PASSWORD=root \
