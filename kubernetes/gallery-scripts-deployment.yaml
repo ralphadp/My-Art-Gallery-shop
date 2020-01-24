@@ -1,19 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gallery-scripts-deploy
+  name: gallery-scripts
   namespace: art
   labels:
-    app: gallery
+    app: gallery-scripts
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gallery
+      app: gallery-scripts
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        app: gallery
+        app: gallery-scripts
     spec:
       containers:
       - image: gallery-scripts:v1
@@ -21,3 +26,8 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 2000
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

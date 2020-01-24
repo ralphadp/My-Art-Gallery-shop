@@ -1,19 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gallery-pictures-deploy
+  name: gallery-images
   namespace: art
   labels:
-    app: gallery
+    app: gallery-images
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gallery
+      app: gallery-images
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        app: gallery
+        app: gallery-images
     spec:
       containers:
       - image: gallery-images:v1
@@ -21,3 +26,16 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 8888
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 50m
+            memory: 128Mi
+          requests:
+            memory: 128Mi
+            cpu: 50m
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
