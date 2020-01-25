@@ -30,6 +30,9 @@ else
     eval $(minikube docker-env --shell bash)
 fi
 
+#change to workspace directory
+cd ..
+
 #####################
 # Build all the images
 echo -e "${GREEN}Start building images${NC}"

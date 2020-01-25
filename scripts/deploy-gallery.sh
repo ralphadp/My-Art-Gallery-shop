@@ -11,6 +11,9 @@ kubectl delete services --all -n art
 kubectl delete deployments --all -n art
 kubectl delete namespace art
 
+#change to workspace directory
+cd ..
+
 cd ./kubernetes
 minikubeHost=$(minikube ip)
 
