@@ -1,0 +1,86 @@
+version: '3.1'
+
+services:
+
+  mysqldb:
+    build: ./sqlDump
+    image: gallery-mysql:v1
+    restart: always
+    ports:
+    #   - <external:internal>
+      - 3306:3306
+    volumes:
+      - ./sqlDump/gallery_db_dump.sql:/docker-entrypoint-initdb.d/gallery_db_dump.sql
+    expose:
+      - 3306
+
+  scriptsserver:
+    build: ./gscripts
+    image: gallery-scripts:v1
+    volumes: 
+      - ./gscripts:/usr/src/artapp/gscripts
+      - /usr/src/artapp/gscripts/node_modules
+    ports:
+      - 2000:2000
+    expose:
+      - 2000
+
+  picturesserver:
+    build: ./galleryPicturesProvider
+    image: gallery-pictures:v1
+    volumes: 
+      - ./galleryPicturesProvider:/usr/src/artapp/galleryPicturesProvider
+      - /usr/src/artapp/galleryPicturesProvider/node_modules
+    ports:
+      - 8888:8888
+    expose:
+      - 8888
+
+  jwtserver:
+    build: ./galleryJWT
+    image: gallery-jwt:v1
+    volumes: 
+      - ./galleryJWT:/usr/src/artapp/galleryJWT
+      - /usr/src/artapp/galleryJWT/node_modules
+    ports:
+      - 3333:3333
+    expose:
+      - 3333
+
+  adminserver:
+    build:
+      context: .
+      dockerfile: ./admin/Dockerfile
+    image: gallery-admin:v1
+    volumes: 
+      - ./admin:/usr/src/artapp/admin
+      - /usr/src/artapp/admin/node_modules
+    ports:
+      - 4000:4000
+    env_file:
+      - ./admin/docker.env
+    links:
+      - mysqldb
+    depends_on:
+      - mysqldb
+    expose:
+      - 4000
+
+  appserver:
+    build:
+      context: .
+      dockerfile: ./gallery/Dockerfile
+    image: gallery-app:v1
+    volumes: 
+      - ./gallery:/usr/src/artapp/gallery
+      - /usr/src/artapp/gallery/node_modules
+    ports:
+      - 3000:3000
+    env_file:
+      - ./gallery/docker.env
+    links:
+      - mysqldb
+    depends_on:
+      - mysqldb
+    expose:
+      - 3000
