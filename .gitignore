@@ -9,3 +9,5 @@ galleryPicturesProvider/private/images/HD
 galleryPicturesProvider/private/images/users
 galleryPicturesProvider/private/images/admin
 .env
+.vscode/
+artistPortal/
