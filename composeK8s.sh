@@ -3,20 +3,21 @@
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
+CYAN='\033[0;36m'
 BLINK='\033[5m'
 NC='\033[0m' # No Color
 
 function showHelp() {
     printf "$0 [-option]"
     printf '\n'
-    printf "Options:"
+    printf "${BLUE}Options:${CYAN}"
     printf '\n'
     printf ' -b  --build\t\t: Build all the docker images\n'
     printf ' -rb --remove-build\t: Remove the docker images\n'
     printf ' -d  --deploy\t\t: Deploy by deleting the olds deploy and setting new pods and services\n'
     printf ' -dd --delete-deploy\t: Remove old deploy, removing services and deployments\n'
     printf ' -a  --all\t\t: Perform all the complete process: Remove old build, build images, and deploy on the current cluster.\n'
-    printf ' -h  --help\t\t: Display a list of all the available options.\n'
+    printf ' -h  --help\t\t: Display a list of all the available options.${NC}\n'
     exit 1
 }
 
@@ -47,7 +48,7 @@ function setMinikubeDockerEnvironment() {
     fi
 }
 
-function buildDockerImages() {
+function buildDockerImagesLocally() {
     #####################
     # Build all the images
     echo -e "${GREEN}Start building images${NC}"
@@ -84,7 +85,7 @@ function buildDockerImages() {
     echo -e "\n${BLINK}${RED}GalleryArt ${GREEN}Images have been created...${NC}"
 }
 
-function removeDockerImages() {
+function removeDockerLocalImages() {
     ######################
     # Remove all the images
     echo -e "${GREEN}Start removing${NC}"
@@ -153,39 +154,40 @@ function deployToMinikubeCluster() {
 }
 
 function perform {
-    echo "Perform $1"
+echo "ewew"
     if [ $1 == "-b" ] || [ $1 == "--build" ];  then
         setMinikubeDockerEnvironment
-        buildDockerImages
+        buildDockerImagesLocally
     elif [ $1 == "-rb" ] || [ $1 == "--remove-build" ];  then
         setMinikubeDockerEnvironment
-        removeDockerImages
+        removeDockerLocalImages
     elif [ $1 == "-d" ] || [ $1 == "--deploy" ];  then
         deployToMinikubeCluster
     elif [ $1 == "-dd" ] || [ $1 == "--delete-deploy" ];  then
         removeDeployAndServicesFromMinikubeCluster
     elif [ $1 == "-a" ] || [ $1 == "--all" ];  then
         removeDeployAndServicesFromMinikubeCluster
-            setMinikubeDockerEnvironment
-            removeDockerImages
-            buildDockerImages
+        setMinikubeDockerEnvironment
+        removeDockerLocalImages
+        buildDockerImagesLocally
         deployToMinikubeCluster
     elif [ $1 == "-h" ] || [ $1 == "--help" ];  then
         showHelp
     else
-        printf "Unknown option [$1] ...\n\n"
+        printf "${RED}Unknown option [$1] ...\n\n${NC}"
         showHelp
     fi
 }
 
 # Main script
 if [ $# -ne 1 ]; then
+    echo -e "${RED}Only one parameter allowed.\n${NC}"
     showHelp
 else # have the argument
     if [ -n $1 ]; then
         perform $1
     else
-        printf 'Invalid option...\n\n'
+        echo -e "${RED}Invalid option...\n${NC}"
         showHelp
     fi
 fi
