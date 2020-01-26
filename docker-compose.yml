@@ -26,13 +26,17 @@ services:
       - 2000
 
   picturesserver:
-    build: ./galleryPicturesProvider
+    build:
+      context: .
+      dockerfile: ./galleryPicturesProvider/Dockerfile
     image: gallery-pictures:v1
     volumes: 
       - ./galleryPicturesProvider:/usr/src/artapp/galleryPicturesProvider
       - /usr/src/artapp/galleryPicturesProvider/node_modules
     ports:
       - 8888:8888
+    env_file:
+      - ./galleryPicturesProvider/docker.env
     expose:
       - 8888
 

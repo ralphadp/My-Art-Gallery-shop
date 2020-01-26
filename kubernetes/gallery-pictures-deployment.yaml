@@ -23,6 +23,15 @@ spec:
       containers:
       - image: gallery-images:v1
         name: gallery-images
+        env:
+        - name: ADMIN_SERVICE_HOST_CONTAINER
+          value: "192.168.99.101"
+        - name: ADMIN_SERVICE_PORT_CONTAINER
+          value: "32600"
+        - name: APP_SERVICE_HOST_CONTAINER
+          value: "192.168.99.101"
+        - name: APP_SERVICE_PORT_CONTAINER
+          value: "32260"
         imagePullPolicy: Never
         ports:
         - containerPort: 8888

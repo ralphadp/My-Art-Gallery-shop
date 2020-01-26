@@ -69,9 +69,7 @@ function buildDockerImagesLocally() {
     cd $buildDir
     echo -e "${BLUE}gallery-jwt image was created${NC}\n"
 
-    cd galleryPicturesProvider/
-    docker build -t gallery-images:v1 .
-    cd $buildDir
+    docker build -f galleryPicturesProvider/Dockerfile -t gallery-images:v1 .
     echo -e "${BLUE}gallery-images image was created${NC}\n"
 
     docker build -f admin/Dockerfile -t gallery-admin:v1 .
