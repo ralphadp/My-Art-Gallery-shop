@@ -19,6 +19,7 @@ var ordersRouter = require('./routes/orders');
 var app = express();
 
 global.currentEmailCounter = 0;
+global.version = require('./package.json').version;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
