@@ -27,7 +27,7 @@
         //fd.append("file", file);
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", `http://localhost:8888/api/${path}/upload/`);
+        xhr.open("POST", `${SERVER_CONFIG.imagesHost}/api/${path}/upload/`);
         xhr.setRequestHeader('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3');
 
         xhr.onloadend = function() {
