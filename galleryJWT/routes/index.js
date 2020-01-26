@@ -1,9 +1,8 @@
 var express = require('express');
+const controller = require('../controllers/rootController');
 var router = express.Router();
 
 /* GET home route. */
-router.get('/', function(req, res, next) {
-  res.send('JWT Api 0.0.1');
-});
+router.get('/', controller.rootResponser);
 
 module.exports = router;
