@@ -173,7 +173,7 @@
         registerPhotoUser(fd) {
 
             let requestConfig = {
-                url: 'http://localhost:8888/api/register/upload',
+                url: `${SERVER_CONFIG.imagesHost}/api/register/upload`,
                 method: 'POST',
                 headers: {
                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"
