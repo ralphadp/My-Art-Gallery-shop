@@ -1,4 +1,4 @@
-FROM node:carbon
+FROM node:12-stretch
 
 RUN mkdir -p /usr/src/artapp/admin
 WORKDIR /usr/src/artapp/admin
