@@ -57,6 +57,10 @@ input[type=file] {
     width: 90%;
 }
 
+input[type=file].profile_input {
+    width: auto;
+}
+
 #input-file {
     width: 80%;
     float: left;
@@ -83,6 +87,19 @@ div#preview img{
     content:'';
     display: block;
     clear: both;
+}
+
+span#preview {
+    width: 236px;
+    height: 236px;
+    display: inline-block;
+}
+
+span#preview img {
+    height: 90%;
+    width: 90%;
+    object-fit: contain;
+    padding: 5px;
 }
 
 .radio-group-item {

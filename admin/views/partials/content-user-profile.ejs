@@ -21,18 +21,20 @@
 <% } else {%>
 <div id="message-card"></div>
 <% } %>
-    
+
 <div id="profile-form">
     <div class="profile-image-uploader">
         <form enctype="multipart/form-data" id="imageForm">
             <div class="profile-row">
-                <label for="admin-thumb">Admin Photograpy</label>
-                <input id="admin-thumb" class="profile_input" type="file" name="imgUploader" accept="image/png, image/jpeg" multiple readonly disabled/>
+                <label for="input-thumb">Admin Photograpy</label>
+                <input id="input-thumb" class="profile_input" type="file" name="imgUploader" accept="image/png, image/jpeg" multiple readonly disabled/>
             </div>
         </form>
         <div class="profile-row">
             <button class="done_button profile_input" id="btnSubmit" path="adminform" type="submit" disabled>Upload Profile Image</button>
-            <img id="profile-image-stored" src="<%= profile.photo ? (`${services.imagesHost}/api/image/admin/` + profile.photo) : '' %>" alt="">
+            <span id="preview">
+                <img id="profile-image-stored" src="<%= profile.photo ? (`${services.imagesHost}/api/image/admin/` + profile.photo) : '' %>" alt="Admin Photograpy">
+            </span>
         </div>
     </div>
     <form action="/users/admin/update" method="POST">

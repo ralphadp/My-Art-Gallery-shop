@@ -60,10 +60,14 @@
 
         reader.onload = (res) => {
             const preview = document.getElementById('preview');
-            const image = document.createElement('img');
-            image.src = reader.result;
-            preview.innerHTML = '';
-            preview.append(image);
+            if (preview.getElementsByTagName('img').length) {
+                preview.getElementsByTagName('img')[0].src = reader.result;
+            } else {
+                const image = document.createElement('img');
+                image.src = reader.result;
+                preview.innerHTML = '';
+                preview.append(image);
+            }
         };
     };
 
