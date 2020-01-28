@@ -1,16 +1,9 @@
 (() => {
 
-    document.getElementById('category_name').addEventListener('keypress', (event) => {
-        let char = String.fromCharCode(event.which);
-        if (!/^[a-zA-Z ]+$/.test(char)) {
-            event.preventDefault();
-        }
-     });
-
-     document.getElementById('category_name').addEventListener('input', (event) => { 
-        let categoryName = document.getElementById('category_name').value;
-        categoryName = categoryName.toLocaleLowerCase();
-        document.getElementById('category_path').value = categoryName.replace(/ /g,'-');    
-    });
+    const categoryType = new CategoryTypeFilter('category_path');
+    /*** KEYPRESS FILTER EVENT  ***/
+    document.getElementById('category_name').onkeypress = categoryType.filterKeypressEvent.bind(categoryType);
+    /*** NAME INPUT COPY TO TYPE ***/
+    document.getElementById('category_name').oninput = categoryType.copyEvent.bind(categoryType); 
 
 })();
