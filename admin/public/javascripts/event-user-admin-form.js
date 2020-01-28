@@ -1,21 +1,10 @@
-/**
- * In case image upload was good, set the user photo
- * @param {*} response 
- */
-const uploadSuccess = (response) => {
-    let photoId = 'SERVER ERROR, none filename was return';
-    if (response.files.length) {
-        photoId = response.files[0].split('.')[0];
-    }
-    document.getElementById('user-photo').value = photoId;
+(() => {
 
-    alert(response.message);
-};
+    const upload = new ThumbUploader('imageForm', 'preview', 'user-photo');
 
-/**
- * In case the failure, show the error
- * @param {*} responseError 
- */
-const uploadFail = (responseError) => {
-    alert(responseError.error);
-};
+    /**** SUBMIT BUTTON ****/
+    document.getElementById('btnSubmit').onclick = upload.uploadEvent.bind(upload);
+    /**** CHANGE IMAGE ****/
+    document.getElementById('input-thumb').onchange = upload.displayPreviewPhoto.bind(upload);
+
+})();

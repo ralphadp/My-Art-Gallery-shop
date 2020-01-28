@@ -1,21 +1,10 @@
-/**
- * In case image upload was good, set the new ExternalId
- * @param {*} response 
- */
-const uploadSuccess = (response) => {
-    let newExternalId = 'ERROR, no file name code was back from server.';
-    if (response.files.length) {
-        newExternalId = response.files[0].split('.')[0];    
-    }
-    document.getElementById('piece-external-id').value = newExternalId;
+(() => {
 
-    alert(response.message);
-};
+    const upload = new ThumbUploader('imageForm', 'preview', 'piece-external-id');
 
-/**
- * In case the failure, show the error
- * @param {*} responseError 
- */
-const uploadFail = (responseError) => {
-    alert(responseError.error);
-};
+    /**** SUBMIT BUTTON ****/
+    document.getElementById('btnSubmit').onclick = upload.uploadEvent.bind(upload);
+    /**** CHANGE IMAGE ****/
+    document.getElementById('input-thumb').onchange = upload.displayPreviewPhoto.bind(upload);
+
+})();
