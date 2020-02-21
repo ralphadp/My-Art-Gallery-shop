@@ -1,6 +1,5 @@
 var {categories} = require('gallery-repository');
 var ConfigHandler = require('../model/configHandler');
-const services = require('../model/servicesPath');
 
 module.exports = {
     getCategories: (req, res, next) => {
@@ -10,14 +9,13 @@ module.exports = {
 
         const category = new categories();
         category.getAll().then((result) => {
-            res.render(
+            res.renderPage(
                 'categories', 
                 { 
                     title: 'Categories List', 
                     tableTitle: 'Categories', 
                     data: result, 
-                    response: response,
-                    services: services
+                    response: response
                 }
             );
         });
@@ -26,14 +24,13 @@ module.exports = {
         const response = req.cookies.category_response || null;
         res.clearCookie('category_response');
 
-        res.render(
+        res.renderPage(
             'categories-form', 
             { 
                 title: 'Categories', 
                 titleForm: 'Add new Category', 
                 result: response,
-                dataToUpdate: null,
-                services: services
+                dataToUpdate: null
             }
         );
     },
@@ -111,14 +108,13 @@ module.exports = {
 
         let dataToUpdate = !response ? (req.params || null) : response.data;
 
-        res.render(
+        res.renderPage(
             'categories-form', 
             { 
                 title: 'Categories', 
                 titleForm: 'Update Category', 
                 result: response,
-                dataToUpdate: dataToUpdate,
-                services: services
+                dataToUpdate: dataToUpdate
             }
         );
     },
@@ -157,15 +153,14 @@ module.exports = {
         const category = new categories();
 
         category.getAllSearching(pattern).then((result) => {
-            res.render(
+            res.renderPage(
                 'categories', 
                 { 
                     title: `Categories search by: "${phrase}" `, 
                     tableTitle: 'Categories', 
                     data: result, 
                     response: response,
-                    searchText: phrase,
-                    services: services
+                    searchText: phrase
                 }
             );
         });

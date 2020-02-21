@@ -9,11 +9,10 @@ module.exports = {
         const response = req.cookies.authorization_response || null;
         res.clearCookie('authorization_response');
 
-        res.render('login', {
+        res.renderPage('login', {
             title: 'Login - Admin', 
             titleForm: 'Login',
-            response: response,
-            services: services
+            response: response
         });
     },
     loginVerify: (req, res, next) => {
@@ -120,7 +119,7 @@ module.exports = {
                                   return item;
                                 });
 
-                                res.render('index', { 
+                                res.renderPage('index', { 
                                     title: 'Admin - Art Gallery',
                                     profit: profit,
                                     profitByMonth: JSON.stringify(profitByMonth),
@@ -128,8 +127,7 @@ module.exports = {
                                     currentDate: currentDate.halfText,
                                     data: userTable,
                                     piecesByType: JSON.stringify(piecesByType),
-                                    piecesReleasedYear: JSON.stringify(piecesReleasedYear),
-                                    services: services
+                                    piecesReleasedYear: JSON.stringify(piecesReleasedYear)
                                 });
                             });
                         });
@@ -142,12 +140,11 @@ module.exports = {
         fetch(`${services.imagesHost}/api/summary/`)
         .then(response => response.json())
         .then(body => {
-            res.render(
+            res.renderPage(
                 'documents', 
                 { 
                     title: 'Documents', 
-                    files: body,
-                    services: services
+                    files: body
                 }
             );
         });
@@ -166,13 +163,11 @@ module.exports = {
                 profile.birth = Util.getDateFromDatetime(profile.birth);
             }
 
-            res.render(
-                'profile', 
-                { 
-                title: 'Profile User Info', 
-                profile: profile,
-                result: response,
-                services: services
+            res.renderPage(
+                'profile', { 
+                    title: 'Profile User Info', 
+                    profile: profile,
+                    result: response
                 }
             );
         });
@@ -200,12 +195,19 @@ module.exports = {
          .then(content => {
 
             if (typeof content.error !== 'undefined') {
-                res.render('messages', { title: 'Inbox messages', error: content.error, services: services });
+                res.renderPage(
+                    'messages', { 
+                        title: 'Inbox messages',
+                        error: content.error
+                    });
                 return;
             }
 
             if (!content.length) {
-                res.render('messages', { title: 'Inbox messages', error: 'Content is empty', services: services});
+                res.renderPage('messages', { 
+                    title: 'Inbox messages', 
+                    error: 'Content is empty'
+                });
                 return;
             }
 
@@ -290,11 +292,11 @@ module.exports = {
                 })
                 .catch (error => console.log(error))
                 .finally(() => {
-                    res.render('messages', { 
+                    res.renderPage('messages', { 
                         title: 'Inbox messages', 
-                        box: inboxData, messages: 
-                        emailContents, error: null, 
-                        services: services
+                        box: inboxData, 
+                        messages: emailContents, 
+                        error: null
                     });
                 });
 
@@ -303,10 +305,9 @@ module.exports = {
         })
         .catch (error => {
             console.log(error);
-            res.render('messages', { 
+            res.renderPage('messages', { 
                 title: 'Inbox messages', 
-                error: error, 
-                services: services 
+                error: error
             });
         });
     },
@@ -317,13 +318,12 @@ module.exports = {
 
         const oConfig = new config;
         oConfig.getAll().then((result) => {
-            res.render(
+            res.renderPage(
                 'configuration', 
                 { 
                     title: 'Global Configuration', 
                     config: result,
-                    response: response,
-                    services: services
+                    response: response
                 }
             );
         });

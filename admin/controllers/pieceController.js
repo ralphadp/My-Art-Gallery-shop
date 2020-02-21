@@ -1,7 +1,6 @@
 var {pieces} = require('gallery-repository');
 var Util = require('../model/util');
 var ConfigHandler = require('../model/configHandler');
-var services = require('../model/servicesPath');
 
 module.exports = {
     getPieces: (req, res, next) => {
@@ -11,14 +10,13 @@ module.exports = {
 
         const piece = new pieces();
         piece.getAllOf().then((result) => {
-            res.render(
+            res.renderPage(
                 'pieces', 
                 { 
                     title: 'List of Pieces', 
                     tableTitle: 'Pieces', 
                     data: result,
-                    response: response,
-                    services: services
+                    response: response
                 }
             );
         });
@@ -29,15 +27,14 @@ module.exports = {
         res.clearCookie('piece_response');
 
         Util.getAllArtCategories().then(categories =>
-            res.render(
+            res.renderPage(
               'pieces-form', 
               { 
                 title: 'Pieces', 
                 titleForm: 'New Piece',
                 categories: categories,
                 response: response,
-                dataToUpdate: null,
-                services: services
+                dataToUpdate: null
               }
             )
         );
@@ -47,14 +44,14 @@ module.exports = {
         const piece = new pieces();
 
         const pieceParam = {
-          itemId: req.body.itemId,
-          name: req.body.name,
-          artist: req.body.artist,
-          type: req.body.type,
-          release_date: req.body.release_date,
-          size: req.body.size,
-          price: req.body.price,
-          currency: req.body.currency
+            itemId: req.body.itemId,
+            name: req.body.name,
+            artist: req.body.artist,
+            type: req.body.type,
+            release_date: req.body.release_date,
+            size: req.body.size,
+            price: req.body.price,
+            currency: req.body.currency
         };
  
         let response = {};
@@ -92,14 +89,13 @@ module.exports = {
             dataToUpdate.release_date = Util.getDateFromDatetime(dataToUpdate.release_date);
 
             Util.getAllArtCategories().then(categories =>
-                res.render(
+                res.renderPage(
                     'pieces-form', {
                         title: 'Pieces', 
                         titleForm: 'Edit Piece',
                         categories: categories,
                         response: response,
-                        dataToUpdate: dataToUpdate,
-                        services: services
+                        dataToUpdate: dataToUpdate
                     }
                 )
             );
@@ -113,15 +109,15 @@ module.exports = {
         const piece = new pieces();
 
         const pieceParam = {
-          itemId: req.body.itemId,
-          name: req.body.name,
-          artist: req.body.artist,
-          type: req.body.type,
-          release_date: req.body.release_date,
-          size: req.body.size,
-          price: req.body.price,
-          currency: req.body.currency,
-          id: req.body.id,
+            itemId: req.body.itemId,
+            name: req.body.name,
+            artist: req.body.artist,
+            type: req.body.type,
+            release_date: req.body.release_date,
+            size: req.body.size,
+            price: req.body.price,
+            currency: req.body.currency,
+            id: req.body.id,
         };
 
         let response = {};
@@ -198,14 +194,13 @@ module.exports = {
 
         piece.getAllSearchingForAdmin(pattern)
         .then((result) => {
-            res.render(
+            res.renderPage(
                 'pieces', { 
                     title: `Pieces search by: "${phrase}" `,
                     tableTitle: 'Pieces', 
                     data: result, 
                     response: response,
-                    searchText: phrase,
-                    services: services
+                    searchText: phrase
                 }
             );
         });

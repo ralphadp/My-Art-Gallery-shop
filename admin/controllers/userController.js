@@ -1,7 +1,6 @@
 var {admins, users} = require('gallery-repository');
 var ConfigHandler = require('../model/configHandler');
 var Util = require('../model/util');
-var services = require('../model/servicesPath');
 
 module.exports = {
     getUsers: (req, res, next) => {
@@ -12,14 +11,13 @@ module.exports = {
         const user = new users();
 
         user.getAll().then((result) => {
-            res.render(
+            res.renderPage(
                 'users', 
                 { 
                     title: 'External Users', 
                     tableTitle: 'Users', 
                     data: result,
-                    response: response,
-                    services: services
+                    response: response
                 }
             );
         });
@@ -31,14 +29,13 @@ module.exports = {
 
         const admin = new admins();
         admin.getAll().then((result) => {
-            res.render(
+            res.renderPage(
                 'admins', 
                 { 
                     title: 'Internal Users', 
                     tableTitle: 'Admins', 
                     data: result,
-                    response: response,
-                    services: services
+                    response: response
                 }
             );
         });
@@ -47,13 +44,12 @@ module.exports = {
         const response = req.cookies.user_response || null;
         res.clearCookie('user_response');
 
-        res.render(
+        res.renderPage(
             'users-form', {
                 title: 'Users', 
                 titleForm: 'New User',
                 result: response,
-                dataToUpdate: null,
-                services: services
+                dataToUpdate: null
             }
         );
     },
@@ -61,13 +57,12 @@ module.exports = {
         const response = req.cookies.admin_response || null;
         res.clearCookie('admin_response');
       
-        res.render(
+        res.renderPage(
             'admins-form', {
                 title: 'Admin', 
                 titleForm: 'New Admin',
                 result: response,
-                dataToUpdate: null,
-                services: services
+                dataToUpdate: null
             }
         );
     },
@@ -169,14 +164,14 @@ module.exports = {
             dataToUpdate.registration_date = Util.getDateFromDatetime(dataToUpdate.registration_date);
             dataToUpdate.birth = Util.getDateFromDatetime(dataToUpdate.birth);
 
-            res.render(
-            'users-form', {
-                title: 'Users', 
-                titleForm: 'Update User',
-                result: response,
-                dataToUpdate: dataToUpdate,
-                services: services
-            });
+            res.renderPage(
+                'users-form', {
+                    title: 'Users', 
+                    titleForm: 'Update User',
+                    result: response,
+                    dataToUpdate: dataToUpdate
+                }
+            );
         })
         .catch((error) => {
             console.log(error);
@@ -253,13 +248,12 @@ module.exports = {
             dataToUpdate.registration_date = Util.getDateFromDatetime(dataToUpdate.registration_date);
             dataToUpdate.birth = Util.getDateFromDatetime(dataToUpdate.birth);
 
-            res.render(
+            res.renderPage(
                 'admins-form', {
                     title: 'Admin', 
                     titleForm: 'Update Admin',
                     result: response,
-                    dataToUpdate: dataToUpdate,
-                    services: services
+                    dataToUpdate: dataToUpdate
                 }
             );
         })
@@ -390,15 +384,14 @@ module.exports = {
         const user = new users();
 
         user.getAllSearching(pattern).then((result) => {
-            res.render(
+            res.renderPage(
                 'users', 
                 { 
                     title: `External Users search by: "${phrase}" `, 
                     tableTitle: 'Users', 
                     data: result, 
                     response: response,
-                    searchText: phrase,
-                    services: services
+                    searchText: phrase
                 }
             );
         });
@@ -415,15 +408,14 @@ module.exports = {
         const admin = new admins();
 
         admin.getAllSearching(pattern).then((result) => {
-            res.render(
+            res.renderPage(
                 'admins', 
                 { 
                     title: `Internal admins search by: "${phrase}" `, 
                     tableTitle: 'Admins', 
                     data: result, 
                     response: response,
-                    searchText: phrase,
-                    services: services,
+                    searchText: phrase
                 }
             );
         });

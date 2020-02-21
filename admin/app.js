@@ -7,6 +7,7 @@ const session = require('express-session');
 const {emailEventEmitter} = require('./model/emailFetcher');
 
 require('dotenv').config();
+const services = require('./model/servicesPath');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -36,6 +37,25 @@ app.use(session({
   saveUninitialized: true
 }));
 
+//just an example
+function getBrowser() {
+  return this.get('User-Agent'); 
+}
+
+app.use((req, res, next) => {
+    req.getBrowserInfo = () => {
+        return req.get('User-Agent'); 
+    };
+    res.renderPage = (title, result) => {
+        result.services = services;
+        res.render(
+            title,
+            result
+        );
+    };
+    next();
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/pieces', piecesRouter);
@@ -57,6 +77,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
+  res.locals.services = services;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
