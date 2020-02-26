@@ -1,5 +1,5 @@
 var express = require('express');
-var tokenCheck = require('../helpers/tokenCheck');
+var tokenCheck = require('../model/tokenCheck');
 var mailer = require('../email/mailer');
 var router = express.Router();
 

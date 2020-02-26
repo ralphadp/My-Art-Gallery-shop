@@ -1,5 +1,5 @@
 var express = require('express');
-var optionsUpdate = require('../helpers/optionsUpdate');
+var optionsUpdate = require('../model/optionsUpdate');
 var router = express.Router();
 
 /* GET app config update */

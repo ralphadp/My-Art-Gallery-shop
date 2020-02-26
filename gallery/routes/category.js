@@ -1,8 +1,8 @@
 var express = require('express');
-var tokenCheck = require('../helpers/tokenCheck');
-const {fromCategoryPathToCategoryName} = require('../helpers/middleware/tasks/util/utilities');
-const {keys, middlewareManager} = require('../helpers/middleware/manager');
-const service = require('../helpers/servicesPath');
+var tokenCheck = require('../model/tokenCheck');
+const {fromCategoryPathToCategoryName} = require('../model/middleware/tasks/util/utilities');
+const {keys, middlewareManager} = require('../model/middleware/manager');
+const service = require('../model/servicesPath');
 var router = express.Router();
 
 /* GET category/<type> page. */

@@ -1,9 +1,9 @@
 var express = require('express');
-var tokenCheck = require('../helpers/tokenCheck');
+var tokenCheck = require('../model/tokenCheck');
 const {orders, carts, pieces} = require('gallery-repository');
-const {keys, middlewareManager} = require('../helpers/middleware/manager');
-const {parsePaypalCartReturnData} = require('../helpers/middleware/tasks/util/utilities');
-const service = require('../helpers/servicesPath');
+const {keys, middlewareManager} = require('../model/middleware/manager');
+const {parsePaypalCartReturnData} = require('../model/middleware/tasks/util/utilities');
+const service = require('../model/servicesPath');
 var router = express.Router();
 
 /* POST save Paypal Orders. */

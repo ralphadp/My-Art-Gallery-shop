@@ -4,11 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
-const service = require('./helpers/servicesPath');
 
 require('dotenv').config();
+const service = require('./model/servicesPath');
 
-var optionsUpdate = require('./helpers/optionsUpdate');
+var optionsUpdate = require('./model/optionsUpdate');
 var indexRouter = require('./routes/index');
 var learningRouter = require('./routes/learning');
 var writeUsRouter = require('./routes/write-us');

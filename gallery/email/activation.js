@@ -1,6 +1,6 @@
 var nodemailer = require('nodemailer');
 var renderTemplate = require('./templates/render');
-const service = require('../helpers/servicesPath');
+const service = require('../model/servicesPath');
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',

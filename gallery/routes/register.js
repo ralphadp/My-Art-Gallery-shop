@@ -1,11 +1,11 @@
 var express = require('express');
 const {users, registration} = require('gallery-repository');
-const {TODAY} = require('../helpers/middleware/tasks/util/utilities');
+const {TODAY} = require('../model/middleware/tasks/util/utilities');
 var {sendActivationRequest, sendSuccessfulActivation} = require('../email/activation');
-const {validate, validateResult} = require('../helpers/validate');
+const {validate, validateResult} = require('../model/validate');
 var shortid = require('shortid');
 var generator = require('generate-serial-number');
-const service = require('../helpers/servicesPath');
+const service = require('../model/servicesPath');
 var router = express.Router();
 
 /* GET register Page. */

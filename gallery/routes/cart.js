@@ -1,6 +1,6 @@
 var express = require('express');
 const {carts} = require('gallery-repository');
-var tokenCheck = require('../helpers/tokenCheck');
+var tokenCheck = require('../model/tokenCheck');
 var router = express.Router();
 
 /* GET Add to cart. */
