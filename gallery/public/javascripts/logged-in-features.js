@@ -31,25 +31,21 @@
     for (let index = 0; index < thumbCheckbox.length; index++) {
         thumbCheckbox.item(index).addEventListener('click', (event) => {
             var checkbox = event.target;
-            if (checkbox.checked) {
-                request({url: "cart/add-to/" + checkbox.id})
-                .then(data => {
-                    let response = JSON.parse(data);
-                    alert (response.message);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-            } else {
-                request({url: "cart/remove-from/" + checkbox.id})
-                .then(data => {
-                    let response = JSON.parse(data);
-                    alert (response.message);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-            }
+            const configRequest = {
+                url: SERVER_CONFIG.appHost 
+                + (checkbox.checked ? "/cart/add-to/" : "/cart/remove-from/") 
+                + checkbox.id 
+            };
+
+            request(configRequest)
+            .then(data => {
+                let response = JSON.parse(data);
+                alert (response.message);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+            
         }, false);
     }
 
