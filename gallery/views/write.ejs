@@ -3,6 +3,7 @@
 <head>
     <% include ./partials/head %>
     <% include ./partials/css/write-us %>
+    <% include ./partials/js/write-us %>
 </head>
 <body>
     <header>
@@ -38,10 +39,8 @@
     <% } %>
 
     <% include ./partials/svg %>
-    <script type="text/javascript" src="<%= service.scriptsHost %>/js/dialog/foggy.js"></script>
-    <script type="text/javascript" src="<%= service.scriptsHost %>/js/dialog/frame.js"></script>
     <script type="text/javascript" src="/javascripts/search.js"></script>
-    <script type="text/javascript" src="/javascripts/email.js"></script>
+    <script type="text/javascript" src="/javascripts/event-email.js"></script>
 
     <% if (currentUser.userExtId) { %>
         <script type="text/javascript" src="/javascripts/events-purchase.js"></script>

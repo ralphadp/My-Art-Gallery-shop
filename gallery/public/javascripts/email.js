@@ -1,8 +1,16 @@
-(() => 
-{
-    /* SEND AN EMAIL */
+class Email {
+    constructor(WAITING_GIF_ID, EMAIL_ID, NAME_ID, DESCRIPTION_ID) {
+        this.waitingGif = document.getElementById(WAITING_GIF_ID);
+        this.email = document.getElementById(EMAIL_ID);
+        this.name = document.getElementById(NAME_ID);
+        this.description = document.getElementById(DESCRIPTION_ID);
+    }
 
-    document.getElementById('send-us-email').addEventListener('click', () => {
+    showWaitGif(enable) {
+        this.waitingGif.style.display = enable ? 'block' : 'none';
+    }
+
+    send() {
 
         let requestConfig = {
             url: '/send-message/',
@@ -11,24 +19,23 @@
                 "Content-Type": "application/json;charset=UTF-8"
             },
             body: JSON.stringify({
-                email: document.getElementById('msg-email').value,
-                name: document.getElementById('msg-name').value,
-                description: document.getElementById('msg-description').value
+                email: this.email.value,
+                name: this.name.value,
+                description: this.description.value
             })
         };
 
-        document.getElementById('waiting-email-response').style.display = 'block';
+        this.showWaitGif(true);
         request(requestConfig)
         .then(data => {
-            document.getElementById('waiting-email-response').style.display = 'none';
             let response = JSON.parse(data);
             alert (response.message.response);
         })
         .catch(error => {
-            document.getElementById('waiting-email-response').style.display = 'none';
             console.log(error);
+        })
+        .finally(()=> {
+            this.showWaitGif(false);
         });
-
-    });
-
-})();
+    }
+}
