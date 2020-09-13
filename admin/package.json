@@ -15,7 +15,7 @@
     "gallery-repository": "file:../galleryRepository",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "sync": "^0.2.5"
   }
 }
